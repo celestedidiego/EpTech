@@ -1,0 +1,22 @@
+RewriteEngine On
+
+#accept loading of actual files and directories
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+#send everything else to the index page
+RewriteRule ^(.*)$ index.php [L,QSA]
+
+# Per la root
+# RewriteRule ^$ test.php [L,QSA]
+# Per il resto
+# RewriteRule ^(.*)$ test.php [L,QSA]
+
+# Enable PHP error reporting
+#php_flag display_errors On
+#php_value error_reporting E_ALL
+
+# Log PHP errors
+#php_flag log_errors On
+#php_value error_log /opt/lampp/logs/php_error_log
+

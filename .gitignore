@@ -1,0 +1,7 @@
+#/vendor/
+
+# Ignora la cartella template_c di Smarty
+/Smarty/templates_c/
+
+# Ignora il configMailer
+/config/configMailer.php
