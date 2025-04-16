@@ -36,88 +36,6 @@ class CProduct {
             header('Location: /EpTechProva/user/login');
         }
     }
-
-    /*
-    public static function addProduct() {
-        $view = new VProduct();
-        $array_category = FPersistentManager::getInstance()->getAllCategories();
-        
-        $found_seller = FPersistentManager::getInstance()->find(EAdmin::class, $_SESSION['user']->getIdAdmin());
-        if ($_SERVER['REQUEST_METHOD'] == "GET") {
-            if ($_SESSION['user'] instanceof EAdmin) {
-                $view->addProductForm($array_category);
-            } else {
-                header('Location: /EpTechProva/user/login');
-            }
-        } elseif ($_SERVER['REQUEST_METHOD'] == "POST") {
-            $postData = $_POST;
-            foreach ($postData as $key => $value) {
-                $array_data[$key] = $value;
-            }
-
-            $allowed_types = array('image/jpeg', 'image/png');
-
-            if (isset($_FILES['images'])) {
-                // Controllo se le immagini inserite eccedono una dimensione di 1MB
-                foreach ($_FILES['images']['size'] as $key => $value) {
-                    if ($_FILES['images']['size'][$key] > 1000000) {
-                        $view->errorImageUpload($array_category);
-                        exit;
-                    }
-                }
-                // Controllo il tipo di file caricati
-                foreach ($_FILES['images']['type'] as $key => $value) {
-                    if (!(in_array($_FILES['images']['type'][$key], $allowed_types))) {
-                        $view->errorImageUpload($array_category);
-                        exit;
-                    }
-                }
-            // Insert the product
-            //$product = new EProduct( $data['name'], $data['priceProduct'],$data['description'], $data['brand'], $data['model'], $data['color'], $data['avQuantity']);
-                $product = new EProduct(
-                    $array_data['name'],
-                    (float)$array_data['priceProduct'],
-                    $array_data['description'],
-                    $array_data['brand'],
-                    $array_data['model'],
-                    $array_data['color'],
-                    (int)$array_data['avQuantity']
-                );
-                $product->setAdmin($found_seller);
-                
-                FPersistentManager::getInstance()->insertProduct($product);
-                
-                // Find the newly inserted product
-                $found_product = FPersistentManager::getInstance()->find(EProduct::class, $product->getProductId());
-            
-                foreach ($_FILES['images']['tmp_name'] as $key => $value) {
-                    $fileName = $_FILES['images']['name'][$key];
-                    $fileSize = $_FILES['images']['size'][$key];
-                    $fileType = $_FILES['images']['type'][$key];
-                    $content = file_get_contents($_FILES['images']['tmp_name'][$key]);
-                    $base64content = base64_encode($content);
-                    $image = new EImage($fileName, $fileSize, $fileType, $base64content);
-    
-                    FPersistentManager::getInstance()->insertImage($image);
-    
-                    // Trova l'immagine appena inserita
-                    $found_image = FPersistentManager::getInstance()->find(EImage::class, $image->getIdImage());
-    
-                    // Collega l'immagine al prodotto
-                    FPersistentManager::getInstance()->updateImageProduct($found_product, $found_image);
-                }
-            }
-            
-            //$found_category = FPersistentManager::getInstance()->find(ECategory::class, $array_data['category']);
-            //$found_seller = FPersistentManager::getInstance()->find(EAdmin::class, $_SESSION['user']->getIdAdmin());
-
-            //FPersistentManager::getInstance()->updateAdminCatProduct($found_product, $found_seller, $found_category);
-
-            $_SESSION['product_added'] = true;
-            header('Location: /EpTechProva/product/listProducts?page=1');
-        }
-    }
-    */
     
     public static function addProduct()
     {
@@ -191,30 +109,6 @@ class CProduct {
             header('Location: /EpTechProva/admin/manageProducts?page=1');
         }
     }
-
-    /*
-    public static function modifyProduct($productId) {
-        $view = new VProduct();
-        $product_to_modify = FPersistentManager::getInstance()->find(EProduct::class, $productId);
-        if ($_SERVER['REQUEST_METHOD'] == "GET") {
-            if ($_SESSION['user'] instanceof EAdmin) {
-                $view->modifyProductForm($product_to_modify);
-            } else {
-                header('Location: /EpTechProva/user/login');
-            }
-        } elseif ($_SERVER['REQUEST_METHOD'] == "POST") {
-            $postData = $_POST;
-            foreach ($postData as $key => $value) {
-                $data[$key] = $value;
-            }
-
-            FPersistentManager::getInstance()->updateProduct($product_to_modify, $data);
-
-            $_SESSION['product_modified'] = true;
-            header('Location: /EpTechProva/product/manageProducts?page=1');
-        }
-    }
-    */
 
     public static function modifyProduct($productId){
         
@@ -292,6 +186,4 @@ class CProduct {
         header('Location: /EpTechProva/product/listProducts?page=1');
     }
 
-    
 }
-?>

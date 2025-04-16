@@ -64,7 +64,6 @@ class CFrontController {
         $publicRoutes = [
             'user' => ['home', 'login', 'logout', 'signUp', 'confirmEmail'], // Rotte pubbliche per il controller 'utente'
             'purchase' => ['viewProduct','shop','addToCart', 'showCart', 'removeFromCart', 'emptyCart', 'updateQuantity'], // Rotte pubbliche per il controller 'purchase'
-            //'cart' => ['showCart', 'showAddForm', 'addProduct', 'removeProduct', 'emptyCart', 'totalPrice', 'changeQuantity'], // Rotte pubbliche per il controller 'cart'
             // Aggiungi altri controller e metodi pubblici se necessario
         ];
 
@@ -89,7 +88,6 @@ class CFrontController {
                 'order' => ['listOrders', 'viewOrder', 'deleteOrder', 'editOrder'],
                 'review' => ['listReviews', 'canRespond', 'respondToReview'],
                 'shipping' => ['listShipping', 'editShipping', 'deleteShipping'],
-
                 // Add more controllers and methods for admin
             ],
             'registered_user' => [
@@ -97,7 +95,6 @@ class CFrontController {
                 'purchase' => ['effettuaCheckout', 'completeOrder', 'errorOrder', 'detailOrder', ],
                 'review' => ['addReview', 'editReview'],
                 'order' => ['requestRefund'], // Aggiunto il metodo per richiedere reso o rimborso
-                //'cart' => ['showCart', 'showAddForm', 'addProduct', 'removeProduct', 'emptyCart', 'totalPrice', 'changeQuantity'],
                 'shipping' => ['editShipping', 'deleteShipping'],
                 // Add more controllers and methods for acquirente
             ],

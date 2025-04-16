@@ -25,7 +25,6 @@ class CUser {
         }
         
     }
-
     
     // Gestisce il processo di login. Se la richiesta è GET, mostra il form di login. Se la richiesta è POST, verifica le credenziali dell'utente e, se corrette, imposta la sessione e i cookie appropriati
     public static function login() {
@@ -39,55 +38,21 @@ class CUser {
         } elseif ($_SERVER['REQUEST_METHOD'] == "POST") {
             $email = $_POST['email-log']; // Recupera l'email dal form
             $password = $_POST['password-log']; // Recupera la password dal form
-            error_log("Email: $email, Password: $password");
             $user = FPersistentManager::getInstance()->findUtente($email); // Cerca l'utente nel database
             if ($user == null) {
-                error_log("Login error: User not found.");
                 // Login fallito
                 $view->loginError(); // Mostra errore se l'utente non esiste
             } else if (password_verify($password, $user[0]->getPassword())) {
-                error_log("Password hash from DB: " . $user[0]->getPassword());
-                error_log("Password verification successful.");
                 $_SESSION['user'] = $user[0];
-                error_log("Login success: User authenticated.");
-                /*
-                // Imposta il ruolo dell'utente nella sessione
-                if ($_SESSION['user'] instanceof ERegisteredUser) {
-                    //$_SESSION['role'] = $user[0]->isBlocked() ? 'user_blocked' : 'registered_user';
-                    //error_log("User role: Registered user.");
-                    } elseif ($_SESSION['user'] instanceof EAdmin) {
-                    $_SESSION['role'] = 'admin';
-                    //error_log("User role: Admin.");
-                }
-
-                // Imposta un cookie di autenticazione
-                if (isset($_COOKIE['auth'])) {
-                    header('Location: /EpTechProva/user/home');
-                    error_log("Auth cookie set.");
-                } else {
-                    setcookie('auth', base64_encode($user[0]->getEmail()), time() + (300), "/"); // 5 minuti
-                    header('Location: /EpTechProva/user/home');
-                }
-                error_log("Redirecting to home...");
-                header('Location: /EpTechProva/user/home');
-            } else {
-                error_log("Password hash from DB: " . $user[0]->getPassword());
-                error_log("Password verification failed.");
-                error_log("Login error: Incorrect password.");
-                $view->loginError(); // Mostra errore se la password è errata
-                */
                 if ($_SESSION['user'] instanceof ERegisteredUser) {
                     $_SESSION['role'] = 'registered_user'; // Imposta il ruolo per gli utenti registrati
-                    error_log("User role: Registered user.");
                 } elseif ($_SESSION['user'] instanceof EAdmin) {
                     $_SESSION['role'] = 'admin'; // Imposta il ruolo per gli amministratori
-                    error_log("User role: Admin.");
                 }
 
                 // Imposta un cookie di autenticazione
                 if (!isset($_COOKIE['auth'])) {
                     setcookie('auth', base64_encode($user[0]->getEmail()), time() + (300), "/"); // 5 minuti
-                    error_log("Auth cookie set.");
                 }
 
                 // Reindirizza alla home
@@ -99,58 +64,6 @@ class CUser {
         }
     }
     
-
-    /*
-    public static function login() {
-        $view = new VUser();
-
-        if ($_SERVER['REQUEST_METHOD'] == "GET") {
-            if (static::isLogged()) {
-                header('Location: /EpTechProva/user/home');
-                exit; // Termina l'esecuzione dopo il reindirizzamento
-            } else {
-                $view->showLoginForm();
-            }
-        } elseif ($_SERVER['REQUEST_METHOD'] == "POST") {
-            $email = $_POST['email-log']; // Recupera l'email dal form
-            $password = $_POST['password-log']; // Recupera la password dal form
-            error_log("Email: $email, Password: $password");
-
-            $user = FPersistentManager::getInstance()->findUtente($email); // Cerca l'utente nel database
-
-            if ($user == null) {
-                error_log("Login error: User not found.");
-                $view->loginError(); // Mostra errore se l'utente non esiste
-            } elseif (password_verify($password, $user[0]->getPassword())) {
-                error_log("Password verification successful.");
-                $_SESSION['user'] = $user[0];
-
-                // Imposta il ruolo dell'utente nella sessione
-                if ($_SESSION['user'] instanceof ERegisteredUser) {
-                    $_SESSION['role'] = 'registered_user';
-                    error_log("User role: Registered user.");
-                } elseif ($_SESSION['user'] instanceof EAdmin) {
-                    $_SESSION['role'] = 'admin';
-                    error_log("User role: Admin.");
-                }
-
-                // Imposta un cookie di autenticazione
-                if (!isset($_COOKIE['auth'])) {
-                    setcookie('auth', base64_encode($user[0]->getEmail()), time() + (300), "/"); // 5 minuti
-                    error_log("Auth cookie set.");
-                }
-
-                // Reindirizza alla home
-                header('Location: /EpTechProva/user/home');
-                exit; // Termina l'esecuzione dopo il reindirizzamento
-            } else {
-                error_log("Password verification failed.");
-                $view->loginError(); // Mostra errore se la password è errata
-            }
-        }
-    }
-    */
-
     // Controlla se l'utente è loggato verificando l'esistenza di un cookie di sessione e una variabile di sessione.
     public static function isLogged()
     {
@@ -176,64 +89,6 @@ class CUser {
         session_destroy();
         header('Location: /EpTechProva/user/home');
     }
-
-    /*
-    public static function signUp(){
-        $view_registeredUser = new VUser();
-        if($_SERVER['REQUEST_METHOD'] == "GET"){
-            $view_registeredUser->signUp();
-        } elseif ($_SERVER['REQUEST_METHOD'] == "POST"){
-            $postData = $_POST;
-            foreach ($postData as $key => $value) {
-                $array_data[$key] = $value;
-            }
-    
-            // Convert birthDate to DateTime object
-            $birthDate = \DateTime::createFromFormat('Y-m-d', $array_data['birthDate']);
-            if (!$birthDate) {
-                $view_registeredUser->signUpError(); // Handle invalid date format
-                return;
-            }
-            
-            // Crea un nuovo utente registrato
-            $new_user = new ERegisteredUser(
-                $array_data['name'],
-                $array_data['surname'],
-                $array_data['email'],
-                $birthDate,
-                $array_data['username'],
-                password_hash($array_data['password'], PASSWORD_DEFAULT),
-            );
-    
-            // Crea un oggetto temporaneo per verificare l'esistenza dell'email
-            $temp = new ERegisteredUser(
-                null, // Default date if no valid date is provided
-                null,
-                $new_user->getEmail(),
-                new \DateTime('1900-01-01'),
-                null,
-                null,
-            );
-    
-            // Controlla se l'email esiste già
-            $same_class_new_user = FPersistentManager::getInstance()->findUtente($new_user);
-            $check_email = FPersistentManager::getInstance()->findUtente($temp);
-    
-            if ($check_email != null || ($check_email == null && $same_class_new_user != null)) {
-                // Se l'email esiste già, ricarica la form per la registrazione con un errore
-                $view_registeredUser->signUpError();
-            } else if ($check_email == null && $same_class_new_user == null) {
-                if ($array_data['password'] != $array_data['confirm-password']) {
-                    $view_registeredUser->checkPassSignUp();
-                } else {
-                    FPersistentManager::getInstance()->insertNewUtente($new_user);
-                    $_SESSION['signUpSuccess'] = true;
-                    header('Location: /EpTechProva/user/home');
-                }
-            }
-        }
-    }
-    */
 
     public static function signUp(){
         $view_registeredUser = new VUser();
@@ -444,44 +299,6 @@ class CUser {
         
         $view_user->shipping($array_shipping, $messages);
     }
-
-    /*
-    public static function addShipping(){
-        $view = new VUser();
-        if ($_SERVER['REQUEST_METHOD'] == "GET") {
-            $view->addShipping();
-        } elseif ($_SERVER['REQUEST_METHOD'] == "POST") {
-            $postData = $_POST;
-            $errors = [];
-
-            // Validazione del campo "via"
-            if (!preg_match('/^Via\s+[A-Za-z\s]+\s+\d+$/', $postData['via'])) {
-                $errors[] = "L'indirizzo deve essere nel formato 'Via Nome strada n_civico'";
-            }
-
-            // Validazione del campo "cap"
-            if (!preg_match('/^\d{5}$/', $postData['cap'])) {
-                $errors[] = "Il CAP deve essere composto da esattamente 5 cifre";
-            }
-
-            if (empty($errors)) {
-                // Se non ci sono errori, procedi con l'inserimento
-                foreach ($postData as $key => $value) {
-                    $array_data[$key] = $value;
-                }
-                //Si assume per semplicità che gli indirizzi siano univoci, 
-                //cioè che non ci sono più famiglie che abitano nella stesso indirizzo,
-                // nello stesso numero civico e nello stesso cap
-                FPersistentManager::getInstance()->insertShipping($array_data);
-                $_SESSION['address_added'] = true;
-                header('Location: /EpTechProva/user/shipping');
-            } else {
-                // Se ci sono errori, mostra nuovamente il form con i messaggi di errore
-                $view->addShippingWithError($errors);
-            }
-        }
-    }
-    */
 
     public static function addShipping() {
         $view = new VUser();
