@@ -19,7 +19,8 @@ class FImage extends EntityRepository {
     public function getAllImages(EProduct $product){
         $dql = "SELECT im
             FROM EImage im
-            WHERE im.product = ?1";
+            WHERE im.product = ?1
+            ORDER BY im.name ASC"; //ordinamento dlle immagini per nome file
         $query = getEntityManager()->createQuery($dql);
         $query->setParameter(1, $product);
         $tmp_images = $query->getArrayResult();
