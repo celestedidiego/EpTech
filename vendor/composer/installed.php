@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => 'cdidi/ep-tech-prova',
-        'pretty_version' => '1.0.0+no-version-set',
-        'version' => '1.0.0.0',
-        'reference' => null,
+        'pretty_version' => 'dev-main',
+        'version' => 'dev-main',
+        'reference' => '8eaf57153ce64c7952cb69f94a9050969bc36820',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -11,9 +11,9 @@
     ),
     'versions' => array(
         'cdidi/ep-tech-prova' => array(
-            'pretty_version' => '1.0.0+no-version-set',
-            'version' => '1.0.0.0',
-            'reference' => null,
+            'pretty_version' => 'dev-main',
+            'version' => 'dev-main',
+            'reference' => '8eaf57153ce64c7952cb69f94a9050969bc36820',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
