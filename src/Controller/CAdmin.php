@@ -122,7 +122,7 @@ class CAdmin {
             $user= $product->getAdmin();
 
             $mailer = new UEMailer();
-                $mailer->sendProductDeletionEmail($user->getEmail(), $product->getName());
+                $mailer->sendProductDeletionEmail($user->getEmail(), $product->getNameProduct());
                 $_SESSION['message'] = "Prodotto eliminato.";
 
         }catch(\Exception $e){
