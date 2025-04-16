@@ -84,7 +84,7 @@ class CFrontController {
         $rolePermissions = [
             'admin' => [
                 'user' => ['userDataForm', 'userDataSection', 'deleteAccount', 'changePass', 'changeUserData'],
-                'admin' => ['manageUsers','filterUsersPaginated', 'deleteUser', 'blockUser', 'unblockUser', 'manageProducts', 'deleteProduct', 'manageReviews','manageOrders', 'changeOrderStatus', 'manageSection'],
+                'admin' => ['manageUsers','filterUsersPaginated', 'deleteUser', 'blockUser', 'unblockUser', 'manageProducts', 'deleteProduct', 'manageReviews','manageOrders', 'changeOrderStatus', 'manageSection', 'acceptRefund', 'rejectRefund'],
                 'product' => ['listProducts', 'addProduct', 'modifyProduct', 'deleteProduct'],
                 'order' => ['listOrders', 'viewOrder', 'deleteOrder', 'editOrder'],
                 'review' => ['listReviews', 'canRespond', 'respondToReview'],
@@ -96,6 +96,7 @@ class CFrontController {
                 'user' => ['userDataForm', 'userDataSection', 'userHistoryOrders', 'deleteAccount', 'changePass', 'changeUserData', 'shipping', 'creditCards', 'addCards', 'deleteCreditCard','addShipping', 'deleteShipping', 'reactivateShipping', 'reactiveCreditCard'],
                 'purchase' => ['effettuaCheckout', 'completeOrder', 'errorOrder', 'detailOrder', ],
                 'review' => ['addReview', 'editReview'],
+                'order' => ['requestRefund'], // Aggiunto il metodo per richiedere reso o rimborso
                 //'cart' => ['showCart', 'showAddForm', 'addProduct', 'removeProduct', 'emptyCart', 'totalPrice', 'changeQuantity'],
                 'shipping' => ['editShipping', 'deleteShipping'],
                 // Add more controllers and methods for acquirente

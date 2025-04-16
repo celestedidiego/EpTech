@@ -23,6 +23,7 @@ return array(
     'EItemOrder' => $baseDir . '/src/Entity/EItemOrder.php',
     'EOrder' => $baseDir . '/src/Entity/EOrder.php',
     'EProduct' => $baseDir . '/src/Entity/EProduct.php',
+    'ERefundRequest' => $baseDir . '/src/Entity/ERefundRequest.php',
     'ERegisteredUser' => $baseDir . '/src/Entity/ERegisteredUser.php',
     'EReview' => $baseDir . '/src/Entity/EReview.php',
     'EShipping' => $baseDir . '/src/Entity/EShipping.php',

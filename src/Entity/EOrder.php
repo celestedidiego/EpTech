@@ -41,6 +41,9 @@ class EOrder
     #[ORM\JoinColumn(name:"registered_user_id", referencedColumnName:"registeredUserId", nullable:false)]
     private ?ERegisteredUser $registeredUser = null;
 
+    #[ORM\OneToMany(mappedBy: "order", targetEntity: ERefundRequest::class)]
+    private Collection $refundRequests;
+
     public function __construct()
     {
         $this->totalPrice = 0.0;
@@ -48,6 +51,7 @@ class EOrder
         $this->orderStatus = 'In elaborazione';
         $this->qTotalProduct = 0;
         $this->itemOrder = new ArrayCollection();
+        $this->refundRequests = new ArrayCollection();
         //$this->creditCard = $creditCard;
         //$this->registeredUser = $registeredUser;
         //$this->shipping = $shipping;
@@ -175,5 +179,37 @@ class EOrder
     {
         $this->registeredUser = $registeredUser;
     }
+
+    /*
+    public function getRefundRequests(): Collection {
+        return $this->refundRequests;
+    }
+    */
+
+    public function getRefundRequests(): array {
+        return $this->refundRequests->toArray();
+    }
+    
+    /*
+    public function hasRefundRequest(): bool {
+        foreach ($this->refundRequests as $refundRequest) {
+            if ($refundRequest->getStatus() === 'pending') {
+                return true;
+            }
+        }
+        return false;
+    }
+    */
+
+
+    public function hasRefundRequest(): bool {
+        foreach ($this->refundRequests as $refundRequest) {
+            if ($refundRequest->getStatus() !== null) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }
 ?>

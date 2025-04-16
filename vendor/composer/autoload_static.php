@@ -303,6 +303,7 @@ class ComposerStaticInit17b6cdc511631d653f0122fd305f42ea
         'EItemOrder' => __DIR__ . '/../..' . '/src/Entity/EItemOrder.php',
         'EOrder' => __DIR__ . '/../..' . '/src/Entity/EOrder.php',
         'EProduct' => __DIR__ . '/../..' . '/src/Entity/EProduct.php',
+        'ERefundRequest' => __DIR__ . '/../..' . '/src/Entity/ERefundRequest.php',
         'ERegisteredUser' => __DIR__ . '/../..' . '/src/Entity/ERegisteredUser.php',
         'EReview' => __DIR__ . '/../..' . '/src/Entity/EReview.php',
         'EShipping' => __DIR__ . '/../..' . '/src/Entity/EShipping.php',

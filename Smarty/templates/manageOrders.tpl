@@ -40,6 +40,7 @@
                             <th>Importo Totale</th>
                             <th>Stato</th>
                             <th>Azioni</th>
+                            <th>Richiesta Reso o Rimborso</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -64,6 +65,23 @@
                                 <td>
                                     <a href="/EpTechProva/purchase/detailOrder/{$order->getIdOrder()}" class="btn btn-info btn-sm">Dettagli</a>
                                 </td>
+                                <td>
+                                    {if $order->hasRefundRequest()}
+                                        {assign var="refundRequests" value=$order->getRefundRequests()}
+                                        {assign var="refundStatus" value=$refundRequests[0]->getStatus()}
+                                        {if $refundStatus == 'pending'}
+                                            <a href="#" class="btn btn-danger btn-sm" onclick="showRefundActions('{$order->getIdOrder()}')">Reso o Rimborso</a>
+                                            <div id="refund-actions-{$order->getIdOrder()}" style="display: none; margin-top: 10px;">
+                                                <a href="/EpTechProva/admin/acceptRefund/{$order->getIdOrder()}" class="btn btn-success btn-sm">Accetta</a>
+                                                <a href="/EpTechProva/admin/rejectRefund/{$order->getIdOrder()}" class="btn btn-danger btn-sm">Rifiuta</a>
+                                            </div>
+                                        {else}
+                                            <p class="mt-2">Stato richiesta: {$refundStatus}</p>
+                                        {/if}
+                                    {else}
+                                        <p class="mt-2">Nessuna richiesta</p>
+                                    {/if}
+                                </td>
                             </tr>
                         {/foreach}
                     </tbody>
@@ -72,6 +90,13 @@
                 <p class="alert alert-warning text-center">Non ci sono ordini disponibili.</p>
             {/if}
         </div>
+
+        <script>
+            function showRefundActions(orderId) {
+                const actionsDiv = document.getElementById('refund-actions-' + orderId);
+                actionsDiv.style.display = actionsDiv.style.display === "none" ? "block" : "none";
+            }
+        </script>
         <script src="/EpTechProva/skin/electroMaster/js/scripts-for-template.js"></script>
 	<!-- jQuery Plugins -->
     <script src="/EpTechProva/skin/electroMaster/js/jquery.min.js"></script>

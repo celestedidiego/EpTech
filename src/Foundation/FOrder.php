@@ -186,5 +186,10 @@ class FOrder extends EntityRepository {
         $em->flush();
     }
 
-
+    public function addRefundRequest(EOrder $order): void {
+        $em = $this->getEntityManager();
+        $refundRequest = new ERefundRequest($order);
+        $em->persist($refundRequest);
+        $em->flush();
+    }
 }

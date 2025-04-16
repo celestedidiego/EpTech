@@ -100,4 +100,48 @@ class COrder
         $view = new VOrder();
         $view->showOrder($order);
     }
+
+    /*
+    public static function requestRefund($orderId) {
+        if (!isset($_SESSION['user']) || !($_SESSION['user'] instanceof ERegisteredUser)) {
+            header('Location: /EpTechProva/user/login');
+            exit;
+        }
+    
+        $order = FPersistentManager::getInstance()->find(EOrder::class, $orderId);
+        if ($order && $order->getOrderStatus() === 'Consegnato') {
+            FPersistentManager::getInstance()->addRefundRequest($order);
+            $_SESSION['success_message'] = "Richiesta di reso o rimborso inviata con successo.";
+        } else {
+            $_SESSION['error_message'] = "Non è possibile richiedere un reso o rimborso per questo ordine.";
+        }
+    
+        header('Location: /EpTechProva/user/userHistoryOrders');
+        exit;
+    }
+    */
+
+    public static function requestRefund($orderId) {
+        if (!isset($_SESSION['user']) || !($_SESSION['user'] instanceof ERegisteredUser)) {
+            header('Location: /EpTechProva/user/login');
+            exit;
+        }
+
+        $order = FPersistentManager::getInstance()->find(EOrder::class, $orderId);
+        if ($order && $order->getOrderStatus() === 'Consegnato') {
+            if ($order->hasRefundRequest()) {
+                $_SESSION['error_message'] = "Hai già effettuato una richiesta di reso o rimborso per questo ordine.";
+            } else {
+                FPersistentManager::getInstance()->addRefundRequest($order);
+                $_SESSION['success_message'] = "Richiesta di reso o rimborso inviata con successo.";
+            }
+        } else {
+            $_SESSION['error_message'] = "Non è possibile richiedere un reso o rimborso per questo ordine.";
+        }
+
+        header('Location: /EpTechProva/user/userHistoryOrders');
+        exit;
+    }
 }
+
+

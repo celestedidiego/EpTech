@@ -9,6 +9,7 @@
                     <th>Importo Totale</th>
                     <th>Stato</th>
                     <th>Azioni</th>
+                    <th>Richiesta Reso o Rimborso</th>
                 </tr>
             </thead>
             <tbody>
@@ -21,6 +22,17 @@
                         <td>
                             <a href="/EpTechProva/purchase/detailOrder/{$order->getIdOrder()}" class="btn btn-info btn-sm">Dettagli</a>
                         </td>
+                        <td>
+                            {if $order->hasRefundRequest()}
+                                {assign var="refundRequests" value=$order->getRefundRequests()}
+                                {assign var="refundStatus" value=$refundRequests[0]->getStatus()}
+                                <p class="mt-2">Stato richiesta: {$refundStatus}</p>
+                            {else}
+                                {if $order->getOrderStatus() == 'Consegnato'}
+                                    <a href="#" class="btn btn-warning btn-sm" onclick="confirmRefundRequest('{$order->getIdOrder()}')">Richiesta Reso o Rimborso</a>
+                                {/if}
+                            {/if}
+                        </td>
                     </tr>
                 {/foreach}
             </tbody>
@@ -28,7 +40,11 @@
     {else}
         <p class="alert alert-warning text-center">Non hai ordini registrati.</p>
     {/if}
-    <div class="text-center mt-4">
-        <a href="/EpTechProva/user/home" class="btn btn-primary">Torna alla Home</a>
-    </div>
 </div>
+<script>
+    function confirmRefundRequest(orderId) {
+        if (confirm("Sei sicuro di voler richiedere un reso o rimborso per questo ordine?")) {
+            window.location.href = '/EpTechProva/order/requestRefund/' + orderId;
+        }
+    }
+</script>

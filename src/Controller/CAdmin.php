@@ -191,4 +191,110 @@ class CAdmin {
         $view = new VAdmin();
         $view->showManageSection();
     }
+
+    /*
+    public static function acceptRefund($orderId) {
+        $order = FPersistentManager::getInstance()->find(EOrder::class, $orderId);
+        if ($order && $order->hasRefundRequest()) {
+            $refundRequest = $order->getRefundRequests()[0];
+            $refundRequest->setStatus('accepted');
+            FPersistentManager::getInstance()->update($refundRequest);
+            $_SESSION['success_message'] = "Richiesta di reso o rimborso accettata.";
+        } else {
+            $_SESSION['error_message'] = "Richiesta non trovata.";
+        }
+        header('Location: /EpTechProva/admin/manageOrders');
+        exit;
+    }
+
+    public static function rejectRefund($orderId) {
+        $order = FPersistentManager::getInstance()->find(EOrder::class, $orderId);
+        if ($order && $order->hasRefundRequest()) {
+            $refundRequest = $order->getRefundRequests()[0];
+            $refundRequest->setStatus('rejected');
+            FPersistentManager::getInstance()->update($refundRequest);
+            $_SESSION['success_message'] = "Richiesta di reso o rimborso rifiutata.";
+        } else {
+            $_SESSION['error_message'] = "Richiesta non trovata.";
+        }
+        header('Location: /EpTechProva/admin/manageOrders');
+        exit;
+    }
+    */
+
+    /*
+    public static function acceptRefund($orderId) {
+        $order = FPersistentManager::getInstance()->find(EOrder::class, $orderId);
+        if ($order && $order->hasRefundRequest()) {
+            $refundRequest = $order->getRefundRequests()[0];
+            if ($refundRequest->getStatus() === 'pending') {
+                $refundRequest->setStatus('accepted');
+                FPersistentManager::getInstance()->update($refundRequest);
+                $_SESSION['success_message'] = "Richiesta di reso o rimborso accettata.";
+            } else {
+                $_SESSION['error_message'] = "La richiesta è già stata gestita.";
+            }
+        } else {
+            $_SESSION['error_message'] = "Richiesta non trovata.";
+        }
+        header('Location: /EpTechProva/admin/manageOrders');
+        exit;
+    }
+
+    public static function rejectRefund($orderId) {
+        $order = FPersistentManager::getInstance()->find(EOrder::class, $orderId);
+        if ($order && $order->hasRefundRequest()) {
+            $refundRequest = $order->getRefundRequests()[0];
+            if ($refundRequest->getStatus() === 'pending') {
+                $refundRequest->setStatus('rejected');
+                FPersistentManager::getInstance()->update($refundRequest);
+                $_SESSION['success_message'] = "Richiesta di reso o rimborso rifiutata.";
+            } else {
+                $_SESSION['error_message'] = "La richiesta è già stata gestita.";
+            }
+        } else {
+            $_SESSION['error_message'] = "Richiesta non trovata.";
+        }
+        header('Location: /EpTechProva/admin/manageOrders');
+        exit;
+    }
+    */
+
+    public static function acceptRefund($orderId) {
+        $order = FPersistentManager::getInstance()->find(EOrder::class, $orderId);
+        if ($order && $order->hasRefundRequest()) {
+            $refundRequest = $order->getRefundRequests()[0];
+            if ($refundRequest->getStatus() === 'pending') {
+                $refundRequest->setStatus('accepted');
+                FPersistentManager::getInstance()->update($refundRequest);
+                $_SESSION['success_message'] = "Richiesta di reso o rimborso accettata.";
+            } else {
+                $_SESSION['error_message'] = "La richiesta è già stata gestita.";
+            }
+        } else {
+            $_SESSION['error_message'] = "Richiesta non trovata.";
+        }
+        header('Location: /EpTechProva/admin/manageOrders');
+        exit;
+    }
+
+    public static function rejectRefund($orderId) {
+        $order = FPersistentManager::getInstance()->find(EOrder::class, $orderId);
+        if ($order && $order->hasRefundRequest()) {
+            $refundRequest = $order->getRefundRequests()[0];
+            if ($refundRequest->getStatus() === 'pending') {
+                $refundRequest->setStatus('rejected');
+                FPersistentManager::getInstance()->update($refundRequest);
+                $_SESSION['success_message'] = "Richiesta di reso o rimborso rifiutata.";
+            } else {
+                $_SESSION['error_message'] = "La richiesta è già stata gestita.";
+            }
+        } else {
+            $_SESSION['error_message'] = "Richiesta non trovata.";
+        }
+        header('Location: /EpTechProva/admin/manageOrders');
+        exit;
+    }
+
+
 }

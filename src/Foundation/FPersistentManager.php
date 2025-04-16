@@ -642,4 +642,11 @@ class FPersistentManager {
     public function getAllReviewsPaginated($page = 1, $itemsPerPage = 5) {
         return getEntityManager()->getRepository('EAdmin')->getAllReviewsPaginated($page,$itemsPerPage);
     }
+
+    public function addRefundRequest(EOrder $order): void {
+        $em = getEntityManager(); // Ottieni l'EntityManager
+        $refundRequest = new ERefundRequest($order); // Crea una nuova richiesta di reso/rimborso
+        $em->persist($refundRequest); // Prepara l'entità per il salvataggio
+        $em->flush(); // Salva l'entità nel database
+    }
 }
