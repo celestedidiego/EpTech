@@ -92,8 +92,8 @@
         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
             <div class="product">
                 <div class="product-img">
-                    {if isset($product->getImages()->last()->getImageData()) && isset($product->getImages()->last()->getType())}
-                        <img src="data:{$product->getImages()->last()->getType()};base64,{$product->getImages()->last()->getEncodedData()}" alt="Image">
+                    {if isset($product->getImages()->first()->getImageData()) && isset($product->getImages()->first()->getType())}
+                        <img src="data:{$product->getImages()->first()->getType()};base64,{$product->getImages()->first()->getEncodedData()}" alt="Image">
                     {else}
                         <p>Immagine non trovata</p>
                     {/if}         
