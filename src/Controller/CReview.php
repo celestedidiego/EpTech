@@ -76,30 +76,6 @@ class CReview
             }
         }
     }
-
-    /*
-    public static function respondToReview($reviewId)
-    {
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $admin = FPersistentManager::getInstance()->find(EAdmin::class, $_SESSION['user']->getIdAdmin());
-            $review = FPersistentManager::getInstance()->find(EReview::class, $reviewId);
-
-            if (!self::canRespond($admin, review: $review)) {
-                $_SESSION['error'] = "Non sei autorizzato a rispondere a questa recensione.";
-                header("Location: /EpTechProva/review/listReviews");
-            }
-
-            $response = $_POST['response'];
-
-            $review->setResponseAdmin($response, new \DateTime());
-
-            FPersistentManager::getInstance()->flush();
-            $_SESSION['success'] = "Risposta inviata con successo.";
-            header("Location: /EpTechProva/admin/manageReviews");
-        }
-    }
-    */
-
     
     public static function respondToReview($reviewId)
     {

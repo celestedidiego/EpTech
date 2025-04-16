@@ -23,7 +23,7 @@ class CAdmin {
             $users= FPersistentManager::getInstance()->getFilteredUsersPaginated($id);
             
         } else {
-            $users = FPersistentManager::getInstance()->getAllUsersPaginated($page,$itemsPerPage=6);
+            $users = FPersistentManager::getInstance()->getAllUsersPaginated($page);
         }
         $view = new VAdmin();
         $view->displayFilteredUsers($users);
@@ -31,7 +31,6 @@ class CAdmin {
 
     // Chiede al PersistentManager di eliminare un utente dati il ruolo e l'ID, invia una mail all'interessato.
     public static function deleteUser($userId) {
-        //$entityClass = $userType === 'registeredUser' ? 'ERegisteredUser' : 'EAdmin';
         $entityClass = 'ERegisteredUser';
         $user = FPersistentManager::getInstance()->find($entityClass, $userId);
         if ($user) {
@@ -50,7 +49,6 @@ class CAdmin {
     // Chiede al PersistentManager di bloccare un utente dati il ruolo e l'ID.
 
     public static function blockUser($userId, $userType) {
-        //$entityClass = $userType === 'registeredUser' ? 'ERegisteredUser' : 'EAdmin';
         $entityClass = 'ERegisteredUser';
         $user = FPersistentManager::getInstance()->find($entityClass, $userId);
         if ($user) {
@@ -65,7 +63,6 @@ class CAdmin {
 
     // Chiede al PersistentManager di sbloccare un utente dati il ruolo e l'ID.
     public static function unblockUser($userId, $userType) {
-        //$entityClass = $userType === 'registeredUser' ? 'ERegisteredUser' : 'EAdmin';
         $entityClass = 'ERegisteredUser';
         $user = FPersistentManager::getInstance()->find($entityClass, $userId);
         if ($user) {
@@ -107,8 +104,6 @@ class CAdmin {
                 $view->manageProducts($array_products, $categories, $brand, $product_added, $product_modified, $product_deleted);
         }
     }
-
-    //chiede al PersistentManager di eliminare un prodotto dati l'ID.
 
     //chiede al PersistentManager di cancellare un prodotto dato l'ID, una volta fatto manda una mail al venditore di riferimento
     public static function deleteProduct($productId) {
@@ -166,7 +161,6 @@ class CAdmin {
     
         $reviews = FPersistentManager::getInstance()->getAllReviewsPaginated($page, $itemsPerPage);
         
-        // Ensure 'items' key exists and is an array
         if (!isset($reviews['items']) || !is_array($reviews['items'])) {
             $reviews['items'] = [];
         }
@@ -191,74 +185,6 @@ class CAdmin {
         $view = new VAdmin();
         $view->showManageSection();
     }
-
-    /*
-    public static function acceptRefund($orderId) {
-        $order = FPersistentManager::getInstance()->find(EOrder::class, $orderId);
-        if ($order && $order->hasRefundRequest()) {
-            $refundRequest = $order->getRefundRequests()[0];
-            $refundRequest->setStatus('accepted');
-            FPersistentManager::getInstance()->update($refundRequest);
-            $_SESSION['success_message'] = "Richiesta di reso o rimborso accettata.";
-        } else {
-            $_SESSION['error_message'] = "Richiesta non trovata.";
-        }
-        header('Location: /EpTechProva/admin/manageOrders');
-        exit;
-    }
-
-    public static function rejectRefund($orderId) {
-        $order = FPersistentManager::getInstance()->find(EOrder::class, $orderId);
-        if ($order && $order->hasRefundRequest()) {
-            $refundRequest = $order->getRefundRequests()[0];
-            $refundRequest->setStatus('rejected');
-            FPersistentManager::getInstance()->update($refundRequest);
-            $_SESSION['success_message'] = "Richiesta di reso o rimborso rifiutata.";
-        } else {
-            $_SESSION['error_message'] = "Richiesta non trovata.";
-        }
-        header('Location: /EpTechProva/admin/manageOrders');
-        exit;
-    }
-    */
-
-    /*
-    public static function acceptRefund($orderId) {
-        $order = FPersistentManager::getInstance()->find(EOrder::class, $orderId);
-        if ($order && $order->hasRefundRequest()) {
-            $refundRequest = $order->getRefundRequests()[0];
-            if ($refundRequest->getStatus() === 'pending') {
-                $refundRequest->setStatus('accepted');
-                FPersistentManager::getInstance()->update($refundRequest);
-                $_SESSION['success_message'] = "Richiesta di reso o rimborso accettata.";
-            } else {
-                $_SESSION['error_message'] = "La richiesta è già stata gestita.";
-            }
-        } else {
-            $_SESSION['error_message'] = "Richiesta non trovata.";
-        }
-        header('Location: /EpTechProva/admin/manageOrders');
-        exit;
-    }
-
-    public static function rejectRefund($orderId) {
-        $order = FPersistentManager::getInstance()->find(EOrder::class, $orderId);
-        if ($order && $order->hasRefundRequest()) {
-            $refundRequest = $order->getRefundRequests()[0];
-            if ($refundRequest->getStatus() === 'pending') {
-                $refundRequest->setStatus('rejected');
-                FPersistentManager::getInstance()->update($refundRequest);
-                $_SESSION['success_message'] = "Richiesta di reso o rimborso rifiutata.";
-            } else {
-                $_SESSION['error_message'] = "La richiesta è già stata gestita.";
-            }
-        } else {
-            $_SESSION['error_message'] = "Richiesta non trovata.";
-        }
-        header('Location: /EpTechProva/admin/manageOrders');
-        exit;
-    }
-    */
 
     public static function acceptRefund($orderId) {
         $order = FPersistentManager::getInstance()->find(EOrder::class, $orderId);
