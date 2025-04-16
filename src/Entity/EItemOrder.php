@@ -8,11 +8,6 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Table('itemorder')]
 class EItemOrder {
 
-    ##[ORM\Id]
-    ##[ORM\GeneratedValue()]
-    ##[ORM\Column(type:"integer")]
-    #private int $idItemOrder;
-
     #[ORM\Column(type:'integer')]
     private $quantity;
 
@@ -25,14 +20,11 @@ class EItemOrder {
     #[ORM\ManyToOne(targetEntity:EProduct::class, inversedBy:'itemOrder')]
     #[ORM\JoinColumn(name:'product_id', referencedColumnName:'productId')]
     private ?EProduct $product = null;
-
-    // Manca lo stato dell'ordine 
-
     
     public function __construct() {
+
         $this->quantity = 0;
-        //$this->orderId = $orderId;
-        //$this->productId = $productId;
+
     }
 
     public function getQuantity()
@@ -45,11 +37,6 @@ class EItemOrder {
         $this->quantity = $quantity;
         return $this;
     }
-
-    #public function getIdItemOrder(): int
-    #{
-    #    return $this->idItemOrder;
-    #}
 
     public function getOrder(): EOrder
     {
@@ -72,5 +59,5 @@ class EItemOrder {
         $this->product= $product;
         return $this;
     }
+
 }
-?>

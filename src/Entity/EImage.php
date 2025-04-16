@@ -35,18 +35,6 @@ class EImage{
         $this->imageData = $imageData;
     }
 
-    /*
-    public function getEncodedData(){
-        if(is_resource($this->imageData)){
-            $data = stream_get_contents($this->imageData);
-            return $data;
-        }else{
-            return $this->imageData;
-        }
-        
-    }
-    */
-
     public function getEncodedData() {
         if (is_resource($this->imageData)) {
             rewind($this->imageData); // Riavvia il puntatore del flusso
@@ -152,4 +140,5 @@ class EImage{
     {
         $this->product = $product;
     }
+    
 }

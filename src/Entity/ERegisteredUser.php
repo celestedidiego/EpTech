@@ -57,19 +57,13 @@ class ERegisteredUser
     #[ORM\Column(type: 'boolean')]
     private bool $emailConfirmed = false;
 
-    //#[ORM\OneToOne(targetEntity: ECart::class, mappedBy: "registeredUser", cascade: ["persist", "remove"])]
-    //private ?ECart $cart = null;
-
-
     public function __construct($name, $surname, $email, $birthDate, $username, $password)
     {
-        //$hashedPassword = password_hash($password, PASSWORD_DEFAULT);
         $this->name = $name;
         $this->surname = $surname;
         $this->email = $email;
         $this->birthDate = $birthDate;
         $this->username = $username;
-        //$this->password = $hashedPassword;
         $this->password = $password;
         $this->orders = new ArrayCollection();
         $this->reviews = new ArrayCollection();
@@ -130,7 +124,6 @@ class ERegisteredUser
         $this->password = $password;
     }
 
-
     public function getOrders(): Collection
     {
         return $this->orders;
@@ -170,16 +163,6 @@ class ERegisteredUser
         return $this;
     }
 
-    //public function getCard(): ECart
-    //{
-    //    return $this->cart;
-    //}
-
-    //public function setCart(ECart $cart)
-    //{
-    //    $this->cart = $cart;
-    //}
-
     public function isBlocked(): bool
     {
         return $this->is_blocked;
@@ -214,5 +197,5 @@ class ERegisteredUser
     public function setEmailConfirmed(bool $emailConfirmed): void {
         $this->emailConfirmed = $emailConfirmed;
     }
+
 }
-?>

@@ -38,7 +38,6 @@ class ECreditCard
             $this->cardHolderName = $cardHolderName;
             $this->setEndDate($endDate);
             $this->cvv = $cvv;
-            //$this->orders = new ArrayCollection();
         }
     }
     
@@ -68,33 +67,11 @@ class ECreditCard
     {
         return $this->endDate;
     }
-
-    /*
-    public function setEndDate(string $endDate): void
-    {
-        $this->endDate = $endDate;
-    }
-
-    */
-
-    /*
-    public function setEndDate($endDate): void
-    {
-        error_log("Valore di endDate in setEndDate: " . $endDate);
-        // Validate the end date format (MM/YY)
-        if (!preg_match('/^(0[1-9]|1[0-2])\/\d{2}$/', $endDate)) {
-            $this->endDate = $endDate;
-        } else {
-            throw new InvalidArgumentException('Invalid end date format. Use MM/YY.');
-        }
-    }
-    */
-
     
     public function setEndDate($endDate): void
     {
         error_log("Valore di endDate in setEndDate: " . $endDate);
-        // Validate the end date format (MM/YY)
+        // Valida il formato di endDate (MM/YY)
         if (preg_match('/^(0[1-9]|1[0-2])\/\d{2}$/', $endDate)) {
             $this->endDate = $endDate;
         } else {
@@ -146,5 +123,5 @@ class ECreditCard
         $this->is_deleted = $deleted;
         return $this;
     }
+
 }
-?>
