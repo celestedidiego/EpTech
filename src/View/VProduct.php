@@ -63,30 +63,4 @@ class VProduct {
     }
     
 
-    /*
-    public function modifyProductForm($product)
-    {
-        $loginVariables = (new VUser)->checkLogin();
-
-        // Controlla se l'utente è un amministratore
-        if ($loginVariables['check_login_admin'] !== 1) {
-            // Reindirizza o mostra un messaggio di accesso negato
-            $this->smarty->display('accessDenied.tpl');
-            return;
-        }
-
-        foreach ($loginVariables as $key => $value) {
-            $this->smarty->assign($key, $value);
-        }
-        $this->smarty->assign('nameProduct', $product->getNameProduct());
-        $this->smarty->assign('description', $product->getDescription());
-        $this->smarty->assign('brand', $product->getBrand());
-        $this->smarty->assign('color', $product->getColor());
-        $this->smarty->assign('category', $product->getCategory());
-        $this->smarty->assign('productId', $product->getProductId());
-        $this->smarty->assign('modifyProductForm', 1);
-        $this->smarty->display('userinfo.tpl');
-    }
-    */
-
 }

@@ -38,10 +38,6 @@ class VUser {
         // Viene inizializzato un array $array_carrello vuoto e viene decodificato il contenuto del cookie cart in un array associativo $carrello
         $array_cart = [];
         $cart = isset($_COOKIE['cart']) ? json_decode($_COOKIE['cart'], true) : [];
-        
-        //var_dump($cart);
-        //exit;
-
 
         // Recupero dei dettagli dei prodotti nel carrello
         
@@ -54,26 +50,6 @@ class VUser {
                 ];
             } 
         }
-        
-
-        /*
-        if ($cart) {
-            foreach ($cart as $id => $qty) {
-                $itemCart = FPersistentManager::getInstance()->find(EItemCart::class, $id);
-                if ($itemCart !== null && $itemCart->getProduct() !== null) {
-                    $array_cart[] = [
-                        'product' => $itemCart->getProduct(),
-                        'quantity' => $qty
-                    ];
-                } else {
-                    error_log("Prodotto con ID $id non trovato o non valido.");
-                }
-            }
-        }
-        */
-
-        //var_dump($array_cart); // Debug per verificare i prodotti recuperati
-        //exit;
 
         // Calcolo del subtotale del carrello
         $subtotal = 0;
