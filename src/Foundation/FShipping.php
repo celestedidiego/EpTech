@@ -3,13 +3,6 @@ use Doctrine\ORM\EntityRepository;
 
 class FShipping extends EntityRepository {
 
-    /*
-    public function __construct($entityManager) {
-        // Passa l'EntityManager e la classe dell'entità al costruttore della classe padre
-        parent::__construct($entityManager, $entityManager->getClassMetadata('EShipping'));
-    }
-    */
-
     public function findShipping($address, $cap){
         $dql = "SELECT sh FROM EShipping sh WHERE sh.address = ?1 AND sh.cap = ?2";
         $query = getEntityManager()->createQuery($dql);
@@ -30,8 +23,7 @@ class FShipping extends EntityRepository {
 
     public function getAllShippingUser($idUser)
     {
-        //error_log("ID Utente: " . $idUser); // Debug dell'ID utente
-        return getEntityManager()->createQueryBuilder('sh')
+            return getEntityManager()->createQueryBuilder('sh')
             ->select('sh')
             ->from(EShipping::class, 'sh')  // Aggiunta esplicita della clausola FROM
             ->where('sh.shippingRegisteredUser = :idUser')

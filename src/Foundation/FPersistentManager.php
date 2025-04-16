@@ -243,14 +243,6 @@ class FPersistentManager {
         return getEntityManager()->getRepository('ECreditCard')->getAllCreditCardUser($registeredUser->getIdRegisteredUser());
     }
 
-    #public function findShipping($address, $cap) {
-    #    return getEntityManager()->getRepository('EShipping')->findShipping( $address, $cap);
-    #}
-
-    #public function findCreditCard($cardNumber) {
-    #    return getEntityManager()->getRepository('ECreditCard')->findCreditCard($cardNumber);
-    #}
-
     public function insertShipping($array_data){
         getEntityManager()->getRepository('EShipping')->insertShipping($array_data);
     }
@@ -282,56 +274,6 @@ class FPersistentManager {
         }
         return $query->getResult();
     }
-
-    /*
-    public function getProductFiltered($filters, $page = 1, $pageSize = 4) {
-        $qb = getEntityManager()->createQueryBuilder();
-        $qb->select('p')
-           ->from('EProduct', 'p')
-           ->where('p.is_deleted = false');
-    
-        if (!empty($filters['query'])) {
-            $qb->andWhere('p.name LIKE :query OR p.description LIKE :query')
-               ->setParameter('query', '%' . $filters['query'] . '%');
-        }
-        if (!empty($filters['category'])) {
-            $qb->andWhere('p.category = :category')
-               ->setParameter('category', $filters['category']);
-        }
-        if (!empty($filters['brand'])) {
-            $qb->andWhere('p.brand = :brand')
-               ->setParameter('brand', $filters['brand']);
-        }
-        if (!empty($filters['price_min'])) {
-            $qb->andWhere('p.price >= :price_min')
-               ->setParameter('price_min', $filters['price_min']);
-        }
-        if (!empty($filters['price_max'])) {
-            $qb->andWhere('p.price <= :price_max')
-               ->setParameter('price_max', $filters['price_max']);
-        }
-        if (!empty($filters['color'])) {
-            $qb->andWhere('p.color = :color')
-               ->setParameter('color', $filters['color']);
-        }
-    
-        // Imposta i risultati per la paginazione
-        $qb->setFirstResult(($page - 1) * $pageSize)
-           ->setMaxResults($pageSize);
-    
-        $query = $qb->getQuery();
-        $paginator = new Paginator($query, $fetchJoinCollection = true);
-        $results = iterator_to_array($paginator);
-    
-        return [
-            'produts' => $results,
-            'currentPage' => $page,
-            'pageSize' => $pageSize,
-            'totalItems' => count($paginator),
-            'totalPages' => ceil(count($paginator) / $pageSize)
-        ];
-    }
-    */
 
     public function getProductFiltered($filters, $page = 1, $pageSize = 4) {
         $qb = getEntityManager()->createQueryBuilder();
@@ -404,14 +346,6 @@ class FPersistentManager {
             return false;
         }
     }
-
-    /*
-    public function update($entity) {
-        $em = getEntityManager();
-        $em->persist($entity);
-        $em->flush();
-    }
-    */
     
     public function getProductById($productId){
         return getEntityManager()->getRepository(EProduct::class)->getProductById($productId);
@@ -565,12 +499,6 @@ class FPersistentManager {
         return getEntityManager()->getRepository('EAdmin')->getFilteredUsersPaginated($adminId);
     }
 
-    /*
-    public function getLatestProductsHome($limit = 4) {
-                return $this->getRepository(EProduct::class)->getLatestNewProducts($limit);
-    }
-    */
-
     public function getLatestProductsHome($limit = 4){
 
         
@@ -587,29 +515,6 @@ class FPersistentManager {
         }
         return $array_product;
     }
-
-
-
-    /*
-    public function getLatestProductsHome($limit = 4) {
-        // Recupera i prodotti ordinati per ID in ordine decrescente
-        $dql = "SELECT p FROM EProduct p ORDER BY p.productId DESC";
-        $query = getEntityManager()->createQuery($dql)
-            ->setMaxResults($limit);
-
-        $array_product = $query->getResult();
-
-        // Aggiungi le immagini a ciascun prodotto
-        foreach ($array_product as $key => $prod_item) {
-            $array_images = FPersistentManager::getInstance()->getAllImages($prod_item);
-            foreach ($array_images as $image) {
-                $array_product[$key]->images = $image; // Questo è il punto in cui si verifica l'errore
-            }
-        }
-
-        return $array_product;
-    }
-    */
     
     public function getAllImages($product){
         return getEntityManager()->getRepository('EImage')->getAllImages($product);
