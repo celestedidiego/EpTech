@@ -3,13 +3,6 @@ use Doctrine\ORM\EntityRepository;
 
 class FAdmin extends EntityRepository {
 
-    /*
-    public function __construct($entityManager) {
-        // Passa l'EntityManager e la classe dell'entità al costruttore della classe padre
-        parent::__construct($entityManager, $entityManager->getClassMetadata('EAdmin'));
-    }
-    */
-
     public function findAdmin($email){
         $dql = "SELECT a FROM EAdmin a WHERE a.email = ?1";
         $query = getEntityManager()->createQuery($dql);
@@ -137,7 +130,6 @@ class FAdmin extends EntityRepository {
         ];
     }
 
-
     private function getTotalUsersCount()
     {
         $qb = $this->getEntityManager()->createQueryBuilder();
@@ -148,48 +140,6 @@ class FAdmin extends EntityRepository {
 
         return $qb->getQuery()->getSingleScalarResult();
     }
-
-    /*
-    public function getAllReviewsPaginated($page = 1, $itemsPerPage = 5)
-    {
-        $offset = ($page - 1) * $itemsPerPage;
-        $em = getEntityManager();
-
-        // Query per ottenere le recensioni paginati
-        $qb = $em->createQueryBuilder();
-        $qb->select('r')
-        ->from('EReview', 'r')
-        ->leftJoin('r.registeredUser', 'ru') // Relazione con l'utente che ha scritto la recensione
-        ->leftJoin('r.product', 'p') // Relazione con il prodotto recensito
-        ->setFirstResult($offset)
-        ->setMaxResults($itemsPerPage)
-        ->orderBy('r.idReview', 'ASC');
-
-        $query = $qb->getQuery();
-
-        // Query semplificata per contare il totale delle recensioni
-        $countQb = $em->createQueryBuilder();
-        $countQb->select('COUNT(r.idReview)')
-                ->from('EReview', 'r');
-        
-        $totalItems = $countQb->getQuery()->getSingleScalarResult();
-
-        // Calcolo del numero totale di pagine
-        $totalPages = ceil($totalItems / $itemsPerPage);
-
-        // Ottieni i risultati come array
-        $items = $query->getArrayResult();
-
-        return [
-            'items' => $items,
-            'totalItems' => $totalItems,
-            'n_reviews' => $totalItems,
-            'itemsPerPage' => $itemsPerPage,
-            'currentPage' => $page,
-            'totalPages' => $totalPages,
-        ];
-    }
-    */
 
 
     public function getAllReviewsPaginated($page = 1, $itemsPerPage = 5)

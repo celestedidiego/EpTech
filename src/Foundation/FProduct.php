@@ -4,27 +4,6 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
 
 class FProduct extends EntityRepository {
 
-    /*
-    public function __construct($entityManager) {
-        // Passa l'EntityManager e la classe dell'entità al costruttore della classe padre
-        parent::__construct($entityManager, $entityManager->getClassMetadata('EProduct'));
-    }
-    */
-
-    /*
-    //Inserisci un prodotto
-    public function insertProduct(EProduct $product){
-        $this->getEntityManager()->persist($product);
-        $this->getEntityManager()->flush();
-    }
-
-    //Elimina un prodotto
-    public function deleteProduct($product){
-        $this->getEntityManager()->remove($product);
-        $this->getEntityManager()->flush();
-    }
-    */
-
     public function insertProduct(EProduct $product){
         $em = getEntityManager();
         $em->persist($product);
@@ -49,19 +28,6 @@ class FProduct extends EntityRepository {
         $em->flush();
     }
 
-    /*
-    public function updateAdminCatProduct(EProduct $product, EAdmin $admin, ECategory $category){
-        $em = getEntityManager();
-        $found_product = $em->find(EProduct::class, $product->getProductId());
-        $found_admin = $em->find(EAdmin::class, $admin->getIdAdmin());
-        $found_category = $em->find(ECategory::class, $category->getIdCategory());
-        $found_product->setAdmin($found_admin);
-        $found_product->setCategory($found_category);
-        $em->persist($found_product);
-        $em->flush();
-    }
-    */
-
     public function updateAdminCatProduct(EProduct $product, EAdmin $admin, ECategory $category)
     {
         $em = getEntityManager();
@@ -78,18 +44,6 @@ class FProduct extends EntityRepository {
             throw new \Exception('Errore: uno degli oggetti non è valido.');
         }
     }
-
-    /*
-    //Recupera tutti i prodotti
-    public function getAllProducts(){
-        $qb = $this->getEntityManager()->createQueryBuilder();
-        $qb->select('p')
-           ->from('EProduct', 'p');
-        $query = $qb->getQuery();
-        return $query->getResult();
-    }
-
-    */
 
     public function getAllProducts($currentPage = 1, $pageSize = 4){
         $dql = "SELECT p
@@ -109,19 +63,6 @@ class FProduct extends EntityRepository {
         'totalPages' => ceil(count($paginator) / $pageSize)
         ];
     }
-
-    /*
-    //Recupera un prodotto per ID
-    public function getProductById($id){
-        $qb = $this->getEntityManager()->createQueryBuilder();
-        $qb->select('p')
-           ->from('EProduct', 'p')
-           ->where('p.productId = :id')
-           ->setParameter('id', $id);
-        $query = $qb->getQuery();
-        return $query->getOneOrNullResult();
-    }
-    */
 
     public function getProductById($id, $currentPage = 1, $pageSize = 4){
         $dql= "SELECT p 
@@ -145,17 +86,6 @@ class FProduct extends EntityRepository {
         ];
     
     }
-
-    /*
-    //Recupera gli ultimi prodotti
-    public function getLatestNewProducts($limit = 4) {
-        $dql = "SELECT p FROM EProduct p ORDER BY p.createdAt DESC";
-        $query = $this->getEntityManager()->createQuery($dql)
-            ->setMaxResults($limit);
-        return $query->getResult();
-    }
-
-    */
 
     //Rivedere se è necessario questo metodo
     public function getLatestNewProducts($limit = 4) {
@@ -225,28 +155,6 @@ class FProduct extends EntityRepository {
         $em->persist($found_product);
         $em->flush();
     }
-
-    /*
-    public function getAllProductsByCategory($category, $page = 1, $itemsPerPage = 4) {
-        $qb = $this->createQueryBuilder('p')
-            ->where('p.nameCategory = :category')
-            ->setParameter('category', $category)
-            ->setFirstResult(($page - 1) * $itemsPerPage)
-            ->setMaxResults($itemsPerPage);
-    
-        $totalItems = count($qb->getQuery()->getResult());
-    
-        $items = $qb->getQuery()->getResult();
-    
-        return [
-            'items' => $items,
-            'n_products' => $totalItems,
-            'currentPage' => $page,
-            'itemsPerPage' => $itemsPerPage,
-            'totalPages' => ceil($totalItems / $itemsPerPage)
-        ];
-    }
-    */
 
     public function getAllProductsByCategory($category, $currentPage = 1, $pageSize = 4){
         $dql = "SELECT p

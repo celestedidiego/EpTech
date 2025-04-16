@@ -3,13 +3,6 @@ use Doctrine\ORM\EntityRepository;
 
 class FReview extends EntityRepository {
 
-    /*
-    public function __construct($entityManager) {
-        // Passa l'EntityManager e la classe dell'entità al costruttore della classe padre
-        parent::__construct($entityManager, $entityManager->getClassMetadata('EReview'));
-    }
-    */
-
     public function findReviewByID($idReview)
     {
         $dql = "SELECT r FROM EReview r WHERE r.idReview = :idReview";

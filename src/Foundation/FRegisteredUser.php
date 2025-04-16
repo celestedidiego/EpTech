@@ -3,13 +3,6 @@ use Doctrine\ORM\EntityRepository;
 
 class FRegisteredUser extends EntityRepository {
 
-    /*
-    public function __construct($entityManager) {
-        // Passa l'EntityManager e la classe dell'entità al costruttore della classe padre
-        parent::__construct($entityManager, $entityManager->getClassMetadata('ERegisteredUser'));
-    }
-    */
-
     //Trova un utente registrato tramite l'email
     public function findRegisteredUser($email){
         $dql = "SELECT ru FROM ERegisteredUser ru WHERE ru.email = ?1";
@@ -33,16 +26,6 @@ class FRegisteredUser extends EntityRepository {
         $em->persist($user);
         $em->flush();
     }
-
-    /*
-    public function deleteRegisteredUser(ERegisteredUser $user) {
-        $em = getEntityManager();
-        $found_user= $em->find(ERegisteredUser::class, $user->getIdRegisteredUser());
-        $em->remove($found_user);
-        $em->flush();
-    }
-    */
-
 
     public function deleteRegisteredUser(ERegisteredUser $user) {
         $em = getEntityManager();

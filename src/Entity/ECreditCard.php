@@ -70,7 +70,6 @@ class ECreditCard
     
     public function setEndDate($endDate): void
     {
-        error_log("Valore di endDate in setEndDate: " . $endDate);
         // Valida il formato di endDate (MM/YY)
         if (preg_match('/^(0[1-9]|1[0-2])\/\d{2}$/', $endDate)) {
             $this->endDate = $endDate;
