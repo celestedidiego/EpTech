@@ -117,6 +117,8 @@ input.addEventListener('change', () => {
 function updateImagePreview() {
     imagePreview.innerHTML = '';
 
+    imageArray.sort((a,b)=> a.name.localeCompare(b.name));
+
     imageArray.forEach((file, index) => {
         const reader = new FileReader();
         reader.onload = () => {

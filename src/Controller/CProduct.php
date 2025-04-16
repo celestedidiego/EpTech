@@ -223,6 +223,7 @@ class CProduct {
         if ($_SERVER['REQUEST_METHOD'] == "GET") {
             if($_SESSION['user'] instanceof EAdmin){
                 $tmp_images = FPersistentManager::getInstance()->getAllImages($product_to_modify);
+                
                 foreach($tmp_images as $image){
                     $array_images[] = $image;
                 }
