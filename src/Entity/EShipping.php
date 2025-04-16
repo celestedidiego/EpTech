@@ -135,5 +135,5 @@ class EShipping
     {
         $this->shippingRegisteredUser = $shippingRegisteredUser;
     }
+
 }
-?>

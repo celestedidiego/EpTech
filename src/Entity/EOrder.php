@@ -52,9 +52,6 @@ class EOrder
         $this->qTotalProduct = 0;
         $this->itemOrder = new ArrayCollection();
         $this->refundRequests = new ArrayCollection();
-        //$this->creditCard = $creditCard;
-        //$this->registeredUser = $registeredUser;
-        //$this->shipping = $shipping;
     }
 
     public function addQProductOrder(EItemOrder $itemOrder){
@@ -180,27 +177,9 @@ class EOrder
         $this->registeredUser = $registeredUser;
     }
 
-    /*
-    public function getRefundRequests(): Collection {
-        return $this->refundRequests;
-    }
-    */
-
     public function getRefundRequests(): array {
         return $this->refundRequests->toArray();
     }
-    
-    /*
-    public function hasRefundRequest(): bool {
-        foreach ($this->refundRequests as $refundRequest) {
-            if ($refundRequest->getStatus() === 'pending') {
-                return true;
-            }
-        }
-        return false;
-    }
-    */
-
 
     public function hasRefundRequest(): bool {
         foreach ($this->refundRequests as $refundRequest) {
@@ -212,4 +191,3 @@ class EOrder
     }
 
 }
-?>
