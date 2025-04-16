@@ -38,13 +38,11 @@ class EAdmin
 
     public function __construct($name, $surname, $email, $username, $password)
     {
-        //$hashedPassword = password_hash($password, PASSWORD_DEFAULT);
         $this->name = $name;
         $this->surname = $surname;
         $this->email = $email;
         $this->username = $username;
         $this->password = $password;
-        //$this->password = $hashedPassword;
         $this->products = new ArrayCollection();
         $this->reviews = new ArrayCollection();
     }

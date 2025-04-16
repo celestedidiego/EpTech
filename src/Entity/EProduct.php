@@ -34,13 +34,9 @@ class EProduct
     #[ORM\Column(type: 'boolean')]
     private $is_deleted = false;
 
-    ##[ORM\Column(type:"integer", columnDefinition: "INTEGER NOT NULL CHECK(avQuantity >= 0)")]
-    #private int $avQuantity;
-
     #[ORM\Column(type:"decimal", precision: 10, scale: 0, columnDefinition: "DECIMAL(10,0) NOT NULL CHECK(avQuantity >= 0)")]
     private float $avQuantity;
 
-    //Relazione ManyToOne con ECategory
     #[ORM\ManyToOne(targetEntity: ECategory::class, inversedBy:'products')]
     #[ORM\JoinColumn(name:'category_id', referencedColumnName:'categoryId', nullable:true, onDelete:'SET NULL')]
     private ?ECategory $category = null;
@@ -51,10 +47,6 @@ class EProduct
     #[ORM\OneToMany(targetEntity:EReview::class, mappedBy:'product')]
     private Collection $reviews;
 
-    //#[ORM\OneToMany(mappedBy:"product", targetEntity: EItemCart::class)]
-    //private Collection $itemCart;
-
-    // Relazione ManyToOne con EAdmin
     #[ORM\ManyToOne(targetEntity: EAdmin::class, inversedBy: 'products')]
     #[ORM\JoinColumn(name: 'adminId', referencedColumnName: 'adminId', nullable: false, onDelete: 'CASCADE')] //prima nullable era true e onDelete era NOT NULL
     private EAdmin $admin;
@@ -62,7 +54,6 @@ class EProduct
     #[ORM\OneToMany(targetEntity:EImage::class, mappedBy:'product')]
     private Collection $images;
 
-    //public function __construct(string $nameProduct, float $price, string $description, string $brand, ?string $model = null, ?string $color = null, ?ECategory $category = null)
     public function __construct(string $nameProduct, float $priceProduct, string $description, string $brand, string $model, string $color, $avQuantity)
     {
         $this->nameProduct = $nameProduct;
@@ -72,10 +63,8 @@ class EProduct
         $this->model = $model;
         $this->color = $color;
         $this->avQuantity = $avQuantity;
-        #$this->category = $category;
         $this->itemOrder = new ArrayCollection();
         $this->reviews = new ArrayCollection();
-        //$this->itemCart = new ArrayCollection();
         $this->images = new ArrayCollection();
     }
 
@@ -166,11 +155,6 @@ class EProduct
         return $this->itemOrder;
     }
 
-    //public function getItemCart()
-    //{
-    //    return $this->itemCart;
-    //}
-
     public function getReviews(): Collection
     {
         return $this->reviews;
@@ -213,9 +197,6 @@ class EProduct
         return $this;
     }
 
-    /**
-     * Get the value of immagini
-     */
     public function getImages(): Collection
     {
         return $this->images;

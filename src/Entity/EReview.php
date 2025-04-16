@@ -34,8 +34,7 @@ class EReview
 
     public function __construct($text, $vote)
     {
-        //$this->text = $text;
-        //$this->vote = $vote;
+
     }
 
     public function getReviewId(): int
@@ -86,7 +85,7 @@ class EReview
 
     public function setResponseAdmin($response, EAdmin $adminId) {
         $this->responseAdmin = $response;
-        $this->setAdmin($adminId); // Salva l'adminId
+        $this->setAdmin($adminId); 
     }
     public function getResponseAdmin() {
         return $this->responseAdmin;
