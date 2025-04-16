@@ -54,7 +54,6 @@ class UEMailer {
             $this->mailer->send();
             return true;
         } catch (Exception $e) {
-            error_log("Errore nell'invio dell'email: " . $this->mailer->ErrorInfo);
             return false;
         }
     }
@@ -68,7 +67,6 @@ class UEMailer {
             $this->mailer->send();
             return true;
         } catch (Exception $e) {
-            error_log("Errore nell'invio dell'email: " . $this->mailer->ErrorInfo);
             return false;
         }
     }
@@ -83,7 +81,6 @@ class UEMailer {
             $this->mailer->send();
             return true;
         } catch (Exception $e) {
-            error_log("Errore nell'invio dell'email di conferma: " . $this->mailer->ErrorInfo);
             return false;
         }
     }

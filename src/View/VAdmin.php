@@ -115,12 +115,6 @@ class VAdmin {
         $this->smarty->display('manageOrders.tpl');
     }
 
-    /*
-    public function showManageSection() {
-        $this->smarty->display('manageSection.tpl');
-    }
-    */
-
     public function showManageSection() {
         $loginVariables = (new VUser)->checkLogin();
         foreach ($loginVariables as $key => $value) {
