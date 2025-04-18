@@ -499,6 +499,7 @@ class FPersistentManager {
         return getEntityManager()->getRepository('EAdmin')->getFilteredUsersPaginated($adminId);
     }
 
+    /*
     public function getLatestProductsHome($limit = 4){
 
         
@@ -513,6 +514,25 @@ class FPersistentManager {
                 }
             }
         }
+        return $array_product;
+    }
+    */
+
+    public function getLatestProductsHome($limit = 4) {
+        $array_product = $this->getRepository(EProduct::class)->getLatestNewProducts($limit);
+    
+        for ($i = 0; $i < sizeof($array_product); $i++) {
+            $prod_item = FPersistentManager::getInstance()->find(EProduct::class, $array_product[$i]['productId']);
+            $array_images = FPersistentManager::getInstance()->getAllImages($prod_item);
+    
+            // Prendi solo la prima immagine, se esiste
+            if (is_array($array_images) && !empty($array_images)) {
+                $array_product[$i]['images'] = $array_images[0]; // Prima immagine
+            } else {
+                $array_product[$i]['images'] = null; // Nessuna immagine
+            }
+        }
+    
         return $array_product;
     }
     

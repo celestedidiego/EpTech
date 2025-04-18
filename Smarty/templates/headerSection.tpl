@@ -73,8 +73,8 @@
                                 <div class="product-widget">
                                     
                                     <div class="product-img">
-                                        {if isset($product['product']->getImages()->last()->getImageData()) && isset($product['product']->getImages()->last()->getType())}
-                                            <img src="data:{$product['product']->getImages()->last()->getType()};base64,{$product['product']->getImages()->last()->getEncodedData()}" alt="Image">
+                                        {if isset($product['product']->getImages()->first()->getImageData()) && isset($product['product']->getImages()->first()->getType())}
+                                            <img src="data:{$product['product']->getImages()->first()->getType()};base64,{$product['product']->getImages()->first()->getEncodedData()}" alt="Image">
                                         {else}
                                             <p>Immagine non trovata</p>
                                         {/if}  
