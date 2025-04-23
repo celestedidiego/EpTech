@@ -232,7 +232,7 @@
 							<div class="col-md-5">
 								<div id="review-form">
 									<h4>{if $review_user}Modifica la tua recensione{else}Scrivi una recensione{/if}</h4>
-									<form action="/EpTech/review/{if $review_user}modifica{else}aggiungi{/if}/{$productId}" method="POST" class="review-form">
+									<form action="/EpTech/review/{if $review_user}edit{else}add{/if}/{$productId}" method="POST" class="review-form">
 									<textarea style="width:400px;height:200px" name="text" placeholder="La tua recensione" required>{if $review_user}{$review_user->getText()}{/if}</textarea>
 										<div class="input-rating">
 											<span>Valuta: </span>

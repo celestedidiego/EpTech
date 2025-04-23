@@ -32,7 +32,7 @@ class EReview
     #[ORM\JoinColumn(name:'adminId', referencedColumnName:'adminId', nullable:true)]
     private EAdmin|null $admin = null;
 
-    public function __construct($text, $vote)
+    public function __construct()
     {
 
     }

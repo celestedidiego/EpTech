@@ -93,7 +93,7 @@ class CFrontController {
             'registered_user' => [
                 'user' => ['userDataForm', 'userDataSection', 'userHistoryOrders', 'deleteAccount', 'changePass', 'changeUserData', 'shipping', 'creditCards', 'addCards', 'deleteCreditCard','addShipping', 'deleteShipping', 'reactivateShipping', 'reactiveCreditCard'],
                 'purchase' => ['checkout', 'completeOrder', 'errorOrder', 'detailOrder', ],
-                'review' => ['addReview', 'editReview'],
+                'review' => ['add', 'edit'],
                 'order' => ['requestRefund'], // Aggiunto il metodo per richiedere reso o rimborso
                 'shipping' => ['editShipping', 'deleteShipping'],
                 // Add more controllers and methods for acquirente
