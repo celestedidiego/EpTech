@@ -97,7 +97,7 @@ class VPurchase {
 
         $this->smarty->assign('can_review', $can_review);
 
-        $this->smarty->assign('user_review', $user_review);
+        $this->smarty->assign('review_user', $user_review);
 
         $this->smarty->assign('successMessage', $successMessage);
 
