@@ -1,0 +1,76 @@
+@startuml EpTechUML
+
+class CReview
+class COrder
+class CFrontController
+class CShipping
+class CAdmin
+class CProduct
+class CPurchase
+class CUser
+class UEMailer
+class FRegisteredUser
+class FItemOrder
+class FAdmin
+class FImage
+class FCreditCard
+class FOrder
+class FReview
+class FPersistentManager
+class FProduct
+class FCategory
+class FShipping
+class VProduct
+class VOrder
+class VReview
+class VPurchase
+class VAdmin
+class VShipping
+class VUser
+class EImage
+class EShipping
+class EOrder
+class EProduct
+class ECategory
+class EItemOrder
+class EReview
+class ERegisteredUser
+class ECreditCard
+class EUnRegisteredUser
+class ERefundRequest
+class EAdmin
+CAdmin <|-- CUser
+COrder <|-- CShipping
+COrder <|-- CProduct
+COrder <|-- CUser
+CReview <|-- CProduct
+CReview <|-- CUser
+CProduct <|-- ECategory
+CProduct <|-- EImage
+COrder <|-- EItemOrder
+COrder <|-- EShipping
+COrder <|-- ECreditCard
+CUser <|-- ERegisteredUser
+CUser <|-- EUnRegisteredUser
+CAdmin <|-- EAdmin
+CReview <|-- EReview
+CShipping <|-- EShipping
+CProduct <|-- FProduct
+COrder <|-- FOrder
+CReview <|-- FReview
+CUser <|-- FRegisteredUser
+CAdmin <|-- FAdmin
+CShipping <|-- FShipping
+CProduct <|-- FCategory
+CProduct <|-- FImage
+COrder <|-- FItemOrder
+CUser <|-- FCreditCard
+FPersistentManager <|-- FProduct
+FPersistentManager <|-- FOrder
+FPersistentManager <|-- FReview
+FPersistentManager <|-- FRegisteredUser
+FPersistentManager <|-- FAdmin
+FPersistentManager <|-- FShipping
+FPersistentManager <|-- FCreditCard
+
+@enduml

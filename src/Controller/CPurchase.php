@@ -58,12 +58,12 @@ class CPurchase {
         }
 
         // Recupera i messaggi dalla sessione
-        $successMessage = isset($_SESSION['recensione_success']) ? $_SESSION['recensione_success'] : null;
-        $errorMessage = isset($_SESSION['recensione_error']) ? $_SESSION['recensione_error'] : null;
+        $successMessage = isset($_SESSION['review_success']) ? $_SESSION['review_success'] : null;
+        $errorMessage = isset($_SESSION['review_error']) ? $_SESSION['review_error'] : null;
 
         // Rimuovi i messaggi dalla sessione dopo averli recuperati
-        unset($_SESSION['recensione_success']);
-        unset($_SESSION['recensione_error']);
+        unset($_SESSION['review_success']);
+        unset($_SESSION['review_error']);
 
         $view->viewProduct($product, $images, $reviews, $same_cat_products, $can_review, $review_user, $successMessage, $errorMessage);
     }

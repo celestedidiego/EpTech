@@ -64,7 +64,7 @@ class FReview extends EntityRepository {
         ]);
     }
 
-    public function insertReview($review) {
+    public function addReview($review) {
         $em = getEntityManager();
         $em->persist($review);
         $em->flush();
@@ -85,8 +85,10 @@ class FReview extends EntityRepository {
         ->join('o.itemOrder', 'io')
         ->where('io.product = :product')
         ->andWhere('o.registeredUser = :user')
+        ->andWhere('o.orderStatus = :status')
         ->setParameter('product', $productId)
         ->setParameter('user', $found_user)
+        ->setParameter('status', 'Consegnato') // Assicurati di usare lo stato corretto per gli ordini completati
         ->getQuery()
         ->getSingleScalarResult();
 
