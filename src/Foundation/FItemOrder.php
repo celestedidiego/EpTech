@@ -3,6 +3,7 @@ use Doctrine\ORM\EntityRepository;
 
 class FItemOrder extends EntityRepository {
 
+    //DA FARE
     public function addItemOrder(EOrder $order, EProduct $product, $quantity) {
         $em = $this->getEntityManager();
         $itemOrder = new EItemOrder(); 

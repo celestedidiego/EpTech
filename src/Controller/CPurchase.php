@@ -202,7 +202,7 @@ class CPurchase {
             setcookie('cart', json_encode([]), time() - 3600, "/");
             
             // Mostra la pagina di conferma dell'ordine
-            $view->viewConfermaOrder($order);
+            $view->viewConfirmOrder($order);
         }
     }
     
@@ -238,7 +238,7 @@ class CPurchase {
             setcookie('cart', json_encode([]), time() - 3600, "/");
 
             // Mostra la pagina di conferma dell'ordine
-            $view->viewConfermaOrder($order);
+            $view->viewConfirmOrder($order);
 
         } catch (\Exception $e) {
             // Gestione degli errori

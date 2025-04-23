@@ -34,7 +34,7 @@ class EReview
 
     public function __construct()
     {
-
+        //DA TOGLIERE?
     }
 
     public function getReviewId(): int

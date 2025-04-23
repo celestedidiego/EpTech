@@ -130,7 +130,7 @@ class FPersistentManager {
     }
 
     //Inserire un nuovo utente registrato nel database
-    public function insertNewUtente(ERegisteredUser $new_user): void
+    public function insertNewUser(ERegisteredUser $new_user): void
     {
         getEntityManager()->getRepository('ERegisteredUser')->insertNewRegisteredUser($new_user);
     }
@@ -162,7 +162,7 @@ class FPersistentManager {
         $em->flush();
     }
     //Utilizzato per aggiornare i dati di un utente registrato (ERegisteredUser) o di un amministratore (EAdmin) nel database
-    public function updateUtente($user, array $array_data): void
+    public function updateUser($user, array $array_data): void
     {
         if($user instanceof ERegisteredUser){
             getEntityManager()->getRepository('ERegisteredUser')->updateRegisteredUser($user, $array_data);
@@ -172,7 +172,7 @@ class FPersistentManager {
     }
 
     //Utilizzato per eliminare un utente registrato (ERegisteredUser) o un amministratore (EAdmin) dal database
-    public function deleteUtente($user): void
+    public function deleteUser($user): void
     {
         if($user instanceof ERegisteredUser){
             getEntityManager()->getRepository('ERegisteredUser')->deleteRegisteredUser($user);
@@ -362,13 +362,13 @@ class FPersistentManager {
         return getEntityManager()->getRepository('EReview')->getReviewUser($registeredUser, $product);
     }
 
-    public function getProductForAdmin($page = 1, $itemsPerPage = 10){
+    /*public function getProductForAdmin($page = 1, $itemsPerPage = 10){
         $offset = ($page - 1) * $itemsPerPage;
         $limit = $itemsPerPage + 1;  // Richiediamo un elemento in più per determinare se c'è una pagina successiva
         
         $em = getEntityManager();
 
-    }
+    }*/
 
     public function findUser($user) {
         if (is_string($user)) {
@@ -560,8 +560,8 @@ class FPersistentManager {
         getEntityManager()->getRepository('EProduct')->updateProduct($product, $array_data);
     }
 
-    public function softDeleteUtente($user) {
-        return getEntityManager()->getRepository('EAdmin')->softDeleteUtente($user);
+    public function softDeleteUser($user) {
+        return getEntityManager()->getRepository('EAdmin')->softDeleteUser($user);
     }
 
     public function getAllReviewsPaginated($page = 1, $itemsPerPage = 5) {

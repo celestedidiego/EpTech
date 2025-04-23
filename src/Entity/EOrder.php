@@ -61,6 +61,7 @@ class EOrder
         }
     }
 
+    //DA AGGIUNGERE I PULSANTI PER USARE QUESTO METODO NELLA VIEW
     public function removeQProductOrder(EItemOrder $itemOrder){
         if ($this->itemOrder->removeElement($itemOrder)) {
             // set the owning side to null (unless already changed)

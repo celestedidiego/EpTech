@@ -138,7 +138,7 @@ class CUser {
             }
 
             // Salva l'utente nel database
-            FPersistentManager::getInstance()->insertNewUtente($new_user);
+            FPersistentManager::getInstance()->insertNewUser($new_user);
 
             // Genera un token di conferma
             $confirmationToken = bin2hex(random_bytes(32));
@@ -211,7 +211,7 @@ class CUser {
     public static function deleteAccount()
     {
         $user = $_SESSION['user'];
-        FPersistentManager::getInstance()->deleteUtente($user);
+        FPersistentManager::getInstance()->deleteUser($user);
         session_unset();
         session_destroy();
         header('Location: /EpTech/user/home');
@@ -261,7 +261,7 @@ class CUser {
             foreach ($postData as $key => $value) {
                 $array_data[$key] = $value;
             }
-            FPersistentManager::getInstance()->updateUtente($_SESSION['user'], $array_data);
+            FPersistentManager::getInstance()->updateUser($_SESSION['user'], $array_data);
 
             //Aggiorno la sessione con i nuovi dati aggiornati
             $updated_cliente = FPersistentManager::getInstance()->findUser($_SESSION['user']);
@@ -493,7 +493,7 @@ class CUser {
         exit();
     }
 
-    public static function searchProducts() {
+    /*public static function searchProducts() {
         if (!isset($_SESSION['user']) || !($_SESSION['user'] instanceof EAdmin)) {
             header('Location: /EpTech/user/login');
             exit;
@@ -506,8 +506,9 @@ class CUser {
              $products = FPersistentManager::getInstance()->getProductById($search_term);
              $view_admin->displaySearchResults($products);
          } 
-     }
+     }*/
 
+    //DA VEDERE SE SERVE
     public static function deleteProduct($id) {
         if (!isset($_SESSION['user']) || !($_SESSION['user'] instanceof EAdmin)) {
             header('Location: /EpTech/user/login');
