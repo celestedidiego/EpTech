@@ -101,7 +101,7 @@
                             </div>
                             <div class="cart-btns">
                                 <a href="/EpTech/purchase/showCart">Vai al carrello</a>
-                                <a href="/EpTech/purchase/effettuaCheckout">Checkout  <i class="fa fa-arrow-circle-right"></i></a>
+                                <a href="/EpTech/purchase/checkout">Checkout  <i class="fa fa-arrow-circle-right"></i></a>
                             </div>
                         </div>
                     </div>
