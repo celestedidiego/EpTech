@@ -1,5 +1,3 @@
-# EpTech
-
 # 🛍️ EpTech
 
 **EpTech** è un'applicazione e-commerce sviluppata con PHP, progettata per offrire un'esperienza d'acquisto solida, moderna e facilmente estendibile. Il progetto supporta la gestione di prodotti, carrelli, ordini e utenti, con un'interfaccia responsive basata su Bootstrap e interazioni dinamiche con jQuery.
