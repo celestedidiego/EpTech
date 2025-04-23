@@ -63,7 +63,7 @@ class FReview extends EntityRepository {
         ]);
     }
 
-    public function insertReview($review) {
+    public function addReview($review) {
         $em = getEntityManager();
         $em->persist($review);
         $em->flush();
