@@ -156,7 +156,7 @@ class CPurchase {
         header('Location: /EpTech/purchase/showCart');
     }
     
-    public static function effettuaCheckout(){
+    public static function checkout(){
         $view = new VPurchase();
     
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {

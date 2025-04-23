@@ -23,7 +23,7 @@ class COrder
         }
     }
 
-    // Metodo per modificare un ordine
+    // Metodo per modificare un ordine (DA VALUTARE SE TENERLO)
     public static function editOrder($orderId)
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
