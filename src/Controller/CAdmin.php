@@ -168,19 +168,6 @@ class CAdmin {
         $view->manageReviews($reviews);
     }
 
-    public static function filterReviews() {
-        if (isset($_POST['adminId'])) {
-            $adminId = $_POST['adminId'];
-            $page  = isset($_GET['page']) ? (int)$_GET['page'] : 1;
-            $reviews = FPersistentManager::getInstance()->findReviewsByAdminId($adminId, $page);
-            
-        } else {
-            $reviews = FPersistentManager::getInstance()->getAllReviewsPaginated();
-        }
-        $view = new VAdmin();
-        $view->displayFilteredReviews($reviews);
-    }
-
     public static function manageSection() {
         $view = new VAdmin();
         $view->showManageSection();
