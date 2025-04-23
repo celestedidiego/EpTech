@@ -163,6 +163,7 @@ class ERegisteredUser
         return $this;
     }
 
+    //DA AGGIUNGERE GLI UTENTI BLOCCATI
     public function isBlocked(): bool
     {
         return $this->is_blocked;

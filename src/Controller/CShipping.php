@@ -2,7 +2,7 @@
 class CShipping
 {
 
-    public static function addShippingAddress()
+    /*public static function addShippingAddress()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['user'])) {
             try {
@@ -32,9 +32,9 @@ class CShipping
             
             header("Location: /EpTech/shipping/addresses");
         }
-    }
+    }*/
 
-    public static function showShippingAddresses()
+    /*public static function showShippingAddresses()
     {
         if (!isset($_SESSION['user'])) {
             $_SESSION['error'] = "Devi effettuare il login.";
@@ -48,9 +48,9 @@ class CShipping
         // Quando avrai implementato la View, sostituisci il codice sopra con:
          $view = new VShipping();
          $view->showAddresses($shippingAddresses);
-    }
+    }*/
 
-    public static function deleteShippingAddress($shippingId)
+    /*public static function deleteShippingAddress($shippingId)
     {
         if (!isset($_SESSION['user'])) {
             $_SESSION['error'] = "Devi effettuare il login.";
@@ -75,9 +75,9 @@ class CShipping
         }
         
         header("Location: /EpTech/shipping/addresses");
-    }
+    }*/
 
-    public static function selectShippingAddress()
+    /*public static function selectShippingAddress()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['user'])) {
             $shippingId = $_POST['shipping_id'];
@@ -96,9 +96,9 @@ class CShipping
             
             header("Location: /EpTech/checkout/payment");
         }
-    }
+    }*/
 
-    public static function editShippingAddress($shippingId)
+    /*public static function editShippingAddress($shippingId)
     {
         if (!isset($_SESSION['user'])) {
             $_SESSION['error'] = "Devi effettuare il login.";
@@ -138,7 +138,7 @@ class CShipping
             $view = new VShipping();
             $view->showEditForm($shipping);
         }
-    }
+    }*/
     
     public static function showAddForm()
     {
@@ -159,7 +159,7 @@ class CShipping
      * @return EShipping|null L'indirizzo di spedizione o null se non trovato
      */
 
-    public static function getShippingAddress($shippingId)
+    /*public static function getShippingAddress($shippingId)
     {
         if (!isset($_SESSION['user'])) {
             return null;
@@ -179,5 +179,5 @@ class CShipping
         }
         
         return $shipping;
-    }
+    }*/
 }

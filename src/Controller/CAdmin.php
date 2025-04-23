@@ -34,7 +34,7 @@ class CAdmin {
         $entityClass = 'ERegisteredUser';
         $user = FPersistentManager::getInstance()->find($entityClass, $userId);
         if ($user) {
-            FPersistentManager::getInstance()->softDeleteUtente($user);
+            FPersistentManager::getInstance()->softDeleteUser($user);
             
             $mailer = new UEMailer();
             $mailer->sendAccountDeletionEmail($user->getEmail());

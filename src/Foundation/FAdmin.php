@@ -49,7 +49,7 @@ class FAdmin extends EntityRepository {
         $em->flush();
     }
 
-    public function softDeleteUtente($user) {
+    public function softDeleteUser($user) {
         $em=getEntityManager();
         $user->setDeleted(true);
         $em->persist($user);

@@ -137,7 +137,7 @@ class VPurchase {
         $this->smarty->display('checkout.tpl');
     }
 
-    public function viewConfermaOrder($order) {
+    public function viewConfirmOrder($order) {
         $loginVariables = (new VUser)->checkLogin();
         foreach ($loginVariables as $key => $value) {
             $this->smarty->assign($key, $value);
