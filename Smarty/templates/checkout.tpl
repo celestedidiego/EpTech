@@ -13,20 +13,20 @@
 		<link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
 
 		<!-- Bootstrap -->
-		<link type="text/css" rel="stylesheet" href="/EpTechProva/skin/electroMaster/css/bootstrap.min.css"/>
+		<link type="text/css" rel="stylesheet" href="/EpTech/skin/electroMaster/css/bootstrap.min.css"/>
 
 		<!-- Slick -->
-		<link type="text/css" rel="stylesheet" href="/EpTechProva/skin/electroMaster/css/slick.css"/>
-		<link type="text/css" rel="stylesheet" href="/EpTechProva/skin/electroMaster/css/slick-theme.css"/>
+		<link type="text/css" rel="stylesheet" href="/EpTech/skin/electroMaster/css/slick.css"/>
+		<link type="text/css" rel="stylesheet" href="/EpTech/skin/electroMaster/css/slick-theme.css"/>
 
 		<!-- nouislider -->
-		<link type="text/css" rel="stylesheet" href="/EpTechProva/skin/electroMaster/css/nouislider.min.css"/>
+		<link type="text/css" rel="stylesheet" href="/EpTech/skin/electroMaster/css/nouislider.min.css"/>
 
 		<!-- Font Awesome Icon -->
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
 		<!-- Custom stlylesheet -->
-		<link type="text/css" rel="stylesheet" href="/EpTechProva/skin/electroMaster/css/style.css"/>
+		<link type="text/css" rel="stylesheet" href="/EpTech/skin/electroMaster/css/style.css"/>
 
 		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -73,7 +73,7 @@
                 <div class="order-summary">
                     <!-- ... (mantieni il riepilogo dell'ordine esistente) ... -->
                 </div>
-                <form action="/EpTechProva/purchase/completeOrder" method="POST">
+                <form action="/EpTech/purchase/completeOrder" method="POST">
                     {assign var="hasActiveAddresses" value=false}
                     {assign var="hasActiveCards" value=false}
 
@@ -101,7 +101,7 @@
                             <p class="alert alert-warning">Non hai indirizzi attivi.</p>
                         {/if}
                         <br>
-                        <a href="/EpTechProva/user/shipping" class="btn btn-primary">Aggiungi un indirizzo</a>
+                        <a href="/EpTech/user/shipping" class="btn btn-primary">Aggiungi un indirizzo</a>
                     </div>
 
                     <div class="form-group">
@@ -127,7 +127,7 @@
                             <p class="alert alert-warning">Non hai carte di credito attive.</p>
                         {/if}
                         <br>
-                        <a href="/EpTechProva/user/creditCards" class="btn btn-primary">Aggiungi una carta di credito</a>
+                        <a href="/EpTech/user/creditCards" class="btn btn-primary">Aggiungi una carta di credito</a>
                     </div>
 
                     <button type="submit" class="primary-btn order-submit" {if !$hasActiveAddresses || !$hasActiveCards}disabled{/if}>
@@ -142,11 +142,11 @@
         </div>
     </div>
     <!-- Js Plugins -->
-    <script src="/EpTechProva/skin/electroMaster/js/jquery-3.3.1.min.js"></script>
-    <script src="/EpTechProva/skin/electroMaster/js/bootstrap.min.js"></script>
-    <script src="/EpTechProva/skin/electroMaster/js/jquery.nice-select.min.js"></script>
-    <script src="/EpTechProva/skin/electroMaster/js/jquery.slicknav.js"></script>
-    <script src="/EpTechProva/skin/electroMaster/js/owl.carousel.min.js"></script>
-    <script src="/EpTechProva/skin/electroMaster/js/main.js"></script>
+    <script src="/EpTech/skin/electroMaster/js/jquery-3.3.1.min.js"></script>
+    <script src="/EpTech/skin/electroMaster/js/bootstrap.min.js"></script>
+    <script src="/EpTech/skin/electroMaster/js/jquery.nice-select.min.js"></script>
+    <script src="/EpTech/skin/electroMaster/js/jquery.slicknav.js"></script>
+    <script src="/EpTech/skin/electroMaster/js/owl.carousel.min.js"></script>
+    <script src="/EpTech/skin/electroMaster/js/main.js"></script>
 </body>
 </html>

@@ -6,7 +6,7 @@
     </div>
 </div>
 
-<form method="POST" action="/EpTechProva/user/deleteAccount">
+<form method="POST" action="/EpTech/user/deleteAccount">
     <div id="confirmationPopup" class="popup" style="display: none;">
         <div class="popup-content">
             <h2>Conferma eliminazione account</h2>

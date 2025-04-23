@@ -24,7 +24,7 @@
         </div>
     {/if}
 
-    <form class="registrationForm" method="POST" action="/EpTechProva/user/changePass">
+    <form class="registrationForm" method="POST" action="/EpTech/user/changePass">
         <div class="form-group">
             <input name="password" type="password" class="form-control" id="password" placeholder="Vecchia password..."
                 required>

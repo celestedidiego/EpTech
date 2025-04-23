@@ -13,20 +13,20 @@
 		<link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
 
 		<!-- Bootstrap -->
-		<link type="text/css" rel="stylesheet" href="/EpTechProva/skin/electroMaster/css/bootstrap.min.css"/>
+		<link type="text/css" rel="stylesheet" href="/EpTech/skin/electroMaster/css/bootstrap.min.css"/>
 
 		<!-- Slick -->
-		<link type="text/css" rel="stylesheet" href="/EpTechProva/skin/electroMaster/css/slick.css"/>
-		<link type="text/css" rel="stylesheet" href="/EpTechProva/skin/electroMaster/css/slick-theme.css"/>
+		<link type="text/css" rel="stylesheet" href="/EpTech/skin/electroMaster/css/slick.css"/>
+		<link type="text/css" rel="stylesheet" href="/EpTech/skin/electroMaster/css/slick-theme.css"/>
 
 		<!-- nouislider -->
-		<link type="text/css" rel="stylesheet" href="/EpTechProva/skin/electroMaster/css/nouislider.min.css"/>
+		<link type="text/css" rel="stylesheet" href="/EpTech/skin/electroMaster/css/nouislider.min.css"/>
 
 		<!-- Font Awesome Icon -->
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
 		<!-- Custom stlylesheet -->
-		<link type="text/css" rel="stylesheet" href="/EpTechProva/skin/electroMaster/css/style.css"/>
+		<link type="text/css" rel="stylesheet" href="/EpTech/skin/electroMaster/css/style.css"/>
 
 		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -44,8 +44,8 @@
             <div class="col-md-12 text-center">
                 <h2>Errore ordine</h2>
                 <p>{$error_order}</p>
-                <a href="/EpTechProva/user/userHistoryOrders" class="btn btn-info">Visualizza Storico Ordini</a>
-                <a href="/EpTechProva/user/home" class="btn btn-primary">Torna alla Home</a>
+                <a href="/EpTech/user/userHistoryOrders" class="btn btn-info">Visualizza Storico Ordini</a>
+                <a href="/EpTech/user/home" class="btn btn-primary">Torna alla Home</a>
             </div>
         </div>
     </div>

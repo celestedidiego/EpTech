@@ -19,7 +19,7 @@ class COrder
             }
 
             // Reindirizza alla lista degli ordini
-            header("Location: /EpTechProva/order/list");
+            header("Location: /EpTech/order/list");
         }
     }
 
@@ -32,7 +32,7 @@ class COrder
 
                 if (!$order) {
                     $_SESSION['order_error'] = "Ordine non trovato.";
-                    header("Location: /EpTechProva/order/list");
+                    header("Location: /EpTech/order/list");
                     return;
                 }
 
@@ -48,7 +48,7 @@ class COrder
             }
 
             // Reindirizza alla lista degli ordini
-            header("Location: /EpTechProva/order/list");
+            header("Location: /EpTech/order/list");
         }
     }
 
@@ -60,7 +60,7 @@ class COrder
 
             if (!$order) {
                 $_SESSION['order_error'] = "Ordine non trovato.";
-                header("Location: /EpTechProva/order/list");
+                header("Location: /EpTech/order/list");
                 return;
             }
 
@@ -71,7 +71,7 @@ class COrder
         }
 
         // Reindirizza alla lista degli ordini
-        header("Location: /EpTechProva/order/list");
+        header("Location: /EpTech/order/list");
     }
 
     // Metodo per elencare gli ordini
@@ -93,7 +93,7 @@ class COrder
 
         if (!$order) {
             $_SESSION['order_error'] = "Ordine non trovato.";
-            header("Location: /EpTechProva/order/list");
+            header("Location: /EpTech/order/list");
             return;
         }
 
@@ -103,7 +103,7 @@ class COrder
 
     public static function requestRefund($orderId) {
         if (!isset($_SESSION['user']) || !($_SESSION['user'] instanceof ERegisteredUser)) {
-            header('Location: /EpTechProva/user/login');
+            header('Location: /EpTech/user/login');
             exit;
         }
 
@@ -119,7 +119,7 @@ class COrder
             $_SESSION['error_message'] = "Non è possibile richiedere un reso o rimborso per questo ordine.";
         }
 
-        header('Location: /EpTechProva/user/userHistoryOrders');
+        header('Location: /EpTech/user/userHistoryOrders');
         exit;
     }
 }

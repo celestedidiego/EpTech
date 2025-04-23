@@ -43,7 +43,7 @@ class CAdmin {
         } else {
             $_SESSION['error'] = "Utente non trovato.";
         }
-        header('Location: /EpTechProva/admin/manageUsers');
+        header('Location: /EpTech/admin/manageUsers');
     }
 
     // Chiede al PersistentManager di bloccare un utente dati il ruolo e l'ID.
@@ -58,7 +58,7 @@ class CAdmin {
         } else {
             $_SESSION['error'] = "Utente non trovato.";
         }
-        header('Location: /EpTechProva/admin/manageUsers');
+        header('Location: /EpTech/admin/manageUsers');
     }
 
     // Chiede al PersistentManager di sbloccare un utente dati il ruolo e l'ID.
@@ -72,7 +72,7 @@ class CAdmin {
         } else {
             $_SESSION['error'] = "Utente non trovato.";
         }
-        header('Location: /EpTechProva/admin/manageUsers');
+        header('Location: /EpTech/admin/manageUsers');
     }
 
     //chiede al PersistentManager i dati di tutte i prodotti per darli a VAdmin
@@ -108,7 +108,7 @@ class CAdmin {
     //chiede al PersistentManager di cancellare un prodotto dato l'ID, una volta fatto manda una mail al venditore di riferimento
     public static function deleteProduct($productId) {
         if (!isset($_SESSION['user']) || !($_SESSION['user'] instanceof EAdmin)) {
-            header('Location: /EpTechProva/user/login');
+            header('Location: /EpTech/user/login');
             exit;
         }
         try{
@@ -124,7 +124,7 @@ class CAdmin {
             $_SESSION['error'] = "Si è verificato un errore".$e->getMessage();
         }
             
-        header('Location: /EpTechProva/admin/manageProduct');
+        header('Location: /EpTech/admin/manageProduct');
         exit;
         
     }
@@ -149,7 +149,7 @@ class CAdmin {
             }
         }
 
-        header('Location: /EpTechProva/admin/manageOrders');
+        header('Location: /EpTech/admin/manageOrders');
         exit;
     }
     
@@ -200,7 +200,7 @@ class CAdmin {
         } else {
             $_SESSION['error_message'] = "Richiesta non trovata.";
         }
-        header('Location: /EpTechProva/admin/manageOrders');
+        header('Location: /EpTech/admin/manageOrders');
         exit;
     }
 
@@ -218,7 +218,7 @@ class CAdmin {
         } else {
             $_SESSION['error_message'] = "Richiesta non trovata.";
         }
-        header('Location: /EpTechProva/admin/manageOrders');
+        header('Location: /EpTech/admin/manageOrders');
         exit;
     }
 

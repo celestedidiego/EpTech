@@ -34,7 +34,7 @@ class CPurchase {
 
         if (!$product) {
             $_SESSION['product_error'] = "Prodotto non trovato.";
-            header("Location: /EpTechProva/purchase/shop");
+            header("Location: /EpTech/purchase/shop");
             return;
         }
 
@@ -94,7 +94,7 @@ class CPurchase {
         setcookie('cart', json_encode($cart), time() + (86400 * 30), "/");
 
         $_SESSION['added_to_cart'] = isset($_SESSION['max_quantity_reached']) && $_SESSION['max_quantity_reached'] ? false : true;
-        header('Location: /EpTechProva/user/home');
+        header('Location: /EpTech/user/home');
     }
 
 
@@ -104,7 +104,7 @@ class CPurchase {
         json_encode($cart);
         setcookie('cart', json_encode($cart), time() + (300), "/");
         $_SESSION['removed_from_cart'] = true;
-        header('Location: /EpTechProva/user/home');
+        header('Location: /EpTech/user/home');
     }
 
     public static function emptyCart() {
@@ -112,7 +112,7 @@ class CPurchase {
             setcookie('cart', json_encode([]), time() - 3600, "/"); 
             $_SESSION['cart_emptied'] = true;
         }
-        header('Location: /EpTechProva/user/home');
+        header('Location: /EpTech/user/home');
     }
 
     public static function showCart(){
@@ -153,7 +153,7 @@ class CPurchase {
         $new_cart = json_encode($cart);
         setcookie('cart', $new_cart, time() + (86400 * 30), "/");
         $_SESSION['qty_updated'] = true;
-        header('Location: /EpTechProva/purchase/showCart');
+        header('Location: /EpTech/purchase/showCart');
     }
     
     public static function effettuaCheckout(){
@@ -209,7 +209,7 @@ class CPurchase {
     
     public static function completeOrder(){
         if ($_SERVER['REQUEST_METHOD'] != 'POST') {
-            header('Location: /EpTechProva/user/home');
+            header('Location: /EpTech/user/home');
             exit;
         }
 
@@ -246,7 +246,7 @@ class CPurchase {
             
             // Reindirizza l'utente a una pagina di errore o al carrello con un messaggio di errore
             $_SESSION['error_order'] = "Si è verificato un errore durante il completamento dell'ordine. " . $e->getMessage();
-            header('Location: /EpTechProva/purchase/errorOrder');
+            header('Location: /EpTech/purchase/errorOrder');
             exit;
         }
     }
@@ -263,7 +263,7 @@ class CPurchase {
             }
             $view_user->detailOrder($order);
         } else {
-            header('Location: /EpTechProva/user/userHistoryOrders');
+            header('Location: /EpTech/user/userHistoryOrders');
             exit;
         }
     }

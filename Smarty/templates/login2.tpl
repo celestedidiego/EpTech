@@ -12,20 +12,20 @@
 		<link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
 
 		<!-- Bootstrap -->
-		<link type="text/css" rel="stylesheet" href="/EpTechProva/skin/electroMaster/css/bootstrap.min.css"/>
+		<link type="text/css" rel="stylesheet" href="/EpTech/skin/electroMaster/css/bootstrap.min.css"/>
 
 		<!-- Slick -->
-		<link type="text/css" rel="stylesheet" href="/EpTechProva/skin/electroMaster/css/slick.css"/>
-		<link type="text/css" rel="stylesheet" href="/EpTechProva/skin/electroMaster/css/slick-theme.css"/>
+		<link type="text/css" rel="stylesheet" href="/EpTech/skin/electroMaster/css/slick.css"/>
+		<link type="text/css" rel="stylesheet" href="/EpTech/skin/electroMaster/css/slick-theme.css"/>
 
 		<!-- nouislider -->
-		<link type="text/css" rel="stylesheet" href="/EpTechProva/skin/electroMaster/css/nouislider.min.css"/>
+		<link type="text/css" rel="stylesheet" href="/EpTech/skin/electroMaster/css/nouislider.min.css"/>
 
 		<!-- Font Awesome Icon -->
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
 		<!-- Custom stlylesheet -->
-		<link type="text/css" rel="stylesheet" href="/EpTechProva/skin/electroMaster/css/style.css"/>
+		<link type="text/css" rel="stylesheet" href="/EpTech/skin/electroMaster/css/style.css"/>
 
 		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -45,7 +45,7 @@
             </div>
             {/if}
             <div class="card-body">
-                <form method="POST" action="/EpTechProva/user/login">
+                <form method="POST" action="/EpTech/user/login">
                     <div class="form-group">
                         <label for="email">Email</label>
                         <input name="email-log" type="email" class="form-control" id="email" placeholder="ad es. prova@example.com">
@@ -60,7 +60,7 @@
             </div>
             <br>
             <div class="card-footer text-center">
-                <a href="/EpTechProva/user/signUp">Non sei registrato? Registrati!</a>
+                <a href="/EpTech/user/signUp">Non sei registrato? Registrati!</a>
             </div>
             <br>
         </div>

@@ -1,6 +1,6 @@
 <!-- Filter Section -->
 <div class="form-container">
-    <form method="GET" action="/EpTechProva/{if $check_login_admin == 1}product/listProducts{else}purchase/shop{/if}" id="filterForm">
+    <form method="GET" action="/EpTech/{if $check_login_admin == 1}product/listProducts{else}purchase/shop{/if}" id="filterForm">
         <input type="hidden" name="query" id="hiddenQuery" value="{$applied_filters.query}">
         <h2>Sezione filtri</h2>
         <div class="form-group">

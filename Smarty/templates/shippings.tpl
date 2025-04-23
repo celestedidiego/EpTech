@@ -4,7 +4,7 @@
             <h2>I miei indirizzi</h2>
         </div>
         <div class="col-md-2">
-            <a href="/EpTechProva/user/addShipping" class="btn btn-primary btn-block">Aggiungi</a>
+            <a href="/EpTech/user/addShipping" class="btn btn-primary btn-block">Aggiungi</a>
         </div>
     </div>
     {if isset($messages.success)}
@@ -76,10 +76,10 @@
                                 -->
                                     <div class="col-6">
                                         {if $address->isDeleted()}
-                                            <a href="/EpTechProva/user/reactivateShipping/{$address->getAddress()}/{$address->getCap()}"
+                                            <a href="/EpTech/user/reactivateShipping/{$address->getAddress()}/{$address->getCap()}"
                                                 class="btn btn-success btn-sm">Riattiva</a>
                                         {else}
-                                            <a href="/EpTechprova/user/deleteShipping/{$address->getAddress()}/{$address->getCap()}"
+                                            <a href="/EpTech/user/deleteShipping/{$address->getAddress()}/{$address->getCap()}"
                                                 class="btn btn-danger btn-sm">Elimina</a>
                                         {/if}
                                     </div>

@@ -153,7 +153,7 @@
         </div>
 
         <div class="text-center mt-4">
-            <a href="/EpTechProva/user/userHistoryOrders" class="btn btn-primary">Torna allo Storico Ordini</a>
+            <a href="/EpTech/user/userHistoryOrders" class="btn btn-primary">Torna allo Storico Ordini</a>
         </div>
     </div>
 </form>

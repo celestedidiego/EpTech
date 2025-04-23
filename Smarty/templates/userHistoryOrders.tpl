@@ -20,7 +20,7 @@
                         <td>€{$order->getTotalPrice()|string_format:"%.2f"}</td>
                         <td>{$order->getOrderStatus()}</td>
                         <td>
-                            <a href="/EpTechProva/purchase/detailOrder/{$order->getIdOrder()}" class="btn btn-info btn-sm">Dettagli</a>
+                            <a href="/EpTech/purchase/detailOrder/{$order->getIdOrder()}" class="btn btn-info btn-sm">Dettagli</a>
                         </td>
                         <td>
                             {if $order->hasRefundRequest()}
@@ -44,7 +44,7 @@
 <script>
     function confirmRefundRequest(orderId) {
         if (confirm("Sei sicuro di voler richiedere un reso o rimborso per questo ordine?")) {
-            window.location.href = '/EpTechProva/order/requestRefund/' + orderId;
+            window.location.href = '/EpTech/order/requestRefund/' + orderId;
         }
     }
 </script>

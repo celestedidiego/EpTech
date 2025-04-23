@@ -30,7 +30,7 @@ class CShipping
                 $_SESSION['error'] = "Errore nell'aggiunta dell'indirizzo: " . $e->getMessage();
             }
             
-            header("Location: /EpTechProva/shipping/addresses");
+            header("Location: /EpTech/shipping/addresses");
         }
     }
 
@@ -38,7 +38,7 @@ class CShipping
     {
         if (!isset($_SESSION['user'])) {
             $_SESSION['error'] = "Devi effettuare il login.";
-            header("Location: /EpTechProva/login");
+            header("Location: /EpTech/login");
             exit();
         }
         
@@ -54,7 +54,7 @@ class CShipping
     {
         if (!isset($_SESSION['user'])) {
             $_SESSION['error'] = "Devi effettuare il login.";
-            header("Location: /EpTechProva/login");
+            header("Location: /EpTech/login");
         }
         
         $userId = $_SESSION['user']->getIdRegisteredUser();
@@ -74,7 +74,7 @@ class CShipping
             }
         }
         
-        header("Location: /EpTechProva/shipping/addresses");
+        header("Location: /EpTech/shipping/addresses");
     }
 
     public static function selectShippingAddress()
@@ -88,13 +88,13 @@ class CShipping
             
             if (!$shipping || $shippingUserId != $_SESSION['user']->getIdRegisteredUser()) {
                 $_SESSION['error'] = "Indirizzo non valido.";
-                header("Location: /EpTechProva/shipping/addresses");
+                header("Location: /EpTech/shipping/addresses");
             }
             
             $_SESSION['shipping_id'] = $shippingId;
             $_SESSION['success'] = "Indirizzo selezionato per la spedizione.";
             
-            header("Location: /EpTechProva/checkout/payment");
+            header("Location: /EpTech/checkout/payment");
         }
     }
 
@@ -102,7 +102,7 @@ class CShipping
     {
         if (!isset($_SESSION['user'])) {
             $_SESSION['error'] = "Devi effettuare il login.";
-            header("Location: /EpTechProva/login");
+            header("Location: /EpTech/login");
             exit();
         }
         
@@ -114,7 +114,7 @@ class CShipping
         
         if (!$shipping || $shippingUserId != $userId) {
             $_SESSION['error'] = "Non hai i permessi per modificare questo indirizzo.";
-            header("Location: /EpTechProva/shipping/addresses");
+            header("Location: /EpTech/shipping/addresses");
         }
         
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -128,7 +128,7 @@ class CShipping
                 FPersistentManager::getInstance()->update($shipping);
                 
                 $_SESSION['success'] = "Indirizzo modificato con successo!";
-                header("Location: /EpTechProva/shipping/addresses");
+                header("Location: /EpTech/shipping/addresses");
             } catch (Exception $e) {
                 $_SESSION['error'] = "Errore nella modifica dell'indirizzo: " . $e->getMessage();
             }
@@ -144,7 +144,7 @@ class CShipping
     {
         if (!isset($_SESSION['user'])) {
             $_SESSION['error'] = "Devi effettuare il login.";
-            header("Location: /EpTechProva/login");
+            header("Location: /EpTech/login");
             exit();
         }
         

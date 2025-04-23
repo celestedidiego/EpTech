@@ -74,9 +74,9 @@ class UEMailer {
     public function sendEmailConfirmation($userEmail, $confirmationLink) {
         try {
             $this->mailer->addAddress($userEmail);
-            $this->mailer->Subject = 'Conferma la tua email su EpTechProva';
-            $this->mailer->Body = "Grazie per esserti registrato su EpTechProva. Clicca sul link seguente per confermare la tua email: <a href='$confirmationLink'>$confirmationLink</a>";
-            $this->mailer->AltBody = "Grazie per esserti registrato su EpTechProva. Clicca sul link seguente per confermare la tua email: $confirmationLink";
+            $this->mailer->Subject = 'Conferma la tua email su EpTech';
+            $this->mailer->Body = "Grazie per esserti registrato su EpTech. Clicca sul link seguente per confermare la tua email: <a href='$confirmationLink'>$confirmationLink</a>";
+            $this->mailer->AltBody = "Grazie per esserti registrato su EpTech. Clicca sul link seguente per confermare la tua email: $confirmationLink";
     
             $this->mailer->send();
             return true;

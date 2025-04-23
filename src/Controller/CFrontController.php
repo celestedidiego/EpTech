@@ -27,7 +27,7 @@ class CFrontController {
                 if (!$this->isPublic($URL[1], $methodName)) {
                     if (!isset($_SESSION['user'])) {
                         // L'utente non è loggato, reindirizza alla pagina di login
-                        header('Location: /EpTechProva/user/login');
+                        header('Location: /EpTech/user/login');
                         exit;
                     } else if (!$this->hasPermission($_SESSION['role'], $URL[1], $methodName)) {
                         // L'utente loggato non ha i permessi per accedere a questo metodo
@@ -49,12 +49,12 @@ class CFrontController {
                 call_user_func_array([$controllerClass, $methodName], $decodedParams); // Chiama il metodo con i parametri
             } else {
                 // Metodo non trovato, gestisce l'errore (es. mostra una pagina 404)
-                header('Location: /EpTechProva/user/home');
+                header('Location: /EpTech/user/home');
                 exit;
             }
         } else {
             // File del controller non trovato, reindirizza alla home page
-            header('Location: /EpTechProva/user/home');
+            header('Location: /EpTech/user/home');
             exit;
         }
     }

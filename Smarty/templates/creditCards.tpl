@@ -4,7 +4,7 @@
             <h2>Le mie carte di credito</h2>
         </div>
         <div class="col-md-2">
-            <a href="/EpTechProva/user/addCards" class="btn btn-primary btn-block">Aggiungi</a>
+            <a href="/EpTech/user/addCards" class="btn btn-primary btn-block">Aggiungi</a>
         </div>
     </div>
     {if isset($messages.success)}
@@ -64,9 +64,9 @@
                     <td>{if $card->isDeleted()}Nascosta{else}Attiva{/if}</td>
                     <td>
                         {if $card->isDeleted()}
-                            <a href="/EpTechProva/user/reactivateCreditCard/{$card->getCardNumber()}" class="btn btn-success btn-sm">Riattiva</a>
+                            <a href="/EpTech/user/reactivateCreditCard/{$card->getCardNumber()}" class="btn btn-success btn-sm">Riattiva</a>
                         {else}
-                            <a href="/EpTechProva/utente/deleteCreditCard/{$card->getCardNumber()}" class="btn btn-danger btn-sm">Elimina</a>
+                            <a href="/EpTech/utente/deleteCreditCard/{$card->getCardNumber()}" class="btn btn-danger btn-sm">Elimina</a>
                         {/if}
                     </td>
                 </tr>

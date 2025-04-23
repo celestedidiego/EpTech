@@ -31,7 +31,7 @@ class CUser {
         $view = new VUser();
         if ($_SERVER['REQUEST_METHOD'] == "GET") {
             if (static::isLogged()) {
-                header('Location: /EpTechProva/user/home');
+                header('Location: /EpTech/user/home');
             } else {
                 $view->showLoginForm();
             }
@@ -56,7 +56,7 @@ class CUser {
                 }
 
                 // Reindirizza alla home
-                header('Location: /EpTechProva/user/home');
+                header('Location: /EpTech/user/home');
                 exit; // Assicurati di terminare lo script dopo il reindirizzamento
             } else {
                 $view->loginError();
@@ -87,7 +87,7 @@ class CUser {
     public static function logout(){
         session_unset();
         session_destroy();
-        header('Location: /EpTechProva/user/home');
+        header('Location: /EpTech/user/home');
     }
 
     public static function signUp(){
@@ -147,7 +147,7 @@ class CUser {
 
             // Invia l'email di conferma
             $mailer = new UEMailer();
-            $confirmationLink = "http://localhost/EpTechProva/user/confirmEmail?token=" . $confirmationToken;
+            $confirmationLink = "http://localhost/EpTech/user/confirmEmail?token=" . $confirmationToken;
             $mailer->sendEmailConfirmation($new_user->getEmail(), $confirmationLink);
 
             // Mostra un messaggio di successo
@@ -166,14 +166,14 @@ class CUser {
                 FPersistentManager::getInstance()->update($user);
     
                 $_SESSION['message'] = "Email confermata con successo. Ora puoi accedere.";
-                header('Location: /EpTechProva/user/login');
+                header('Location: /EpTech/user/login');
             } else {
                 $_SESSION['error'] = "Token non valido o scaduto.";
-                header('Location: /EpTechProva/user/login');
+                header('Location: /EpTech/user/login');
             }
         } else {
             $_SESSION['error'] = "Token non fornito.";
-            header('Location: /EpTechProva/user/login');
+            header('Location: /EpTech/user/login');
         }
     }
 
@@ -184,7 +184,7 @@ class CUser {
         if (static::isLogged()) {
             $view_user->userDataForm();
         } else {
-            header('Location: /EpTechProva/user/login');
+            header('Location: /EpTech/user/login');
         }
     }
 
@@ -195,7 +195,7 @@ class CUser {
         if (static::isLogged()) {
             $view_user->userDataSection();
         } else {
-            header('Location: /EpTechProva/user/login');
+            header('Location: /EpTech/user/login');
         }
     }
 
@@ -214,7 +214,7 @@ class CUser {
         FPersistentManager::getInstance()->deleteUtente($user);
         session_unset();
         session_destroy();
-        header('Location: /EpTechProva/user/home');
+        header('Location: /EpTech/user/home');
     }
 
     public static function changePass() {
@@ -223,7 +223,7 @@ class CUser {
             if(isset($_SESSION['user'])){
                 $view->changePass();
             }else{
-                header('Location: /EpTechProva/user/login');
+                header('Location: /EpTech/user/login');
             }
         } elseif ($_SERVER['REQUEST_METHOD'] == "POST") {
             $password_old = $_POST['password'];
@@ -234,7 +234,7 @@ class CUser {
                     if ($new_password == $confirm_password) {
                         FPersistentManager::getInstance()->updatePass($_SESSION['user'], $new_password);
                         $_SESSION['changepasswordsucces'] = true;
-                        header('Location: /EpTechProva/user/userDataSection');
+                        header('Location: /EpTech/user/userDataSection');
                     } else {
                         $view->errorPassUpdate();
                     }
@@ -254,7 +254,7 @@ class CUser {
             if(isset($_SESSION['user'])){
                 $view->userDataForm();
             }else{
-                header('Location: /EpTechProva/user/login');
+                header('Location: /EpTech/user/login');
             }
         } elseif ($_SERVER['REQUEST_METHOD'] == "POST") {
             $postData = $_POST;
@@ -267,7 +267,7 @@ class CUser {
             $updated_cliente = FPersistentManager::getInstance()->findUser($_SESSION['user']);
             $_SESSION['user'] = $updated_cliente[0];
             $_SESSION['changeuserdatasucces'] = true;
-            header('Location: /EpTechProva/user/userDataSection');
+            header('Location: /EpTech/user/userDataSection');
         }
     }
 
@@ -329,7 +329,7 @@ class CUser {
                 // Passa i dati al metodo insertShipping
                 FPersistentManager::getInstance()->insertShipping($postData);
                 $_SESSION['address_added'] = true;
-                header('Location: /EpTechProva/user/shipping');
+                header('Location: /EpTech/user/shipping');
             } else {
                 // Mostra errori
                 $view->addShippingWithError($errors);
@@ -352,7 +352,7 @@ class CUser {
             $_SESSION['address_error'] = "Errore: l'indirizzo non è stato trovato.";
         }
         
-        header('Location: /EpTechProva/user/shipping');
+        header('Location: /EpTech/user/shipping');
         exit();
     }
 
@@ -366,7 +366,7 @@ class CUser {
             $_SESSION['address_error'] = "Errore: l'indirizzo non è stato trovato.";
         }
         
-        header('Location: /EpTechProva/user/shipping');
+        header('Location: /EpTech/user/shipping');
         exit();
     }
 
@@ -382,7 +382,7 @@ class CUser {
                 try {
                     FPersistentManager::getInstance()->insertCreditCard($postData);
                     $_SESSION['credit_card_added'] = true;
-                    header('Location: /EpTechProva/user/creditCards');
+                    header('Location: /EpTech/user/creditCards');
                     exit;
                 } catch (Exception $e) {
                     $errors[] = "Errore durante l'inserimento della carta: " . $e->getMessage();
@@ -475,7 +475,7 @@ class CUser {
             $_SESSION['card_error'] = "Errore: la carta di credito non è stata trovata.";
         }
         
-        header('Location: /EpTechProva/user/creditCards');
+        header('Location: /EpTech/user/creditCards');
         exit();
     }
 
@@ -489,13 +489,13 @@ class CUser {
             $_SESSION['card_error'] = "Errore: la carta di credito non è stata trovata.";
         }
         
-        header('Location: /EpTechProva/user/creditCards');
+        header('Location: /EpTech/user/creditCards');
         exit();
     }
 
     public static function searchProducts() {
         if (!isset($_SESSION['user']) || !($_SESSION['user'] instanceof EAdmin)) {
-            header('Location: /EpTechProva/user/login');
+            header('Location: /EpTech/user/login');
             exit;
          }
      
@@ -510,7 +510,7 @@ class CUser {
 
     public static function deleteProduct($id) {
         if (!isset($_SESSION['user']) || !($_SESSION['user'] instanceof EAdmin)) {
-            header('Location: /EpTechProva/user/login');
+            header('Location: /EpTech/user/login');
             exit;
         }
 
@@ -522,7 +522,7 @@ class CUser {
             } else {
                 $_SESSION['product_delete_error'] = true;
             }
-            header('Location: /EpTechProva/user/manageProducts');
+            header('Location: /EpTech/user/manageProducts');
             exit;
         }
     }

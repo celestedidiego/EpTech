@@ -8,7 +8,7 @@
 
 <div class="form-container width-90">
     <h2>Modifica il prodotto</h2>
-    <form class="registrationForm" id="modifyProductForm" method="POST" action="/EpTechProva/product/modifyProduct/{$productId}" enctype="multipart/form-data">
+    <form class="registrationForm" id="modifyProductForm" method="POST" action="/EpTech/product/modifyProduct/{$productId}" enctype="multipart/form-data">
         <div class="left-column">
             <div class="form-group">
                 <label>Nome prodotto</label>

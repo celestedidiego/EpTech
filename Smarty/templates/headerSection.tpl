@@ -11,8 +11,8 @@
             <!-- LOGO -->
             <div class="col-lg-4 col-md-3">
                 <div class="header-logo">
-                    <a href="/EpTechProva/user/home" class="logo">
-                        <img src="/EpTechProva/skin/electroMaster/img/logo_EpTech.png" alt="">
+                    <a href="/EpTech/user/home" class="logo">
+                        <img src="/EpTech/skin/electroMaster/img/logo_EpTech.png" alt="">
                     </a>
                 </div>
             </div>
@@ -22,7 +22,7 @@
             <div class="col-lg-4 col-md-6 col-sm-9 col-xs-9">
             {if $search_bar == 1}
                 <div class="header-search">
-                    <form action="/EpTechProva/purchase/shop" method="GET">
+                    <form action="/EpTech/purchase/shop" method="GET">
                         <select class="input-select" name="category">
                             <option value="">Tutte le categorie</option>
                             {foreach from=$array_category item=category}
@@ -44,14 +44,14 @@
                     <!-- My Account -->
                     {if $user_not_logged == 0}
                         <div>
-                            <a href="/EpTechProva/user/logout">
+                            <a href="/EpTech/user/logout">
                                 <i class="fas fa-sign-out-alt" style="color: #ffffff;"></i>
                                 <span>Logout</span>
                             </a>
                         </div>
                     {else}
                         <div>
-                            <a href="/EpTechProva/user/login">
+                            <a href="/EpTech/user/login">
                                 <i class="fas fa-sign-in-alt" style="color: #ffffff;"></i>
                                 <span>Accedi</span>
                             </a>
@@ -84,7 +84,7 @@
                                         <h3 class="product-name">{$product['product']->getNameProduct()}</h3>
                                         <h4 class="product-price"><span class="qty">{$product.quantity}x</span>€{$product['product']->getPriceProduct()}</h4>
                                     </div>
-                                    <form action="/EpTechProva/purchase/removeFromCart/{$product['product']->getProductId()}">
+                                    <form action="/EpTech/purchase/removeFromCart/{$product['product']->getProductId()}">
                                         <button class="delete"><i class="fas fa-times-circle"></i></button>
                                     </form>
                                 </div>
@@ -100,8 +100,8 @@
                                 <h5>SUBTOTAL: €{$subtotal}</h5>
                             </div>
                             <div class="cart-btns">
-                                <a href="/EpTechProva/purchase/showCart">Vai al carrello</a>
-                                <a href="/EpTechProva/purchase/effettuaCheckout">Checkout  <i class="fa fa-arrow-circle-right"></i></a>
+                                <a href="/EpTech/purchase/showCart">Vai al carrello</a>
+                                <a href="/EpTech/purchase/effettuaCheckout">Checkout  <i class="fa fa-arrow-circle-right"></i></a>
                             </div>
                         </div>
                     </div>
@@ -136,26 +136,26 @@
         <!-- NAV -->
         <ul class="main-nav nav navbar-nav">
         {if $check_login_registered_user == 1}
-            <li><a href="/EpTechProva/user/userDataSection">Profilo</a></li>
-            <li><a href="/EpTechProva/user/userHistoryOrders">Ordini</a></li>
+            <li><a href="/EpTech/user/userDataSection">Profilo</a></li>
+            <li><a href="/EpTech/user/userHistoryOrders">Ordini</a></li>
         {elseif $check_login_admin == 1}
         <!--
-        <li><a href="/EpTechProva/user/userDataSection">Profilo</a></li>
-            <li><a href="/EpTechProva/admin/manageProducts">Gestione prodotti</a></li>
-            <li><a href="/EpTechProva/admin/manageUsers">Gestione utenti registrati</a></li>
-            <li><a href="/EpTechProva/admin/manageReviews">Gestione recensioni</a></li>
-            <li><a href="/EpTechProva/admin/manageOrders">Gestione ordini</a></li>
+        <li><a href="/EpTech/user/userDataSection">Profilo</a></li>
+            <li><a href="/EpTech/admin/manageProducts">Gestione prodotti</a></li>
+            <li><a href="/EpTech/admin/manageUsers">Gestione utenti registrati</a></li>
+            <li><a href="/EpTech/admin/manageReviews">Gestione recensioni</a></li>
+            <li><a href="/EpTech/admin/manageOrders">Gestione ordini</a></li>
         -->
-        <li><a href="/EpTechProva/user/userDataSection">Profilo</a></li>
-        <li><a href="/EpTechProva/admin/manageSection">Gestione</a></li>
+        <li><a href="/EpTech/user/userDataSection">Profilo</a></li>
+        <li><a href="/EpTech/admin/manageSection">Gestione</a></li>
         {/if}
 
         {if $user_not_logged == 1}
-            <!-- <li><a href="/EpTechProva/user/login"><i class="fas fa-sign-in-alt"></i><span> Accedi</span></a></li> -->
-            <!-- <li><a href="/EpTechProva/purchase/showCart"><span> Carrello</span></a></li> -->
+            <!-- <li><a href="/EpTech/user/login"><i class="fas fa-sign-in-alt"></i><span> Accedi</span></a></li> -->
+            <!-- <li><a href="/EpTech/purchase/showCart"><span> Carrello</span></a></li> -->
         {else if $user_not_logged == 0 && $check_login_registered_user == 1}
-            <li><a href="/EpTechProva/purchase/showCart"><span> Carrello</span></a></li> 
-            <!-- <li><a href="/EpTechProva/user/logout"><i class="fas fa-sign-out-alt"></i><span> Logout</span></a></li> -->
+            <li><a href="/EpTech/purchase/showCart"><span> Carrello</span></a></li> 
+            <!-- <li><a href="/EpTech/user/logout"><i class="fas fa-sign-out-alt"></i><span> Logout</span></a></li> -->
         {/if}
         </ul>
         <!-- /NAV -->

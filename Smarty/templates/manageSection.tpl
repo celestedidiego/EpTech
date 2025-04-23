@@ -48,16 +48,16 @@
 
     <h2 class="text-center">Gestione</h2>
     <div class="gestione-grid mt-4">
-        <a href="/EpTechProva/admin/manageProducts" class="gestione-item">
+        <a href="/EpTech/admin/manageProducts" class="gestione-item">
             <h5 class="gestione-title">Gestione Prodotti</h5>
         </a>
-        <a href="/EpTechProva/admin/manageUsers" class="gestione-item">
+        <a href="/EpTech/admin/manageUsers" class="gestione-item">
             <h5 class="gestione-title">Gestione Utenti</h5>
         </a>
-        <a href="/EpTechProva/admin/manageReviews" class="gestione-item">
+        <a href="/EpTech/admin/manageReviews" class="gestione-item">
             <h5 class="gestione-title">Gestione Recensioni</h5>
         </a>
-        <a href="/EpTechProva/admin/manageOrders" class="gestione-item">
+        <a href="/EpTech/admin/manageOrders" class="gestione-item">
             <h5 class="gestione-title">Gestione Ordini</h5>
         </a>
     </div>

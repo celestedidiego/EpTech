@@ -12,20 +12,20 @@
 		<link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
 
 		<!-- Bootstrap -->
-		<link type="text/css" rel="stylesheet" href="/EpTechProva/skin/electroMaster/css/bootstrap.min.css"/>
+		<link type="text/css" rel="stylesheet" href="/EpTech/skin/electroMaster/css/bootstrap.min.css"/>
 
 		<!-- Slick -->
-		<link type="text/css" rel="stylesheet" href="/EpTechProva/skin/electroMaster/css/slick.css"/>
-		<link type="text/css" rel="stylesheet" href="/EpTechProva/skin/electroMaster/css/slick-theme.css"/>
+		<link type="text/css" rel="stylesheet" href="/EpTech/skin/electroMaster/css/slick.css"/>
+		<link type="text/css" rel="stylesheet" href="/EpTech/skin/electroMaster/css/slick-theme.css"/>
 
 		<!-- nouislider -->
-		<link type="text/css" rel="stylesheet" href="/EpTechProva/skin/electroMaster/css/nouislider.min.css"/>
+		<link type="text/css" rel="stylesheet" href="/EpTech/skin/electroMaster/css/nouislider.min.css"/>
 
 		<!-- Font Awesome Icon -->
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
 		<!-- Custom stlylesheet -->
-		<link type="text/css" rel="stylesheet" href="/EpTechProva/skin/electroMaster/css/style.css"/>
+		<link type="text/css" rel="stylesheet" href="/EpTech/skin/electroMaster/css/style.css"/>
 
 		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -55,7 +55,7 @@
             {/if}
 
             <div class="card-body">
-                <form method="POST" action="/EpTechProva/user/signUp">
+                <form method="POST" action="/EpTech/user/signUp">
                     <!--
                     <div class="form-check">
                         <input class="form-check-input" type="radio" name="userType" id="registeredUser" value="registeredUser" required>
@@ -93,11 +93,11 @@
                     </div>
                     <button type="submit" class="btn btn-primary btn-block">Registrati</button>
                     <br>
-                    <a href="/EpTechProva/user/login" id="linkpass">Hai già un account? Accedi</a>
+                    <a href="/EpTech/user/login" id="linkpass">Hai già un account? Accedi</a>
                 </form>
             </div>
         </div>
-        <script src="/EpTechProva/skin/electroMaster/js/scripts-for-template.js"></script>
+        <script src="/EpTech/skin/electroMaster/js/scripts-for-template.js"></script>
         <script src="js/jquery.min.js"></script>
         <script src="js/bootstrap.bundle.min.js"></script>
         <!-- Include any other JS files needed -->

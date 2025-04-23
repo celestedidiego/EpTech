@@ -11,7 +11,7 @@
         </div>
     {/if}
     
-    <form id="registrationForm" method="POST" action="/EpTechProva/user/addShipping">
+    <form id="registrationForm" method="POST" action="/EpTech/user/addShipping">
         <div class="form-group">
             <label>Indirizzo</label>
             <input name="address" type="text" class="form-control" id="via" placeholder="es. Via Roma 3" required>

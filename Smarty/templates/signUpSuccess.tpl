@@ -3,6 +3,6 @@
         <h4>{$success_message}</h4>
     </div>
     <div class="text-center mt-4">
-        <a href="/EpTechProva/user/login" class="btn btn-primary">Vai al Login</a>
+        <a href="/EpTech/user/login" class="btn btn-primary">Vai al Login</a>
     </div>
 </div>

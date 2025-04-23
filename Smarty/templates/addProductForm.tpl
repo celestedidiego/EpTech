@@ -9,7 +9,7 @@
 
 <div class="form-container width-90">
         <h2>Aggiungi un prodotto</h2>
-        <form class="registrationForm" id="addProductForm" method="POST" action="/EpTechProva/product/addProduct" enctype="multipart/form-data">
+        <form class="registrationForm" id="addProductForm" method="POST" action="/EpTech/product/addProduct" enctype="multipart/form-data">
             <div class="left-column">
                 <div class="form-group">
                     <label>Nome prodotto</label>

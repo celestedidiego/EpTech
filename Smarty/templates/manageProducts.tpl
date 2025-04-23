@@ -13,20 +13,20 @@
 		<link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
 
 		<!-- Bootstrap -->
-		<link type="text/css" rel="stylesheet" href="/EpTechProva/skin/electroMaster/css/bootstrap.min.css"/>
+		<link type="text/css" rel="stylesheet" href="/EpTech/skin/electroMaster/css/bootstrap.min.css"/>
 
 		<!-- Slick -->
-		<link type="text/css" rel="stylesheet" href="/EpTechProva/skin/electroMaster/css/slick.css"/>
-		<link type="text/css" rel="stylesheet" href="/EpTechProva/skin/electroMaster/css/slick-theme.css"/>
+		<link type="text/css" rel="stylesheet" href="/EpTech/skin/electroMaster/css/slick.css"/>
+		<link type="text/css" rel="stylesheet" href="/EpTech/skin/electroMaster/css/slick-theme.css"/>
 
 		<!-- nouislider -->
-		<link type="text/css" rel="stylesheet" href="/EpTechProva/skin/electroMaster/css/nouislider.min.css"/>
+		<link type="text/css" rel="stylesheet" href="/EpTech/skin/electroMaster/css/nouislider.min.css"/>
 
 		<!-- Font Awesome Icon -->
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
 		<!-- Custom stlylesheet -->
-		<link type="text/css" rel="stylesheet" href="/EpTechProva/skin/electroMaster/css/style.css"/>
+		<link type="text/css" rel="stylesheet" href="/EpTech/skin/electroMaster/css/style.css"/>
 
 		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -72,7 +72,7 @@
     {/if}
 
      <!-- FILTRO -->
-     <form method="post" action="/EpTechProva/admin/manageProducts">
+     <form method="post" action="/EpTech/admin/manageProducts">
         <div class="form-group">
             <label for="productId">Filter by ID:</label>
             <input type="text" class="form-control" id="productId" name="productId">
@@ -85,7 +85,7 @@
     
 
     <!-- Pagination --> 
-    <form class="container-fluid text-center" method="GET" action="/EpTechProva/product/addProduct">
+    <form class="container-fluid text-center" method="GET" action="/EpTech/product/addProduct">
         <button type="submit" class="btn btn-primary">Aggiungi un nuovo prodotto</button>
     </form>
     {if $array_products.totalPages > 1}
@@ -121,9 +121,9 @@
                     <h3 class="product-name">{$product->getNameProduct()}</h3>
                     <h4 class="product-price">€{$product->getPriceProduct()}</h4>
                     <div class="mt-3">
-                        <a href="/EpTechProva/product/modifyProduct/{$product->getProductId()}" class="btn btn-primary btn-sm">Modifica</a>
-                        <a href="/EpTechProva/purchase/viewProduct/{$product->getProductId()}" class="btn btn-info btn-sm">Visualizza</a>
-                        <a href="/EpTechProva/admin/deleteProduct/{$product->getProductId()}" class="btn btn-danger btn-sm" onclick="return confirm('Sei sicuro di voler eliminare questo prodotto? Questa azione non può essere annullata.');">Elimina</a>
+                        <a href="/EpTech/product/modifyProduct/{$product->getProductId()}" class="btn btn-primary btn-sm">Modifica</a>
+                        <a href="/EpTech/purchase/viewProduct/{$product->getProductId()}" class="btn btn-info btn-sm">Visualizza</a>
+                        <a href="/EpTech/admin/deleteProduct/{$product->getProductId()}" class="btn btn-danger btn-sm" onclick="return confirm('Sei sicuro di voler eliminare questo prodotto? Questa azione non può essere annullata.');">Elimina</a>
                     </div>
                 </div>
             </div>

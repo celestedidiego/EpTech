@@ -445,7 +445,7 @@
             <div class="finger"></div>
         </div>
     </div>
-    <form method="POST" action="/EpTechProva/user/login" data-error-log="{if $error_log == 1}true{else}false{/if}">
+    <form method="POST" action="/EpTech/user/login" data-error-log="{if $error_log == 1}true{else}false{/if}">
         <div class="hand"></div>
         <div class="hand rgt"></div>
         <h1>Login</h1>
@@ -467,7 +467,7 @@
         
     </form>
     <div class="card-footer text-center">
-        <a href="/EpTechProva/user/signUp" class="white-text">Non sei registrato? Registrati!</a>
+        <a href="/EpTech/user/signUp" class="white-text">Non sei registrato? Registrati!</a>
     </div>
     <br>
 

@@ -10,20 +10,20 @@
         <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
 
         <!-- Bootstrap -->
-        <link type="text/css" rel="stylesheet" href="/EpTechProva/skin/electroMaster/css/bootstrap.min.css"/>
+        <link type="text/css" rel="stylesheet" href="/EpTech/skin/electroMaster/css/bootstrap.min.css"/>
 
         <!-- Slick -->
-        <link type="text/css" rel="stylesheet" href="/EpTechProva/skin/electroMaster/css/slick.css"/>
-        <link type="text/css" rel="stylesheet" href="/EpTechProva/skin/electroMaster/css/slick-theme.css"/>
+        <link type="text/css" rel="stylesheet" href="/EpTech/skin/electroMaster/css/slick.css"/>
+        <link type="text/css" rel="stylesheet" href="/EpTech/skin/electroMaster/css/slick-theme.css"/>
 
         <!-- nouislider -->
-        <link type="text/css" rel="stylesheet" href="/EpTechProva/skin/electroMaster/css/nouislider.min.css"/>
+        <link type="text/css" rel="stylesheet" href="/EpTech/skin/electroMaster/css/nouislider.min.css"/>
 
         <!-- Font Awesome Icon -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
         <!-- Custom stlylesheet -->
-        <link type="text/css" rel="stylesheet" href="/EpTechProva/skin/electroMaster/css/style.css"/>
+        <link type="text/css" rel="stylesheet" href="/EpTech/skin/electroMaster/css/style.css"/>
     </head>
     <body>
     {include file='headerSection.tpl'}
@@ -68,7 +68,7 @@
                                         <p>{$review->getResponseAdmin()}</p>
                                     </div>
                                 {else}
-                                    <form method="POST" action="/EpTechProva/review/respondToReview/{$review->getReviewId()}">
+                                    <form method="POST" action="/EpTech/review/respondToReview/{$review->getReviewId()}">
                                         <div class="form-group">
                                             <label for="risposta">Rispondi alla recensione:</label>
                                             <textarea class="form-control" id="risposta" name="risposta" rows="3" required></textarea>
@@ -84,14 +84,14 @@
         {/if}
     </div>
 
-    <script src="/EpTechProva/skin/electroMaster/js/scripts-for-template.js"></script>
+    <script src="/EpTech/skin/electroMaster/js/scripts-for-template.js"></script>
 	<!-- jQuery Plugins -->
-    <script src="/EpTechProva/skin/electroMaster/js/jquery.min.js"></script>
-    <script src="/EpTechProva/skin/electroMaster/js/bootstrap.min.js"></script>
-    <script src="/EpTechProva/skin/electroMaster/js/slick.min.js"></script>
-    <script src="/EpTechProva/skin/electroMaster/js/nouislider.min.js"></script>
-    <script src="/EpTechProva/skin/electroMaster/js/jquery.zoom.min.js"></script>
-    <script src="/EpTechProva/skin/electroMaster/js/main.js"></script>
+    <script src="/EpTech/skin/electroMaster/js/jquery.min.js"></script>
+    <script src="/EpTech/skin/electroMaster/js/bootstrap.min.js"></script>
+    <script src="/EpTech/skin/electroMaster/js/slick.min.js"></script>
+    <script src="/EpTech/skin/electroMaster/js/nouislider.min.js"></script>
+    <script src="/EpTech/skin/electroMaster/js/jquery.zoom.min.js"></script>
+    <script src="/EpTech/skin/electroMaster/js/main.js"></script>
     </body>
 
 </html>

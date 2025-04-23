@@ -10,20 +10,20 @@
         <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
 
         <!-- Bootstrap -->
-        <link type="text/css" rel="stylesheet" href="/EpTechProva/skin/electroMaster/css/bootstrap.min.css"/>
+        <link type="text/css" rel="stylesheet" href="/EpTech/skin/electroMaster/css/bootstrap.min.css"/>
 
         <!-- Slick -->
-        <link type="text/css" rel="stylesheet" href="/EpTechProva/skin/electroMaster/css/slick.css"/>
-        <link type="text/css" rel="stylesheet" href="/EpTechProva/skin/electroMaster/css/slick-theme.css"/>
+        <link type="text/css" rel="stylesheet" href="/EpTech/skin/electroMaster/css/slick.css"/>
+        <link type="text/css" rel="stylesheet" href="/EpTech/skin/electroMaster/css/slick-theme.css"/>
 
         <!-- nouislider -->
-        <link type="text/css" rel="stylesheet" href="/EpTechProva/skin/electroMaster/css/nouislider.min.css"/>
+        <link type="text/css" rel="stylesheet" href="/EpTech/skin/electroMaster/css/nouislider.min.css"/>
 
         <!-- Font Awesome Icon -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
         <!-- Custom stlylesheet -->
-        <link type="text/css" rel="stylesheet" href="/EpTechProva/skin/electroMaster/css/style.css"/>
+        <link type="text/css" rel="stylesheet" href="/EpTech/skin/electroMaster/css/style.css"/>
     </head>
     <body>
     {include file='headerSection.tpl'}
@@ -51,7 +51,7 @@
                                 <td>{$order->getDateTime()->format('d/m/Y')}</td>
                                 <td>€{$order->getTotalPrice()|string_format:"%.2f"}</td>
                                 <td>
-                                    <form method="POST" action="/EpTechProva/admin/changeOrderStatus/{$order->getIdOrder()}">
+                                    <form method="POST" action="/EpTech/admin/changeOrderStatus/{$order->getIdOrder()}">
                                         <select name="orderStatus" class="form-control">
                                             <option value="In elaborazione" {if $order->getOrderStatus() == 'In elaborazione'}selected{/if}>In elaborazione</option>
                                             <option value="Preso in carico" {if $order->getOrderStatus() == 'Preso in carico'}selected{/if}>Preso in carico</option>
@@ -63,7 +63,7 @@
                                     </form>
                                 </td>
                                 <td>
-                                    <a href="/EpTechProva/purchase/detailOrder/{$order->getIdOrder()}" class="btn btn-info btn-sm">Dettagli</a>
+                                    <a href="/EpTech/purchase/detailOrder/{$order->getIdOrder()}" class="btn btn-info btn-sm">Dettagli</a>
                                 </td>
                                 <td>
                                     {if $order->hasRefundRequest()}
@@ -72,8 +72,8 @@
                                         {if $refundStatus == 'pending'}
                                             <a href="#" class="btn btn-danger btn-sm" onclick="showRefundActions('{$order->getIdOrder()}')">Reso o Rimborso</a>
                                             <div id="refund-actions-{$order->getIdOrder()}" style="display: none; margin-top: 10px;">
-                                                <a href="/EpTechProva/admin/acceptRefund/{$order->getIdOrder()}" class="btn btn-success btn-sm">Accetta</a>
-                                                <a href="/EpTechProva/admin/rejectRefund/{$order->getIdOrder()}" class="btn btn-danger btn-sm">Rifiuta</a>
+                                                <a href="/EpTech/admin/acceptRefund/{$order->getIdOrder()}" class="btn btn-success btn-sm">Accetta</a>
+                                                <a href="/EpTech/admin/rejectRefund/{$order->getIdOrder()}" class="btn btn-danger btn-sm">Rifiuta</a>
                                             </div>
                                         {else}
                                             <p class="mt-2">Stato richiesta: {$refundStatus}</p>
@@ -97,13 +97,13 @@
                 actionsDiv.style.display = actionsDiv.style.display === "none" ? "block" : "none";
             }
         </script>
-        <script src="/EpTechProva/skin/electroMaster/js/scripts-for-template.js"></script>
+        <script src="/EpTech/skin/electroMaster/js/scripts-for-template.js"></script>
 	<!-- jQuery Plugins -->
-    <script src="/EpTechProva/skin/electroMaster/js/jquery.min.js"></script>
-    <script src="/EpTechProva/skin/electroMaster/js/bootstrap.min.js"></script>
-    <script src="/EpTechProva/skin/electroMaster/js/slick.min.js"></script>
-    <script src="/EpTechProva/skin/electroMaster/js/nouislider.min.js"></script>
-    <script src="/EpTechProva/skin/electroMaster/js/jquery.zoom.min.js"></script>
-    <script src="/EpTechProva/skin/electroMaster/js/main.js"></script>
+    <script src="/EpTech/skin/electroMaster/js/jquery.min.js"></script>
+    <script src="/EpTech/skin/electroMaster/js/bootstrap.min.js"></script>
+    <script src="/EpTech/skin/electroMaster/js/slick.min.js"></script>
+    <script src="/EpTech/skin/electroMaster/js/nouislider.min.js"></script>
+    <script src="/EpTech/skin/electroMaster/js/jquery.zoom.min.js"></script>
+    <script src="/EpTech/skin/electroMaster/js/main.js"></script>
     </body>
 </html>

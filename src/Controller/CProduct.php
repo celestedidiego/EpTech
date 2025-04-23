@@ -30,10 +30,10 @@ class CProduct {
                 $brands = FPersistentManager::getInstance()->getAllBrands();
                 $view->listProducts($products, $categories, $brands, $filters, $product_added, $product_modified, $product_deleted);
             } else {
-                header('Location: /EpTechProva/user/home');
+                header('Location: /EpTech/user/home');
             }
         } else {
-            header('Location: /EpTechProva/user/login');
+            header('Location: /EpTech/user/login');
         }
     }
     
@@ -46,7 +46,7 @@ class CProduct {
             if ($_SESSION['user'] instanceof EAdmin) {
                 $view->addProductForm($array_category);
             } else {
-                header('Location: /EpTechProva/user/login');
+                header('Location: /EpTech/user/login');
             }
         } elseif ($_SERVER['REQUEST_METHOD'] == "POST") {
             $postData = $_POST;
@@ -106,7 +106,7 @@ class CProduct {
             }
 
             $_SESSION['product_added'] = true;
-            header('Location: /EpTechProva/admin/manageProducts?page=1');
+            header('Location: /EpTech/admin/manageProducts?page=1');
         }
     }
 
@@ -123,7 +123,7 @@ class CProduct {
                 }
                 $view->modifyProductForm($product_to_modify, $array_images);
             }else{
-                header('Location: /EpTechProva/user/login');
+                header('Location: /EpTech/user/login');
             }
         } elseif ($_SERVER['REQUEST_METHOD'] == "POST") {
             $postData = $_POST;
@@ -175,7 +175,7 @@ class CProduct {
             }
 
             $_SESSION['product_modified'] = true;
-            header('Location: /EpTechProva/admin/?page=1');
+            header('Location: /EpTech/admin/?page=1');
         }
     }
 
@@ -183,7 +183,7 @@ class CProduct {
     public static function deleteProduct($productId) {
         FPersistentManager::getInstance()->deleteProduct($productId);
         $_SESSION['product_deleted'] = true;
-        header('Location: /EpTechProva/product/listProducts?page=1');
+        header('Location: /EpTech/product/listProducts?page=1');
     }
 
 }

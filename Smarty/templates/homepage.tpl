@@ -12,20 +12,20 @@
 		<link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
 
 		<!-- Bootstrap -->
-		<link type="text/css" rel="stylesheet" href="/EpTechProva/skin/electroMaster/css/bootstrap.min.css"/>
+		<link type="text/css" rel="stylesheet" href="/EpTech/skin/electroMaster/css/bootstrap.min.css"/>
 
 		<!-- Slick -->
-		<link type="text/css" rel="stylesheet" href="/EpTechProva/skin/electroMaster/css/slick.css"/>
-		<link type="text/css" rel="stylesheet" href="/EpTechProva/skin/electroMaster/css/slick-theme.css"/>
+		<link type="text/css" rel="stylesheet" href="/EpTech/skin/electroMaster/css/slick.css"/>
+		<link type="text/css" rel="stylesheet" href="/EpTech/skin/electroMaster/css/slick-theme.css"/>
 
 		<!-- nouislider -->
-		<link type="text/css" rel="stylesheet" href="/EpTechProva/skin/electroMaster/css/nouislider.min.css"/>
+		<link type="text/css" rel="stylesheet" href="/EpTech/skin/electroMaster/css/nouislider.min.css"/>
 
 		<!-- Font Awesome Icon -->
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
 		<!-- Custom stlylesheet -->
-		<link type="text/css" rel="stylesheet" href="/EpTechProva/skin/electroMaster/css/style.css"/>
+		<link type="text/css" rel="stylesheet" href="/EpTech/skin/electroMaster/css/style.css"/>
 
 		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -107,7 +107,7 @@
 						<div class="hot-deal">
 							<h2 class="text-uppercase">scopri tutti i nostri prodotti</h2>
 							<p>Esplora le categorie che ti interessano</p>
-							<a class="primary-btn cta-btn" href="/EpTechProva/purchase/shop">Vai allo shop</a>
+							<a class="primary-btn cta-btn" href="/EpTech/purchase/shop">Vai allo shop</a>
 						</div>
 					</div>
 				</div>
@@ -128,11 +128,11 @@
 					<div class="col-md-4 col-xs-6">
 						<div class="shop">
 							<div class="shop-img">
-								<img src="/EpTechProva/skin/electroMaster/img/{$category.nameCategory}.png" alt="">
+								<img src="/EpTech/skin/electroMaster/img/{$category.nameCategory}.png" alt="">
 							</div>
 							<div class="shop-body">
 								<h3>{$category.nameCategory}</h3>
-								<a href="/EpTechProva/purchase/shop?query=&category={$category.nameCategory}&brand=&prezzo_max=5000" class="cta-btn">Vai allo shop <i class="fa fa-arrow-circle-right"></i></a>
+								<a href="/EpTech/purchase/shop?query=&category={$category.nameCategory}&brand=&prezzo_max=5000" class="cta-btn">Vai allo shop <i class="fa fa-arrow-circle-right"></i></a>
 							</div>
 						</div>
 					</div>
@@ -181,7 +181,7 @@
                                                     <p class="product-category">{$product.nameCategory}</p>
                                                     <h3 class="product-name"><a href="#">{$product.nameProduct}</a></h3>
 													<h4 class="product-price">€{$product.priceProduct}</h4>
-                                                    <form class="product-btns" method="GET" action="/EpTechProva/purchase/viewProduct/{$product.productId}">
+                                                    <form class="product-btns" method="GET" action="/EpTech/purchase/viewProduct/{$product.productId}">
                                                         <button type="submit" class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">vedi prodotto</span></button>
                                                     </form>
                                                 </div>
@@ -193,7 +193,7 @@
 										<!-- product example> 
 										<div class="product">
 											<div class="product-img">
-												<img src="/EpTechProva/skin/electroMaster/img/product01.png" alt="">
+												<img src="/EpTech/skin/electroMaster/img/product01.png" alt="">
 												<div class="product-label">
 													<span class="sale">-30%</span>
 													<span class="new">NEW</span>
@@ -269,15 +269,15 @@
         </footer>
         <!-- /FOOTER -->
 
-        <script src="/EpTechProva/skin/electroMaster/js/scripts-for-template.js"></script>
+        <script src="/EpTech/skin/electroMaster/js/scripts-for-template.js"></script>
         
 		<!-- jQuery Plugins -->
-		<script src="/EpTechProva/skin/electroMaster/js/jquery.min.js"></script>
-		<script src="/EpTechProva/skin/electroMaster/js/bootstrap.min.js"></script>
-		<script src="/EpTechProva/skin/electroMaster/js/slick.min.js"></script>
-		<script src="/EpTechProva/skin/electroMaster/js/nouislider.min.js"></script>
-		<script src="/EpTechProva/skin/electroMaster/js/jquery.zoom.min.js"></script>
-		<script src="/EpTechProva/skin/electroMaster/js/main.js"></script>
+		<script src="/EpTech/skin/electroMaster/js/jquery.min.js"></script>
+		<script src="/EpTech/skin/electroMaster/js/bootstrap.min.js"></script>
+		<script src="/EpTech/skin/electroMaster/js/slick.min.js"></script>
+		<script src="/EpTech/skin/electroMaster/js/nouislider.min.js"></script>
+		<script src="/EpTech/skin/electroMaster/js/jquery.zoom.min.js"></script>
+		<script src="/EpTech/skin/electroMaster/js/main.js"></script>
 
     </body>
 </html>

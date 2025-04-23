@@ -13,7 +13,7 @@
     
     <h2 class="text-center">I miei dati personali</h2>
 
-    <form class="registrationForm" method="POST" action="/EpTechProva/user/changeUserData">
+    <form class="registrationForm" method="POST" action="/EpTech/user/changeUserData">
         <div class="form-group">
             <label>Nome</label>
             <input name="name" type="text" class="form-control" id="name" placeholder="Nome..." value={$name} required>
@@ -35,7 +35,7 @@
         {/if}
         <button type="submit" class="btn btn-primary btn-block">Modifica</button>
         <br>
-        <a id="linkpass" href="/EpTechProva/user/changePass">Modifica la password</a>
+        <a id="linkpass" href="/EpTech/user/changePass">Modifica la password</a>
     </form>
 </div>
 

@@ -12,20 +12,20 @@
 		<link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
 
 		<!-- Bootstrap -->
-		<link type="text/css" rel="stylesheet" href="/EpTechProva/skin/electroMaster/css/bootstrap.min.css"/>
+		<link type="text/css" rel="stylesheet" href="/EpTech/skin/electroMaster/css/bootstrap.min.css"/>
 
 		<!-- Slick -->
-		<link type="text/css" rel="stylesheet" href="/EpTechProva/skin/electroMaster/css/slick.css"/>
-		<link type="text/css" rel="stylesheet" href="/EpTechProva/skin/electroMaster/css/slick-theme.css"/>
+		<link type="text/css" rel="stylesheet" href="/EpTech/skin/electroMaster/css/slick.css"/>
+		<link type="text/css" rel="stylesheet" href="/EpTech/skin/electroMaster/css/slick-theme.css"/>
 
 		<!-- nouislider -->
-		<link type="text/css" rel="stylesheet" href="/EpTechProva/skin/electroMaster/css/nouislider.min.css"/>
+		<link type="text/css" rel="stylesheet" href="/EpTech/skin/electroMaster/css/nouislider.min.css"/>
 
 		<!-- Font Awesome Icon -->
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
 		<!-- Custom stlylesheet -->
-		<link type="text/css" rel="stylesheet" href="/EpTechProva/skin/electroMaster/css/style.css"/>
+		<link type="text/css" rel="stylesheet" href="/EpTech/skin/electroMaster/css/style.css"/>
 
 		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -49,7 +49,7 @@
         <div class="container">
             <h2>Il tuo carrello è vuoto</h2>
             <p>Aggiungi qualche prodotto per iniziare lo shopping!</p>
-            <a href="/EpTechProva/purchase/shop" class="btn btn-primary">Continua lo shopping</a>
+            <a href="/EpTech/purchase/shop" class="btn btn-primary">Continua lo shopping</a>
         </div>
     {else}
         <div class="container">
@@ -73,7 +73,7 @@
                         <p>{$product['product']->getDescription()|truncate:300}</p>
                     </div>
                     <div class="col-md-2">
-                        <form action="/EpTechProva/purchase/updateQuantity/{$product['product']->getProductId()}" method="POST">
+                        <form action="/EpTech/purchase/updateQuantity/{$product['product']->getProductId()}" method="POST">
                             <select class="input-select margin-bottom-20" id="quantity" name="quantity">
                                 <!--Controllo la quantità disp quando è minore di 10,
                                 Se è minore di 10, mettere tanti option quanto è le quantità 
@@ -97,19 +97,19 @@
                         <p>Totale: €{$product['product']->getPriceProduct() * $product['quantity']}</p>
                     </div>
                     <div class="col-md-3">
-                        <a href="/EpTechProva/purchase/viewProduct/{$product['product']->getProductId()}" class="btn btn-info">Dettagli</a>
-                        <a href="/EpTechProva/purchase/removeFromCart/{$product['product']->getProductId()}" class="btn btn-danger mt-2">Rimuovi</a>
+                        <a href="/EpTech/purchase/viewProduct/{$product['product']->getProductId()}" class="btn btn-info">Dettagli</a>
+                        <a href="/EpTech/purchase/removeFromCart/{$product['product']->getProductId()}" class="btn btn-danger mt-2">Rimuovi</a>
                     </div>
                 </div>
             {/foreach}
             <br>
             <div class="row mt-4 d-flex">
                 <div class="col-md-6">
-                    <a href="/EpTechProva/purchase/emptyCart" class="btn btn-warning">Svuota carrello</a>
+                    <a href="/EpTech/purchase/emptyCart" class="btn btn-warning">Svuota carrello</a>
                 </div>
                 <div class="col-md-6 text-right">
                     <h3>Totale: €{$subtotal|string_format:"%.2f"}</h3>
-                    <a href="/EpTechProva/purchase/effettuaCheckout" class="btn btn-primary">Procedi al checkout</a>
+                    <a href="/EpTech/purchase/effettuaCheckout" class="btn btn-primary">Procedi al checkout</a>
                 </div>
             </div>
         </div>

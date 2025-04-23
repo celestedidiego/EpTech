@@ -52,17 +52,17 @@
     <div class="row d-flex justify-content-center">
         {if $check_login_admin == 0}
             <div class="col-md-4">
-                <a href="/EpTechProva/user/userDataForm" class="btn btn-primary btn-block">Modifica dati personali</a>
+                <a href="/EpTech/user/userDataForm" class="btn btn-primary btn-block">Modifica dati personali</a>
             </div>
             <div class="col-md-4">
-                <a href="/EpTechProva/user/shipping" class="btn btn-primary btn-block">I miei indirizzi</a>
+                <a href="/EpTech/user/shipping" class="btn btn-primary btn-block">I miei indirizzi</a>
             </div>
             <div class="col-md-4">
-                <a href="/EpTechProva/user/creditCards" class="btn btn-primary btn-block">Le mie carte di credito</a>
+                <a href="/EpTech/user/creditCards" class="btn btn-primary btn-block">Le mie carte di credito</a>
             </div>
         {else}
             <div class="col">
-                <a href="/EpTechProva/user/userDataForm" class="btn btn-primary btn-block">Modifica dati personali</a>
+                <a href="/EpTech/user/userDataForm" class="btn btn-primary btn-block">Modifica dati personali</a>
             </div>
         {/if}
     </div>

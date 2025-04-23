@@ -13,20 +13,20 @@
 		<link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
 
 		<!-- Bootstrap -->
-		<link type="text/css" rel="stylesheet" href="/EpTechProva/skin/electroMaster/css/bootstrap.min.css"/>
+		<link type="text/css" rel="stylesheet" href="/EpTech/skin/electroMaster/css/bootstrap.min.css"/>
 
 		<!-- Slick -->
-		<link type="text/css" rel="stylesheet" href="/EpTechProva/skin/electroMaster/css/slick.css"/>
-		<link type="text/css" rel="stylesheet" href="/EpTechProva/skin/electroMaster/css/slick-theme.css"/>
+		<link type="text/css" rel="stylesheet" href="/EpTech/skin/electroMaster/css/slick.css"/>
+		<link type="text/css" rel="stylesheet" href="/EpTech/skin/electroMaster/css/slick-theme.css"/>
 
 		<!-- nouislider -->
-		<link type="text/css" rel="stylesheet" href="/EpTechProva/skin/electroMaster/css/nouislider.min.css"/>
+		<link type="text/css" rel="stylesheet" href="/EpTech/skin/electroMaster/css/nouislider.min.css"/>
 
 		<!-- Font Awesome Icon -->
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
 		<!-- Custom stlylesheet -->
-		<link type="text/css" rel="stylesheet" href="/EpTechProva/skin/electroMaster/css/style.css"/>
+		<link type="text/css" rel="stylesheet" href="/EpTech/skin/electroMaster/css/style.css"/>
 
 		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -99,7 +99,7 @@
                             </div>
                         </div>
                     </div>
-                    <form id="purchase" action="/EpTechProva/purchase/addToCart/{$productId}" method="POST">
+                    <form id="purchase" action="/EpTech/purchase/addToCart/{$productId}" method="POST">
                         {if $avQuantity > 0}
                         <select class="input-select margin-bottom-20" id="quantity" name="quantity">
                             <!-- Mostra fino a 10 opzioni o il massimo disponibile -->
@@ -232,7 +232,7 @@
 							<div class="col-md-5">
 								<div id="review-form">
 									<h4>{if $review_user}Modifica la tua recensione{else}Scrivi una recensione{/if}</h4>
-									<form action="/EpTechProva/review/{if $review_user}modifica{else}aggiungi{/if}/{$productId}" method="POST" class="review-form">
+									<form action="/EpTech/review/{if $review_user}modifica{else}aggiungi{/if}/{$productId}" method="POST" class="review-form">
 									<textarea style="width:400px;height:200px" name="text" placeholder="La tua recensione" required>{if $review_user}{$review_user->getText()}{/if}</textarea>
 										<div class="input-rating">
 											<span>Valuta: </span>
@@ -320,7 +320,7 @@
 					<h3 class="product-name">{$same_cat_product->getNameProduct()}</h3>
                     <h4 class="product-price">€{$same_cat_product->getPriceProduct()}</h4>
 				
-					<form class="product-btns" method="GET" action="/EpTechProva/purchase/viewProduct/{$same_cat_product->getProductId()}">											
+					<form class="product-btns" method="GET" action="/EpTech/purchase/viewProduct/{$same_cat_product->getProductId()}">											
 						<button type="submit" class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">vedi prodotto</span></button>
 					</form>
 				</div>
@@ -380,11 +380,11 @@
         document.getElementById('gestioneAcquisti').action = action;
     }
 </script>
-<script src="/EpTechProva/skin/electroMaster/js/scripts-for-template.js"></script>
-<script src="/EpTechProva/skin/electroMaster/js/jquery.min.js"></script>
-<script src="/EpTechProva/skin/electroMaster/js/bootstrap.min.js"></script>
-<script src="/EpTechProva/skin/electroMaster/js/nouislider.min.js"></script>
-<script src="/EpTechProva/skin/electroMaster/js/main.js"></script>
+<script src="/EpTech/skin/electroMaster/js/scripts-for-template.js"></script>
+<script src="/EpTech/skin/electroMaster/js/jquery.min.js"></script>
+<script src="/EpTech/skin/electroMaster/js/bootstrap.min.js"></script>
+<script src="/EpTech/skin/electroMaster/js/nouislider.min.js"></script>
+<script src="/EpTech/skin/electroMaster/js/main.js"></script>
 
 </body>
 </html>

@@ -11,7 +11,7 @@
         </div>
     {/if}
 
-    <form id="creditCardForm" method="POST" action="/EpTechProva/user/addCards">
+    <form id="creditCardForm" method="POST" action="/EpTech/user/addCards">
         <div class="form-group">
             <label>Nome e Cognome titolare</label>
             <input name="cardHolderName" type="text" class="form-control" id="nome" placeholder="es. Mario Rossi" required>

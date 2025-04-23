@@ -7,7 +7,7 @@ class CReview
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             if (!FPersistentManager::getInstance()->hasPurchasedProduct($productId)) {
                 $_SESSION['review_error'] = "Non puoi recensire un prodotto che non hai acquistato.";
-                header("Location: /EpTechProva/product/viewProduct/" . $productId);
+                header("Location: /EpTech/product/viewProduct/" . $productId);
                 return;
             }
 
@@ -17,7 +17,7 @@ class CReview
             $existingReview = FPersistentManager::getInstance()->getReviewUser($user, $product);
             if ($existingReview) {
                 $_SESSION['review_error'] = "Hai già scritto una recensione per questo prodotto. Puoi modificarla ma non aggiungerne una nuova.";
-                header("Location: /EpTechProva/product/viewProduct/" . $productId);
+                header("Location: /EpTech/product/viewProduct/" . $productId);
             } else {
                 try {
                     $text = $_POST['text'];
@@ -34,7 +34,7 @@ class CReview
                     $_SESSION['review_error'] = "Si è verificato un errore durante l'aggiunta della recensione: " . $e->getMessage();
                 }
 
-                header("Location: /EpTechProva/product/viewProduct/" . $productId);
+                header("Location: /EpTech/product/viewProduct/" . $productId);
             }
         }
     }
@@ -47,7 +47,7 @@ class CReview
 
             if (!FPersistentManager::getInstance()->hasPurchasedProduct($productId)) {
                 $_SESSION['review_error'] = "Non puoi modificare una recensione per un prodotto che non hai acquistato.";
-                header("Location: /EpTechProva/product/view/" . $productId);
+                header("Location: /EpTech/product/view/" . $productId);
                 return;
             }
 
@@ -56,7 +56,7 @@ class CReview
 
             if ($review->getRegisteredUser()->getIdRegisteredUser() != $user->getIdRegisteredUser()) {
                 $_SESSION['review_error'] = "Non puoi modificare una recensione che non ti appartiene.";
-                header("Location: /EpTechProva/product/view/" . $productId);
+                header("Location: /EpTech/product/view/" . $productId);
             } else {
                 try {
                     $text = $_POST['text'];
@@ -72,7 +72,7 @@ class CReview
                     $_SESSION['review_error'] = "Si è verificato un errore durante la modifica della recensione: " . $e->getMessage();
                 }
 
-                header("Location: /EpTechProva/product/view/" . $productId);
+                header("Location: /EpTech/product/view/" . $productId);
             }
         }
     }
@@ -87,7 +87,7 @@ class CReview
             // Controlla se l'admin è autorizzato a rispondere
             if (!self::canRespond($admin, $review)) {
                 $_SESSION['error'] = "Non sei autorizzato a rispondere a questa recensione.";
-                header("Location: /EpTechProva/admin/manageReviews");
+                header("Location: /EpTech/admin/manageReviews");
                 exit;
             }
 
@@ -104,7 +104,7 @@ class CReview
             $_SESSION['success'] = "Risposta inviata con successo.";
 
             // Reindirizza a manageReviews
-            header("Location: /EpTechProva/admin/manageReviews");
+            header("Location: /EpTech/admin/manageReviews");
         }
     }
 

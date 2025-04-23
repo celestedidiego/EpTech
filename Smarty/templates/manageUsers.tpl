@@ -13,20 +13,20 @@
 		<link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
 
 		<!-- Bootstrap -->
-		<link type="text/css" rel="stylesheet" href="/EpTechProva/skin/electroMaster/css/bootstrap.min.css"/>
+		<link type="text/css" rel="stylesheet" href="/EpTech/skin/electroMaster/css/bootstrap.min.css"/>
 
 		<!-- Slick -->
-		<link type="text/css" rel="stylesheet" href="/EpTechProva/skin/electroMaster/css/slick.css"/>
-		<link type="text/css" rel="stylesheet" href="/EpTechProva/skin/electroMaster/css/slick-theme.css"/>
+		<link type="text/css" rel="stylesheet" href="/EpTech/skin/electroMaster/css/slick.css"/>
+		<link type="text/css" rel="stylesheet" href="/EpTech/skin/electroMaster/css/slick-theme.css"/>
 
 		<!-- nouislider -->
-		<link type="text/css" rel="stylesheet" href="/EpTechProva/skin/electroMaster/css/nouislider.min.css"/>
+		<link type="text/css" rel="stylesheet" href="/EpTech/skin/electroMaster/css/nouislider.min.css"/>
 
 		<!-- Font Awesome Icon -->
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
 		<!-- Custom stlylesheet -->
-		<link type="text/css" rel="stylesheet" href="/EpTechProva/skin/electroMaster/css/style.css"/>
+		<link type="text/css" rel="stylesheet" href="/EpTech/skin/electroMaster/css/style.css"/>
 
 		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -51,7 +51,7 @@
         <div class="alert alert-danger">{$error}</div>
     {/if}
 
-    <form method="post" action="/EpTechProva/admin/filterUsersPaginated">
+    <form method="post" action="/EpTech/admin/filterUsersPaginated">
         <div class="form-group">
             <label for="id">Filtra per ID:</label>
             <input type="text" class="form-control" id="registeredUserId" name="registeredUserId">
@@ -94,11 +94,11 @@
                         <p><strong>Email:</strong> {$user.email}</p>
                         <p><strong>Stato:</strong> {if $user.is_blocked}Bloccato{else}Attivo{/if}</p>
                         <div class="mt-3">
-                            <a href="/EpTechProva/admin/deleteUser/{$user.registeredUserId}" class="btn btn-danger btn-sm" onclick="return confirm('Sei sicuro di voler eliminare questo utente? Questa azione non può essere annullata.');">Elimina</a>
+                            <a href="/EpTech/admin/deleteUser/{$user.registeredUserId}" class="btn btn-danger btn-sm" onclick="return confirm('Sei sicuro di voler eliminare questo utente? Questa azione non può essere annullata.');">Elimina</a>
                             {if $user.is_blocked}
-                                <a href="/EpTechProva/admin/unblockUser/{$user.registeredUserId}" class="btn btn-success btn-sm">Sblocca</a>
+                                <a href="/EpTech/admin/unblockUser/{$user.registeredUserId}" class="btn btn-success btn-sm">Sblocca</a>
                             {else}
-                                <a href="/EpTechProva/admin/blockUser/{$user.registeredUserId}" class="btn btn-warning btn-sm">Blocca</a>
+                                <a href="/EpTech/admin/blockUser/{$user.registeredUserId}" class="btn btn-warning btn-sm">Blocca</a>
                             {/if}
                         </div>
                     </div>
@@ -109,13 +109,13 @@
     {/if}
     </div>
 
-<script src="/EpTechProva/skin/electroMaster/js/scripts-for-template.js"></script>
+<script src="/EpTech/skin/electroMaster/js/scripts-for-template.js"></script>
 	<!-- jQuery Plugins -->
-	<script src="/EpTechProva/skin/electroMaster/js/jquery.min.js"></script>
-	<script src="/EpTechProva/skin/electroMaster/js/bootstrap.min.js"></script>
-	<script src="/EpTechProva/skin/electroMaster/js/slick.min.js"></script>
-	<script src="/EpTechProva/skin/electroMaster/js/nouislider.min.js"></script>
-	<script src="/EpTechProva/skin/electroMaster/js/jquery.zoom.min.js"></script>
-	<script src="/EpTechProva/skin/electroMaster/js/main.js"></script>
+	<script src="/EpTech/skin/electroMaster/js/jquery.min.js"></script>
+	<script src="/EpTech/skin/electroMaster/js/bootstrap.min.js"></script>
+	<script src="/EpTech/skin/electroMaster/js/slick.min.js"></script>
+	<script src="/EpTech/skin/electroMaster/js/nouislider.min.js"></script>
+	<script src="/EpTech/skin/electroMaster/js/jquery.zoom.min.js"></script>
+	<script src="/EpTech/skin/electroMaster/js/main.js"></script>
     </body>
 </html>
