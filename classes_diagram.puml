@@ -1,0 +1,2196 @@
+@startuml EpTechUML
+class CReview {
+  +addReview()
+  +editReview()
+  +respondToReview()
+  +listReviews()
+  +canRespond()
+}
+class COrder {
+  +addOrder()
+  +editOrder()
+  +deleteOrder()
+  +listOrders()
+  +viewOrder()
+  +requestRefund()
+}
+class CFrontController {
+  +run()
+  -isPublic()
+  -hasPermission()
+}
+class CShipping {
+  +addShippingAddress()
+  +showShippingAddresses()
+  +deleteShippingAddress()
+  +selectShippingAddress()
+  +editShippingAddress()
+  +showAddForm()
+  +getShippingAddress()
+}
+class CAdmin {
+  +manageUsers()
+  +filterUsersPaginated()
+  +deleteUser()
+  +blockUser()
+  +unblockUser()
+  +manageProducts()
+  +deleteProduct()
+  +manageOrders()
+  +changeOrderStatus()
+  +manageReviews()
+  +manageSection()
+  +acceptRefund()
+  +rejectRefund()
+}
+class CProduct {
+  +listProducts()
+  +addProduct()
+  +modifyProduct()
+  +deleteProduct()
+}
+class CPurchase {
+  +shop()
+  +viewProduct()
+  +addToCart()
+  +removeFromCart()
+  +emptyCart()
+  +showCart()
+  +updateQuantity()
+  +checkout()
+  +completeOrder()
+  +detailOrder()
+}
+class CUser {
+  +home()
+  +login()
+  +isLogged()
+  +logout()
+  +signUp()
+  +confirmEmail()
+  +userDataForm()
+  +userDataSection()
+  +userHistoryOrders()
+  +deleteAccount()
+  +changePass()
+  +changeUserData()
+  +shipping()
+  +addShipping()
+  +deleteShipping()
+  +reactivateShipping()
+  +addCards()
+  -validateCreditCardData()
+  +creditCards()
+  +deleteCreditCard()
+  +reactivateCreditCard()
+  +searchProducts()
+  +deleteProduct()
+}
+class UEMailer {
+  +__construct()
+  -loadConfig()
+  +sendAccountDeletionEmail()
+  +sendProductDeletionEmail()
+  +sendEmailConfirmation()
+}
+class FRegisteredUser {
+  +findRegisteredUser()
+  +findRegisteredUserById()
+  +insertNewRegisteredUser()
+  +deleteRegisteredUser()
+  +updatePass()
+  +updateRegisteredUser()
+  +__construct()
+  +createQueryBuilder()
+  +createResultSetMappingBuilder()
+  +createNamedQuery()
+  +createNativeNamedQuery()
+  +clear()
+  +find()
+  +findAll()
+  +findBy()
+  +findOneBy()
+  +count()
+  +__call()
+  #getEntityName()
+  +getClassName()
+  #getEntityManager()
+  #getClassMetadata()
+  +matching()
+}
+class FItemOrder {
+  +addItemOrder()
+  +findItemOrder()
+  +__construct()
+  +createQueryBuilder()
+  +createResultSetMappingBuilder()
+  +createNamedQuery()
+  +createNativeNamedQuery()
+  +clear()
+  +find()
+  +findAll()
+  +findBy()
+  +findOneBy()
+  +count()
+  +__call()
+  #getEntityName()
+  +getClassName()
+  #getEntityManager()
+  #getClassMetadata()
+  +matching()
+}
+class FAdmin {
+  +findAdmin()
+  +findAdminById()
+  +updatePass()
+  +updateAdmin()
+  +deleteAdmin()
+  +softDeleteUtente()
+  +getAllUsersPaginated()
+  +getFilteredUsersPaginated()
+  -getTotalUsersCount()
+  +getAllReviewsPaginated()
+  +findReviewsByUserId()
+  +__construct()
+  +createQueryBuilder()
+  +createResultSetMappingBuilder()
+  +createNamedQuery()
+  +createNativeNamedQuery()
+  +clear()
+  +find()
+  +findAll()
+  +findBy()
+  +findOneBy()
+  +count()
+  +__call()
+  #getEntityName()
+  +getClassName()
+  #getEntityManager()
+  #getClassMetadata()
+  +matching()
+}
+class FImage {
+  +insertImage()
+  +findImage()
+  +getAllImages()
+  +getAllObjectImages()
+  +deleteAllImages()
+  +__construct()
+  +createQueryBuilder()
+  +createResultSetMappingBuilder()
+  +createNamedQuery()
+  +createNativeNamedQuery()
+  +clear()
+  +find()
+  +findAll()
+  +findBy()
+  +findOneBy()
+  +count()
+  +__call()
+  #getEntityName()
+  +getClassName()
+  #getEntityManager()
+  #getClassMetadata()
+  +matching()
+}
+class FCreditCard {
+  +findCreditCard()
+  +insertCreditCard()
+  +getAllCreditCardUser()
+  +deleteCreditCard()
+  +findAllActive()
+  +softDelete()
+  +canBeHardDeleted()
+  +__construct()
+  +createQueryBuilder()
+  +createResultSetMappingBuilder()
+  +createNamedQuery()
+  +createNativeNamedQuery()
+  +clear()
+  +find()
+  +findAll()
+  +findBy()
+  +findOneBy()
+  +count()
+  +__call()
+  #getEntityName()
+  +getClassName()
+  #getEntityManager()
+  #getClassMetadata()
+  +matching()
+}
+class FOrder {
+  +findOrderUser()
+  +newOrder()
+  +ChangeOrderStatus()
+  +addRefundRequest()
+  +__construct()
+  +createQueryBuilder()
+  +createResultSetMappingBuilder()
+  +createNamedQuery()
+  +createNativeNamedQuery()
+  +clear()
+  +find()
+  +findAll()
+  +findBy()
+  +findOneBy()
+  +count()
+  +__call()
+  #getEntityName()
+  +getClassName()
+  #getEntityManager()
+  #getClassMetadata()
+  +matching()
+}
+class FReview {
+  +findReviewByID()
+  +getReviewAdmin()
+  +getReviewsProduct()
+  +getReviewUser()
+  +insertReview()
+  +deleteReview()
+  +hasPurchasedProduct()
+  +__construct()
+  +createQueryBuilder()
+  +createResultSetMappingBuilder()
+  +createNamedQuery()
+  +createNativeNamedQuery()
+  +clear()
+  +find()
+  +findAll()
+  +findBy()
+  +findOneBy()
+  +count()
+  +__call()
+  #getEntityName()
+  +getClassName()
+  #getEntityManager()
+  #getClassMetadata()
+  +matching()
+}
+class FPersistentManager {
+  -__construct()
+  +getInstance()
+  +setInstance()
+  +getRepository()
+  +persist()
+  +remove()
+  +flush()
+  +clear()
+  +find()
+  +findAll()
+  +findBy()
+  +findOneBy()
+  +refresh()
+  +findUtente()
+  +findRegisteredUserById()
+  +findAdminById()
+  +insertNewUtente()
+  +updatePass()
+  -updateRegisteredUserPass()
+  -updateAdminPass()
+  +updateUtente()
+  +deleteUtente()
+  +getAllProducts()
+  +getAllSameCatProducts()
+  +getAllCategories()
+  +insertProduct()
+  +findCategory()
+  +updateCatProdotto()
+  +deleteProduct()
+  +getAllOrders()
+  +newOrder()
+  +addProductOrder()
+  +getAllShippingUser()
+  +getAllCreditCardUser()
+  +insertShipping()
+  +deleteShipping()
+  +insertCreditCard()
+  +deleteCreditCard()
+  +getOrderUser()
+  +searchProduct()
+  +getProductFiltered()
+  +getAllBrands()
+  +findItemOrder()
+  +update()
+  +getProductById()
+  +getReviewsProduct()
+  +addReview()
+  +getReviewUser()
+  +getProductForAdmin()
+  +findUser()
+  -findUserByEmail()
+  -findUserByObject()
+  +findCreditCard()
+  +findShipping()
+  +hasPurchasedProduct()
+  +getReviewAdmin()
+  +getAllProductsByAdmin()
+  +updateAdminCatProduct()
+  +hasProducts()
+  +deleteCategory()
+  +softDeleteShipping()
+  +canShippingBeHardDeleted()
+  +reactivateShipping()
+  +canCreditCardBeHardDeleted()
+  +softDeleteCreditCard()
+  +reactivateCreditCard()
+  +addOrderData()
+  +deleteOrder()
+  +getOrders()
+  +getAllUsersPaginated()
+  +getFilteredUsersPaginated()
+  +getLatestProductsHome()
+  +getAllImages()
+  +insertImage()
+  +findImage()
+  +updateImageProduct()
+  +deleteAllImages()
+  +updateProduct()
+  +softDeleteUtente()
+  +getAllReviewsPaginated()
+  +addRefundRequest()
+}
+class FProduct {
+  +insertProduct()
+  +deleteProduct()
+  +updateImageProduct()
+  +updateAdminCatProduct()
+  +getAllProducts()
+  +getProductById()
+  +getLatestNewProducts()
+  +getAllProductsByAdmin()
+  +updateProduct()
+  +getAllProductsByCategory()
+  +__construct()
+  +createQueryBuilder()
+  +createResultSetMappingBuilder()
+  +createNamedQuery()
+  +createNativeNamedQuery()
+  +clear()
+  +find()
+  +findAll()
+  +findBy()
+  +findOneBy()
+  +count()
+  +__call()
+  #getEntityName()
+  +getClassName()
+  #getEntityManager()
+  #getClassMetadata()
+  +matching()
+}
+class FCategory {
+  +getAllCategories()
+  +findCategoria()
+  +__construct()
+  +createQueryBuilder()
+  +createResultSetMappingBuilder()
+  +createNamedQuery()
+  +createNativeNamedQuery()
+  +clear()
+  +find()
+  +findAll()
+  +findBy()
+  +findOneBy()
+  +count()
+  +__call()
+  #getEntityName()
+  +getClassName()
+  #getEntityManager()
+  #getClassMetadata()
+  +matching()
+}
+class FShipping {
+  +findShipping()
+  +insertShipping()
+  +getAllShippingUser()
+  +deleteShipping()
+  +findAllActive()
+  +softDelete()
+  +canBeHardDeleted()
+  +__construct()
+  +createQueryBuilder()
+  +createResultSetMappingBuilder()
+  +createNamedQuery()
+  +createNativeNamedQuery()
+  +clear()
+  +find()
+  +findAll()
+  +findBy()
+  +findOneBy()
+  +count()
+  +__call()
+  #getEntityName()
+  +getClassName()
+  #getEntityManager()
+  #getClassMetadata()
+  +matching()
+}
+class VProduct {
+  +__construct()
+  +listProducts()
+  +addProductForm()
+  +modifyProductForm()
+  +errorImageUpload()
+}
+class VOrder {
+  +__construct()
+  +showOrders()
+  +showOrder()
+  +showAddOrderForm()
+  +showEditOrderForm()
+}
+class VReview {
+  +__construct()
+  +showProductReviews()
+  +showAdminReviews()
+  +showReviewForm()
+  +showReplyForm()
+}
+class VPurchase {
+  +__construct()
+  +shop()
+  +viewProduct()
+  +cart()
+  +viewCheckoutForm()
+  +viewConfermaOrder()
+  +detailOrder()
+  +errorOrder()
+}
+class VAdmin {
+  +__construct()
+  +manageProducts()
+  +manageUsers()
+  +displaySearchResults()
+  +displayFilteredUsers()
+  +manageReviews()
+  +displayFilteredReviews()
+  +showManageOrders()
+  +showManageSection()
+}
+class VShipping {
+  +__construct()
+  +showAddresses()
+  +showAddForm()
+  +showEditForm()
+}
+class VUser {
+  +__construct()
+  +cart_header()
+  +countItemCart()
+  +checkLogin()
+  +accessDenied()
+  +accessUnAuthorized()
+  +showLoginForm()
+  +loginSuccessUser()
+  +loginSuccessAdmin()
+  +loginError()
+  +logout()
+  +signUp()
+  +checkPassSignUp()
+  +signUpError()
+  +userDataForm()
+  +userDataSection()
+  +userHistoryOrders()
+  +changePass()
+  +errorPassUpdate()
+  +errorOldPass()
+  +equalPasswordError()
+  +shipping()
+  +addShipping()
+  +addShippingWithError()
+  +errorDeleteShipping()
+  +creditCards()
+  +errorDeleteCard()
+  +addCards()
+  +addCardsWithErrors()
+  +signUpSuccess()
+}
+class EImage {
+  +__construct()
+  +getEncodedData()
+  +getIdImage()
+  +setIdImage()
+  +getName()
+  +setName()
+  +getSize()
+  +setSize()
+  +getType()
+  +setType()
+  +getImageData()
+  +setImageData()
+  +getProduct()
+  +setProduct()
+}
+class EShipping {
+  +__construct()
+  +getIdShipping()
+  +isDeleted()
+  +setDeleted()
+  +getAddress()
+  +setAddress()
+  +getCAP()
+  +setCAP()
+  +getCity()
+  +setCity()
+  +getRecipientName()
+  +setRecipientName()
+  +getRecipientSurname()
+  +setRecipientSurname()
+  +getOrders()
+  +setOrders()
+  +getShippingRegisteredUser()
+  +setShippingRegisteredUser()
+}
+class EOrder {
+  +__construct()
+  +addQProductOrder()
+  +removeQProductOrder()
+  +getIdOrder()
+  +setIdOrder()
+  +getTotalPrice()
+  +setTotalPrice()
+  +getDateTime()
+  +setDateTime()
+  +getShipping()
+  +setShipping()
+  +getTotalQuantityProduct()
+  +setTotalQuantityProduct()
+  +getOrderStatus()
+  +setOrderStatus()
+  +isPresoInCarico()
+  +isInSpedizione()
+  +isConsegnato()
+  +isAnnullato()
+  +getItemOrder()
+  +setItemOrder()
+  +getCreditCard()
+  +setCreditCard()
+  +getRegistereduser()
+  +setRegisteredUser()
+  +getRefundRequests()
+  +hasRefundRequest()
+}
+class EProduct {
+  +__construct()
+  +getProductId()
+  +getNameCategory()
+  +setNameCategory()
+  +getNameProduct()
+  +setNameProduct()
+  +getPriceProduct()
+  +setPriceProduct()
+  +getDescription()
+  +setDescription()
+  +getBrand()
+  +setBrand()
+  +getModel()
+  +setModel()
+  +getColor()
+  +setColor()
+  +getItemOrder()
+  +getReviews()
+  +setReviews()
+  +getAvQuantity()
+  +setAvQuantity()
+  +getAdmin()
+  +setAdmin()
+  +isDeleted()
+  +setDeleted()
+  +getImages()
+  +addImage()
+  +removeImage()
+}
+class ECategory {
+  +__construct()
+  +getIdCategory()
+  +getNameCategory()
+  +setNameCategory()
+  +getProducts()
+  +setProducts()
+}
+class EItemOrder {
+  +__construct()
+  +getQuantity()
+  +setQuantity()
+  +getOrder()
+  +setOrder()
+  +getProduct()
+  +setProduct()
+}
+class EReview {
+  +__construct()
+  +getReviewId()
+  +getText()
+  +setText()
+  +getVote()
+  +setVote()
+  +getProduct()
+  +setProduct()
+  +getRegisteredUser()
+  +setRegisteredUser()
+  +setResponseAdmin()
+  +getResponseAdmin()
+  +getAdmin()
+  +setAdmin()
+}
+class ERegisteredUser {
+  +__construct()
+  +getIdRegisteredUser()
+  +getName()
+  +setName()
+  +getSurname()
+  +setSurname()
+  +getEmail()
+  +setEmail()
+  +getBirthDate()
+  +setBirthDate()
+  +getUsername()
+  +setUsername()
+  +getPassword()
+  +setPassword()
+  +getOrders()
+  +setOrders()
+  +getReviews()
+  +setReviews()
+  +getAddresses()
+  +getCreditCards()
+  +setCreditCards()
+  +isBlocked()
+  +setBlocked()
+  +isDeleted()
+  +setDeleted()
+  +getConfirmationToken()
+  +setConfirmationToken()
+  +isEmailConfirmed()
+  +setEmailConfirmed()
+}
+class ECreditCard {
+  +__construct()
+  +getCardNumber()
+  +setCardNumber()
+  +getCardHolderName()
+  +setCardHolderName()
+  +getEndDate()
+  +setEndDate()
+  +getCVV()
+  +setCVV()
+  +getOrders()
+  +setOrders()
+  +getRegisteredUser()
+  +setRegisteredUser()
+  +isDeleted()
+  +setDeleted()
+}
+class EUnRegisteredUser {
+  +__construct()
+  +getIdUnRegisteredUser()
+}
+class ERefundRequest {
+  +__construct()
+  +getId()
+  +getOrder()
+  +getStatus()
+  +setStatus()
+  +getRequestDate()
+}
+class EAdmin {
+  +__construct()
+  +getIdAdmin()
+  +getName()
+  +setName()
+  +getSurname()
+  +setSurname()
+  +getEmail()
+  +setEmail()
+  +getUsername()
+  +setUsername()
+  +getPassword()
+  +setPassword()
+  +getProducts()
+  +getReviews()
+}
+CReview <|-- COrder
+CReview <|-- CFrontController
+CReview <|-- CShipping
+CReview <|-- CAdmin
+CReview <|-- CProduct
+CReview <|-- CPurchase
+CReview <|-- CUser
+CReview <|-- UEMailer
+CReview <|-- FRegisteredUser
+CReview <|-- FItemOrder
+CReview <|-- FAdmin
+CReview <|-- FImage
+CReview <|-- FCreditCard
+CReview <|-- FOrder
+CReview <|-- FReview
+CReview <|-- FPersistentManager
+CReview <|-- FProduct
+CReview <|-- FCategory
+CReview <|-- FShipping
+CReview <|-- VProduct
+CReview <|-- VOrder
+CReview <|-- VReview
+CReview <|-- VPurchase
+CReview <|-- VAdmin
+CReview <|-- VShipping
+CReview <|-- VUser
+CReview <|-- EImage
+CReview <|-- EShipping
+CReview <|-- EOrder
+CReview <|-- EProduct
+CReview <|-- ECategory
+CReview <|-- EItemOrder
+CReview <|-- EReview
+CReview <|-- ERegisteredUser
+CReview <|-- ECreditCard
+CReview <|-- EUnRegisteredUser
+CReview <|-- ERefundRequest
+CReview <|-- EAdmin
+COrder <|-- CReview
+COrder <|-- CFrontController
+COrder <|-- CShipping
+COrder <|-- CAdmin
+COrder <|-- CProduct
+COrder <|-- CPurchase
+COrder <|-- CUser
+COrder <|-- UEMailer
+COrder <|-- FRegisteredUser
+COrder <|-- FItemOrder
+COrder <|-- FAdmin
+COrder <|-- FImage
+COrder <|-- FCreditCard
+COrder <|-- FOrder
+COrder <|-- FReview
+COrder <|-- FPersistentManager
+COrder <|-- FProduct
+COrder <|-- FCategory
+COrder <|-- FShipping
+COrder <|-- VProduct
+COrder <|-- VOrder
+COrder <|-- VReview
+COrder <|-- VPurchase
+COrder <|-- VAdmin
+COrder <|-- VShipping
+COrder <|-- VUser
+COrder <|-- EImage
+COrder <|-- EShipping
+COrder <|-- EOrder
+COrder <|-- EProduct
+COrder <|-- ECategory
+COrder <|-- EItemOrder
+COrder <|-- EReview
+COrder <|-- ERegisteredUser
+COrder <|-- ECreditCard
+COrder <|-- EUnRegisteredUser
+COrder <|-- ERefundRequest
+COrder <|-- EAdmin
+CFrontController <|-- CReview
+CFrontController <|-- COrder
+CFrontController <|-- CShipping
+CFrontController <|-- CAdmin
+CFrontController <|-- CProduct
+CFrontController <|-- CPurchase
+CFrontController <|-- CUser
+CFrontController <|-- UEMailer
+CFrontController <|-- FRegisteredUser
+CFrontController <|-- FItemOrder
+CFrontController <|-- FAdmin
+CFrontController <|-- FImage
+CFrontController <|-- FCreditCard
+CFrontController <|-- FOrder
+CFrontController <|-- FReview
+CFrontController <|-- FPersistentManager
+CFrontController <|-- FProduct
+CFrontController <|-- FCategory
+CFrontController <|-- FShipping
+CFrontController <|-- VProduct
+CFrontController <|-- VOrder
+CFrontController <|-- VReview
+CFrontController <|-- VPurchase
+CFrontController <|-- VAdmin
+CFrontController <|-- VShipping
+CFrontController <|-- VUser
+CFrontController <|-- EImage
+CFrontController <|-- EShipping
+CFrontController <|-- EOrder
+CFrontController <|-- EProduct
+CFrontController <|-- ECategory
+CFrontController <|-- EItemOrder
+CFrontController <|-- EReview
+CFrontController <|-- ERegisteredUser
+CFrontController <|-- ECreditCard
+CFrontController <|-- EUnRegisteredUser
+CFrontController <|-- ERefundRequest
+CFrontController <|-- EAdmin
+CShipping <|-- CReview
+CShipping <|-- COrder
+CShipping <|-- CFrontController
+CShipping <|-- CAdmin
+CShipping <|-- CProduct
+CShipping <|-- CPurchase
+CShipping <|-- CUser
+CShipping <|-- UEMailer
+CShipping <|-- FRegisteredUser
+CShipping <|-- FItemOrder
+CShipping <|-- FAdmin
+CShipping <|-- FImage
+CShipping <|-- FCreditCard
+CShipping <|-- FOrder
+CShipping <|-- FReview
+CShipping <|-- FPersistentManager
+CShipping <|-- FProduct
+CShipping <|-- FCategory
+CShipping <|-- FShipping
+CShipping <|-- VProduct
+CShipping <|-- VOrder
+CShipping <|-- VReview
+CShipping <|-- VPurchase
+CShipping <|-- VAdmin
+CShipping <|-- VShipping
+CShipping <|-- VUser
+CShipping <|-- EImage
+CShipping <|-- EShipping
+CShipping <|-- EOrder
+CShipping <|-- EProduct
+CShipping <|-- ECategory
+CShipping <|-- EItemOrder
+CShipping <|-- EReview
+CShipping <|-- ERegisteredUser
+CShipping <|-- ECreditCard
+CShipping <|-- EUnRegisteredUser
+CShipping <|-- ERefundRequest
+CShipping <|-- EAdmin
+CAdmin <|-- CReview
+CAdmin <|-- COrder
+CAdmin <|-- CFrontController
+CAdmin <|-- CShipping
+CAdmin <|-- CProduct
+CAdmin <|-- CPurchase
+CAdmin <|-- CUser
+CAdmin <|-- UEMailer
+CAdmin <|-- FRegisteredUser
+CAdmin <|-- FItemOrder
+CAdmin <|-- FAdmin
+CAdmin <|-- FImage
+CAdmin <|-- FCreditCard
+CAdmin <|-- FOrder
+CAdmin <|-- FReview
+CAdmin <|-- FPersistentManager
+CAdmin <|-- FProduct
+CAdmin <|-- FCategory
+CAdmin <|-- FShipping
+CAdmin <|-- VProduct
+CAdmin <|-- VOrder
+CAdmin <|-- VReview
+CAdmin <|-- VPurchase
+CAdmin <|-- VAdmin
+CAdmin <|-- VShipping
+CAdmin <|-- VUser
+CAdmin <|-- EImage
+CAdmin <|-- EShipping
+CAdmin <|-- EOrder
+CAdmin <|-- EProduct
+CAdmin <|-- ECategory
+CAdmin <|-- EItemOrder
+CAdmin <|-- EReview
+CAdmin <|-- ERegisteredUser
+CAdmin <|-- ECreditCard
+CAdmin <|-- EUnRegisteredUser
+CAdmin <|-- ERefundRequest
+CAdmin <|-- EAdmin
+CProduct <|-- CReview
+CProduct <|-- COrder
+CProduct <|-- CFrontController
+CProduct <|-- CShipping
+CProduct <|-- CAdmin
+CProduct <|-- CPurchase
+CProduct <|-- CUser
+CProduct <|-- UEMailer
+CProduct <|-- FRegisteredUser
+CProduct <|-- FItemOrder
+CProduct <|-- FAdmin
+CProduct <|-- FImage
+CProduct <|-- FCreditCard
+CProduct <|-- FOrder
+CProduct <|-- FReview
+CProduct <|-- FPersistentManager
+CProduct <|-- FProduct
+CProduct <|-- FCategory
+CProduct <|-- FShipping
+CProduct <|-- VProduct
+CProduct <|-- VOrder
+CProduct <|-- VReview
+CProduct <|-- VPurchase
+CProduct <|-- VAdmin
+CProduct <|-- VShipping
+CProduct <|-- VUser
+CProduct <|-- EImage
+CProduct <|-- EShipping
+CProduct <|-- EOrder
+CProduct <|-- EProduct
+CProduct <|-- ECategory
+CProduct <|-- EItemOrder
+CProduct <|-- EReview
+CProduct <|-- ERegisteredUser
+CProduct <|-- ECreditCard
+CProduct <|-- EUnRegisteredUser
+CProduct <|-- ERefundRequest
+CProduct <|-- EAdmin
+CPurchase <|-- CReview
+CPurchase <|-- COrder
+CPurchase <|-- CFrontController
+CPurchase <|-- CShipping
+CPurchase <|-- CAdmin
+CPurchase <|-- CProduct
+CPurchase <|-- CUser
+CPurchase <|-- UEMailer
+CPurchase <|-- FRegisteredUser
+CPurchase <|-- FItemOrder
+CPurchase <|-- FAdmin
+CPurchase <|-- FImage
+CPurchase <|-- FCreditCard
+CPurchase <|-- FOrder
+CPurchase <|-- FReview
+CPurchase <|-- FPersistentManager
+CPurchase <|-- FProduct
+CPurchase <|-- FCategory
+CPurchase <|-- FShipping
+CPurchase <|-- VProduct
+CPurchase <|-- VOrder
+CPurchase <|-- VReview
+CPurchase <|-- VPurchase
+CPurchase <|-- VAdmin
+CPurchase <|-- VShipping
+CPurchase <|-- VUser
+CPurchase <|-- EImage
+CPurchase <|-- EShipping
+CPurchase <|-- EOrder
+CPurchase <|-- EProduct
+CPurchase <|-- ECategory
+CPurchase <|-- EItemOrder
+CPurchase <|-- EReview
+CPurchase <|-- ERegisteredUser
+CPurchase <|-- ECreditCard
+CPurchase <|-- EUnRegisteredUser
+CPurchase <|-- ERefundRequest
+CPurchase <|-- EAdmin
+CUser <|-- CReview
+CUser <|-- COrder
+CUser <|-- CFrontController
+CUser <|-- CShipping
+CUser <|-- CAdmin
+CUser <|-- CProduct
+CUser <|-- CPurchase
+CUser <|-- UEMailer
+CUser <|-- FRegisteredUser
+CUser <|-- FItemOrder
+CUser <|-- FAdmin
+CUser <|-- FImage
+CUser <|-- FCreditCard
+CUser <|-- FOrder
+CUser <|-- FReview
+CUser <|-- FPersistentManager
+CUser <|-- FProduct
+CUser <|-- FCategory
+CUser <|-- FShipping
+CUser <|-- VProduct
+CUser <|-- VOrder
+CUser <|-- VReview
+CUser <|-- VPurchase
+CUser <|-- VAdmin
+CUser <|-- VShipping
+CUser <|-- VUser
+CUser <|-- EImage
+CUser <|-- EShipping
+CUser <|-- EOrder
+CUser <|-- EProduct
+CUser <|-- ECategory
+CUser <|-- EItemOrder
+CUser <|-- EReview
+CUser <|-- ERegisteredUser
+CUser <|-- ECreditCard
+CUser <|-- EUnRegisteredUser
+CUser <|-- ERefundRequest
+CUser <|-- EAdmin
+UEMailer <|-- CReview
+UEMailer <|-- COrder
+UEMailer <|-- CFrontController
+UEMailer <|-- CShipping
+UEMailer <|-- CAdmin
+UEMailer <|-- CProduct
+UEMailer <|-- CPurchase
+UEMailer <|-- CUser
+UEMailer <|-- FRegisteredUser
+UEMailer <|-- FItemOrder
+UEMailer <|-- FAdmin
+UEMailer <|-- FImage
+UEMailer <|-- FCreditCard
+UEMailer <|-- FOrder
+UEMailer <|-- FReview
+UEMailer <|-- FPersistentManager
+UEMailer <|-- FProduct
+UEMailer <|-- FCategory
+UEMailer <|-- FShipping
+UEMailer <|-- VProduct
+UEMailer <|-- VOrder
+UEMailer <|-- VReview
+UEMailer <|-- VPurchase
+UEMailer <|-- VAdmin
+UEMailer <|-- VShipping
+UEMailer <|-- VUser
+UEMailer <|-- EImage
+UEMailer <|-- EShipping
+UEMailer <|-- EOrder
+UEMailer <|-- EProduct
+UEMailer <|-- ECategory
+UEMailer <|-- EItemOrder
+UEMailer <|-- EReview
+UEMailer <|-- ERegisteredUser
+UEMailer <|-- ECreditCard
+UEMailer <|-- EUnRegisteredUser
+UEMailer <|-- ERefundRequest
+UEMailer <|-- EAdmin
+FRegisteredUser <|-- CReview
+FRegisteredUser <|-- COrder
+FRegisteredUser <|-- CFrontController
+FRegisteredUser <|-- CShipping
+FRegisteredUser <|-- CAdmin
+FRegisteredUser <|-- CProduct
+FRegisteredUser <|-- CPurchase
+FRegisteredUser <|-- CUser
+FRegisteredUser <|-- UEMailer
+FRegisteredUser <|-- FItemOrder
+FRegisteredUser <|-- FAdmin
+FRegisteredUser <|-- FImage
+FRegisteredUser <|-- FCreditCard
+FRegisteredUser <|-- FOrder
+FRegisteredUser <|-- FReview
+FRegisteredUser <|-- FPersistentManager
+FRegisteredUser <|-- FProduct
+FRegisteredUser <|-- FCategory
+FRegisteredUser <|-- FShipping
+FRegisteredUser <|-- VProduct
+FRegisteredUser <|-- VOrder
+FRegisteredUser <|-- VReview
+FRegisteredUser <|-- VPurchase
+FRegisteredUser <|-- VAdmin
+FRegisteredUser <|-- VShipping
+FRegisteredUser <|-- VUser
+FRegisteredUser <|-- EImage
+FRegisteredUser <|-- EShipping
+FRegisteredUser <|-- EOrder
+FRegisteredUser <|-- EProduct
+FRegisteredUser <|-- ECategory
+FRegisteredUser <|-- EItemOrder
+FRegisteredUser <|-- EReview
+FRegisteredUser <|-- ERegisteredUser
+FRegisteredUser <|-- ECreditCard
+FRegisteredUser <|-- EUnRegisteredUser
+FRegisteredUser <|-- ERefundRequest
+FRegisteredUser <|-- EAdmin
+FItemOrder <|-- CReview
+FItemOrder <|-- COrder
+FItemOrder <|-- CFrontController
+FItemOrder <|-- CShipping
+FItemOrder <|-- CAdmin
+FItemOrder <|-- CProduct
+FItemOrder <|-- CPurchase
+FItemOrder <|-- CUser
+FItemOrder <|-- UEMailer
+FItemOrder <|-- FRegisteredUser
+FItemOrder <|-- FAdmin
+FItemOrder <|-- FImage
+FItemOrder <|-- FCreditCard
+FItemOrder <|-- FOrder
+FItemOrder <|-- FReview
+FItemOrder <|-- FPersistentManager
+FItemOrder <|-- FProduct
+FItemOrder <|-- FCategory
+FItemOrder <|-- FShipping
+FItemOrder <|-- VProduct
+FItemOrder <|-- VOrder
+FItemOrder <|-- VReview
+FItemOrder <|-- VPurchase
+FItemOrder <|-- VAdmin
+FItemOrder <|-- VShipping
+FItemOrder <|-- VUser
+FItemOrder <|-- EImage
+FItemOrder <|-- EShipping
+FItemOrder <|-- EOrder
+FItemOrder <|-- EProduct
+FItemOrder <|-- ECategory
+FItemOrder <|-- EItemOrder
+FItemOrder <|-- EReview
+FItemOrder <|-- ERegisteredUser
+FItemOrder <|-- ECreditCard
+FItemOrder <|-- EUnRegisteredUser
+FItemOrder <|-- ERefundRequest
+FItemOrder <|-- EAdmin
+FAdmin <|-- CReview
+FAdmin <|-- COrder
+FAdmin <|-- CFrontController
+FAdmin <|-- CShipping
+FAdmin <|-- CAdmin
+FAdmin <|-- CProduct
+FAdmin <|-- CPurchase
+FAdmin <|-- CUser
+FAdmin <|-- UEMailer
+FAdmin <|-- FRegisteredUser
+FAdmin <|-- FItemOrder
+FAdmin <|-- FImage
+FAdmin <|-- FCreditCard
+FAdmin <|-- FOrder
+FAdmin <|-- FReview
+FAdmin <|-- FPersistentManager
+FAdmin <|-- FProduct
+FAdmin <|-- FCategory
+FAdmin <|-- FShipping
+FAdmin <|-- VProduct
+FAdmin <|-- VOrder
+FAdmin <|-- VReview
+FAdmin <|-- VPurchase
+FAdmin <|-- VAdmin
+FAdmin <|-- VShipping
+FAdmin <|-- VUser
+FAdmin <|-- EImage
+FAdmin <|-- EShipping
+FAdmin <|-- EOrder
+FAdmin <|-- EProduct
+FAdmin <|-- ECategory
+FAdmin <|-- EItemOrder
+FAdmin <|-- EReview
+FAdmin <|-- ERegisteredUser
+FAdmin <|-- ECreditCard
+FAdmin <|-- EUnRegisteredUser
+FAdmin <|-- ERefundRequest
+FAdmin <|-- EAdmin
+FImage <|-- CReview
+FImage <|-- COrder
+FImage <|-- CFrontController
+FImage <|-- CShipping
+FImage <|-- CAdmin
+FImage <|-- CProduct
+FImage <|-- CPurchase
+FImage <|-- CUser
+FImage <|-- UEMailer
+FImage <|-- FRegisteredUser
+FImage <|-- FItemOrder
+FImage <|-- FAdmin
+FImage <|-- FCreditCard
+FImage <|-- FOrder
+FImage <|-- FReview
+FImage <|-- FPersistentManager
+FImage <|-- FProduct
+FImage <|-- FCategory
+FImage <|-- FShipping
+FImage <|-- VProduct
+FImage <|-- VOrder
+FImage <|-- VReview
+FImage <|-- VPurchase
+FImage <|-- VAdmin
+FImage <|-- VShipping
+FImage <|-- VUser
+FImage <|-- EImage
+FImage <|-- EShipping
+FImage <|-- EOrder
+FImage <|-- EProduct
+FImage <|-- ECategory
+FImage <|-- EItemOrder
+FImage <|-- EReview
+FImage <|-- ERegisteredUser
+FImage <|-- ECreditCard
+FImage <|-- EUnRegisteredUser
+FImage <|-- ERefundRequest
+FImage <|-- EAdmin
+FCreditCard <|-- CReview
+FCreditCard <|-- COrder
+FCreditCard <|-- CFrontController
+FCreditCard <|-- CShipping
+FCreditCard <|-- CAdmin
+FCreditCard <|-- CProduct
+FCreditCard <|-- CPurchase
+FCreditCard <|-- CUser
+FCreditCard <|-- UEMailer
+FCreditCard <|-- FRegisteredUser
+FCreditCard <|-- FItemOrder
+FCreditCard <|-- FAdmin
+FCreditCard <|-- FImage
+FCreditCard <|-- FOrder
+FCreditCard <|-- FReview
+FCreditCard <|-- FPersistentManager
+FCreditCard <|-- FProduct
+FCreditCard <|-- FCategory
+FCreditCard <|-- FShipping
+FCreditCard <|-- VProduct
+FCreditCard <|-- VOrder
+FCreditCard <|-- VReview
+FCreditCard <|-- VPurchase
+FCreditCard <|-- VAdmin
+FCreditCard <|-- VShipping
+FCreditCard <|-- VUser
+FCreditCard <|-- EImage
+FCreditCard <|-- EShipping
+FCreditCard <|-- EOrder
+FCreditCard <|-- EProduct
+FCreditCard <|-- ECategory
+FCreditCard <|-- EItemOrder
+FCreditCard <|-- EReview
+FCreditCard <|-- ERegisteredUser
+FCreditCard <|-- ECreditCard
+FCreditCard <|-- EUnRegisteredUser
+FCreditCard <|-- ERefundRequest
+FCreditCard <|-- EAdmin
+FOrder <|-- CReview
+FOrder <|-- COrder
+FOrder <|-- CFrontController
+FOrder <|-- CShipping
+FOrder <|-- CAdmin
+FOrder <|-- CProduct
+FOrder <|-- CPurchase
+FOrder <|-- CUser
+FOrder <|-- UEMailer
+FOrder <|-- FRegisteredUser
+FOrder <|-- FItemOrder
+FOrder <|-- FAdmin
+FOrder <|-- FImage
+FOrder <|-- FCreditCard
+FOrder <|-- FReview
+FOrder <|-- FPersistentManager
+FOrder <|-- FProduct
+FOrder <|-- FCategory
+FOrder <|-- FShipping
+FOrder <|-- VProduct
+FOrder <|-- VOrder
+FOrder <|-- VReview
+FOrder <|-- VPurchase
+FOrder <|-- VAdmin
+FOrder <|-- VShipping
+FOrder <|-- VUser
+FOrder <|-- EImage
+FOrder <|-- EShipping
+FOrder <|-- EOrder
+FOrder <|-- EProduct
+FOrder <|-- ECategory
+FOrder <|-- EItemOrder
+FOrder <|-- EReview
+FOrder <|-- ERegisteredUser
+FOrder <|-- ECreditCard
+FOrder <|-- EUnRegisteredUser
+FOrder <|-- ERefundRequest
+FOrder <|-- EAdmin
+FReview <|-- CReview
+FReview <|-- COrder
+FReview <|-- CFrontController
+FReview <|-- CShipping
+FReview <|-- CAdmin
+FReview <|-- CProduct
+FReview <|-- CPurchase
+FReview <|-- CUser
+FReview <|-- UEMailer
+FReview <|-- FRegisteredUser
+FReview <|-- FItemOrder
+FReview <|-- FAdmin
+FReview <|-- FImage
+FReview <|-- FCreditCard
+FReview <|-- FOrder
+FReview <|-- FPersistentManager
+FReview <|-- FProduct
+FReview <|-- FCategory
+FReview <|-- FShipping
+FReview <|-- VProduct
+FReview <|-- VOrder
+FReview <|-- VReview
+FReview <|-- VPurchase
+FReview <|-- VAdmin
+FReview <|-- VShipping
+FReview <|-- VUser
+FReview <|-- EImage
+FReview <|-- EShipping
+FReview <|-- EOrder
+FReview <|-- EProduct
+FReview <|-- ECategory
+FReview <|-- EItemOrder
+FReview <|-- EReview
+FReview <|-- ERegisteredUser
+FReview <|-- ECreditCard
+FReview <|-- EUnRegisteredUser
+FReview <|-- ERefundRequest
+FReview <|-- EAdmin
+FPersistentManager <|-- CReview
+FPersistentManager <|-- COrder
+FPersistentManager <|-- CFrontController
+FPersistentManager <|-- CShipping
+FPersistentManager <|-- CAdmin
+FPersistentManager <|-- CProduct
+FPersistentManager <|-- CPurchase
+FPersistentManager <|-- CUser
+FPersistentManager <|-- UEMailer
+FPersistentManager <|-- FRegisteredUser
+FPersistentManager <|-- FItemOrder
+FPersistentManager <|-- FAdmin
+FPersistentManager <|-- FImage
+FPersistentManager <|-- FCreditCard
+FPersistentManager <|-- FOrder
+FPersistentManager <|-- FReview
+FPersistentManager <|-- FProduct
+FPersistentManager <|-- FCategory
+FPersistentManager <|-- FShipping
+FPersistentManager <|-- VProduct
+FPersistentManager <|-- VOrder
+FPersistentManager <|-- VReview
+FPersistentManager <|-- VPurchase
+FPersistentManager <|-- VAdmin
+FPersistentManager <|-- VShipping
+FPersistentManager <|-- VUser
+FPersistentManager <|-- EImage
+FPersistentManager <|-- EShipping
+FPersistentManager <|-- EOrder
+FPersistentManager <|-- EProduct
+FPersistentManager <|-- ECategory
+FPersistentManager <|-- EItemOrder
+FPersistentManager <|-- EReview
+FPersistentManager <|-- ERegisteredUser
+FPersistentManager <|-- ECreditCard
+FPersistentManager <|-- EUnRegisteredUser
+FPersistentManager <|-- ERefundRequest
+FPersistentManager <|-- EAdmin
+FProduct <|-- CReview
+FProduct <|-- COrder
+FProduct <|-- CFrontController
+FProduct <|-- CShipping
+FProduct <|-- CAdmin
+FProduct <|-- CProduct
+FProduct <|-- CPurchase
+FProduct <|-- CUser
+FProduct <|-- UEMailer
+FProduct <|-- FRegisteredUser
+FProduct <|-- FItemOrder
+FProduct <|-- FAdmin
+FProduct <|-- FImage
+FProduct <|-- FCreditCard
+FProduct <|-- FOrder
+FProduct <|-- FReview
+FProduct <|-- FPersistentManager
+FProduct <|-- FCategory
+FProduct <|-- FShipping
+FProduct <|-- VProduct
+FProduct <|-- VOrder
+FProduct <|-- VReview
+FProduct <|-- VPurchase
+FProduct <|-- VAdmin
+FProduct <|-- VShipping
+FProduct <|-- VUser
+FProduct <|-- EImage
+FProduct <|-- EShipping
+FProduct <|-- EOrder
+FProduct <|-- EProduct
+FProduct <|-- ECategory
+FProduct <|-- EItemOrder
+FProduct <|-- EReview
+FProduct <|-- ERegisteredUser
+FProduct <|-- ECreditCard
+FProduct <|-- EUnRegisteredUser
+FProduct <|-- ERefundRequest
+FProduct <|-- EAdmin
+FCategory <|-- CReview
+FCategory <|-- COrder
+FCategory <|-- CFrontController
+FCategory <|-- CShipping
+FCategory <|-- CAdmin
+FCategory <|-- CProduct
+FCategory <|-- CPurchase
+FCategory <|-- CUser
+FCategory <|-- UEMailer
+FCategory <|-- FRegisteredUser
+FCategory <|-- FItemOrder
+FCategory <|-- FAdmin
+FCategory <|-- FImage
+FCategory <|-- FCreditCard
+FCategory <|-- FOrder
+FCategory <|-- FReview
+FCategory <|-- FPersistentManager
+FCategory <|-- FProduct
+FCategory <|-- FShipping
+FCategory <|-- VProduct
+FCategory <|-- VOrder
+FCategory <|-- VReview
+FCategory <|-- VPurchase
+FCategory <|-- VAdmin
+FCategory <|-- VShipping
+FCategory <|-- VUser
+FCategory <|-- EImage
+FCategory <|-- EShipping
+FCategory <|-- EOrder
+FCategory <|-- EProduct
+FCategory <|-- ECategory
+FCategory <|-- EItemOrder
+FCategory <|-- EReview
+FCategory <|-- ERegisteredUser
+FCategory <|-- ECreditCard
+FCategory <|-- EUnRegisteredUser
+FCategory <|-- ERefundRequest
+FCategory <|-- EAdmin
+FShipping <|-- CReview
+FShipping <|-- COrder
+FShipping <|-- CFrontController
+FShipping <|-- CShipping
+FShipping <|-- CAdmin
+FShipping <|-- CProduct
+FShipping <|-- CPurchase
+FShipping <|-- CUser
+FShipping <|-- UEMailer
+FShipping <|-- FRegisteredUser
+FShipping <|-- FItemOrder
+FShipping <|-- FAdmin
+FShipping <|-- FImage
+FShipping <|-- FCreditCard
+FShipping <|-- FOrder
+FShipping <|-- FReview
+FShipping <|-- FPersistentManager
+FShipping <|-- FProduct
+FShipping <|-- FCategory
+FShipping <|-- VProduct
+FShipping <|-- VOrder
+FShipping <|-- VReview
+FShipping <|-- VPurchase
+FShipping <|-- VAdmin
+FShipping <|-- VShipping
+FShipping <|-- VUser
+FShipping <|-- EImage
+FShipping <|-- EShipping
+FShipping <|-- EOrder
+FShipping <|-- EProduct
+FShipping <|-- ECategory
+FShipping <|-- EItemOrder
+FShipping <|-- EReview
+FShipping <|-- ERegisteredUser
+FShipping <|-- ECreditCard
+FShipping <|-- EUnRegisteredUser
+FShipping <|-- ERefundRequest
+FShipping <|-- EAdmin
+VProduct <|-- CReview
+VProduct <|-- COrder
+VProduct <|-- CFrontController
+VProduct <|-- CShipping
+VProduct <|-- CAdmin
+VProduct <|-- CProduct
+VProduct <|-- CPurchase
+VProduct <|-- CUser
+VProduct <|-- UEMailer
+VProduct <|-- FRegisteredUser
+VProduct <|-- FItemOrder
+VProduct <|-- FAdmin
+VProduct <|-- FImage
+VProduct <|-- FCreditCard
+VProduct <|-- FOrder
+VProduct <|-- FReview
+VProduct <|-- FPersistentManager
+VProduct <|-- FProduct
+VProduct <|-- FCategory
+VProduct <|-- FShipping
+VProduct <|-- VOrder
+VProduct <|-- VReview
+VProduct <|-- VPurchase
+VProduct <|-- VAdmin
+VProduct <|-- VShipping
+VProduct <|-- VUser
+VProduct <|-- EImage
+VProduct <|-- EShipping
+VProduct <|-- EOrder
+VProduct <|-- EProduct
+VProduct <|-- ECategory
+VProduct <|-- EItemOrder
+VProduct <|-- EReview
+VProduct <|-- ERegisteredUser
+VProduct <|-- ECreditCard
+VProduct <|-- EUnRegisteredUser
+VProduct <|-- ERefundRequest
+VProduct <|-- EAdmin
+VOrder <|-- CReview
+VOrder <|-- COrder
+VOrder <|-- CFrontController
+VOrder <|-- CShipping
+VOrder <|-- CAdmin
+VOrder <|-- CProduct
+VOrder <|-- CPurchase
+VOrder <|-- CUser
+VOrder <|-- UEMailer
+VOrder <|-- FRegisteredUser
+VOrder <|-- FItemOrder
+VOrder <|-- FAdmin
+VOrder <|-- FImage
+VOrder <|-- FCreditCard
+VOrder <|-- FOrder
+VOrder <|-- FReview
+VOrder <|-- FPersistentManager
+VOrder <|-- FProduct
+VOrder <|-- FCategory
+VOrder <|-- FShipping
+VOrder <|-- VProduct
+VOrder <|-- VReview
+VOrder <|-- VPurchase
+VOrder <|-- VAdmin
+VOrder <|-- VShipping
+VOrder <|-- VUser
+VOrder <|-- EImage
+VOrder <|-- EShipping
+VOrder <|-- EOrder
+VOrder <|-- EProduct
+VOrder <|-- ECategory
+VOrder <|-- EItemOrder
+VOrder <|-- EReview
+VOrder <|-- ERegisteredUser
+VOrder <|-- ECreditCard
+VOrder <|-- EUnRegisteredUser
+VOrder <|-- ERefundRequest
+VOrder <|-- EAdmin
+VReview <|-- CReview
+VReview <|-- COrder
+VReview <|-- CFrontController
+VReview <|-- CShipping
+VReview <|-- CAdmin
+VReview <|-- CProduct
+VReview <|-- CPurchase
+VReview <|-- CUser
+VReview <|-- UEMailer
+VReview <|-- FRegisteredUser
+VReview <|-- FItemOrder
+VReview <|-- FAdmin
+VReview <|-- FImage
+VReview <|-- FCreditCard
+VReview <|-- FOrder
+VReview <|-- FReview
+VReview <|-- FPersistentManager
+VReview <|-- FProduct
+VReview <|-- FCategory
+VReview <|-- FShipping
+VReview <|-- VProduct
+VReview <|-- VOrder
+VReview <|-- VPurchase
+VReview <|-- VAdmin
+VReview <|-- VShipping
+VReview <|-- VUser
+VReview <|-- EImage
+VReview <|-- EShipping
+VReview <|-- EOrder
+VReview <|-- EProduct
+VReview <|-- ECategory
+VReview <|-- EItemOrder
+VReview <|-- EReview
+VReview <|-- ERegisteredUser
+VReview <|-- ECreditCard
+VReview <|-- EUnRegisteredUser
+VReview <|-- ERefundRequest
+VReview <|-- EAdmin
+VPurchase <|-- CReview
+VPurchase <|-- COrder
+VPurchase <|-- CFrontController
+VPurchase <|-- CShipping
+VPurchase <|-- CAdmin
+VPurchase <|-- CProduct
+VPurchase <|-- CPurchase
+VPurchase <|-- CUser
+VPurchase <|-- UEMailer
+VPurchase <|-- FRegisteredUser
+VPurchase <|-- FItemOrder
+VPurchase <|-- FAdmin
+VPurchase <|-- FImage
+VPurchase <|-- FCreditCard
+VPurchase <|-- FOrder
+VPurchase <|-- FReview
+VPurchase <|-- FPersistentManager
+VPurchase <|-- FProduct
+VPurchase <|-- FCategory
+VPurchase <|-- FShipping
+VPurchase <|-- VProduct
+VPurchase <|-- VOrder
+VPurchase <|-- VReview
+VPurchase <|-- VAdmin
+VPurchase <|-- VShipping
+VPurchase <|-- VUser
+VPurchase <|-- EImage
+VPurchase <|-- EShipping
+VPurchase <|-- EOrder
+VPurchase <|-- EProduct
+VPurchase <|-- ECategory
+VPurchase <|-- EItemOrder
+VPurchase <|-- EReview
+VPurchase <|-- ERegisteredUser
+VPurchase <|-- ECreditCard
+VPurchase <|-- EUnRegisteredUser
+VPurchase <|-- ERefundRequest
+VPurchase <|-- EAdmin
+VAdmin <|-- CReview
+VAdmin <|-- COrder
+VAdmin <|-- CFrontController
+VAdmin <|-- CShipping
+VAdmin <|-- CAdmin
+VAdmin <|-- CProduct
+VAdmin <|-- CPurchase
+VAdmin <|-- CUser
+VAdmin <|-- UEMailer
+VAdmin <|-- FRegisteredUser
+VAdmin <|-- FItemOrder
+VAdmin <|-- FAdmin
+VAdmin <|-- FImage
+VAdmin <|-- FCreditCard
+VAdmin <|-- FOrder
+VAdmin <|-- FReview
+VAdmin <|-- FPersistentManager
+VAdmin <|-- FProduct
+VAdmin <|-- FCategory
+VAdmin <|-- FShipping
+VAdmin <|-- VProduct
+VAdmin <|-- VOrder
+VAdmin <|-- VReview
+VAdmin <|-- VPurchase
+VAdmin <|-- VShipping
+VAdmin <|-- VUser
+VAdmin <|-- EImage
+VAdmin <|-- EShipping
+VAdmin <|-- EOrder
+VAdmin <|-- EProduct
+VAdmin <|-- ECategory
+VAdmin <|-- EItemOrder
+VAdmin <|-- EReview
+VAdmin <|-- ERegisteredUser
+VAdmin <|-- ECreditCard
+VAdmin <|-- EUnRegisteredUser
+VAdmin <|-- ERefundRequest
+VAdmin <|-- EAdmin
+VShipping <|-- CReview
+VShipping <|-- COrder
+VShipping <|-- CFrontController
+VShipping <|-- CShipping
+VShipping <|-- CAdmin
+VShipping <|-- CProduct
+VShipping <|-- CPurchase
+VShipping <|-- CUser
+VShipping <|-- UEMailer
+VShipping <|-- FRegisteredUser
+VShipping <|-- FItemOrder
+VShipping <|-- FAdmin
+VShipping <|-- FImage
+VShipping <|-- FCreditCard
+VShipping <|-- FOrder
+VShipping <|-- FReview
+VShipping <|-- FPersistentManager
+VShipping <|-- FProduct
+VShipping <|-- FCategory
+VShipping <|-- FShipping
+VShipping <|-- VProduct
+VShipping <|-- VOrder
+VShipping <|-- VReview
+VShipping <|-- VPurchase
+VShipping <|-- VAdmin
+VShipping <|-- VUser
+VShipping <|-- EImage
+VShipping <|-- EShipping
+VShipping <|-- EOrder
+VShipping <|-- EProduct
+VShipping <|-- ECategory
+VShipping <|-- EItemOrder
+VShipping <|-- EReview
+VShipping <|-- ERegisteredUser
+VShipping <|-- ECreditCard
+VShipping <|-- EUnRegisteredUser
+VShipping <|-- ERefundRequest
+VShipping <|-- EAdmin
+VUser <|-- CReview
+VUser <|-- COrder
+VUser <|-- CFrontController
+VUser <|-- CShipping
+VUser <|-- CAdmin
+VUser <|-- CProduct
+VUser <|-- CPurchase
+VUser <|-- CUser
+VUser <|-- UEMailer
+VUser <|-- FRegisteredUser
+VUser <|-- FItemOrder
+VUser <|-- FAdmin
+VUser <|-- FImage
+VUser <|-- FCreditCard
+VUser <|-- FOrder
+VUser <|-- FReview
+VUser <|-- FPersistentManager
+VUser <|-- FProduct
+VUser <|-- FCategory
+VUser <|-- FShipping
+VUser <|-- VProduct
+VUser <|-- VOrder
+VUser <|-- VReview
+VUser <|-- VPurchase
+VUser <|-- VAdmin
+VUser <|-- VShipping
+VUser <|-- EImage
+VUser <|-- EShipping
+VUser <|-- EOrder
+VUser <|-- EProduct
+VUser <|-- ECategory
+VUser <|-- EItemOrder
+VUser <|-- EReview
+VUser <|-- ERegisteredUser
+VUser <|-- ECreditCard
+VUser <|-- EUnRegisteredUser
+VUser <|-- ERefundRequest
+VUser <|-- EAdmin
+EImage <|-- CReview
+EImage <|-- COrder
+EImage <|-- CFrontController
+EImage <|-- CShipping
+EImage <|-- CAdmin
+EImage <|-- CProduct
+EImage <|-- CPurchase
+EImage <|-- CUser
+EImage <|-- UEMailer
+EImage <|-- FRegisteredUser
+EImage <|-- FItemOrder
+EImage <|-- FAdmin
+EImage <|-- FImage
+EImage <|-- FCreditCard
+EImage <|-- FOrder
+EImage <|-- FReview
+EImage <|-- FPersistentManager
+EImage <|-- FProduct
+EImage <|-- FCategory
+EImage <|-- FShipping
+EImage <|-- VProduct
+EImage <|-- VOrder
+EImage <|-- VReview
+EImage <|-- VPurchase
+EImage <|-- VAdmin
+EImage <|-- VShipping
+EImage <|-- VUser
+EImage <|-- EShipping
+EImage <|-- EOrder
+EImage <|-- EProduct
+EImage <|-- ECategory
+EImage <|-- EItemOrder
+EImage <|-- EReview
+EImage <|-- ERegisteredUser
+EImage <|-- ECreditCard
+EImage <|-- EUnRegisteredUser
+EImage <|-- ERefundRequest
+EImage <|-- EAdmin
+EShipping <|-- CReview
+EShipping <|-- COrder
+EShipping <|-- CFrontController
+EShipping <|-- CShipping
+EShipping <|-- CAdmin
+EShipping <|-- CProduct
+EShipping <|-- CPurchase
+EShipping <|-- CUser
+EShipping <|-- UEMailer
+EShipping <|-- FRegisteredUser
+EShipping <|-- FItemOrder
+EShipping <|-- FAdmin
+EShipping <|-- FImage
+EShipping <|-- FCreditCard
+EShipping <|-- FOrder
+EShipping <|-- FReview
+EShipping <|-- FPersistentManager
+EShipping <|-- FProduct
+EShipping <|-- FCategory
+EShipping <|-- FShipping
+EShipping <|-- VProduct
+EShipping <|-- VOrder
+EShipping <|-- VReview
+EShipping <|-- VPurchase
+EShipping <|-- VAdmin
+EShipping <|-- VShipping
+EShipping <|-- VUser
+EShipping <|-- EImage
+EShipping <|-- EOrder
+EShipping <|-- EProduct
+EShipping <|-- ECategory
+EShipping <|-- EItemOrder
+EShipping <|-- EReview
+EShipping <|-- ERegisteredUser
+EShipping <|-- ECreditCard
+EShipping <|-- EUnRegisteredUser
+EShipping <|-- ERefundRequest
+EShipping <|-- EAdmin
+EOrder <|-- CReview
+EOrder <|-- COrder
+EOrder <|-- CFrontController
+EOrder <|-- CShipping
+EOrder <|-- CAdmin
+EOrder <|-- CProduct
+EOrder <|-- CPurchase
+EOrder <|-- CUser
+EOrder <|-- UEMailer
+EOrder <|-- FRegisteredUser
+EOrder <|-- FItemOrder
+EOrder <|-- FAdmin
+EOrder <|-- FImage
+EOrder <|-- FCreditCard
+EOrder <|-- FOrder
+EOrder <|-- FReview
+EOrder <|-- FPersistentManager
+EOrder <|-- FProduct
+EOrder <|-- FCategory
+EOrder <|-- FShipping
+EOrder <|-- VProduct
+EOrder <|-- VOrder
+EOrder <|-- VReview
+EOrder <|-- VPurchase
+EOrder <|-- VAdmin
+EOrder <|-- VShipping
+EOrder <|-- VUser
+EOrder <|-- EImage
+EOrder <|-- EShipping
+EOrder <|-- EProduct
+EOrder <|-- ECategory
+EOrder <|-- EItemOrder
+EOrder <|-- EReview
+EOrder <|-- ERegisteredUser
+EOrder <|-- ECreditCard
+EOrder <|-- EUnRegisteredUser
+EOrder <|-- ERefundRequest
+EOrder <|-- EAdmin
+EProduct <|-- CReview
+EProduct <|-- COrder
+EProduct <|-- CFrontController
+EProduct <|-- CShipping
+EProduct <|-- CAdmin
+EProduct <|-- CProduct
+EProduct <|-- CPurchase
+EProduct <|-- CUser
+EProduct <|-- UEMailer
+EProduct <|-- FRegisteredUser
+EProduct <|-- FItemOrder
+EProduct <|-- FAdmin
+EProduct <|-- FImage
+EProduct <|-- FCreditCard
+EProduct <|-- FOrder
+EProduct <|-- FReview
+EProduct <|-- FPersistentManager
+EProduct <|-- FProduct
+EProduct <|-- FCategory
+EProduct <|-- FShipping
+EProduct <|-- VProduct
+EProduct <|-- VOrder
+EProduct <|-- VReview
+EProduct <|-- VPurchase
+EProduct <|-- VAdmin
+EProduct <|-- VShipping
+EProduct <|-- VUser
+EProduct <|-- EImage
+EProduct <|-- EShipping
+EProduct <|-- EOrder
+EProduct <|-- ECategory
+EProduct <|-- EItemOrder
+EProduct <|-- EReview
+EProduct <|-- ERegisteredUser
+EProduct <|-- ECreditCard
+EProduct <|-- EUnRegisteredUser
+EProduct <|-- ERefundRequest
+EProduct <|-- EAdmin
+ECategory <|-- CReview
+ECategory <|-- COrder
+ECategory <|-- CFrontController
+ECategory <|-- CShipping
+ECategory <|-- CAdmin
+ECategory <|-- CProduct
+ECategory <|-- CPurchase
+ECategory <|-- CUser
+ECategory <|-- UEMailer
+ECategory <|-- FRegisteredUser
+ECategory <|-- FItemOrder
+ECategory <|-- FAdmin
+ECategory <|-- FImage
+ECategory <|-- FCreditCard
+ECategory <|-- FOrder
+ECategory <|-- FReview
+ECategory <|-- FPersistentManager
+ECategory <|-- FProduct
+ECategory <|-- FCategory
+ECategory <|-- FShipping
+ECategory <|-- VProduct
+ECategory <|-- VOrder
+ECategory <|-- VReview
+ECategory <|-- VPurchase
+ECategory <|-- VAdmin
+ECategory <|-- VShipping
+ECategory <|-- VUser
+ECategory <|-- EImage
+ECategory <|-- EShipping
+ECategory <|-- EOrder
+ECategory <|-- EProduct
+ECategory <|-- EItemOrder
+ECategory <|-- EReview
+ECategory <|-- ERegisteredUser
+ECategory <|-- ECreditCard
+ECategory <|-- EUnRegisteredUser
+ECategory <|-- ERefundRequest
+ECategory <|-- EAdmin
+EItemOrder <|-- CReview
+EItemOrder <|-- COrder
+EItemOrder <|-- CFrontController
+EItemOrder <|-- CShipping
+EItemOrder <|-- CAdmin
+EItemOrder <|-- CProduct
+EItemOrder <|-- CPurchase
+EItemOrder <|-- CUser
+EItemOrder <|-- UEMailer
+EItemOrder <|-- FRegisteredUser
+EItemOrder <|-- FItemOrder
+EItemOrder <|-- FAdmin
+EItemOrder <|-- FImage
+EItemOrder <|-- FCreditCard
+EItemOrder <|-- FOrder
+EItemOrder <|-- FReview
+EItemOrder <|-- FPersistentManager
+EItemOrder <|-- FProduct
+EItemOrder <|-- FCategory
+EItemOrder <|-- FShipping
+EItemOrder <|-- VProduct
+EItemOrder <|-- VOrder
+EItemOrder <|-- VReview
+EItemOrder <|-- VPurchase
+EItemOrder <|-- VAdmin
+EItemOrder <|-- VShipping
+EItemOrder <|-- VUser
+EItemOrder <|-- EImage
+EItemOrder <|-- EShipping
+EItemOrder <|-- EOrder
+EItemOrder <|-- EProduct
+EItemOrder <|-- ECategory
+EItemOrder <|-- EReview
+EItemOrder <|-- ERegisteredUser
+EItemOrder <|-- ECreditCard
+EItemOrder <|-- EUnRegisteredUser
+EItemOrder <|-- ERefundRequest
+EItemOrder <|-- EAdmin
+EReview <|-- CReview
+EReview <|-- COrder
+EReview <|-- CFrontController
+EReview <|-- CShipping
+EReview <|-- CAdmin
+EReview <|-- CProduct
+EReview <|-- CPurchase
+EReview <|-- CUser
+EReview <|-- UEMailer
+EReview <|-- FRegisteredUser
+EReview <|-- FItemOrder
+EReview <|-- FAdmin
+EReview <|-- FImage
+EReview <|-- FCreditCard
+EReview <|-- FOrder
+EReview <|-- FReview
+EReview <|-- FPersistentManager
+EReview <|-- FProduct
+EReview <|-- FCategory
+EReview <|-- FShipping
+EReview <|-- VProduct
+EReview <|-- VOrder
+EReview <|-- VReview
+EReview <|-- VPurchase
+EReview <|-- VAdmin
+EReview <|-- VShipping
+EReview <|-- VUser
+EReview <|-- EImage
+EReview <|-- EShipping
+EReview <|-- EOrder
+EReview <|-- EProduct
+EReview <|-- ECategory
+EReview <|-- EItemOrder
+EReview <|-- ERegisteredUser
+EReview <|-- ECreditCard
+EReview <|-- EUnRegisteredUser
+EReview <|-- ERefundRequest
+EReview <|-- EAdmin
+ERegisteredUser <|-- CReview
+ERegisteredUser <|-- COrder
+ERegisteredUser <|-- CFrontController
+ERegisteredUser <|-- CShipping
+ERegisteredUser <|-- CAdmin
+ERegisteredUser <|-- CProduct
+ERegisteredUser <|-- CPurchase
+ERegisteredUser <|-- CUser
+ERegisteredUser <|-- UEMailer
+ERegisteredUser <|-- FRegisteredUser
+ERegisteredUser <|-- FItemOrder
+ERegisteredUser <|-- FAdmin
+ERegisteredUser <|-- FImage
+ERegisteredUser <|-- FCreditCard
+ERegisteredUser <|-- FOrder
+ERegisteredUser <|-- FReview
+ERegisteredUser <|-- FPersistentManager
+ERegisteredUser <|-- FProduct
+ERegisteredUser <|-- FCategory
+ERegisteredUser <|-- FShipping
+ERegisteredUser <|-- VProduct
+ERegisteredUser <|-- VOrder
+ERegisteredUser <|-- VReview
+ERegisteredUser <|-- VPurchase
+ERegisteredUser <|-- VAdmin
+ERegisteredUser <|-- VShipping
+ERegisteredUser <|-- VUser
+ERegisteredUser <|-- EImage
+ERegisteredUser <|-- EShipping
+ERegisteredUser <|-- EOrder
+ERegisteredUser <|-- EProduct
+ERegisteredUser <|-- ECategory
+ERegisteredUser <|-- EItemOrder
+ERegisteredUser <|-- EReview
+ERegisteredUser <|-- ECreditCard
+ERegisteredUser <|-- EUnRegisteredUser
+ERegisteredUser <|-- ERefundRequest
+ERegisteredUser <|-- EAdmin
+ECreditCard <|-- CReview
+ECreditCard <|-- COrder
+ECreditCard <|-- CFrontController
+ECreditCard <|-- CShipping
+ECreditCard <|-- CAdmin
+ECreditCard <|-- CProduct
+ECreditCard <|-- CPurchase
+ECreditCard <|-- CUser
+ECreditCard <|-- UEMailer
+ECreditCard <|-- FRegisteredUser
+ECreditCard <|-- FItemOrder
+ECreditCard <|-- FAdmin
+ECreditCard <|-- FImage
+ECreditCard <|-- FCreditCard
+ECreditCard <|-- FOrder
+ECreditCard <|-- FReview
+ECreditCard <|-- FPersistentManager
+ECreditCard <|-- FProduct
+ECreditCard <|-- FCategory
+ECreditCard <|-- FShipping
+ECreditCard <|-- VProduct
+ECreditCard <|-- VOrder
+ECreditCard <|-- VReview
+ECreditCard <|-- VPurchase
+ECreditCard <|-- VAdmin
+ECreditCard <|-- VShipping
+ECreditCard <|-- VUser
+ECreditCard <|-- EImage
+ECreditCard <|-- EShipping
+ECreditCard <|-- EOrder
+ECreditCard <|-- EProduct
+ECreditCard <|-- ECategory
+ECreditCard <|-- EItemOrder
+ECreditCard <|-- EReview
+ECreditCard <|-- ERegisteredUser
+ECreditCard <|-- EUnRegisteredUser
+ECreditCard <|-- ERefundRequest
+ECreditCard <|-- EAdmin
+EUnRegisteredUser <|-- CReview
+EUnRegisteredUser <|-- COrder
+EUnRegisteredUser <|-- CFrontController
+EUnRegisteredUser <|-- CShipping
+EUnRegisteredUser <|-- CAdmin
+EUnRegisteredUser <|-- CProduct
+EUnRegisteredUser <|-- CPurchase
+EUnRegisteredUser <|-- CUser
+EUnRegisteredUser <|-- UEMailer
+EUnRegisteredUser <|-- FRegisteredUser
+EUnRegisteredUser <|-- FItemOrder
+EUnRegisteredUser <|-- FAdmin
+EUnRegisteredUser <|-- FImage
+EUnRegisteredUser <|-- FCreditCard
+EUnRegisteredUser <|-- FOrder
+EUnRegisteredUser <|-- FReview
+EUnRegisteredUser <|-- FPersistentManager
+EUnRegisteredUser <|-- FProduct
+EUnRegisteredUser <|-- FCategory
+EUnRegisteredUser <|-- FShipping
+EUnRegisteredUser <|-- VProduct
+EUnRegisteredUser <|-- VOrder
+EUnRegisteredUser <|-- VReview
+EUnRegisteredUser <|-- VPurchase
+EUnRegisteredUser <|-- VAdmin
+EUnRegisteredUser <|-- VShipping
+EUnRegisteredUser <|-- VUser
+EUnRegisteredUser <|-- EImage
+EUnRegisteredUser <|-- EShipping
+EUnRegisteredUser <|-- EOrder
+EUnRegisteredUser <|-- EProduct
+EUnRegisteredUser <|-- ECategory
+EUnRegisteredUser <|-- EItemOrder
+EUnRegisteredUser <|-- EReview
+EUnRegisteredUser <|-- ERegisteredUser
+EUnRegisteredUser <|-- ECreditCard
+EUnRegisteredUser <|-- ERefundRequest
+EUnRegisteredUser <|-- EAdmin
+ERefundRequest <|-- CReview
+ERefundRequest <|-- COrder
+ERefundRequest <|-- CFrontController
+ERefundRequest <|-- CShipping
+ERefundRequest <|-- CAdmin
+ERefundRequest <|-- CProduct
+ERefundRequest <|-- CPurchase
+ERefundRequest <|-- CUser
+ERefundRequest <|-- UEMailer
+ERefundRequest <|-- FRegisteredUser
+ERefundRequest <|-- FItemOrder
+ERefundRequest <|-- FAdmin
+ERefundRequest <|-- FImage
+ERefundRequest <|-- FCreditCard
+ERefundRequest <|-- FOrder
+ERefundRequest <|-- FReview
+ERefundRequest <|-- FPersistentManager
+ERefundRequest <|-- FProduct
+ERefundRequest <|-- FCategory
+ERefundRequest <|-- FShipping
+ERefundRequest <|-- VProduct
+ERefundRequest <|-- VOrder
+ERefundRequest <|-- VReview
+ERefundRequest <|-- VPurchase
+ERefundRequest <|-- VAdmin
+ERefundRequest <|-- VShipping
+ERefundRequest <|-- VUser
+ERefundRequest <|-- EImage
+ERefundRequest <|-- EShipping
+ERefundRequest <|-- EOrder
+ERefundRequest <|-- EProduct
+ERefundRequest <|-- ECategory
+ERefundRequest <|-- EItemOrder
+ERefundRequest <|-- EReview
+ERefundRequest <|-- ERegisteredUser
+ERefundRequest <|-- ECreditCard
+ERefundRequest <|-- EUnRegisteredUser
+ERefundRequest <|-- EAdmin
+EAdmin <|-- CReview
+EAdmin <|-- COrder
+EAdmin <|-- CFrontController
+EAdmin <|-- CShipping
+EAdmin <|-- CAdmin
+EAdmin <|-- CProduct
+EAdmin <|-- CPurchase
+EAdmin <|-- CUser
+EAdmin <|-- UEMailer
+EAdmin <|-- FRegisteredUser
+EAdmin <|-- FItemOrder
+EAdmin <|-- FAdmin
+EAdmin <|-- FImage
+EAdmin <|-- FCreditCard
+EAdmin <|-- FOrder
+EAdmin <|-- FReview
+EAdmin <|-- FPersistentManager
+EAdmin <|-- FProduct
+EAdmin <|-- FCategory
+EAdmin <|-- FShipping
+EAdmin <|-- VProduct
+EAdmin <|-- VOrder
+EAdmin <|-- VReview
+EAdmin <|-- VPurchase
+EAdmin <|-- VAdmin
+EAdmin <|-- VShipping
+EAdmin <|-- VUser
+EAdmin <|-- EImage
+EAdmin <|-- EShipping
+EAdmin <|-- EOrder
+EAdmin <|-- EProduct
+EAdmin <|-- ECategory
+EAdmin <|-- EItemOrder
+EAdmin <|-- EReview
+EAdmin <|-- ERegisteredUser
+EAdmin <|-- ECreditCard
+EAdmin <|-- EUnRegisteredUser
+EAdmin <|-- ERefundRequest
+@enduml
