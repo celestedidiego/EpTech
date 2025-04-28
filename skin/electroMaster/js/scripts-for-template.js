@@ -109,3 +109,20 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 });
+
+document.addEventListener('DOMContentLoaded', function () {
+  const menuToggle = document.getElementById('menuToggle');
+  const responsiveNav = document.getElementById('responsive-nav');
+
+  menuToggle.addEventListener('click', function (event) {
+      event.preventDefault(); // Evita il comportamento predefinito del link
+      responsiveNav.classList.toggle('active'); // Aggiunge/rimuove la classe "active"
+  });
+
+  // Chiudi il menu se si clicca fuori
+  document.addEventListener('click', function (event) {
+      if (!responsiveNav.contains(event.target) && !menuToggle.contains(event.target)) {
+          responsiveNav.classList.remove('active');
+      }
+  });
+});
