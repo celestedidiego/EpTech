@@ -49,7 +49,7 @@ class FProduct extends EntityRepository {
         $dql = "SELECT p
             FROM EProduct p
             WHERE p.is_deleted = false
-            ORDER BY p.productId DESC"; // Ordina per ID decrescente (prodotti più nuovi per primi)
+            ORDER BY p.productId ASC"; // per ordinare i prodotti in ordine crescente
         $query = getEntityManager()->createQuery($dql);
         $query->setFirstResult(($currentPage - 1) * $pageSize)
         ->setMaxResults($pageSize);
