@@ -11,8 +11,8 @@
         }
 
         body {
-            /* background: rgba(4, 55, 79, 0.8); */
-            background:  #281858;
+            background: rgba(4, 55, 79, 0.8); 
+            /* background:  #281858; */
             text-align: center;
             font-family: 'Roboto', sans-serif;
         }
