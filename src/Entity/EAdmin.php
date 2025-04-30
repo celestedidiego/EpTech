@@ -12,22 +12,22 @@ class EAdmin
 
     #[ORM\Id]
     #[ORM\GeneratedValue()]
-    #[ORM\Column(type: "integer")]
+    #[ORM\Column(name: "adminId",type: "integer")]
     private int $adminId;
 
-    #[ORM\Column(type: "string", length: 255)]
+    #[ORM\Column(name: "name",type: "string", length: 255)]
     protected $name;
 
-    #[ORM\Column(type: "string", length: 255)]
+    #[ORM\Column(name:"surname",type: "string", length: 255)]
     protected $surname;
 
-    #[ORM\Column(type: "string", length: 255)]
+    #[ORM\Column(name: "email",type: "string", length: 255)]
     protected $email;
 
-    #[ORM\Column(type: "string", length: 255)]
+    #[ORM\Column(name:"username",type: "string", length: 255)]
     protected $username;
 
-    #[ORM\Column(type: "string", length: 255)]
+    #[ORM\Column(name:"password",type: "string", length: 255)]
     protected $password;
 
     #[ORM\OneToMany(targetEntity: EProduct::class, mappedBy: 'admin')]
