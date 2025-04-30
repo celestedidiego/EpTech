@@ -38,17 +38,27 @@
     {if isset($array_products.totalPages) && $array_products.totalPages > 1}
     <ul class="reviews-pagination">
         {if $array_products.currentPage > 1}
-            <li><a href="?page={math equation='x-1' x=$array_products.currentPage}&query={$applied_filters.query}&category={$applied_filters.category}"><i class="fa fa-angle-left"></i></a></li>
+            <li>
+                <a href="?page={math equation='x-1' x=$array_products.currentPage}&query={$applied_filters.query}&category={$applied_filters.category}&brand={$applied_filters.brand}&prezzo_max={$applied_filters.prezzo_max}">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+            </li>
         {/if}
-
+    
         {for $page=1 to $array_products.totalPages}
             <li {if $page == $array_products.currentPage}class="active"{/if}>
-                <a href="?page={$page}&query={$applied_filters.query}&category={$applied_filters.category}">{$page}</a>
+                <a href="?page={$page}&query={$applied_filters.query}&category={$applied_filters.category}&brand={$applied_filters.brand}&prezzo_max={$applied_filters.prezzo_max}">
+                    {$page}
+                </a>
             </li>
         {/for}
-
+    
         {if $array_products.currentPage < $array_products.totalPages}
-            <li><a href="?page={$array_products.currentPage+1}&query={$applied_filters.query}&category={$applied_filters.category}"><i class="fa fa-angle-right"></i></a></li>
+            <li>
+                <a href="?page={$array_products.currentPage+1}&query={$applied_filters.query}&category={$applied_filters.category}&brand={$applied_filters.brand}&prezzo_max={$applied_filters.prezzo_max}">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
         {/if}
     </ul>
     {/if}
