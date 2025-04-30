@@ -13,18 +13,18 @@ class CAdmin {
         $view->manageUsers($users_info);
     }
 
-    // Prende i dati degli utenti con l'ID inserito dal PersistentManager per darli a VAdmin
     public static function filterUsersPaginated()
     {
         $page  = isset($_GET['page']) ? (int)$_GET['page'] : 1;
-        
-        if (isset($_POST['id'])) {
-            $id= $_POST['id'];
-            $users= FPersistentManager::getInstance()->getFilteredUsersPaginated($id);
-            
+        $itemsPerPage = 9;
+
+        if (isset($_POST['adminId']) && !empty($_POST['adminId'])) {
+            $adminId = $_POST['adminId'];
+            $users = FPersistentManager::getInstance()->getFilteredUsersPaginated($adminId, $page, $itemsPerPage);
         } else {
-            $users = FPersistentManager::getInstance()->getAllUsersPaginated($page);
+            $users = FPersistentManager::getInstance()->getAllUsersPaginated($page, $itemsPerPage);
         }
+
         $view = new VAdmin();
         $view->displayFilteredUsers($users);
     }
@@ -91,7 +91,7 @@ class CAdmin {
         unset($_SESSION['product_modified']);
         unset($_SESSION['product_deleted']);
 
-        if($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['produuctId'])){
+        if($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['productId'])){
             $search_term = $_POST['productId'];
         $product = FPersistentManager::getInstance()->getProductById($search_term, $page, $pageSize = 4);
         $categories = FPersistentManager::getInstance()->getAllCategories();
@@ -152,7 +152,7 @@ class CAdmin {
         header('Location: /EpTech/admin/manageOrders');
         exit;
     }
-    
+    /*
     public static function manageReviews() {
         $view = new VAdmin();
     
@@ -161,6 +161,29 @@ class CAdmin {
     
         $reviews = FPersistentManager::getInstance()->getAllReviewsPaginated($page, $itemsPerPage);
         
+        if (!isset($reviews['items']) || !is_array($reviews['items'])) {
+            $reviews['items'] = [];
+        }
+    
+        $view->manageReviews($reviews);
+    }
+    */
+
+    public static function manageReviews() {
+        $view = new VAdmin();
+        
+        $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+        $itemsPerPage = 10;
+    
+        if (isset($_GET['product_name']) && !empty($_GET['product_name'])) {
+            // Filtra per nome prodotto
+            $productName = $_GET['product_name'];
+            $reviews = FPersistentManager::getInstance()->getReviewsByProductName($productName, $page, $itemsPerPage);
+        } else {
+            // Recupera tutte le recensioni
+            $reviews = FPersistentManager::getInstance()->getAllReviewsPaginated($page, $itemsPerPage);
+        }
+    
         if (!isset($reviews['items']) || !is_array($reviews['items'])) {
             $reviews['items'] = [];
         }

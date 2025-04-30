@@ -98,14 +98,14 @@ class FAdmin extends EntityRepository {
 
         $em = getEntityManager();
 
-        // Query per gli utenti registrati (acquirenti)
-        $qb = $em->createQueryBuilder();
-        $qb->select('ru.registeredUserId as id', 'ru.name as nome', 'ru.surname as cognome', 'ru.email', 'ru.is_deleted', 'ru.is_blocked', "'registeredUser' as tipo")
+        // Query per gli utenti registrati
+        $qb = $this->getEntityManager()->createQueryBuilder();
+        $qb->select('ru.registeredUserId as registeredUserId', 'ru.name', 'ru.surname', 'ru.is_blocked', 'ru.is_deleted', 'ru.email')
         ->from('ERegisteredUser', 'ru')
         ->where('ru.is_deleted = :isDeleted')
-        ->andWhere('ru.registeredUserId = :id')
+        ->andWhere('ru.registeredUserId = :userId') // Filtra per ID utente
         ->setParameter('isDeleted', false)
-        ->setParameter('id', $id)
+        ->setParameter('userId', $id)
         ->setMaxResults($limit)
         ->setFirstResult($offset)
         ->orderBy('ru.registeredUserId', 'ASC');
@@ -118,7 +118,7 @@ class FAdmin extends EntityRepository {
         $users = array_slice($users, 0, $itemsPerPage);
 
         // Conteggio totale degli utenti (questa query verrà eseguita solo quando necessario)
-        $totalItems = $this->getTotalUsersCount();
+        $totalItems = count($users); // Modificato per riflettere il filtro applicato
 
         return [
             'users' => $users,

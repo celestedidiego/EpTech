@@ -31,6 +31,20 @@
     <div class="container mt-5">
         <h2 class="text-center mb-4">Recensioni dei prodotti</h2>
         
+        <!-- FILTRO PER NOME -->
+        <form method="GET" action="/EpTech/admin/manageReviews" class="mb-4">
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <input type="text" name="product_name" class="form-control" placeholder="Cerca recensioni per nome prodotto" value="{if isset($smarty.get.product_name)}{$smarty.get.product_name}{/if}">
+                </div>
+                <div class="col-md-2">
+                    <button type="submit" class="btn btn-primary btn-block">Cerca</button>
+                </div>
+            </div>
+        </form>
+        <br>
+        <!-- /FILTRO PER NOME -->
+
         {if isset($success)}
             <div class="alert alert-success">
                 {$success}

@@ -71,8 +71,8 @@
         <div class="alert alert-danger">{$error}</div>
     {/if}
 
-     <!-- FILTRO -->
-     <form method="post" action="/EpTech/admin/manageProducts">
+    <!-- FILTRO -->
+    <form method="post" action="/EpTech/admin/manageProducts">
         <div class="form-group">
             <label for="productId">Filter by ID:</label>
             <input type="text" class="form-control" id="productId" name="productId">
@@ -80,7 +80,7 @@
         <button type="submit" class="btn btn-primary">Filter</button>
     </form>
      
-     <!-- /FILTRO -->
+    <!-- /FILTRO -->
 
     
 
