@@ -111,6 +111,10 @@ class VAdmin {
     }
 
     public function showManageOrders($orders) {
+        $loginVariables = (new VUser)->checkLogin();
+        foreach ($loginVariables as $key => $value) {
+            $this->smarty->assign($key, $value);
+        }
         $this->smarty->assign('orders', $orders);
         $this->smarty->display('manageOrders.tpl');
     }

@@ -139,15 +139,8 @@
             <li><a href="/EpTech/user/userDataSection">Profilo</a></li>
             <li><a href="/EpTech/user/userHistoryOrders">Ordini</a></li>
         {elseif $check_login_admin == 1}
-        <!--
-        <li><a href="/EpTech/user/userDataSection">Profilo</a></li>
-            <li><a href="/EpTech/admin/manageProducts">Gestione prodotti</a></li>
-            <li><a href="/EpTech/admin/manageUsers">Gestione utenti registrati</a></li>
-            <li><a href="/EpTech/admin/manageReviews">Gestione recensioni</a></li>
-            <li><a href="/EpTech/admin/manageOrders">Gestione ordini</a></li>
-        -->
-        <li><a href="/EpTech/user/userDataSection">Profilo</a></li>
-        <li><a href="/EpTech/admin/manageSection">Gestione</a></li>
+            <li><a href="/EpTech/user/userDataSection">Profilo</a></li>
+            <li><a href="/EpTech/admin/manageSection">Gestione</a></li>
         {/if}
 
         {if $user_not_logged == 1}
