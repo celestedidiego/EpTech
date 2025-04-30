@@ -287,6 +287,64 @@ textarea.input {
   max-height: 800px;
 }
 
+/* Filter Section */
+
+.form-container{
+  max-width: 500px;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Prodotti nello shop */
+
+.content-area {
+  padding: 20px;
+  background-color: #f0f0f0;
+  border-radius: 8px;
+  margin: 20px;
+}
+
+/* Stile per le card delle recensioni */
+.card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 30px;
+}
+
+.card-header {
+  font-size: 16px;
+  font-weight: bold;
+  padding: 10px;
+}
+
+.card-body {
+  padding: 15px;
+}
+
+.card-body p {
+  margin-bottom: 10px;
+}
+
+.card-body .form-group {
+  margin-bottom: 15px;
+}
+
+.card-body .btn {
+  width: 100%;
+}
+
+.shadow-sm {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.card-header.bg-primary {
+  background-color: #d0eaff !important;
+}
+
 /*----------------------------*\
 	Section
 \*----------------------------*/
@@ -352,7 +410,6 @@ textarea.input {
   top: 0px;
   right: 0px;
 }
-
 
 /*----------------------------*\
 	Breadcrumb

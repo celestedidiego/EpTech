@@ -29,42 +29,42 @@
     {include file='headerSection.tpl'}
 
     <div class="container mt-5">
-        <h2>Recensioni dei prodotti</h2>
-
+        <h2 class="text-center mb-4">Recensioni dei prodotti</h2>
+        
         {if isset($success)}
             <div class="alert alert-success">
                 {$success}
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">Close</button>
             </div>
         {/if}
-
+    
         {if isset($error)}
             <div class="alert alert-danger">
                 {$error}
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">Close</button>
             </div>
         {/if}
-        
+    
         {if isset($reviews.n_reviews) && $reviews.n_reviews == 0}
-            <div class="alert alert-warning">
+            <div class="alert alert-warning text-center">
                 Non ci sono recensioni per i tuoi prodotti!
             </div>
         {else}
             <div class="row">
                 {foreach from=$reviews['items'] item=review}
                     <div class="col-md-6">
-                        <div class="card mb-4">
-                            <div class="card-header">
-                                <h4>Recensione per {$review->getProduct()->getNameProduct()}</h4>
+                        <div class="card mb-4 shadow-sm">
+                            <div class="card-header bg-primary text-white">
+                                <h5 class="mb-0">{$review->getProduct()->getNameProduct()}</h5>
                             </div>
                             <div class="card-body">
                                 <p><strong>Utente:</strong> {$review->getRegisteredUser()->getUsername()}</p>
                                 <p><strong>Voto:</strong> {$review->getVote()} / 5</p>
                                 <p><strong>Testo:</strong> {$review->getText()}</p>
-                                
+    
                                 {if $review->getResponseAdmin()}
-                                    <div class="mt-3 p-3 border">
-                                        <h5>La tua risposta:</h5>
+                                    <div class="mt-3 p-3 border bg-light">
+                                        <h6>La tua risposta:</h6>
                                         <p>{$review->getResponseAdmin()}</p>
                                     </div>
                                 {else}
@@ -73,7 +73,7 @@
                                             <label for="risposta">Rispondi alla recensione:</label>
                                             <textarea class="form-control" id="risposta" name="risposta" rows="3" required></textarea>
                                         </div>
-                                        <button type="submit" class="btn btn-primary">Invia Risposta</button>
+                                        <button type="submit" class="btn btn-success mt-2">Invia Risposta</button>
                                     </form>
                                 {/if}
                             </div>
