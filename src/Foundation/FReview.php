@@ -1,5 +1,6 @@
 <?php
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 
 class FReview extends EntityRepository {
 
@@ -93,5 +94,29 @@ class FReview extends EntityRepository {
         ->getSingleScalarResult();
 
         return $result > 0;  // Restituisce true se il cliente ha acquistato il prodotto, false altrimenti
+    }
+
+    public function getReviewsByProductName($productName, $page = 1, $itemsPerPage = 10) {
+        $offset = ($page - 1) * $itemsPerPage;
+    
+        $dql = "SELECT r FROM EReview r
+                JOIN r.product p
+                WHERE p.nameProduct LIKE :productName
+                ORDER BY r.idReview DESC";
+    
+        $query = getEntityManager()->createQuery($dql)
+            ->setParameter('productName', '%' . $productName . '%')
+            ->setFirstResult($offset)
+            ->setMaxResults($itemsPerPage);
+    
+        $paginator = new Paginator($query, fetchJoinCollection: true);
+    
+        return [
+            'items' => iterator_to_array($paginator),
+            'n_reviews' => count($paginator),
+            'currentPage' => $page,
+            'itemsPerPage' => $itemsPerPage,
+            'totalPages' => ceil(count($paginator) / $itemsPerPage)
+        ];
     }
 }

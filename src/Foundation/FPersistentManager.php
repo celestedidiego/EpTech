@@ -351,6 +351,10 @@ class FPersistentManager {
         return getEntityManager()->getRepository(EProduct::class)->getProductById($productId);
     }
 
+    public function getReviewsByProductName($productName){
+        return getEntityManager()->getRepository(EReview::class)->getReviewsByProductName($productName);
+    }
+
     public function getReviewsProduct($product, $page = 1, $itemsPerPage = 5) {
         return getEntityManager()->getRepository('EReview')->getReviewsProduct($product, $page, $itemsPerPage);
     }

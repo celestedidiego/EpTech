@@ -71,16 +71,16 @@
         <div class="alert alert-danger">{$error}</div>
     {/if}
 
-     <!-- FILTRO -->
-     <form method="post" action="/EpTech/admin/manageProducts">
+    <!-- FILTRO -->
+    <form method="post" action="/EpTech/admin/manageProducts">
         <div class="form-group">
-            <label for="productId">Filter by ID:</label>
-            <input type="text" class="form-control" id="productId" name="productId">
+            <label for="productId">Filtra Prodotto per ID:</label>
+            <input type="text" class="form-control" id="productId" name="productId" placeholder="Inserisci ID Prodotto">
         </div>
         <button type="submit" class="btn btn-primary">Filter</button>
     </form>
      
-     <!-- /FILTRO -->
+    <!-- /FILTRO -->
 
     
 
@@ -88,6 +88,7 @@
     <form class="container-fluid text-center" method="GET" action="/EpTech/product/addProduct">
         <button type="submit" class="btn btn-primary">Aggiungi un nuovo prodotto</button>
     </form>
+    <br>
     {if $array_products.totalPages > 1}
         <ul class="reviews-pagination">
             {if $array_products.currentPage > 1}

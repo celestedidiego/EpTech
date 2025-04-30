@@ -66,20 +66,37 @@ class VAdmin {
         $this->smarty->display('manageProducts.tpl');
     }
 
-        //mostra solo gli utenti filtrati dall'admin
-        public function displayFilteredUsers($users){
-            $loginVariables=(new VUser)->checkLogin();
-            foreach ($loginVariables as $key => $value){
-                $this->smarty->assign($key, $value);
-            }
-            if (!isset($users['items']) || !is_array($users['items'])) {
-                $users['items'] = [];
-            }
-            $this->smarty->assign('users_info', $users);
-            $this->smarty->display('manageUsers.tpl');
+    /*
+    //mostra solo gli utenti filtrati dall'admin
+    public function displayFilteredUsers($users){
+        $loginVariables=(new VUser)->checkLogin();
+        foreach ($loginVariables as $key => $value){
+            $this->smarty->assign($key, $value);
+        }
+        if (!isset($users['items']) || !is_array($users['items'])) {
+            $users['items'] = [];
+        }
+        $this->smarty->assign('users_info', $users);
+        $this->smarty->display('manageUsers.tpl');
+    }
+    */
+
+    public function displayFilteredUsers($users)
+    {
+        $loginVariables = (new VUser)->checkLogin();
+        foreach ($loginVariables as $key => $value) {
+            $this->smarty->assign($key, $value);
         }
 
-        // Mostra tutte le recensioni gestite dall'admin
+        if (!isset($users['users']) || !is_array($users['users'])) {
+            $users['users'] = [];
+        }
+
+        $this->smarty->assign('users_info', $users);
+        $this->smarty->display('manageUsers.tpl');
+    }
+
+    // Mostra tutte le recensioni gestite dall'admin
     public function manageReviews($reviews) {
         $loginVariables = (new VUser)->checkLogin();
         foreach ($loginVariables as $key => $value){
@@ -111,6 +128,10 @@ class VAdmin {
     }
 
     public function showManageOrders($orders) {
+        $loginVariables = (new VUser)->checkLogin();
+        foreach ($loginVariables as $key => $value) {
+            $this->smarty->assign($key, $value);
+        }
         $this->smarty->assign('orders', $orders);
         $this->smarty->display('manageOrders.tpl');
     }

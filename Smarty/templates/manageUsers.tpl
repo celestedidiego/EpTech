@@ -53,8 +53,8 @@
 
     <form method="post" action="/EpTech/admin/filterUsersPaginated">
         <div class="form-group">
-            <label for="id">Filtra per ID:</label>
-            <input type="text" class="form-control" id="registeredUserId" name="registeredUserId">
+            <label for="id">Filtra per ID Utente:</label>
+            <input type="text" class="form-control" id="adminId" name="adminId" placeholder="Inserisci ID Utente">
         </div>
         <button type="submit" class="btn btn-primary">Filtra</button>
     </form>
@@ -90,6 +90,7 @@
                 <div class="col-md-4 mb-4">
                 <div class="card">
                     <div class="card-body">
+                        <p><strong>ID Utente:</strong> {$user.registeredUserId}</p>
                         <p><strong>Nome:</strong> {$user.name} {$user.surname}</p>
                         <p><strong>Email:</strong> {$user.email}</p>
                         <p><strong>Stato:</strong> {if $user.is_blocked}Bloccato{else}Attivo{/if}</p>
