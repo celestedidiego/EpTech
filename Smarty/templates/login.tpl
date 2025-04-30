@@ -272,7 +272,7 @@
         }
 
         h1 {
-            color: #829ef0;
+            color: #ff2301;
             font-family: 'Dancing Script', cursive;
         }
 
@@ -281,17 +281,17 @@
             padding: 5px;
             width: 150px;
             height: 35px;
-            border: 1px solid #4069ff;
+            border: 1px solid #ff2301;
             margin-top: 25px;
             cursor: pointer;
             transition: .3s;
-            box-shadow: 0 50px #754cd4 inset;
+            box-shadow: 0 50px #ff2301 inset;
             color: #fff;
         }
 
         .btn:hover {
-            box-shadow: 0 0 #666 inset;
-            color: #666;
+            box-shadow: 0 0 #000 inset;
+            color: #000;
         }
 
         .btn:focus {
@@ -301,7 +301,7 @@
         .form-group {
             position: relative;
             font-size: 15px;
-            color: #666;
+            color: rgba(4, 55, 79, 0.8);
         }
 
         .form-group + .form-group {
@@ -325,8 +325,8 @@
             border: none;
             padding: 5px 0;
             transition: .3s;
-            border-bottom: 1px solid #777;
-            color: #555;
+            border-bottom: 1px solid #000;
+            color: #000;
         }
 
         .form-control:invalid {
@@ -335,13 +335,13 @@
 
         .form-control:focus, .form-control:valid {
             outline: none;
-            box-shadow: 0 1px #12008a;
-            border-color:  #12008a;
+            box-shadow: 0 1px rgba(4, 55, 79, 0.8);
+            border-color:  rgba(4, 55, 79, 0.8);
         }
 
         .form-control:focus + .form-label, .form-control:valid + .form-label {
             font-size: 12px;
-            color:  #12008a;
+            color:  rgba(4, 55, 79, 0.8);
             transform: translateY(-15px);
         }
 
