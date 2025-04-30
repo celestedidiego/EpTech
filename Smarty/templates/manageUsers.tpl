@@ -53,8 +53,8 @@
 
     <form method="post" action="/EpTech/admin/filterUsersPaginated">
         <div class="form-group">
-            <label for="id">Filtra per ID Admin:</label>
-            <input type="text" class="form-control" id="adminId" name="adminId" placeholder="Inserisci ID Admin">
+            <label for="id">Filtra per ID Utente:</label>
+            <input type="text" class="form-control" id="adminId" name="adminId" placeholder="Inserisci ID Utente">
         </div>
         <button type="submit" class="btn btn-primary">Filtra</button>
     </form>
