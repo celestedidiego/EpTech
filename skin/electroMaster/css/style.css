@@ -334,7 +334,7 @@ textarea.input {
 }
 
 .card-body .btn {
-  width: 100%;
+  width: auto;
 }
 
 .shadow-sm {
@@ -343,6 +343,15 @@ textarea.input {
 
 .card-header.bg-primary {
   background-color: #d0eaff !important;
+}
+
+.btn-danger, .btn-warning, .btn-success {
+  display: inline-block; /* Mantieni i pulsanti inline */
+  min-width: 150px; /* Imposta una larghezza minima */
+  padding: 5px 15px; /* Riduce il padding per rendere i pulsanti più piccoli */
+  font-size: 14px; /* Riduce la dimensione del font */
+  margin: 0 auto; /* Centra i pulsanti */
+  text-align: center; /* Centra il contenuto del pulsante */
 }
 
 /*----------------------------*\

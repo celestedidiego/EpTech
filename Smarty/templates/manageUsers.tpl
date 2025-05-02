@@ -94,12 +94,12 @@
                         <p><strong>Nome:</strong> {$user.name} {$user.surname}</p>
                         <p><strong>Email:</strong> {$user.email}</p>
                         <p><strong>Stato:</strong> {if $user.is_blocked}Bloccato{else}Attivo{/if}</p>
-                        <div class="mt-3">
-                            <a href="/EpTech/admin/deleteUser/{$user.registeredUserId}" class="btn btn-danger btn-sm" onclick="return confirm('Sei sicuro di voler eliminare questo utente? Questa azione non può essere annullata.');">Elimina</a>
+                        <div class="text-center">
+                            <a href="/EpTech/admin/deleteUser/{$user.registeredUserId}" class="btn btn-danger" onclick="return confirm('Sei sicuro di voler eliminare questo utente? Questa azione non può essere annullata.');">Elimina</a>
                             {if $user.is_blocked}
-                                <a href="/EpTech/admin/unblockUser/{$user.registeredUserId}" class="btn btn-success btn-sm">Sblocca</a>
+                                <a href="/EpTech/admin/unblockUser/{$user.registeredUserId}" class="btn btn-success">Sblocca</a>
                             {else}
-                                <a href="/EpTech/admin/blockUser/{$user.registeredUserId}" class="btn btn-warning btn-sm">Blocca</a>
+                                <a href="/EpTech/admin/blockUser/{$user.registeredUserId}" class="btn btn-warning">Blocca</a>
                             {/if}
                         </div>
                     </div>

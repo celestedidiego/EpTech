@@ -48,7 +48,7 @@ class CAdmin {
 
     // Chiede al PersistentManager di bloccare un utente dati il ruolo e l'ID.
 
-    public static function blockUser($userId, $userType) {
+    public static function blockUser($userId) {
         $entityClass = 'ERegisteredUser';
         $user = FPersistentManager::getInstance()->find($entityClass, $userId);
         if ($user) {
@@ -62,7 +62,7 @@ class CAdmin {
     }
 
     // Chiede al PersistentManager di sbloccare un utente dati il ruolo e l'ID.
-    public static function unblockUser($userId, $userType) {
+    public static function unblockUser($userId) {
         $entityClass = 'ERegisteredUser';
         $user = FPersistentManager::getInstance()->find($entityClass, $userId);
         if ($user) {

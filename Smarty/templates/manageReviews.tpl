@@ -32,15 +32,12 @@
         <h2 class="text-center mb-4">Recensioni dei prodotti</h2>
         
         <!-- FILTRO PER NOME -->
-        <form method="GET" action="/EpTech/admin/manageReviews" class="mb-4">
-            <div class="row justify-content-center">
-                <div class="col-md-6">
-                    <input type="text" name="product_name" class="form-control" placeholder="Cerca recensioni per nome prodotto" value="{if isset($smarty.get.product_name)}{$smarty.get.product_name}{/if}">
-                </div>
-                <div class="col-md-2">
-                    <button type="submit" class="btn btn-primary btn-block">Cerca</button>
-                </div>
+        <form method="GET" action="/EpTech/admin/manageReviews">
+            <div class="form-group">
+                <label for="product_name">Filtra per Nome Prodotto:</label>
+                <input type="text" name="product_name" class="form-control" placeholder="Cerca recensioni per nome prodotto" value="{if isset($smarty.get.product_name)}{$smarty.get.product_name}{/if}">
             </div>
+            <button type="submit" class="btn btn-primary">Cerca</button>
         </form>
         <br>
         <!-- /FILTRO PER NOME -->
