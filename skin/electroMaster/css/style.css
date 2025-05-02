@@ -345,6 +345,8 @@ textarea.input {
   background-color: #d0eaff !important;
 }
 
+/* Stile per 'Elimina' e 'Blocca/Sblocca' in manageUsers */
+
 .btn-danger, .btn-warning, .btn-success {
   display: inline-block; /* Mantieni i pulsanti inline */
   min-width: 150px; /* Imposta una larghezza minima */

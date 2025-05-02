@@ -61,8 +61,8 @@ class UEMailer {
     public function sendProductDeletionEmail($userEmail,$nameProduct) {
         try {
             $this->mailer->addAddress($userEmail);
-            $this->mailer->Subject = 'Un tuo prodotto e\' stato eliminato';
-            $this->mailer->Body = 'Il prodotto '. $nameProduct .' che avevi messo in vendita e\' stato eliminato dall\'amministratore di EpTech.';
+            $this->mailer->Subject = 'Il prodotto e\' stato eliminato';
+            $this->mailer->Body = 'Il prodotto '. $nameProduct .' e\' stato eliminato con successo.';
 
             $this->mailer->send();
             return true;

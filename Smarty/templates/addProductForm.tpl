@@ -31,14 +31,14 @@
                 </div>
 
                 <div class="form-group">
-                <label for="images">Aggiungi un massimo di 5 immagini:</label>
+                    <label for="images">Aggiungi un massimo di 5 immagini:</label>
                     <input id="images" name="images[]" type="file" multiple required>
                 </div>
 
                 <div class="image-preview" id="imagePreview">
                 </div>
 
-                <div class="form-group price-for-new">
+                <div class="form-group mb-3">
                     <label for="price">Prezzo</label>
                     <input type="number" name="priceProduct" id="pricefornew" value={$priceProduct} min="1" step="0.01" placeholder="€####">
                 </div>
@@ -46,22 +46,30 @@
 
             <div class="right-column">
                 <fieldset>
-                    <legend>Specifice dell'oggetto</legend>
-
-                    <label for="brand">Marca</label>
-                    <input type="text" name="brand" id="brand" required>
-
-                    <label for="model">Modello</label>
-                    <input type="text" name="model" id="model" required>
-
-                    <label for="quantity">Quantità</label>
-                    <input type="number" name="avQuantity" id="quantita_disp" min="1" step="1" required>
-
-                    <label for="color">Color</label>
-                    <input type="text" name="color" id="color" required>
+                    <legend>Specifiche dell'oggetto</legend>
+            
+                    <div class="form-group mb-3">
+                        <label for="brand">Marca</label>
+                        <input type="text" name="brand" id="brand" class="form-control" required>
+                    </div>
+            
+                    <div class="form-group mb-3">
+                        <label for="model">Modello</label>
+                        <input type="text" name="model" id="model" class="form-control" required>
+                    </div>
+            
+                    <div class="form-group mb-3">
+                        <label for="quantity">Quantità</label>
+                        <input type="number" name="avQuantity" id="quantita_disp" class="form-control" min="1" step="1" required>
+                    </div>
+            
+                    <div class="form-group mb-3">
+                        <label for="color">Colore</label>
+                        <input type="text" name="color" id="color" class="form-control" required>
+                    </div>
                 </fieldset>
-
-                <button type="submit" class="btn btn-primary">Aggiungi</button>
+            
+                <button type="submit" class="btn btn-primary mt-3">Aggiungi</button>
             </div>
 
         </form>
