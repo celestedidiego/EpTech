@@ -547,7 +547,7 @@ textarea.input {
 
 .header-search form .search-btn {
   height: 40px; /* Altezza coerente con il campo di input */
-  width: 100px; /* Larghezza del bottone */
+  width: 10%; /* Larghezza del bottone */
   background: #6c727f;
   color: #FFF;
   font-weight: 700;
