@@ -50,25 +50,31 @@ document.addEventListener('DOMContentLoaded', function () {
     const cancelBtn = document.getElementById('cancelBtn');
     const deleteBtn = document.getElementById('deleteBtn');
 
-    deleteBtn.addEventListener('click', function () {
+    if(deleteBtn){
+        deleteBtn.addEventListener('click', function () {
         confirmationPopup.style.display = 'flex';
-    });
+        });
+      }
 
-    cancelBtn.addEventListener('click', function () {
+    if(cancelBtn){
+        cancelBtn.addEventListener('click', function () {
         confirmationPopup.style.display = 'none';
-    });
+      });
+    }
 
+    if(confirmBtn){
     confirmBtn.addEventListener('click', function (event) {
         
-        if (confirmInput.value === 'CONFERMA') {
-            alert('Account eliminato definitivamente.');
-            confirmationPopup.style.display = 'none';
-        } else {
-            alert('Per favore, digita "CONFERMA" correttamente.');
-            event.preventDefault();
-        }
-    });
-});
+          if (confirmInput.value === 'CONFERMA') {
+              alert('Account eliminato definitivamente.');
+              confirmationPopup.style.display = 'none';
+          } else {
+              alert('Per favore, digita "CONFERMA" correttamente.');
+              event.preventDefault();
+          }
+        });
+     }
+     
 document.addEventListener('DOMContentLoaded', function () {
     
   const deleteProdBtns = document.querySelectorAll('.deleteProdBtns');
@@ -113,16 +119,19 @@ document.addEventListener('DOMContentLoaded', function () {
 document.addEventListener('DOMContentLoaded', function () {
   const menuToggle = document.getElementById('menuToggle');
   const responsiveNav = document.getElementById('responsive-nav');
+    
+  if (menuToggle && responsiveNav) {
+      menuToggle.addEventListener('click', function (event) {
+          event.preventDefault(); // Evita il comportamento predefinito del link
+          responsiveNav.classList.toggle('active'); // Aggiunge/rimuove la classe "active"
+      });
 
-  menuToggle.addEventListener('click', function (event) {
-      event.preventDefault(); // Evita il comportamento predefinito del link
-      responsiveNav.classList.toggle('active'); // Aggiunge/rimuove la classe "active"
-  });
-
-  // Chiudi il menu se si clicca fuori
-  document.addEventListener('click', function (event) {
-      if (!responsiveNav.contains(event.target) && !menuToggle.contains(event.target)) {
-          responsiveNav.classList.remove('active');
-      }
-  });
+      // Chiudi il menu se si clicca fuori
+      document.addEventListener('click', function (event) {
+            if (!responsiveNav.contains(event.target) && !menuToggle.contains(event.target)) {
+                responsiveNav.classList.remove('active');
+            }
+         });
+        }
+     });
 });
