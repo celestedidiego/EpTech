@@ -386,6 +386,8 @@
 <script src="/EpTech/skin/electroMaster/js/jquery.min.js"></script>
 <script src="/EpTech/skin/electroMaster/js/bootstrap.min.js"></script>
 <script src="/EpTech/skin/electroMaster/js/nouislider.min.js"></script>
+<script src="/EpTech/skin/electroMaster/js/slick.min.js"></script>
+<script src="/EpTech/skin/electroMaster/js/jquery.zoom.min.js"></script>
 <script src="/EpTech/skin/electroMaster/js/main.js"></script>
 
 </body>
