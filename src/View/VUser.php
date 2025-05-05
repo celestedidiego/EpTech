@@ -116,7 +116,7 @@ class VUser {
     }
 
     // Ha la funzione di gestire il successo del login di un utente e di preparare i dati necessari per visualizzare la homepage
-    public function loginSuccessUser($array_product, $array_category){
+    public function loginSuccessUser($array_product, $array_category, $article){
         // Recupero delle variabili di login
         $loginVariables = self::checkLogin();
         foreach ($loginVariables as $key => $value) {
@@ -155,6 +155,7 @@ class VUser {
         $this->smarty->assign('search_bar', 1);
         $this->smarty->assign('array_category', $array_category);
         $this->smarty->assign('array_product', $array_product);
+        $this->smarty->assign('article', $article);
         $this->smarty->display('homepage.tpl');
     }
 
@@ -181,7 +182,7 @@ class VUser {
 
 
     // Ha la funzione di gestire il processo di logout dell'utente e di preparare i dati necessari per visualizzare la homepage
-    public function logout($array_product, $array_category){
+    public function logout($array_product, $array_category, $article){
         $loginVariables = self::checkLogin();
         foreach ($loginVariables as $key => $value) {
             $this->smarty->assign($key, $value);
@@ -213,6 +214,7 @@ class VUser {
         $this->smarty->assign('search_bar', 1);
         $this->smarty->assign('array_category', $array_category);
         $this->smarty->assign('array_product', $array_product);
+        $this->smarty->assign('article', $article);
         $this->smarty->assign('signUpSuccess', 0);
         // Verifica se il messaggio di successo è presente nella sessione
         $signUpSuccess = isset($_SESSION['signUpSuccess']) && $_SESSION['signUpSuccess'];

@@ -232,5 +232,22 @@ class CAdmin {
         exit;
     }
 
+    public static function newArticle() {
+        $view = new VAdmin();
+        $article = json_decode(file_get_contents('./src/Utility/article.json'), true); // Legge l'articolo salvato
+        $view->showNewArticle($article);
+    }
 
+    public static function saveArticle() {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $article = [
+                'title' => $_POST['title'],
+                'content' => $_POST['content'],
+            ];
+            file_put_contents('./src/Utility/article.json', json_encode($article)); // Salva l'articolo in un file JSON
+            $_SESSION['message'] = "Articolo salvato con successo!";
+            header('Location: /EpTech/admin/newArticle');
+            exit;
+        }
+    }
 }

@@ -141,6 +141,7 @@
         {elseif $check_login_admin == 1}
             <li><a href="/EpTech/user/userDataSection">Profilo</a></li>
             <li><a href="/EpTech/admin/manageSection">Gestione</a></li>
+            <li><a href="/EpTech/admin/newArticle">Articolo</a></li>
         {/if}
 
         {if $user_not_logged == 1}
