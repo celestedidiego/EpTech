@@ -21,7 +21,28 @@
 - **Gestione pacchetti**: Composer
 - **Frontend**: Bootstrap, jQuery
 
-## 📦 Installazione Windows
+## 📧 Configurazione Mailtrap
+
+1. Crea un account su ([Mailtrap](https://mailtrap.io/))
+
+2. Crea il file configMailer.php con i parametri di connessione al server smtp di Mailtrap
+```php
+<?php
+    return [
+        'smtp_host' => 'sandbox.smtp.mailtrap.io',
+        'smtp_username' => 'xxxxxxxxxxxxxx',
+        'smtp_password' => 'xxxxxxxxxxxxxx',
+        'smtp_secure' => 'tls',
+        'smtp_port' => 2525,
+        'from_email' => 'admin@eptech',
+        'from_name' => 'EpTech Admin',
+    ];
+?>
+```
+3. Inserisci questo file in EpTech/config/configMailer.php
+4. Ora sei in grado di ricevere le mail di EpTech
+
+## 📦🪟 Installazione Windows
 
 1. Posizionati nella directory `xampp/htdocs`
 
@@ -32,7 +53,7 @@
 
 3. Crea un nuovo database con nome eptechprova su `localhost/phpmyadmin` e importa il db provaeptech.sql incluso nel repository.
 
-## 📦 Installazione Linux
+## 📦🐧 Installazione Linux
 
 1. Posizionati nella directory `/opt/lampp/htdocs`
 
@@ -75,5 +96,5 @@ L'output deve essere di questo tipo:
 
 4. Crea un nuovo database con nome eptechprova su `localhost/phpmyadmin` e importa il db provaeptech.sql incluso nel repository.
 
-## 📦 Installazione MacOS
+## 📦🍏 Installazione MacOS
 Essendo basato su Unix, i passaggi sono i medesimi di Linux, sostituire lampp con mampp
