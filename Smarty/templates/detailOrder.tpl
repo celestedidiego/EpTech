@@ -10,7 +10,7 @@
 
             form h4 {
                 margin-top: 20px;
-                border-bottom: 2px solid #007bff;
+                border-bottom: 2px solid rgba(4, 55, 79, 0.8);
                 padding-bottom: 5px;
                 width: 70%;
             }
@@ -87,13 +87,13 @@
                 font-size: 1rem;
                 text-decoration: none;
                 color: #fff;
-                background-color: #007bff;
+                background-color: #6c727f;
                 border-radius: 5px;
                 transition: background-color 0.3s;
             }
 
             .text-center.mt-4 a:hover {
-                background-color: #0056b3;
+                background-color: #797f8a;
             }
         </style>
         <h2 class="text-center">Dettagli Ordine</h2>

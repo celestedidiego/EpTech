@@ -88,6 +88,7 @@ class CFrontController {
                 'order' => ['listOrders', 'viewOrder', 'deleteOrder', 'editOrder'],
                 'review' => ['listReviews', 'canRespond', 'respondToReview'],
                 'shipping' => ['listShipping', 'editShipping', 'deleteShipping'],
+                'purchase' => ['detailOrder'],
                 // Add more controllers and methods for admin
             ],
             'registered_user' => [

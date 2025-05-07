@@ -256,7 +256,31 @@ class CPurchase {
         $view_user = new VPurchase();
         $order = FPersistentManager::getInstance()->find(EOrder::class, $orderId);
 
-        if ($order && $order->getRegisteredUser()->getIdRegisteredUser() == $_SESSION['user']->getIdRegisteredUser()) {
+        if ($order && isset($_SESSION['user'])) {
+            if ($_SESSION['user'] instanceof ERegisteredUser && $order->getRegisteredUser()->getIdRegisteredUser() == $_SESSION['user']->getIdRegisteredUser()) {
+                // Utente registrato: carica i dettagli dell'ordine
+                foreach ($order->getItemOrder() as $item) {
+                    $item->getProduct()->getImages();
+                }
+                $view_user->detailOrder($order);
+            } elseif ($_SESSION['user'] instanceof EAdmin) {
+                // Admin: consenti l'accesso ai dettagli dell'ordine
+                foreach ($order->getItemOrder() as $item) {
+                    $item->getProduct()->getImages();
+                }
+                $view_user->detailOrder($order);
+            } else {
+                // Utente non autorizzato
+                header('Location: /EpTech/user/userHistoryOrders');
+                exit;
+            }
+        } else {
+            // Ordine non trovato o utente non loggato
+            header('Location: /EpTech/user/userHistoryOrders');
+            exit;
+        }
+
+        /*if ($order && $order->getRegisteredUser()->getIdRegisteredUser() == $_SESSION['user']->getIdRegisteredUser()) {
             // Forza il caricamento delle immagini
             foreach ($order->getItemOrder() as $item) {
                 $item->getProduct()->getImages();
@@ -265,6 +289,6 @@ class CPurchase {
         } else {
             header('Location: /EpTech/user/userHistoryOrders');
             exit;
-        }
+        }*/
     }
 }
