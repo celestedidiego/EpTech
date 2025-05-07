@@ -4,59 +4,117 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass:FRegisteredUser::class)]
-#[ORM\Table(name:"registered_user")]
-
+/**
+ * Class ERegisteredUser
+ * @ORM\Entity(repositoryClass=FRegisteredUser::class)
+ * @ORM\Table(name="registered_user")
+ * Represents a registered user with personal details, orders, reviews, addresses, and credit cards.
+ * @package EpTech\Entity
+ */
 class ERegisteredUser
 {
-
-    #[ORM\Id]
-    #[ORM\GeneratedValue()]
-    #[ORM\Column(type: "integer")]
+    /**
+     * @var int The unique identifier of the registered user.
+     * @ORM\Id
+     * @ORM\GeneratedValue()
+     * @ORM\Column(type="integer")
+     */
     private int $registeredUserId;
 
-    #[ORM\Column(type: "string", length: 255)]
+    /**
+     * @var string The first name of the user.
+     * @ORM\Column(type="string", length=255)
+     */
     protected $name;
 
-    #[ORM\Column(type: "string", length: 255)]
+    /**
+     * @var string The surname of the user.
+     * @ORM\Column(type="string", length=255)
+     */
     protected $surname;
 
-    #[ORM\Column(type: "string", length: 255)]
+    /**
+     * @var string The email address of the user.
+     * @ORM\Column(type="string", length=255)
+     */
     protected $email;
 
-    #[ORM\Column(type: "date")]
+    /**
+     * @var \DateTime The birth date of the user.
+     * @ORM\Column(type="date")
+     */
     protected \DateTime $birthDate;
 
-    #[ORM\Column(type: "string", length: 255)]
+    /**
+     * @var string The username of the user.
+     * @ORM\Column(type="string", length=255)
+     */
     protected $username;
 
-    #[ORM\Column(type: "string", length: 255)]
+    /**
+     * @var string The password of the user.
+     * @ORM\Column(type="string", length=255)
+     */
     protected $password;
 
-    #[ORM\Column(type: 'boolean')]
+    /**
+     * @var bool Indicates if the user is blocked.
+     * @ORM\Column(type="boolean")
+     */
     private $is_blocked = false;
 
-    #[ORM\Column(type: 'boolean')]
+    /**
+     * @var bool Indicates if the user is marked as deleted.
+     * @ORM\Column(type="boolean")
+     */
     private $is_deleted = false;
 
-    #[ORM\OneToMany(targetEntity:EOrder::class, mappedBy:"registeredUser", cascade:["persist", "remove"])]
+    /**
+     * @var Collection|EOrder[] The collection of orders placed by the user.
+     * @ORM\OneToMany(targetEntity=EOrder::class, mappedBy="registeredUser", cascade={"persist", "remove"})
+     */
     private Collection $orders;
 
-    #[ORM\OneToMany(targetEntity:EReview::class, mappedBy:'registeredUser')]
+    /**
+     * @var Collection|EReview[] The collection of reviews written by the user.
+     * @ORM\OneToMany(targetEntity=EReview::class, mappedBy="registeredUser")
+     */
     private Collection $reviews;
 
-    #[ORM\OneToMany(targetEntity:EShipping::class, mappedBy:'registeredUser')]
+    /**
+     * @var Collection|EShipping[] The collection of addresses associated with the user.
+     * @ORM\OneToMany(targetEntity=EShipping::class, mappedBy="registeredUser")
+     */
     private Collection $addresses;
 
-    #[ORM\OneToMany(targetEntity:ECreditCard::class, mappedBy:'registeredUser')]
+    /**
+     * @var Collection|ECreditCard[] The collection of credit cards associated with the user.
+     * @ORM\OneToMany(targetEntity=ECreditCard::class, mappedBy="registeredUser")
+     */
     private Collection $creditCards;
 
-    #[ORM\Column(type: 'string', length: 64, nullable: true)]
+    /**
+     * @var string|null The confirmation token for email verification.
+     * @ORM\Column(type="string", length=64, nullable=true)
+     */
     private ?string $confirmationToken = null;
 
-    #[ORM\Column(type: 'boolean')]
+    /**
+     * @var bool Indicates if the user's email is confirmed.
+     * @ORM\Column(type="boolean")
+     */
     private bool $emailConfirmed = false;
 
+    /**
+     * Constructor for the ERegisteredUser class.
+     * Initializes the user with personal details and empty collections for relationships.
+     * @param string $name The first name of the user.
+     * @param string $surname The surname of the user.
+     * @param string $email The email address of the user.
+     * @param \DateTime $birthDate The birth date of the user.
+     * @param string $username The username of the user.
+     * @param string $password The password of the user.
+     */
     public function __construct($name, $surname, $email, $birthDate, $username, $password)
     {
         $this->name = $name;
@@ -71,74 +129,162 @@ class ERegisteredUser
         $this->creditCards = new ArrayCollection();
     }
 
+    /**
+     * Returns the unique identifier of the registered user.
+     * @return int The unique identifier of the user.
+     */
     public function getIdRegisteredUser(): int
     {
         return $this->registeredUserId;
     }
 
-    public function getName() {
+    /**
+     * Returns the first name of the user.
+     * @return string The first name of the user.
+     */
+    public function getName()
+    {
         return $this->name;
     }
 
-    public function setName($name) {
+    /**
+     * Sets the first name of the user.
+     * @param string $name The first name of the user.
+     * @return void
+     */
+    public function setName($name)
+    {
         $this->name = $name;
     }
 
-    public function getSurname() {
+    /**
+     * Returns the surname of the user.
+     * @return string The surname of the user.
+     */
+    public function getSurname()
+    {
         return $this->surname;
     }
 
-    public function setSurname($surname) {
+    /**
+     * Sets the surname of the user.
+     * @param string $surname The surname of the user.
+     * @return void
+     */
+    public function setSurname($surname)
+    {
         $this->surname = $surname;
     }
 
-    public function getEmail() {
+    /**
+     * Returns the email address of the user.
+     * @return string The email address of the user.
+     */
+    public function getEmail()
+    {
         return $this->email;
     }
 
-    public function setEmail($email) {
+    /**
+     * Sets the email address of the user.
+     * @param string $email The email address of the user.
+     * @return void
+     */
+    public function setEmail($email)
+    {
         $this->email = $email;
     }
 
-    public function getBirthDate() {
+    /**
+     * Returns the birth date of the user.
+     * @return \DateTime The birth date of the user.
+     */
+    public function getBirthDate()
+    {
         return $this->birthDate;
     }
 
-    public function setBirthDate($birthDate) {
+    /**
+     * Sets the birth date of the user.
+     * @param \DateTime $birthDate The birth date of the user.
+     * @return void
+     */
+    public function setBirthDate($birthDate)
+    {
         $this->birthDate = $birthDate;
     }
 
-    public function getUsername() {
+    /**
+     * Returns the username of the user.
+     * @return string The username of the user.
+     */
+    public function getUsername()
+    {
         return $this->username;
     }
 
-    public function setUsername($username) {
+    /**
+     * Sets the username of the user.
+     * @param string $username The username of the user.
+     * @return void
+     */
+    public function setUsername($username)
+    {
         $this->username = $username;
     }
 
-    public function getPassword() {
+    /**
+     * Returns the password of the user.
+     * @return string The password of the user.
+     */
+    public function getPassword()
+    {
         return $this->password;
     }
 
-    public function setPassword($password) {
+    /**
+     * Sets the password of the user.
+     * @param string $password The password of the user.
+     * @return void
+     */
+    public function setPassword($password)
+    {
         $this->password = $password;
     }
 
+    /**
+     * Returns the collection of orders placed by the user.
+     * @return Collection|EOrder[] The collection of orders.
+     */
     public function getOrders(): Collection
     {
         return $this->orders;
     }
 
-    public function setOrders($orders) 
+    /**
+     * Sets the collection of orders placed by the user.
+     * @param Collection $orders The collection of orders.
+     * @return void
+     */
+    public function setOrders($orders)
     {
         $this->orders = $orders;
     }
 
+    /**
+     * Returns the collection of reviews written by the user.
+     * @return Collection|EReview[] The collection of reviews.
+     */
     public function getReviews(): Collection
     {
         return $this->reviews;
     }
 
+    /**
+     * Sets the collection of reviews written by the user.
+     * @param Collection $reviews The collection of reviews.
+     * @return self
+     */
     public function setReviews(Collection $reviews): self
     {
         $this->reviews = $reviews;
@@ -146,57 +292,109 @@ class ERegisteredUser
         return $this;
     }
 
+    /**
+     * Returns the collection of addresses associated with the user.
+     * @return Collection|EShipping[] The collection of addresses.
+     */
     public function getAddresses(): Collection
     {
         return $this->addresses;
     }
 
+    /**
+     * Returns the collection of credit cards associated with the user.
+     * @return Collection|ECreditCard[] The collection of credit cards.
+     */
     public function getCreditCards(): Collection
     {
         return $this->creditCards;
     }
 
+    /**
+     * Sets the collection of credit cards associated with the user.
+     * @param Collection $creditCards The collection of credit cards.
+     * @return self
+     */
     public function setCreditCards(Collection $creditCards): self
     {
-        $this->creditCards= $creditCards;
+        $this->creditCards = $creditCards;
 
         return $this;
     }
 
-    //DA AGGIUNGERE GLI UTENTI BLOCCATI
+    /**
+     * Checks if the user is blocked.
+     * @return bool True if the user is blocked, false otherwise.
+     */
     public function isBlocked(): bool
     {
         return $this->is_blocked;
     }
 
+    /**
+     * Sets the blocked status of the user.
+     * @param bool $blocked True to block the user, false otherwise.
+     * @return void
+     */
     public function setBlocked(bool $blocked)
     {
         $this->is_blocked = $blocked;
     }
+
+    /**
+     * Checks if the user is marked as deleted.
+     * @return bool True if the user is deleted, false otherwise.
+     */
     public function isDeleted(): bool
     {
         return $this->is_deleted;
     }
 
+    /**
+     * Sets the deleted status of the user.
+     * @param bool $deleted True to mark as deleted, false otherwise.
+     * @return void
+     */
     public function setDeleted(bool $deleted)
     {
         $this->is_deleted = $deleted;
     }
 
-    public function getConfirmationToken(): ?string {
+    /**
+     * Returns the confirmation token for email verification.
+     * @return string|null The confirmation token.
+     */
+    public function getConfirmationToken(): ?string
+    {
         return $this->confirmationToken;
     }
-    
-    public function setConfirmationToken(?string $confirmationToken): void {
+
+    /**
+     * Sets the confirmation token for email verification.
+     * @param string|null $confirmationToken The confirmation token.
+     * @return void
+     */
+    public function setConfirmationToken(?string $confirmationToken): void
+    {
         $this->confirmationToken = $confirmationToken;
     }
-    
-    public function isEmailConfirmed(): bool {
+
+    /**
+     * Checks if the user's email is confirmed.
+     * @return bool True if the email is confirmed, false otherwise.
+     */
+    public function isEmailConfirmed(): bool
+    {
         return $this->emailConfirmed;
     }
-    
-    public function setEmailConfirmed(bool $emailConfirmed): void {
+
+    /**
+     * Sets the email confirmation status of the user.
+     * @param bool $emailConfirmed True to confirm the email, false otherwise.
+     * @return void
+     */
+    public function setEmailConfirmed(bool $emailConfirmed): void
+    {
         $this->emailConfirmed = $emailConfirmed;
     }
-
 }

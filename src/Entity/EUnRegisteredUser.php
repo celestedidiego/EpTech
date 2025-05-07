@@ -2,18 +2,36 @@
 
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity]
-#[ORM\Table(name:'unregistered')]
+/**
+ * Class EUnRegisteredUser
+ * @ORM\Entity
+ * @ORM\Table(name="unregistered")
+ * Represents an unregistered user in the system.
+ * @package EpTech\Entity
+ */
 class EUnRegisteredUser
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue()]
-    #[ORM\Column(type: "integer")]
+    /**
+     * @var int The unique identifier of the unregistered user.
+     * @ORM\Id
+     * @ORM\GeneratedValue()
+     * @ORM\Column(type="integer")
+     */
     private int $UnRegisteredUserId;
-    public function __construct(){
+
+    /**
+     * Constructor for the EUnRegisteredUser class.
+     * Initializes the unregistered user entity.
+     */
+    public function __construct()
+    {
 
     }
 
+    /**
+     * Returns the unique identifier of the unregistered user.
+     * @return int The unique identifier of the unregistered user.
+     */
     public function getIdUnRegisteredUser(): int
     {
         return $this->UnRegisteredUserId;

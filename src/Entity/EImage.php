@@ -3,38 +3,72 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass:FImage::class)]
-#[ORM\Table('image')]
-class EImage{
+/**
+ * Class EImage
+ * @ORM\Entity(repositoryClass=FImage::class)
+ * @ORM\Table(name="image")
+ * Represents an image entity associated with a product.
+ * @package EpTech\Entity
+ */
+class EImage {
 
-    #[ORM\Id]
-    #[ORM\Column(type: 'integer')]
-    #[ORM\GeneratedValue]
+    /**
+     * @var int|null The unique identifier of the image.
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue
+     */
     private int|null $idImage = null;
 
-    #[ORM\Column(type: 'string', length:70, columnDefinition: 'VARCHAR(70)')]
+    /**
+     * @var string The name of the image.
+     * @ORM\Column(type="string", length=70, columnDefinition="VARCHAR(70)")
+     */
     private $name;
 
-    #[ORM\Column(type: 'integer', columnDefinition: 'INT(9)')]
+    /**
+     * @var int The size of the image in bytes.
+     * @ORM\Column(type="integer", columnDefinition="INT(9)")
+     */
     private $size;
 
-    #[ORM\Column(type: 'string', length:20, columnDefinition: 'VARCHAR(20)')]
+    /**
+     * @var string The MIME type of the image.
+     * @ORM\Column(type="string", length=20, columnDefinition="VARCHAR(20)")
+     */
     private $type;
 
-    #[ORM\Column(type: 'blob')]
+    /**
+     * @var resource|string The binary data of the image.
+     * @ORM\Column(type="blob")
+     */
     private $imageData;
 
-    #[ORM\ManyToOne(targetEntity: EProduct::class, inversedBy:'images')]
-    #[ORM\JoinColumn(name:'productId', referencedColumnName:'productId', nullable:true)]
+    /**
+     * @var EProduct|null The product associated with the image.
+     * @ORM\ManyToOne(targetEntity=EProduct::class, inversedBy="images")
+     * @ORM\JoinColumn(name="productId", referencedColumnName="productId", nullable=true)
+     */
     private EProduct|null $product = null;
 
-    public function __construct($name, $size, $type, $imageData){
+    /**
+     * Constructor for the EImage class.
+     * @param string $name The name of the image.
+     * @param int $size The size of the image in bytes.
+     * @param string $type The MIME type of the image.
+     * @param resource|string $imageData The binary data of the image.
+     */
+    public function __construct($name, $size, $type, $imageData) {
         $this->name = $name;
         $this->size = $size;
         $this->type = $type;
         $this->imageData = $imageData;
     }
 
+    /**
+     * Returns the encoded binary data of the image.
+     * @return string The binary data of the image.
+     */
     public function getEncodedData() {
         if (is_resource($this->imageData)) {
             rewind($this->imageData); // Riavvia il puntatore del flusso
@@ -46,99 +80,104 @@ class EImage{
     }
 
     /**
-     * Get the value of id_image
+     * Returns the unique identifier of the image.
+     * @return int|null The unique identifier of the image.
      */
-    public function getIdImage()
-    {
+    public function getIdImage() {
         return $this->idImage;
     }
 
     /**
-     * Set the value of id_image
+     * Sets the unique identifier of the image.
+     * @param int|null $idImage The unique identifier of the image.
+     * @return void
      */
-    public function setIdImage($idImage)
-    {
+    public function setIdImage($idImage) {
         $this->idImage = $idImage;
     }
 
     /**
-     * Get the value of name
+     * Returns the name of the image.
+     * @return string The name of the image.
      */
-    public function getName()
-    {
+    public function getName() {
         return $this->name;
     }
 
     /**
-     * Set the value of name
+     * Sets the name of the image.
+     * @param string $name The name of the image.
+     * @return void
      */
-    public function setName($name)
-    {
+    public function setName($name) {
         $this->name = $name;
     }
 
     /**
-     * Get the value of size
+     * Returns the size of the image in bytes.
+     * @return int The size of the image in bytes.
      */
-    public function getSize()
-    {
+    public function getSize() {
         return $this->size;
     }
 
     /**
-     * Set the value of size
+     * Sets the size of the image in bytes.
+     * @param int $size The size of the image in bytes.
+     * @return void
      */
-    public function setSize($size)
-    {
+    public function setSize($size) {
         $this->size = $size;
     }
 
     /**
-     * Get the value of type
+     * Returns the MIME type of the image.
+     * @return string The MIME type of the image.
      */
-    public function getType()
-    {
+    public function getType() {
         return $this->type;
     }
 
     /**
-     * Set the value of type
+     * Sets the MIME type of the image.
+     * @param string $type The MIME type of the image.
+     * @return void
      */
-    public function setType($type)
-    {
+    public function setType($type) {
         $this->type = $type;
     }
 
     /**
-     * Get the value of imageData
+     * Returns the binary data of the image.
+     * @return resource|string The binary data of the image.
      */
-    public function getImageData()
-    {
+    public function getImageData() {
         return $this->imageData;
     }
 
     /**
-     * Set the value of imageData
+     * Sets the binary data of the image.
+     * @param resource|string $imageData The binary data of the image.
+     * @return void
      */
-    public function setImageData($imageData)
-    {
+    public function setImageData($imageData) {
         $this->imageData = $imageData;
     }
 
     /**
-     * Get the value of productId
+     * Returns the product associated with the image.
+     * @return EProduct|null The associated product.
      */
-    public function getProduct(): ?EProduct
-    {
+    public function getProduct(): ?EProduct {
         return $this->product;
     }
 
     /**
-     * Set the value of productId
+     * Sets the product associated with the image.
+     * @param EProduct|null $product The associated product.
+     * @return void
      */
-    public function setProduct(?EProduct $product)
-    {
+    public function setProduct(?EProduct $product) {
         $this->product = $product;
     }
-    
 }
