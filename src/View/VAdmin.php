@@ -66,21 +66,6 @@ class VAdmin {
         $this->smarty->display('manageProducts.tpl');
     }
 
-    /*
-    //mostra solo gli utenti filtrati dall'admin
-    public function displayFilteredUsers($users){
-        $loginVariables=(new VUser)->checkLogin();
-        foreach ($loginVariables as $key => $value){
-            $this->smarty->assign($key, $value);
-        }
-        if (!isset($users['items']) || !is_array($users['items'])) {
-            $users['items'] = [];
-        }
-        $this->smarty->assign('users_info', $users);
-        $this->smarty->display('manageUsers.tpl');
-    }
-    */
-
     public function displayFilteredUsers($users)
     {
         $loginVariables = (new VUser)->checkLogin();
@@ -146,6 +131,10 @@ class VAdmin {
     }
 
     public function showNewArticle($articles = []) {
+        $loginVariables=(new VUser)->checkLogin();
+        foreach ($loginVariables as $key => $value){
+            $this->smarty->assign($key, $value);
+        }
         $this->smarty->assign('articles', $articles);
         $this->smarty->display('newArticle.tpl');
     }

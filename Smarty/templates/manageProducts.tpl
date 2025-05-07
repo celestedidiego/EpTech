@@ -64,7 +64,10 @@
     <h2>Gestione Prodotti</h2>
 
     {if isset($message)}
-        <div class="alert alert-success">{$message}</div>
+        <div class="alert alert-success">
+            {$message}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">Close</button>
+        </div>
     {/if}
 
     {if isset($error)}
@@ -133,3 +136,4 @@
     {/foreach}
 </body>
 </html>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

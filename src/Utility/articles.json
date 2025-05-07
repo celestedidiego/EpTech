@@ -22,5 +22,13 @@
     {
         "title": "vediamo adesso",
         "content": "vediamo adessovediamo adessovediamo adesso"
+    },
+    {
+        "title": "titolo",
+        "content": "titolotitolotitolotitolotitolo"
+    },
+    {
+        "title": "titolo",
+        "content": "{if isset($message)}\r\n    <div class=\"alert alert-success alert-dismissible fade show\" role=\"alert\">\r\n        {$message}\r\n        <button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"alert\" aria-label=\"Close\"><\/button>\r\n    <\/div>\r\n{\/if}{if isset($message)}\r\n    <div class=\"alert alert-success alert-dismissible fade show\" role=\"alert\">\r\n        {$message}\r\n        <button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"alert\" aria-label=\"Close\"><\/button>\r\n    <\/div>\r\n{\/if}{if isset($message)}\r\n    <div class=\"alert alert-success alert-dismissible fade show\" role=\"alert\">\r\n        {$message}\r\n        <button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"alert\" aria-label=\"Close\"><\/button>\r\n    <\/div>\r\n{\/if}"
     }
 ]
