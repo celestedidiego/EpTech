@@ -75,7 +75,7 @@ a {
 }
 
 a:hover, a:focus {
-  color: #0bac25;
+  color: rgba(96, 139, 159, 0.8);
   text-decoration: none;
   outline: none;
 }
@@ -342,7 +342,7 @@ textarea.input {
 }
 
 .card-header.bg-primary {
-  background-color: #d0eaff !important;
+  background-color: rgba(114, 183, 215, 0.8) !important;
 }
 
 /* Stile per 'Elimina' e 'Blocca/Sblocca' in manageUsers */
