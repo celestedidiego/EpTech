@@ -153,7 +153,11 @@
         </div>
 
         <div class="text-center mt-4">
-            <a href="/EpTech/user/userHistoryOrders" class="btn btn-primary">Torna allo Storico Ordini</a>
+            {if $check_login_registered_user == 1}
+                <a href="/EpTech/user/userHistoryOrders" class="btn btn-primary">Torna allo Storico Ordini</a>
+            {elseif $check_login_admin == 1}
+                <a href="/EpTech/admin/manageOrders" class="btn btn-primary">Torna alla Gestione Ordini</a>
+            {/if}
         </div>
     </div>
 </form>
