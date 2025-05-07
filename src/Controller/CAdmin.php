@@ -124,7 +124,7 @@ class CAdmin {
             $_SESSION['error'] = "Si è verificato un errore".$e->getMessage();
         }
             
-        header('Location: /EpTech/admin/manageProduct');
+        header('Location: /EpTech/admin/manageProducts');
         exit;
         
     }
@@ -152,22 +152,6 @@ class CAdmin {
         header('Location: /EpTech/admin/manageOrders');
         exit;
     }
-    /*
-    public static function manageReviews() {
-        $view = new VAdmin();
-    
-        $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
-        $itemsPerPage = 10;
-    
-        $reviews = FPersistentManager::getInstance()->getAllReviewsPaginated($page, $itemsPerPage);
-        
-        if (!isset($reviews['items']) || !is_array($reviews['items'])) {
-            $reviews['items'] = [];
-        }
-    
-        $view->manageReviews($reviews);
-    }
-    */
 
     public static function manageReviews() {
         $view = new VAdmin();
