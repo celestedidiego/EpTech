@@ -45,14 +45,12 @@
         {if isset($success)}
             <div class="alert alert-success">
                 {$success}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">Close</button>
             </div>
         {/if}
     
         {if isset($error)}
             <div class="alert alert-danger">
                 {$error}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">Close</button>
             </div>
         {/if}
     
