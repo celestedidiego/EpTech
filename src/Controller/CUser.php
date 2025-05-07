@@ -4,26 +4,29 @@ class CUser {
 
     // Questo metodo gestisce la visualizzazione della homepage. Controlla se l'utente è loggato e mostra la homepage appropriata per utenti registrati, amministratori o utenti non loggati. 
     // Inoltre, imposta un cookie per il carrello se non esiste già.
+
     public static function home() {
         $view_home = new VUser();
-        //$array_product = FPersistentManager::getInstance()->getAllProducts();
         $array_product = FPersistentManager::getInstance()->getLatestProductsHome();
         $array_category = FPersistentManager::getInstance()->getAllCategories();
+        $articles = json_decode(file_get_contents('./src/Utility/articles.json'), true); // Legge l'articolo salvato
 
+        // Ottieni l'articolo più recente
+        $article = is_array($articles) && count($articles) > 0 ? end($articles) : null;
+        
         if (!isset($_COOKIE['cart'])) {
             setcookie('cart', json_encode([]), time() + (300), "/"); // 5 minuti
         }
 
         if (static::isLogged()) {
             if ($_SESSION['user'] instanceof ERegisteredUser) {
-                $view_home->loginSuccessUser($array_product, $array_category);
+                $view_home->loginSuccessUser($array_product, $array_category, $article);
             } else if ($_SESSION['user'] instanceof EAdmin) {
                 $view_home->loginSuccessAdmin();
             }
         } else {
-            $view_home->logout($array_product, $array_category);
+            $view_home->logout($array_product, $array_category, $article);
         }
-        
     }
     
     // Gestisce il processo di login. Se la richiesta è GET, mostra il form di login. Se la richiesta è POST, verifica le credenziali dell'utente e, se corrette, imposta la sessione e i cookie appropriati

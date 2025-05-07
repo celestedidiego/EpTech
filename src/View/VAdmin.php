@@ -144,4 +144,9 @@ class VAdmin {
         $this->smarty->assign('manageSection', 1);
         $this->smarty->display('userinfo.tpl');
     }
+
+    public function showNewArticle($articles = []) {
+        $this->smarty->assign('articles', $articles);
+        $this->smarty->display('newArticle.tpl');
+    }
 }

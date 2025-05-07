@@ -83,7 +83,7 @@ class CFrontController {
         $rolePermissions = [
             'admin' => [
                 'user' => ['userDataForm', 'userDataSection', 'deleteAccount', 'changePass', 'changeUserData'],
-                'admin' => ['manageUsers','filterUsersPaginated', 'deleteUser', 'blockUser', 'unblockUser', 'manageProducts', 'deleteProduct', 'manageReviews','manageOrders', 'changeOrderStatus', 'manageSection', 'acceptRefund', 'rejectRefund'],
+                'admin' => ['manageUsers','filterUsersPaginated', 'deleteUser', 'blockUser', 'unblockUser', 'manageProducts', 'deleteProduct', 'manageReviews','manageOrders', 'changeOrderStatus', 'manageSection', 'acceptRefund', 'rejectRefund', 'newArticle', 'saveArticle'],
                 'product' => ['listProducts', 'addProduct', 'modifyProduct', 'deleteProduct'],
                 'order' => ['listOrders', 'viewOrder', 'deleteOrder', 'editOrder'],
                 'review' => ['listReviews', 'canRespond', 'respondToReview'],

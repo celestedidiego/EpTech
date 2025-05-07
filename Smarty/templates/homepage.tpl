@@ -188,38 +188,6 @@
                                             </div>
 										{/foreach}
 										<!-- /product -->
-
-										
-										<!-- product example> 
-										<div class="product">
-											<div class="product-img">
-												<img src="/EpTech/skin/electroMaster/img/product01.png" alt="">
-												<div class="product-label">
-													<span class="sale">-30%</span>
-													<span class="new">NEW</span>
-												</div>
-											</div>
-											<div class="product-body">
-												<p class="product-category">Category</p>
-												<h3 class="product-name"><a href="#">product name goes here</a></h3>
-												<h4 class="product-price">€980.00 <del class="product-old-price">€990.00</del></h4>
-												
-												<div class="product-rating">
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-												</div>
-												
-												<div class="product-btns">												
-													<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">vedi prodotto</span></button>
-												</div>
-											</div>
-											
-										</div>
-                                     	/product example> -->
-
 									</div>
 									<div id="slick-nav-1" class="products-slick-nav"></div>
 								</div>
@@ -234,6 +202,24 @@
 			<!-- /container -->
 		</div>
 		<!-- /SECTION -->
+
+		<!-- SECTION ARTICLE -->
+		<div class="section">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+						<h2 class="text-center">Articolo più recente</h2>
+						{if $article && $article.title && $article.content}
+							<h3>{$article.title}</h3>
+							<p>{$article.content}</p>
+						{else}
+							<p class="text-center">Nessun articolo disponibile.</p>
+						{/if}
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- /SECTION ARTICLE -->
     {/if}
 
     <br>

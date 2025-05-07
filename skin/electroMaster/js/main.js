@@ -14,7 +14,7 @@
 
 	/////////////////////////////////////////
 
-	// Products Slick
+	// Products Slick //Carosello prodotti homepage
 	$('.products-slick').each(function() {
 		var $this = $(this),
 				$nav = $this.attr('data-nav');
@@ -23,7 +23,7 @@
 			slidesToShow: 4,
 			slidesToScroll: 1,
 			autoplay: true,
-			infinite: true,
+			infinite: false,
 			speed: 300,
 			dots: false,
 			arrows: true,
@@ -52,8 +52,8 @@
 				$nav = $this.attr('data-nav');
 
 		$this.slick({
-			infinite: true,
-			autoplay: true,
+			infinite: false,
+			autoplay: false,
 			speed: 300,
 			dots: false,
 			arrows: true,
@@ -63,17 +63,17 @@
 
 	/////////////////////////////////////////
 
-	// Product Main img Slick
+	// Product Main img Slick //Immagine principale prodotto
 	$('#product-main-img').slick({
-    infinite: true,
+    infinite: false,
     speed: 300,
     dots: false,
     arrows: true,
-    fade: true,
+    fade: false,
     asNavFor: '#product-imgs',
   });
 
-	// Product imgs Slick
+	// Product imgs Slick //Immagini secondarie carosello del prodotto
   $('#product-imgs').slick({
     slidesToShow: 3,
     slidesToScroll: 1,
