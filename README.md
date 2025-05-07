@@ -2,6 +2,9 @@
 
 **EpTech** è un'applicazione e-commerce sviluppata con PHP, progettata per offrire un'esperienza d'acquisto solida, moderna e facilmente estendibile. Il progetto supporta la gestione di prodotti, carrelli, ordini e utenti, con un'interfaccia responsive basata su Bootstrap e interazioni dinamiche con jQuery.
 
+## 🌍 http://www.eptech.infinityfreeapp.com/ 
+- (Senza certificato SSL l'URL deve iniziare con http, non con https)
+
 ## 🚀 Funzionalità principali
 
 - Catalogo prodotti con categorie e ricerca
@@ -23,7 +26,7 @@
 
 ## 📧 Configurazione Mailtrap
 
-1. Crea un account su ([Mailtrap](https://mailtrap.io/))
+1. Crea un account su [Mailtrap](https://mailtrap.io/)
 
 2. Crea il file configMailer.php con i parametri di connessione al server smtp di Mailtrap
 ```php
