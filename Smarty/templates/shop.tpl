@@ -18,11 +18,15 @@
             max-height: 85%; /* L'immagine non supera l'altezza del contenitore */
             object-fit: contain; /* Adatta l'immagine senza ritagliarla */
         }
+
+        .search-results-title {
+            text-align: center; /* Allinea il testo al centro */
+        }
     </style>
     <div class="row">
         {if isset($applied_filters.query) && $applied_filters.query != ''}
             <div class="col-12">
-                <h3>Risultati della ricerca per: {$applied_filters.query}</h3>
+                <h3 class="search-results-title">Risultati della ricerca per: {$applied_filters.query}</h3>
             </div>
         {/if}
 
