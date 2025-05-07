@@ -150,6 +150,8 @@
         {else if $user_not_logged == 0 && $check_login_registered_user == 1}
             <li><a href="/EpTech/purchase/showCart"><span> Carrello</span></a></li> 
             <li><a href="/EpTech/user/logout"><i class="fas fa-sign-out-alt"></i><span> Logout</span></a></li>
+        {else if $check_login_admin == 1}
+            <li><a href="/EpTech/user/logout"><i class="fas fa-sign-out-alt"></i><span> Logout</span></a></li>
         {/if}
         </ul>
         <!-- /NAV -->
