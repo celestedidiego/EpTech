@@ -9,8 +9,11 @@ class CUser {
         $view_home = new VUser();
         $array_product = FPersistentManager::getInstance()->getLatestProductsHome();
         $array_category = FPersistentManager::getInstance()->getAllCategories();
-        $article = json_decode(file_get_contents('./src/Utility/article.json'), true); // Legge l'articolo salvato
+        $articles = json_decode(file_get_contents('./src/Utility/articles.json'), true); // Legge l'articolo salvato
 
+        // Ottieni l'articolo più recente
+        $article = is_array($articles) && count($articles) > 0 ? end($articles) : null;
+        
         if (!isset($_COOKIE['cart'])) {
             setcookie('cart', json_encode([]), time() + (300), "/"); // 5 minuti
         }

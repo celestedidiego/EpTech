@@ -209,7 +209,7 @@
 				<div class="row">
 					<div class="col-md-12">
 						<h2 class="text-center">Articolo più recente</h2>
-						{if $article}
+						{if $article && $article.title && $article.content}
 							<h3>{$article.title}</h3>
 							<p>{$article.content}</p>
 						{else}
