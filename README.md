@@ -1,9 +1,9 @@
-# 🐼 EpTech
+# 🐼 [EpTech](http://www.eptech.infinityfreeapp.com/)
 
 **EpTech** è un'applicazione e-commerce sviluppata con PHP, progettata per offrire un'esperienza d'acquisto solida, moderna e facilmente estendibile. Il progetto supporta la gestione di prodotti, carrelli, ordini e utenti, con un'interfaccia responsive basata su Bootstrap e interazioni dinamiche con jQuery.
 
-## 🌍 http://www.eptech.infinityfreeapp.com/ 
-- (Senza certificato SSL l'URL deve iniziare con http, non con https)
+## 🌍 [Visita EpTech](http://www.eptech.infinityfreeapp.com/)
+- (Senza certificato `SSL` l'URL deve iniziare con `http`, non con `https`)
 
 ## 🚀 Funzionalità principali
 
@@ -16,19 +16,20 @@
 
 ## 🛠️ Stack Tecnologico
 
-- **Linguaggio**: PHP
+- **Linguaggio**: PHP 8.2
 - **Framework**: Symfony
 - **ORM**: Doctrine
 - **Templating**: Smarty
 - **Database**: MySQL
 - **Gestione pacchetti**: Composer
 - **Frontend**: Bootstrap, jQuery
+- **Staging**: XAMPP, LAMPP 8.2.12 (PHP 8.2), VS Code, Git, GitHub
 
 ## 📧 Configurazione Mailtrap
 
 1. Crea un account su [Mailtrap](https://mailtrap.io/)
 
-2. Crea il file configMailer.php con i parametri di connessione al server smtp di Mailtrap
+2. Crea il file `configMailer.php` con i parametri di connessione al server smtp di Mailtrap
 ```php
 <?php
     return [
@@ -42,7 +43,7 @@
     ];
 ?>
 ```
-3. Inserisci questo file in EpTech/config/configMailer.php
+3. Inserisci questo file in `EpTech/config/configMailer.php`
 4. Ora sei in grado di ricevere le mail di EpTech
 
 ## 📦🪟 Installazione Windows
@@ -101,3 +102,45 @@ L'output deve essere di questo tipo:
 
 ## 📦🍏 Installazione MacOS
 Essendo basato su Unix, i passaggi sono i medesimi di Linux, sostituire lampp con mampp
+
+## 📦🌍 Installazione Web
+1. Segui i passi per l'installazione Linux
+
+2. Segui i passi per la configurazione Mailtrap
+
+3. Zippa la Directory EpTech
+
+4. Collegarsi via FTP (oppure utilizzare il file manager dell'hosting web)
+
+5. Unzippa la directory nella `/` (root) dell' hosting web (o dove indicato dall'hosting)
+
+6. A seconda della posizone della directory EpTech spostare il `.htaccess` e l'`index.php` nella root dell'hosting (o dove indicato dall'hosting) e modificare gli URL di `index.php` per farli puntare alla posizone corretta della directory EpTech
+```php
+    <?php
+    # index.php, istruzioni utili per il debug:
+    # ini_set('display_errors', 'On');
+    # error_reporting(E_ALL);
+    # error_log("index.php Inizio esecuzione", 0);
+
+    require_once __DIR__ .'/config/bootstrap.php'; # modificare questo path in accordo con la posizione nel file manger web
+    require_once __DIR__ .'/config/StartSmarty.php' # modificare questo path in accordo con la posizione della directory EpTech nel file manager web
+
+    $fc = new CFrontController();
+    $fc->run();
+    ?>
+```
+
+7. Collegarsi al phpmyadmin dell'hosting creare un nuovo DB eptech, importare il db fornito nel repository
+
+8. Imposta i parametri di connessione al DB nel file `EpTech/config/bootstrap.php`
+```php
+    $connectionParams = [
+        'dbname'   => 'eptech',
+        'user'     => 'hostingwebuser',
+        'password' => 'hostingwebpassword',
+        'host'     => 'hostingwebipdb',
+        'driver'   => 'pdo_mysql',
+];
+```
+
+9. EpTech è pronto per il Web! (Assicurarsi che l'url inizi con `http` e non con `https`, ignorare gli avvisi di sicurezza dei browser essendo mancante il certificato `SSL` per `https`)
