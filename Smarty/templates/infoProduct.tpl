@@ -81,7 +81,7 @@
                             {foreach from=$reviews.items item=review}
                                 {assign var="averageRating" value=$averageRating + $review->getVote()}
                             {/foreach}
-                            {assign var="averageRating" value=$averageRating / $reviews.n_reviews}
+                            {assign var="averageRating" value=round($averageRating / $reviews.n_reviews)}
                             {for $i=1 to 5}
                                 {if $i <= $averageRating}
                                     <i class="fa fa-star"></i>
