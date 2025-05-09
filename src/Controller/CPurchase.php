@@ -94,7 +94,7 @@ class CPurchase {
         setcookie('cart', json_encode($cart), time() + (86400 * 30), "/");
 
         $_SESSION['added_to_cart'] = isset($_SESSION['max_quantity_reached']) && $_SESSION['max_quantity_reached'] ? false : true;
-        header('Location: /EpTech/purchase/viewProduct/' . $productId);
+        header('Location: /EpTech/purchase/shop/');
     }
 
 
@@ -104,7 +104,9 @@ class CPurchase {
         json_encode($cart);
         setcookie('cart', json_encode($cart), time() + (300), "/");
         $_SESSION['removed_from_cart'] = true;
+
         header('Location: /EpTech/purchase/showCart');
+        exit;
     }
 
     public static function emptyCart() {
