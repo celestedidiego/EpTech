@@ -138,7 +138,6 @@
         {if $check_login_registered_user == 1}
             <li><a href="/EpTech/user/userDataSection">Profilo</a></li>
             <li><a href="/EpTech/user/userHistoryOrders">Ordini</a></li>
-            <li><a href="/EpTech/user/aboutUs"><span>Chi siamo</span></a></li>
         {elseif $check_login_admin == 1}
             <li><a href="/EpTech/user/userDataSection">Profilo</a></li>
             <li><a href="/EpTech/admin/manageSection">Gestione</a></li>
@@ -150,7 +149,8 @@
             <li><a href="/EpTech/purchase/showCart"><span> Carrello</span></a></li>
             <li><a href="/EpTech/user/aboutUs"><span>Chi siamo</span></a></li>
         {else if $user_not_logged == 0 && $check_login_registered_user == 1}
-            <li><a href="/EpTech/purchase/showCart"><span> Carrello</span></a></li> 
+            <li><a href="/EpTech/purchase/showCart"><span> Carrello</span></a></li>
+            <li><a href="/EpTech/user/aboutUs"><span>Chi siamo</span></a></li> 
             <li><a href="/EpTech/user/logout"><i class="fas fa-sign-out-alt"></i><span> Logout</span></a></li>
         {else if $check_login_admin == 1}
             <li><a href="/EpTech/user/logout"><i class="fas fa-sign-out-alt"></i><span> Logout</span></a></li>
