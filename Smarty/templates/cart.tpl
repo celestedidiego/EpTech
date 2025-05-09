@@ -109,6 +109,7 @@
                 </div>
                 <div class="col-md-6 text-right">
                     <h3>Totale: €{$subtotal|string_format:"%.2f"}</h3>
+                    <a href="/EpTech/purchase/shop" class="btn btn-primary">Continua lo shopping</a>
                     <a href="/EpTech/purchase/checkout" class="btn btn-primary">Procedi al checkout</a>
                 </div>
             </div>
