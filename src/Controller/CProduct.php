@@ -186,4 +186,10 @@ class CProduct {
         header('Location: /EpTech/product/listProducts?page=1');
     }
 
+    public static function viewProduct($productId) {
+        $view = new VProduct();
+        $product = FPersistentManager::getInstance()->find(EProduct::class, $productId);
+        $reviews = FPersistentManager::getInstance()->getReviewsProduct($product);
+        $view->showProductDetails($product, $reviews);
+    }
 }
