@@ -62,5 +62,17 @@ class VProduct {
         $this->smarty->display('userinfo.tpl');
     }
     
+    public function showProductDetails($product, $reviews) {
+        $averageRating = 0;
+        if ($reviews['n_reviews'] > 0) {
+            foreach ($reviews['items'] as $review) {
+                $averageRating += $review->getVote();
+            }
+            $averageRating /= $reviews['n_reviews'];
+        }
+        $this->smarty->assign('averageRating', $averageRating);
+        $this->smarty->assign('reviews', $reviews);
+        $this->smarty->display('infoProduct.tpl');
+    }
 
 }

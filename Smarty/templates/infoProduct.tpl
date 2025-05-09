@@ -76,11 +76,22 @@
                 <h2 class="product-name">{$nameProduct}</h2>
                 <div>
                     <div class="product-rating">
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star-o"></i>
+                        {if $reviews.n_reviews > 0}
+                            {assign var="averageRating" value=0}
+                            {foreach from=$reviews.items item=review}
+                                {assign var="averageRating" value=$averageRating + $review->getVote()}
+                            {/foreach}
+                            {assign var="averageRating" value=round($averageRating / $reviews.n_reviews)}
+                            {for $i=1 to 5}
+                                {if $i <= $averageRating}
+                                    <i class="fa fa-star"></i>
+                                {else}
+                                    <i class="fa fa-star-o"></i>
+                                {/if}
+                            {/for}
+                        {else}
+                            <p>Nessuna valutazione disponibile</p>
+                        {/if}
                     </div>
                 </div>
                 <div>
