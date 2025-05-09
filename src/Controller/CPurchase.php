@@ -94,7 +94,7 @@ class CPurchase {
         setcookie('cart', json_encode($cart), time() + (86400 * 30), "/");
 
         $_SESSION['added_to_cart'] = isset($_SESSION['max_quantity_reached']) && $_SESSION['max_quantity_reached'] ? false : true;
-        header('Location: /EpTech/purchase/shop/');
+        header('Location: /EpTech/purchase/viewProduct/' . $productId);
     }
 
 

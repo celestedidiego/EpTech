@@ -136,6 +136,8 @@
                                 <button class="add-to-cart-btn" type="submit"><i class="fas fa-table"></i> Aggiungi al Carrello</button>
                             {/if}
                         </div>
+						<br>
+						<a href="/EpTech/purchase/shop" class="btn btn-primary">Continua lo shopping</a>
                     </form>
                 </div>
             </div>
