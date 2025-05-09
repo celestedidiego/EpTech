@@ -146,6 +146,8 @@
                                 <p class="card-text"><strong>Prezzo:</strong> €{$item->getProduct()->getPriceProduct()|string_format:"%.2f"}</p>
                                 <p class="card-text"><strong>Quantità:</strong> {$item->getQuantity()}</p>
                                 <p class="card-text"><strong>Totale:</strong> €{$item->getProduct()->getPriceProduct() * $item->getQuantity()|string_format:"%.2f"}</p>
+                            
+                                <a href="/EpTech/purchase/viewProduct/{$item->getProduct()->getProductId()}" class="btn btn-primary mt-2">Visualizza Prodotto</a>
                             </div>
                         </div>
                     </div>
