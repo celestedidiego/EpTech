@@ -180,7 +180,7 @@
                                                 <div class="product-body">
                                                     <p class="product-category">{$product.nameCategory}</p>
                                                     <h3 class="product-name"><a href="#">{$product.nameProduct}</a></h3>
-													<h4 class="product-price">€{$product.priceProduct}</h4>
+													<h4 class="product-price">€ {$product.priceProduct}</h4>
                                                     <form class="product-btns" method="GET" action="/EpTech/purchase/viewProduct/{$product.productId}">
                                                         <button type="submit" class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">vedi prodotto</span></button>
                                                     </form>

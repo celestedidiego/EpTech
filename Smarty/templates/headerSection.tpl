@@ -82,7 +82,7 @@
                                     
                                     <div class="product-body">
                                         <h3 class="product-name">{$product['product']->getNameProduct()}</h3>
-                                        <h4 class="product-price"><span class="qty">{$product.quantity}x</span>€{$product['product']->getPriceProduct()}</h4>
+                                        <h4 class="product-price"><span class="qty">{$product.quantity}x</span>€ {$product['product']->getPriceProduct()}</h4>
                                     </div>
                                     <form action="/EpTech/purchase/removeFromCart/{$product['product']->getProductId()}">
                                         <button class="delete"><i class="fas fa-times-circle"></i></button>

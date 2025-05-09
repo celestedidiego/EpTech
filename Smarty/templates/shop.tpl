@@ -84,7 +84,7 @@
                     <div class="product-body">
                         <p class="product-category">{$product->getNameCategory()->getNameCategory()}</p>
                         <h3 class="product-name">{$product->getNameProduct()}</h3>
-                        <h4 class="product-price">{$product->getPriceProduct()}</h4>
+                        <h4 class="product-price">€ {$product->getPriceProduct()}</h4>
                         <form class="product-btns" method="GET" action="/EpTech/purchase/viewProduct/{$product->getProductId()}">											
                             <button type="submit" class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">vedi prodotto</span></button>
                         </form>

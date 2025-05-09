@@ -123,7 +123,7 @@
                 <div class="product-body">
                     <p class="product-category">{$product->getNameCategory()->getNameCategory()}</p>
                     <h3 class="product-name">{$product->getNameProduct()}</h3>
-                    <h4 class="product-price">€{$product->getPriceProduct()}</h4>
+                    <h4 class="product-price">€ {$product->getPriceProduct()}</h4>
                     <div class="mt-3">
                         <a href="/EpTech/product/modifyProduct/{$product->getProductId()}" class="btn btn-primary btn-sm">Modifica</a>
                         <a href="/EpTech/purchase/viewProduct/{$product->getProductId()}" class="btn btn-info btn-sm">Visualizza</a>

@@ -84,7 +84,7 @@
                     </div>
                 </div>
                 <div>
-                    <h3 class="product-price">€{$priceProduct}</h3>
+                    <h3 class="product-price">€ {$priceProduct}</h3>
                     <span class="product-available">Disponibilità: {$avQuantity}</span>
                 </div>
 
@@ -320,7 +320,7 @@
 				<div class="product-body">
 					<p class="product-category">{$same_cat_product->getNameCategory()->getNameCategory()}</p>
 					<h3 class="product-name">{$same_cat_product->getNameProduct()}</h3>
-                    <h4 class="product-price">€{$same_cat_product->getPriceProduct()}</h4>
+                    <h4 class="product-price">€ {$same_cat_product->getPriceProduct()}</h4>
 				
 					<form class="product-btns" method="GET" action="/EpTech/purchase/viewProduct/{$same_cat_product->getProductId()}">											
 						<button type="submit" class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">vedi prodotto</span></button>
