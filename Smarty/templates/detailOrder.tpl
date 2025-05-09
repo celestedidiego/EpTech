@@ -126,15 +126,19 @@
                 <p><strong>Email:</strong> {$order->getRegisteredUser()->getEmail()}</p>
             </div>
         </div>
-
+        
         <div class="row mt-4">
             <h4>Prodotti dell'Ordine</h4>
             <div class="row">
                 {foreach $order->getItemOrder() as $item}
                     <div class="col-md-6">
                         <div class="card mb-4">
+                            {assign var="firstImageShown" value=false}
                             {foreach $item->getProduct()->getImages() as $image}
-                                <img style="width:200px; height: auto;" src="data:{$image->getType()};base64,{$image->getEncodedData()}" class="card-img-top" alt="{$item->getProduct()->getNameProduct()}">
+                                {if !$firstImageShown}
+                                    <img style="width:200px; height: auto;" src="data:{$image->getType()};base64,{$image->getEncodedData()}" class="card-img-top" alt="{$item->getProduct()->getNameProduct()}">
+                                    {assign var="firstImageShown" value=true}
+                                {/if}
                             {/foreach}
                             <div class="card-body">
                                 <h5 class="card-title">{$item->getProduct()->getNameProduct()}</h5>

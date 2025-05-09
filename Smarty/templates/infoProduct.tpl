@@ -136,8 +136,8 @@
 			<div id="product-tab">
 				<!-- product tab nav -->
 				<ul class="tab-nav">
-					<li class="active"><a data-toggle="tab" href="#tab1">Description</a></li>
-					<li><a data-toggle="tab" href="#tab3">Reviews ({$reviews.n_reviews})</a></li>
+					<li class="active"><a data-toggle="tab" href="#tab1">Descrizione</a></li>
+					<li><a data-toggle="tab" href="#tab3">Recensioni ({$reviews.n_reviews})</a></li>
 				</ul>
 				<!-- /product tab nav -->
 
