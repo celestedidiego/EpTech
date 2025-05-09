@@ -93,6 +93,7 @@ class FProduct extends EntityRepository {
         $dql = "SELECT p.productId, p.nameProduct, p.priceProduct, c.nameCategory
                 FROM EProduct p
                 JOIN p.category c
+                WHERE p.is_deleted = false
                 ORDER BY p.productId DESC";
         $query = $this->getEntityManager()->createQuery($dql)
             ->setMaxResults($limit);
