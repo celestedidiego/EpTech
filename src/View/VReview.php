@@ -111,5 +111,4 @@ class VReview {
         // Visualizza il template formRisposta.tpl
         $this->smarty->display('replyForm.tpl');
     }
-
 }

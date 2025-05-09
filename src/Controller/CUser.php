@@ -531,4 +531,9 @@ class CUser {
         }
     }
 
+    public static function aboutUs() {
+        $view = new VUser();
+        $view->showAboutUs(); // Mostra il template della pagina "Chi siamo"
+    }
+
 }

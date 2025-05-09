@@ -433,4 +433,12 @@ class VUser {
         $this->smarty->assign('success_message', $message);
         $this->smarty->display('signUpSuccess.tpl');
     }
+    
+    public function showAboutUs() {
+        $loginVariables=(new VUser)->checkLogin();
+        foreach ($loginVariables as $key => $value){
+            $this->smarty->assign($key, $value);
+        }
+        $this->smarty->display('aboutUs.tpl'); // Mostra il template della pagina "Chi siamo"
+    }
 }

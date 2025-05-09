@@ -62,7 +62,7 @@ class CFrontController {
     private function isPublic($controller, $method) {
         // Definisce le rotte pubbliche
         $publicRoutes = [
-            'user' => ['home', 'login', 'logout', 'signUp', 'confirmEmail'], // Rotte pubbliche per il controller 'utente'
+            'user' => ['home', 'login', 'logout', 'signUp', 'confirmEmail', 'aboutUs'], // Rotte pubbliche per il controller 'utente'
             'purchase' => ['viewProduct','shop','addToCart', 'showCart', 'removeFromCart', 'emptyCart', 'updateQuantity'], // Rotte pubbliche per il controller 'purchase'
             // Aggiungi altri controller e metodi pubblici se necessario
         ];
