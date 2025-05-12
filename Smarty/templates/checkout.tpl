@@ -142,11 +142,11 @@
         </div>
     </div>
     <!-- Js Plugins -->
-    <script src="/EpTech/skin/electroMaster/js/jquery-3.3.1.min.js"></script>
-    <script src="/EpTech/skin/electroMaster/js/bootstrap.min.js"></script>
-    <script src="/EpTech/skin/electroMaster/js/jquery.nice-select.min.js"></script>
-    <script src="/EpTech/skin/electroMaster/js/jquery.slicknav.js"></script>
-    <script src="/EpTech/skin/electroMaster/js/owl.carousel.min.js"></script>
-    <script src="/EpTech/skin/electroMaster/js/main.js"></script>
+    <!-- <script src="/EpTech/skin/electroMaster/js/jquery.min.js"></script> -->
+    <!-- <script src="/EpTech/skin/electroMaster/js/bootstrap.min.js"></script> -->
+    <!-- <script src="/EpTech/skin/electroMaster/js/jquery.nice-select.min.js"></script> -->
+    <!-- <script src="/EpTech/skin/electroMaster/js/jquery.slicknav.js"></script> -->
+    <!-- <script src="/EpTech/skin/electroMaster/js/owl.carousel.min.js"></script> -->
+    <!-- <script src="/EpTech/skin/electroMaster/js/main.js"></script> -->
 </body>
 </html>
