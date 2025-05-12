@@ -455,11 +455,11 @@
         </div>
         {/if}  
         <div class="form-group">
-            <input name="email-log" type="email" class="form-control" id="email" placeholder="prova@example.com" required="required">
+            <input name="email-log" type="email" class="form-control" id="email" placeholder="prova@example.com" required="required" autocomplete="email">
             <label class = "form-label" for="email">Email</label>
         </div>
         <div class="form-group">
-            <input name="password-log" type="password" class="form-control" id="password" placeholder="password" required="required">
+            <input name="password-log" type="password" class="form-control" id="password" placeholder="password" required="required" autocomplete="current-password">
             <label class = "form-label" for="password">Password</label>
         </div>
         <button type="submit" class="btn btn-primary btn-block">Login</button>

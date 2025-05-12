@@ -81,15 +81,15 @@
                     </div>
                     <div class="form-group">
                         
-                        <input name="email" type="email" class="form-control" id="email" placeholder="es. prova@example.com" required>
+                        <input name="email" type="email" class="form-control" id="email" placeholder="es. prova@example.com" required autocomplete="email">
                     </div>
                     <div class="form-group">
           
-                        <input name="password" type="password" class="form-control" id="password" placeholder="Password..." required>
+                        <input name="password" type="password" class="form-control" id="password" placeholder="Password..." required autocomplete="new-password">
                     </div>
                     <div class="form-group">
                         
-                        <input name="confirm-password" type="password" class="form-control" id="confirm-password" placeholder="Conferma password..." required>
+                        <input name="confirm-password" type="password" class="form-control" id="confirm-password" placeholder="Conferma password..." required autocomplete="new-password">
                     </div>
                     <button type="submit" class="btn btn-primary btn-block">Registrati</button>
                     <br>
