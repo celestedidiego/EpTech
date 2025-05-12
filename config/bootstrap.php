@@ -7,7 +7,7 @@ use Doctrine\DBAL\DriverManager;
 require_once __DIR__ . '/../vendor/autoload.php';
 
 $connectionParams = [
-    'dbname'   => 'provaeptech',
+    'dbname'   => 'eptech',
     'user'     => 'root',
     'password' => '',
     'host'     => '127.0.0.1',
