@@ -51,21 +51,21 @@
                 <img src="/EpTech/skin/electroMaster/img/team/member1.jpg" class="rounded-circle z-depth-1" style="width: 150px; height: 150px;" alt="Team Member 1">
                 <h4 class="font-weight-bold mt-3">Celeste Di Diego</h4>
                 <p class="text-dark">
-                    <a href="https://github.com/celestedidiego" target="_blank" rel="noopener noreferrer">https://github.com/celestedidiego</a>
+                    <a href="https://github.com/celestedidiego" target="_blank" rel="noopener noreferrer">github.com/celestedidiego</a>
                 </p>
             </div>
             <div class="col-md-4">
                 <img src="/EpTech/skin/electroMaster/img/team/member2.jpg" class="rounded-circle z-depth-1" style="width: 150px; height: 150px;" alt="Team Member 2">
                 <h4 class="font-weight-bold mt-3">Alessia Pulcini</h4>
                 <p class="text-dark">
-                    <a href="https://github.com/celestedidiego" target="_blank" rel="noopener noreferrer">https://github.com/alepulc</a>
+                    <a href="https://github.com/alepulc" target="_blank" rel="noopener noreferrer">github.com/alepulc</a>
                 </p>
             </div>
             <div class="col-md-4">
                 <img src="/EpTech/skin/electroMaster/img/team/member3.jpg" class="rounded-circle z-depth-1" style="width: 150px; height: 150px;" alt="Team Member 3">
                 <h4 class="font-weight-bold mt-3">Riccardo Beniamino</h4>
                 <p class="text-dark">
-                    <a href="https://github.com/celestedidiego" target="_blank" rel="noopener noreferrer">https://github.com/rickb3n</a>
+                    <a href="https://github.com/rickb3n" target="_blank" rel="noopener noreferrer">github.com/rickb3n</a>
                 </p>
             </div>
         </div>
