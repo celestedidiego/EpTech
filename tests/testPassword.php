@@ -1,9 +1,14 @@
 <?php
-$password = 'blu4';
-$hash = '$2y$10$g4Z.bJ.atD.gQ4e8yxuUnuUyQRtHRKo4oyD.i3ZxszJTAS8.sYWbe';
+    $password = 'admin'; // Testo in chiaro
+    $hash = password_hash($password, PASSWORD_BCRYPT);
 
-if (password_verify($password, $hash)) {
-    echo 'Password is valid!';
-} else {
-    echo 'Invalid password.';
-}
+    echo $hash; // Testo cifrato
+    echo "\n";
+
+    if (password_verify($password, $hash)) {
+        echo 'Password is valid!';
+    } else {
+        echo 'Invalid password.';
+    }
+
+?>
