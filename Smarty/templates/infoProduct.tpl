@@ -115,9 +115,9 @@
                     <form id="purchase" action="/EpTech/purchase/addToCart/{$productId}" method="POST">
                         {if $avQuantity > 0}
                         <select class="input-select margin-bottom-20" id="quantity" name="quantity">
-                            <!-- Mostra fino a 10 opzioni o il massimo disponibile -->
-                            {if $avQuantity >= 10}
-                                {for $i=1 to 10}
+                            <!-- Mostra fino a 20 opzioni o il massimo disponibile -->
+                            {if $avQuantity >= 20}
+                                {for $i=1 to 20}
                                     <option value="{$i}">Quantità: {$i}</option>
                                 {/for}
                             {else}
