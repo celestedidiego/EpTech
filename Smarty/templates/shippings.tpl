@@ -4,7 +4,7 @@
             <h2>I miei indirizzi</h2>
         </div>
         <div class="col-md-2">
-            <a href="/EpTech/user/addShipping" class="btn btn-primary">Aggiungi</a>
+            <a href="/EpTech/user/addShipping" class="btn btn-primary btn-block">Aggiungi</a>
         </div>
     </div>
     {if isset($messages.success)}

@@ -78,4 +78,7 @@
             Non hai ancora salvato nessuna carta di credito.
         </div>
     {/if}
+    <div class="col-md-2">
+        <a href="/EpTech/purchase/checkout" class="btn btn-primary">Procedi al checkout</a>
+    </div>
 </div>
