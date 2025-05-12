@@ -98,8 +98,9 @@
             </div>
         </div>
         <script src="/EpTech/skin/electroMaster/js/scripts-for-template.js"></script>
-        <script src="js/jquery.min.js"></script>
-        <script src="js/bootstrap.bundle.min.js"></script>
+        <!-- 
+        <script src="/EpTech/skin/electroMaster/js/jquery.min.js"></script>
+        <script src="/EpTech/skin/electroMaster/js/bootstrap.bundle.min.js"></script> -->
         <!-- Include any other JS files needed -->
     </body>
 </html>
