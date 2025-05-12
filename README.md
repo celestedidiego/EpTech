@@ -25,6 +25,12 @@
 - **Frontend**: Bootstrap, jQuery
 - **Staging**: XAMPP, LAMPP 8.2.12 (PHP 8.2), VS Code, Git, GitHub
 
+## 🔒 Credenziali utenti
+- **Admin**: Login: admin@gmail.com | Password: admin
+- **Celeste**: Login: celeste@gmail.com | Password: celeste
+- **Alessia**: Login: alessia@gmail.com | Password: alessia
+- **Riccardo**: Login: riccardo@gmail.com | Password:riccardo
+
 ## 📧 Configurazione Mailtrap
 
 1. Crea un account su [Mailtrap](https://mailtrap.io/)
