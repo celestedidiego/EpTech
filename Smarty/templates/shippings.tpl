@@ -4,7 +4,7 @@
             <h2>I miei indirizzi</h2>
         </div>
         <div class="col-md-2">
-            <a href="/EpTech/user/addShipping" class="btn btn-primary btn-block">Aggiungi</a>
+            <a href="/EpTech/user/addShipping" class="btn btn-primary">Aggiungi</a>
         </div>
     </div>
     {if isset($messages.success)}
@@ -88,6 +88,9 @@
                         </tr>
                     {/foreach}
                 </tbody>
-            </table>
-        </div>
+            </table>        
     {/if}
+    <div class="col-md-2">
+        <a href="/EpTech/purchase/checkout" class="btn btn-primary">Procedi al checkout</a>
+    </div>
+</div>

@@ -33,7 +33,6 @@
             <input name="recipientSurname" type="text" class="form-control" id="recipientSurname" placeholder="es. Rossi" required>
         </div>
         <button type="submit" class="btn btn-primary btn-block">Aggiungi</button>
-        <a href="/EpTech/purchase/checkout" class="btn btn-primary">Torna al checkout</a>
         <br>
     </form>
 </div>
