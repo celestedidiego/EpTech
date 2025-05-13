@@ -150,3 +150,6 @@ Essendo basato su Unix, i passaggi sono i medesimi di Linux, sostituire lampp co
 ```
 
 9. EpTech è pronto per il Web! (Assicurarsi che l'url inizi con `http` e non con `https`, ignorare gli avvisi di sicurezza dei browser essendo mancante il certificato `SSL` per `https`)
+
+## 💻 Team di sviluppo
+[Celeste Di Diego](https://github.com/celestedidiego), [Alessia Pulcini](https://github.com/alepulc), [Riccardo Beniamino](https://github.com/rickb3n)
