@@ -410,6 +410,9 @@ class CUser {
      * 
      * Se l'indirizzo può essere eliminato definitivamente, lo elimina.
      * Se l'indirizzo è associato a ordini esistenti, esegue una soft delete (nasconde l'indirizzo).
+     * 
+     * @param string $address L'indirizzo da eliminare.
+     * @param string $cap Il CAP dell'indirizzo da eliminare.
      */
     public static function deleteShipping($address, $cap) {
         $found_shipping = FPersistentManager::getInstance()->findShipping($address, $cap);
@@ -430,7 +433,12 @@ class CUser {
         exit();
     }
 
-    // Riattiva un indirizzo di spedizione precedentemente disattivato.
+    /**
+     * Riattiva un indirizzo di spedizione precedentemente disattivato.
+     * 
+     * @param string $address L'indirizzo da eliminare.
+     * @param string $cap Il CAP dell'indirizzo da eliminare.
+     */
     public static function reactivateShipping($address, $cap) {
         $found_shipping = FPersistentManager::getInstance()->findShipping($address, $cap);
         
