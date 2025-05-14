@@ -2,6 +2,11 @@
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 
+/**
+ * Class FPersistentManager
+ * Singleton per la gestione centralizzata della persistenza delle entità.
+ * Fornisce metodi per operazioni CRUD e query su varie entità del dominio.
+ */
 class FPersistentManager {
     //Singleton Class
     private static $instance;
@@ -10,7 +15,10 @@ class FPersistentManager {
 
     }
 
-    //Assicura che ci sia una sola istanza della classe FPersistentManager durante l'intero ciclo di vita dell'applicazione. Questo è utile per gestire la persistenza delle entità in modo centralizzato e coerente.
+    /**
+     * Restituisce l'istanza singleton (singola istanza) di FPersistentManager.
+     * @return FPersistentManager
+     */
     public static function getInstance(){
         if (!self::$instance) {
             self::$instance = new self();
@@ -19,12 +27,21 @@ class FPersistentManager {
         return self::$instance;
     }
 
+    /**
+     * Imposta l'istanza singleton (per test o override).
+     * @param FPersistentManager $instance
+     * @return void
+     */
     public static function setInstance($instance)
     {
         self::$instance = $instance;
     }
 
-    //Utilizzato per ottenere il repository di una specifica classe di entità.
+    /**
+     * Restituisce il repository Doctrine per una classe di entità.
+     * @param string $entityClass
+     * @return EntityRepository
+     */
     public function getRepository(string $entityClass): EntityRepository
     {
         if (!isset($this->repositories[$entityClass])) {
@@ -34,60 +51,105 @@ class FPersistentManager {
         return $this->repositories[$entityClass];
     }
 
-    //Utilizzato per rendere un'entità gestita e persistente nel contesto di persistenza di Doctrine
+    /**
+     * Rende persistente un'entità.
+     * @param object $entity
+     * @return void
+     */
     public function persist($entity): void
     {
        getEntityManager()->persist($entity);
     }
 
-    //Utilizzato per rimuovere un'entità dal contesto di persistenza di Doctrine
+    /**
+     * Rimuove un'entità dal contesto di persistenza.
+     * @param object $entity
+     * @return void
+     */
     public function remove($entity): void
     {
        getEntityManager()->remove($entity);
     }
 
-    //Utilizzato per applicare tutte le modifiche pendenti al database
+    /**
+     * Applica tutte le modifiche pendenti al database.
+     * @return void
+     */
     public function flush(): void
     {
        getEntityManager()->flush();
     }
 
-    //Utilizzato per pulire il contesto di persistenza di Doctrine
+    /**
+     * Pulisce il contesto di persistenza di Doctrine.
+     * @return void
+     */
     public function clear(): void
     {
        getEntityManager()->clear();
     }
 
-    //Utilizzato per trovare un'entità nel database tramite il suo identificatore
+    /**
+     * Trova un'entità nel database tramite la sua classe e identificatore.
+     * @param string $entityClass
+     * @param mixed $id
+     * @return object|null
+     */
     public function find(string $entityClass, $id)
     {
         return $this->getRepository($entityClass)->find($id);
     }
 
-    //Utilizzato per trovare tutte le entità di una specifica classe nel database
+    /**
+     * Trova tutte le entità di una specifica classe nel database.
+     * @param string $entityClass
+     * @return array
+     */
     public function findAll(string $entityClass): array
     {
         return $this->getRepository($entityClass)->findAll();
     }
 
-    //Utilizzato per trovare entità nel database basate su criteri specifici
+    /**
+     * Trova entità nel database tramite criteri specifici.
+     * @param string $entityClass
+     * @param array $criteria
+     * @param array|null $orderBy
+     * @param int|null $limit
+     * @param int|null $offset
+     * @return array
+     */
     public function findBy(string $entityClass, array $criteria, ?array $orderBy = null, ?int $limit = null, ?int $offset = null): array
     {
         return $this->getRepository($entityClass)->findBy($criteria, $orderBy, $limit, $offset);
     }
 
-    //Utilizzato per trovare una singola entità nel database basata su criteri specifici
+    /**
+     * Trova una singola entità nel database tramite criteri specifici.
+     * @param string $entityClass
+     * @param array $criteria
+     * @return object|null
+     */
     public function findOneBy(string $entityClass, array $criteria)
     {
         return $this->getRepository($entityClass)->findOneBy($criteria);
     }
 
-    //Utilizzato per aggiornare lo stato di un'entità con i dati attuali dal database
+    /**
+     * Aggiorna lo stato di un'entità con i dati attuali dal database.
+     * @param object $entity
+     * @return void
+     */
     public function refresh($entity){
         getEntityManager()->refresh($entity);
     }
 
-    //Utilizzato per trovare un utente nel database, sia che l'utente sia un oggetto di una classe specifica (ERegisteredUser, EUnRegisteredUser, EAdmin) o una stringa (email).
+     /**
+     * Trova un utente (registrato o admin) tramite oggetto o email.
+     * Utilizzato per trovare un utente nel database, sia che l'utente sia un oggetto di una classe specifica (ERegisteredUser, EUnRegisteredUser, EAdmin) o una stringa (email).
+     * @param mixed $user
+     * @return mixed
+     */
     public function findUtente($user){
         if($user instanceof ERegisteredUser){
             if(is_object($user)){
@@ -116,23 +178,40 @@ class FPersistentManager {
         }
     }
 
-    //Utilizzato per trovare un acquirente nel database tramite il suo identificatore
+    /**
+     * Trova un utente registrato tramite ID.
+     * @param int $registeredUserId
+     * @return mixed
+     */
     public function findRegisteredUserById($registeredUserId){
         return getEntityManager()->getRepository('ERegisteredUser')->findRegisteredUserById($registeredUserId);
     }
 
-    //Utilizzato per trovare un admin nel database tramite il suo identificatore
+    /**
+     * Trova un admin tramite ID.
+     * @param int $adminId
+     * @return mixed
+     */
     public function findAdminById($adminId){
         return getEntityManager()->getRepository('EAdmin')->findAdminById($adminId);
     }
 
-    //Inserire un nuovo utente registrato nel database
+    /**
+     * Inserisce un nuovo utente registrato nel database.
+     * @param ERegisteredUser $new_user
+     * @return void
+     */
     public function insertNewUser(ERegisteredUser $new_user): void
     {
         getEntityManager()->getRepository('ERegisteredUser')->insertNewRegisteredUser($new_user);
     }
 
-    //Aggiornare la password di un utente
+    /**
+     * Aggiorna la password di un utente (registrato o admin).
+     * @param mixed $user
+     * @param string $new_password
+     * @return void
+     */
     public function updatePass($user, string $new_password): void {
         if ($user instanceof ERegisteredUser) {
             $this->updateRegisteredUserPass($user, $new_password);
@@ -169,7 +248,11 @@ class FPersistentManager {
         }
     }
 
-    //Utilizzato per eliminare un utente registrato (ERegisteredUser) o un amministratore (EAdmin) dal database
+    /**
+     * Elimina un utente registrato o admin.
+     * @param mixed $user
+     * @return void
+     */
     public function deleteUser($user): void
     {
         if($user instanceof ERegisteredUser){
@@ -179,10 +262,23 @@ class FPersistentManager {
         }
     }
 
+    /**
+     * Restituisce tutti i prodotti paginati.
+     * @param int $currentPage
+     * @return mixed
+     */
     public function getAllProducts($currentPage){
         return getEntityManager()->getRepository('EProduct')->getAllProducts($currentPage);
     }
 
+    /**
+     * Restituisce tutti i prodotti della stessa categoria, escluso uno specifico prodotto.
+     * @param string $category
+     * @param int $productId
+     * @param int $page
+     * @param int $itemsPerPage
+     * @return array
+     */
     public function getAllSameCatProducts($category, $productId, $page = 1, $itemsPerPage = 4) {
         $prod = $this->find(EProduct::class, $productId);
         // Recupera tutti i prodotti della stessa categoria
@@ -201,65 +297,152 @@ class FPersistentManager {
         return $all_products;
     }
 
+    /**
+     * Restituisce tutte le categorie.
+     * @return array
+     */
     public function getAllCategories(){
         return getEntityManager()->getRepository('ECategory')->getAllCategories();
     }
 
+    /**
+     * Inserisce un nuovo prodotto.
+     * @param mixed $product
+     * @return void
+     */
     public function insertProduct($product){
         getEntityManager()->getRepository('EProduct')->insertProduct($product);
     }
 
+    /**
+     * Trova una categoria.
+     * @param mixed $category
+     * @return mixed
+     */
     public function findCategory($category){
         return getEntityManager()->getRepository('ECategory')->findCategory($category);
     }
 
-    //Aggiornare le informazioni di un prodotto, inclusa la categoria
+    /**
+     * Aggiorna le informazioni di un pordotto inclusa la categoria.
+     * @param mixed $product
+     * @param mixed $category
+     * @return void
+     */
     public function updateCatProdotto($product, $category){
         getEntityManager()->getRepository('EProduct')->updateCatProdotto($product, $category);
     }
 
+    /**
+     * Elimina un prodotto.
+     * @param mixed $product
+     * @return void
+     */
     public function deleteProduct($product){
         getEntityManager()->getRepository('EProduct')->deleteProduct($product);
     }
 
+    /**
+     * Restituisce tutti gli ordini di un utente paginati.
+     * @param mixed $user
+     * @param int $page
+     * @return mixed
+     */
     public function getAllOrders($user, $page) {
         return getEntityManager()->getRepository('EItemOrder')->getAllOrders($user, $page);
     }
 
+    /**
+     * Crea un nuovo ordine.
+     * @param mixed $idShipping
+     * @param string $cap
+     * @param mixed $carta_id
+     * @param array $cart
+     * @return mixed
+     */
     public function newOrder($idShipping, $cap, $carta_id, $cart) {
         return getEntityManager()->getRepository('EOrder')->newOrder($idShipping, $cap, $carta_id, $cart);
     }
 
+    /**
+     * Aggiunge un prodotto a un ordine.
+     * @param EOrder $order
+     * @param EProduct $product
+     * @param int $quantity
+     * @return mixed
+     */
     public function addProductOrder(EOrder $order, EProduct $product, $quantity) {
         return getEntityManager()->getRepository('EItemOrder')->addProductOrder($order, $product, $quantity);
     }
+
+    /**
+     * Restituisce tutte le spedizioni di un utente.
+     * @param ERegisteredUser $registeredUser
+     * @return mixed
+     */
     public function getAllShippingUser(ERegisteredUser $registeredUser) {
         return getEntityManager()->getRepository('EShipping')->getAllShippingUser($registeredUser->getIdRegisteredUser());
     }
 
+    /**
+     * Restituisce tutte le carte di credito di un utente.
+     * @param ERegisteredUser $registeredUser
+     * @return mixed
+     */
     public function getAllCreditCardUser(ERegisteredUser $registeredUser) {
         return getEntityManager()->getRepository('ECreditCard')->getAllCreditCardUser($registeredUser->getIdRegisteredUser());
     }
 
+    /**
+     * Inserisce una nuova spedizione.
+     * @param array $array_data
+     * @return void
+     */
     public function insertShipping($array_data){
         getEntityManager()->getRepository('EShipping')->insertShipping($array_data);
     }
+
+    /**
+     * Elimina una spedizione.
+     * @param mixed $idShipping
+     * @return void
+     */
     public function deleteShipping($idShipping){
         getEntityManager()->getRepository('EShipping')->deleteShipping($idShipping);
     }
+
+    /**
+     * Inserisce una nuova carta di credito.
+     * @param array $array_data
+     * @return void
+     */
     public function insertCreditCard($array_data) {
         getEntityManager()->getRepository('ECreditCard')->insertCreditCard($array_data);
     }
 
+    /**
+     * Elimina una carta di credito.
+     * @param mixed $cardNumber
+     * @return void
+     */
     public function deleteCreditCard($cardNumber) {
         getEntityManager()->getRepository('ECreditCard')->deleteCreditCard($cardNumber);
     }
 
+    /**
+     * Restituisce tutti gli ordini dell'utente corrente.
+     * @return mixed
+     */
     public function getOrderUser(){
         return getEntityManager()->getRepository('EOrder')->findOrderUser($_SESSION['user']->getIdRegisteredUser());
     }
 
-    //Per cercare prodotti in base a una query di ricerca e, opzionalmente, una categoria.
+    /**
+     * Cerca prodotti tramite query di ricerca e opzionalmente di categoria.
+     * @param string $query
+     * @param string|null $category
+     * @return array
+     */
     public function searchProduct($query, $category) {
         $dql = "SELECT p FROM EProduct p WHERE p.nameProduct LIKE :query";
         if ($category) {
@@ -273,6 +456,13 @@ class FPersistentManager {
         return $query->getResult();
     }
 
+    /**
+     * Restituisce prodotti filtrati e paginati.
+     * @param array $filters
+     * @param int $page
+     * @param int $pageSize
+     * @return array
+     */
     public function getProductFiltered($filters, $page = 1, $pageSize = 4) {
         $qb = getEntityManager()->createQueryBuilder();
         $qb->select('p')
@@ -321,6 +511,10 @@ class FPersistentManager {
         ];
     }
 
+    /**
+     * Restituisce tutte le marche dei prodotti.
+     * @return array
+     */
     public function getAllBrands() {
         $dql = "SELECT DISTINCT p.brand FROM EProduct p";
         $query = getEntityManager()->createQuery($dql);
@@ -328,11 +522,21 @@ class FPersistentManager {
         return array_column($results, 'brand');
     }
 
+    /**
+     * Trova un elemento dell' ordine basandosi sull'ID dell'ordine e ID del prodotto.
+     * @param int $idOrder L'identificatore univoco dell'ordine.
+     * @param int $productId L'identificatore univoco del prodotto.
+     * @return mixed L'elemento dell'ordine corrispondente, se trovato; altrimenti null.
+     */
     public function findItemOrder($idOrder, $productId) {
         return getEntityManager()->getRepository('ItemOrder')->findItemOrder($idOrder, $productId);
     }
 
-    //Aggiornare un'entità nel database
+    /**
+     * Aggiorna un'entità nel database.
+     * @param object $entity
+     * @return bool
+     */
     public function update($entity) {
         try {
             getEntityManager()->persist($entity);
@@ -345,21 +549,50 @@ class FPersistentManager {
         }
     }
     
+    /**
+     * Restituisce un prodotto tramite ID.
+     * @param int $productId
+     * @return mixed
+     */
     public function getProductById($productId){
         return getEntityManager()->getRepository(EProduct::class)->getProductById($productId);
     }
 
+    /**
+     * Restituisce le recensioni di un prodotto tramite nome.
+     * @param string $productName
+     * @return mixed
+     */
     public function getReviewsByProductName($productName){
         return getEntityManager()->getRepository(EReview::class)->getReviewsByProductName($productName);
     }
 
+    /**
+     * Restituisce le recensioni di un prodotto paginati.
+     * @param mixed $product
+     * @param int $page
+     * @param int $itemsPerPage
+     * @return mixed
+     */
     public function getReviewsProduct($product, $page = 1, $itemsPerPage = 5) {
         return getEntityManager()->getRepository('EReview')->getReviewsProduct($product, $page, $itemsPerPage);
     }
 
+    /**
+     * Aggiunge una recensione.
+     * @param mixed $review
+     * @return void
+     */
     public function addReview($review) {
         getEntityManager()->getRepository('EReview')->addReview($review);
     }
+
+    /**
+     * Restituisce la recensione di un utente per un prodotto.
+     * @param mixed $registeredUser
+     * @param mixed $product
+     * @return mixed
+     */
     public function getReviewUser($registeredUser, $product) {
         return getEntityManager()->getRepository('EReview')->getReviewUser($registeredUser, $product);
     }
@@ -376,6 +609,11 @@ class FPersistentManager {
         return null;
     }
     
+     /**
+     * Trova un utente tramite email.
+     * @param string $email
+     * @return mixed $user
+     */
     private function findUserByEmail($email) {
         $user = getEntityManager()->getRepository('ERegisteredUser')->findRegisteredUser($email);
         if (!$user) {
@@ -384,6 +622,11 @@ class FPersistentManager {
         return $user;
     }
     
+    /**
+     * Trova un utente dall'oggetto.
+     * @param mixed $user
+     * @return mixed
+     */
     private function findUserByObject($user) {
         if ($user instanceof ERegisteredUser) {
             return getEntityManager()->getRepository('ERegisteredUser')->findRegisteredUser($user->getEmail());
@@ -393,6 +636,11 @@ class FPersistentManager {
         return null;
     }
 
+     /**
+     * Trova una carta di credito tramite numero.
+     * @param string $cardNumber
+     * @return ECreditCard|null
+     */
     public function findCreditCard($cardNumber) {
         $dql = "SELECT car FROM ECreditCard car WHERE car.cardNumber = ?1";
         $query = getEntityManager()->createQuery($dql); 
@@ -401,6 +649,12 @@ class FPersistentManager {
         return $query->getOneOrNullResult(); // Restituisce un singolo oggetto o null
     }
 
+     /**
+     * Trova una spedizione credito tramite inidirzzo e cap.
+     * @param string $address
+     * @param string $cap
+     * @return array
+     */
     public function findShipping($address, $cap){
         $dql = "SELECT sh FROM EShipping sh WHERE sh.address = ?1 AND sh.cap = ?2";
         $query = getEntityManager()->createQuery($dql);
@@ -410,23 +664,53 @@ class FPersistentManager {
         return $query->getResult();
     }
 
+     /**
+     * Verifica se un untente ha comprato un prodotto per sbloccare la recensione.
+     * @param mixed $product
+     * @return bool
+     */
     public function hasPurchasedProduct($product) {
         return getEntityManager()->getRepository('EReview')->hasPurchasedProduct($product);
     }
 
+     /**
+     * Restituisce le recensioni di un prodotto per l'amministratore.
+     * @param mixed $admin
+     * @param int $page
+     * @param int $itemsPerPage
+     * @return bool
+     */
     public function getReviewAdmin($admin, $page, $itemsPerPage) {
         return getEntityManager()->getRepository('EReview')->getReviewAdmin($admin, $page, $itemsPerPage);
     }
 
+     /**
+     * Restituisce tutti i prodotti di un admin.
+     * @param EAdmin $admin
+     * @param int $page
+     * @param array $filters
+     * @return array
+     */
     public function getAllProductsByAdmin(EAdmin $admin, $page, $filters){
         return getEntityManager()->getRepository('EProduct')->getAllProductsByAdmin($admin, $page, $filters);
     }
 
+     /**
+     * Fa aggiornare all'admin la categoria di un prodotto.
+     * @param mixed $product
+     * @param mixed $admin
+     * @param mixed $category
+     * @return void
+     */
     public function updateAdminCatProduct($product, $admin, $category){
         getEntityManager()->getRepository('EProduct')->updateAdminCatProduct($product, $admin, $category);
     }
 
-    // verificherà se una categoria ha prodotti associati.
+     /**
+     * Verifica se una categoria ha prodotti associati.
+     * @param mixed $category
+     * @return int $count
+     */
     public function hasProducts($category)
     {
         $dql = "SELECT COUNT(p.id) FROM EProduct p WHERE p.category = ?1";
@@ -436,63 +720,133 @@ class FPersistentManager {
         return $count > 0;
     }
 
-    // eliminerà una categoria dal database
+     /**
+     * Elimina una categoria dal database.
+     * @param mixed $category
+     * @return void
+     */
     public function deleteCategory($category)
     {
         getEntityManager()->remove($category);
         getEntityManager()->flush();
     }
 
+     /**
+     * Esegue una soft delete di una spedizione.
+     * @param EShipping $shipping
+     * @return void
+     */
     public function softDeleteShipping(EShipping $shipping) {
         $shipping->setDeleted(true);
         getEntityManager()->flush();
     }
 
+     /**
+     * Verifica se una spedizione può essere eliminata definitivamente.
+     * @param mixed $address
+     * @param string $cap
+     * @return bool
+     */
     public function canShippingBeHardDeleted($address, $cap): bool {
         return getEntityManager()->getRepository('EShipping')->canBeHardDeleted($address, $cap);
     }
 
+     /**
+     * Riattiva una spedizione precedentemente eliminata.
+     * @param EShipping $shipping
+     * @return void
+     */
     public function reactivateShipping(EShipping $shipping) {
         $shipping->setDeleted(false);
         getEntityManager()->flush();
     }
 
+     /**
+     * Verifica se una carta di credito può essere eliminata definitivamente.
+     * @param string $cardNumber
+     * @return bool
+     */
     public function canCreditCardBeHardDeleted($cardNumber): bool {
         return getEntityManager()->getRepository('ECreditCard')->canBeHardDeleted($cardNumber);
     }
 
+     /**
+     * Esegue una soft delete di una carta di credito.
+     * @param ECreditCard $creditCard
+     * @return void
+     */
     public function softDeleteCreditCard(ECreditCard $creditCard) {
         $creditCard->setDeleted(true);
         getEntityManager()->flush();
     }
 
+     /**
+     * Riattiva una carta di credito precedentemente eliminata.
+     * @param ECreditCard $creditCard
+     * @return void 
+     */
     public function reactivateCreditCard(ECreditCard $creditCard) {
         $creditCard->setDeleted(false);
         getEntityManager()->flush();
     }
 
+     /**
+     * Aggiunge dati a un ordine.
+     * @param EOrder $order
+     * @param array $data
+     * @return void
+     */
     public function addOrderData($order, $data) {
         getEntityManager()->getRepository('EOrder')->addOrderData($order, $data);
     }
 
+     /**
+     * Cancella un ordine.
+     * @param EOrder $order
+     * @return void
+     */
     public function deleteOrder($order)
     {
         getEntityManager()->remove($order);
         getEntityManager()->flush();
     }
 
+     /**
+     * Restituisce tutti gli ordini paginati.
+     * @param int $page
+     * @param int $itemsPerPage
+     * @return mixed
+     */
     public function getOrders($page, $itemsPerPage) {
         return getEntityManager()->getRepository('EOrder')->getOrders($page, $itemsPerPage);
     }
 
+     /**
+     * Restituisce tutti gli utenti paginati.
+     * @param int $page
+     * @param int $itemsPerPage
+     * @return mixed
+     */
     public function getAllUsersPaginated($page, $itemsPerPage) {
         return getEntityManager()->getRepository('EAdmin')->getAllUsersPaginated($page,$itemsPerPage);
     }
 
+     /**
+     * Restituisce gli utenti filtrati e paginati.
+     * Fa il collegamento con il repository EAdmin per ottenere gli utenti filtrati e paginati tramite adminId.
+     * Perché solo gli admin possono cercare/filtrare gli utenti registrati.
+     * @param int $adminId
+     * @return mixed
+     */
     public function getFilteredUsersPaginated($adminId){
         return getEntityManager()->getRepository('EAdmin')->getFilteredUsersPaginated($adminId);
     }
 
+     /**
+     * Restituisce gli ultimi quattro prodotti per la home page.
+     * @param int $limit
+     * @return array
+     */
     public function getLatestProductsHome($limit = 4) {
         $array_product = $this->getRepository(EProduct::class)->getLatestNewProducts($limit);
     
@@ -511,38 +865,86 @@ class FPersistentManager {
         return $array_product;
     }
     
+    /**
+     * Restituisce tutte le immagini di un prodotto.
+     * @param mixed $product
+     * @return array
+     */
     public function getAllImages($product){
         return getEntityManager()->getRepository('EImage')->getAllImages($product);
     }
 
+    /**
+     * Inserisce una nuova immagine.
+     * @param mixed $image
+     * @return void
+     */
     public function insertImage($image){
         getEntityManager()->getRepository('EImage')->insertImage($image);
     }
 
+    /**
+     * Trova un'immagine tramite ID.
+     * @param mixed $image
+     * @return mixed
+     */
     public function findImage($image){
         return getEntityManager()->getRepository('EImage')->findImage($image);
     }
 
+    /**
+     * Aggiorna l'immagine di un prodotto.
+     * @param mixed $product
+     * @param mixed $image
+     * @return void
+     */
     public function updateImageProduct($product, $image){
         getEntityManager()->getRepository('EProduct')->updateImageProduct($product,$image);
     }
 
+    /**
+     * Elimina tutte le immagini associate a un ID prodotto.
+     * @param mixed $productId
+     * @return void
+     */
     public function deleteAllImages($productId){
         getEntityManager()->getRepository('EImage')->deleteAllImages($productId);
     }
 
+    /**
+     * Aggiorna i dati di un prodotto.
+     * @param mixed $product
+     * @param array $array_data
+     * @return void
+     */
     public function updateProduct ($product, $array_data) {
         getEntityManager()->getRepository('EProduct')->updateProduct($product, $array_data);
     }
 
+    /**
+     * Esegue una soft delete su un utente.
+     * @param mixed $user
+     * @return mixed
+     */
     public function softDeleteUser($user) {
         return getEntityManager()->getRepository('EAdmin')->softDeleteUser($user);
     }
 
+    /**
+     * Restituisce tutte le recensioni paginati.
+     * @param int $page
+     * @param int $itemsPerPage
+     * @return mixed
+     */
     public function getAllReviewsPaginated($page = 1, $itemsPerPage = 5) {
         return getEntityManager()->getRepository('EAdmin')->getAllReviewsPaginated($page,$itemsPerPage);
     }
 
+    /**
+     * Aggiunge una richiesta di rimborso per un ordine.
+     * @param EOrder $order
+     * @return void
+     */
     public function addRefundRequest(EOrder $order): void {
         $em = getEntityManager(); // Ottieni l'EntityManager
         $refundRequest = new ERefundRequest($order); // Crea una nuova richiesta di reso/rimborso

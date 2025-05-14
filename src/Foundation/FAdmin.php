@@ -1,8 +1,17 @@
 <?php
 use Doctrine\ORM\EntityRepository;
 
+/**
+ * Class FAdmin
+ * Repository per la gestione degli amministratori e delle operazioni correlate.
+ */
 class FAdmin extends EntityRepository {
 
+    /**
+     * Trova un amministratore tramite email.
+     * @param string $email
+     * @return array
+     */
     public function findAdmin($email){
         $dql = "SELECT a FROM EAdmin a WHERE a.email = ?1";
         $query = getEntityManager()->createQuery($dql);
@@ -11,6 +20,11 @@ class FAdmin extends EntityRepository {
         return $query->getResult();
     }
 
+    /**
+     * Trova un amministratore tramite ID.
+     * @param int $adminId
+     * @return array
+     */
     public function findAdminById($adminId){
         $dql = "SELECT a FROM EAdmin a WHERE a.adminId = ?1";
         $query = getEntityManager()->createQuery($dql);
@@ -19,6 +33,12 @@ class FAdmin extends EntityRepository {
         return $query->getResult();
     }
 
+    /**
+     * Aggiorna la password di un amministratore.
+     * @param EAdmin $admin
+     * @param string $new_password
+     * @return void
+     */
     public function updatePass(EAdmin $admin, $new_password){
         $em = getEntityManager();
         $found_admin = $em->find(EAdmin::class, $admin->getIdAdmin());
@@ -29,6 +49,12 @@ class FAdmin extends EntityRepository {
         $em->flush();
     }
 
+    /**
+     * Aggiorna i dati di un amministratore.
+     * @param EAdmin $admin
+     * @param array $array_data
+     * @return void
+     */
     public function updateAdmin(EAdmin $admin, $array_data){
         $em = getEntityManager();
         $found_admin = $em->find(EAdmin::class, $admin->getIdAdmin());
@@ -42,6 +68,11 @@ class FAdmin extends EntityRepository {
 
     }
 
+    /**
+     * Elimina definitivamente un amministratore.
+     * @param EAdmin $admin
+     * @return void
+     */
     public function deleteAdmin(EAdmin $admin) {
         $em = getEntityManager();
         $found_admin = $em->find(EAdmin::class, $admin->getIdAdmin());
@@ -49,6 +80,11 @@ class FAdmin extends EntityRepository {
         $em->flush();
     }
 
+    /**
+     * Esegue una soft delete su un utente (imposta il flag deleted).
+     * @param mixed $user
+     * @return void
+     */
     public function softDeleteUser($user) {
         $em=getEntityManager();
         $user->setDeleted(true);
@@ -56,6 +92,12 @@ class FAdmin extends EntityRepository {
         $em->flush();
     }
 
+    /**
+     * Restituisce tutti gli utenti paginati
+     * @param int $page
+     * @param int $itemsPerPage
+     * @return array
+     */
     public function getAllUsersPaginated($page = 1, $itemsPerPage = 10)
     {
         $offset = ($page - 1) * $itemsPerPage;
@@ -91,6 +133,13 @@ class FAdmin extends EntityRepository {
         ];
     }
 
+    /**
+     * Restituisce gli utenti filtrati per ID e paginati.
+     * @param int $id
+     * @param int $page
+     * @param int $itemsPerPage
+     * @return array
+     */
     public function getFilteredUsersPaginated($id, $page = 1, $itemsPerPage = 10)
     {
         $offset = ($page - 1) * $itemsPerPage;
@@ -130,6 +179,10 @@ class FAdmin extends EntityRepository {
         ];
     }
 
+    /**
+     * Conta il numero totale di utenti non eliminati.
+     * @return int
+     */
     private function getTotalUsersCount()
     {
         $qb = $this->getEntityManager()->createQueryBuilder();
@@ -141,7 +194,12 @@ class FAdmin extends EntityRepository {
         return $qb->getQuery()->getSingleScalarResult();
     }
 
-
+    /**
+     * Restituisce tutte le recensioni paginati.
+     * @param int $page
+     * @param int $itemsPerPage
+     * @return array
+     */
     public function getAllReviewsPaginated($page = 1, $itemsPerPage = 5)
     {
         $offset = ($page - 1) * $itemsPerPage;
@@ -182,6 +240,13 @@ class FAdmin extends EntityRepository {
         ];
     }
 
+    /**
+     * Trova le recensioni di un utente specifico, paginati.
+     * @param int $userId
+     * @param int $page
+     * @param int $itemsPerPage
+     * @return array
+     */
     public function findReviewsByUserId($userId, $page = 1, $itemsPerPage = 5)
     {
         $offset = ($page - 1) * $itemsPerPage;

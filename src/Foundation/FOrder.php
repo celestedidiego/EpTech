@@ -2,14 +2,31 @@
 
 use Doctrine\ORM\EntityRepository;
 
-
+/**
+ * Class FOrder
+ * Repository per la gestione degli ordini.
+ */
 class FOrder extends EntityRepository {
 
+    /**
+     * Trova tutti gli ordini di un utente.
+     * @param int $idUser
+     * @return array
+     */
     public function findOrderUser($idUser)
     {
         return $this->findBy(['registeredUser' => $idUser], ['idOrder' => 'DESC']);
     }
 
+    /**
+     * Crea un nuovo ordine.
+     * @param string $address
+     * @param string $cap
+     * @param string $cardNumber
+     * @param array $cart
+     * @return EOrder
+     * @throws Exception
+     */
     public function newOrder($address, $cap, $cardNumber, $cart){
         $em = getEntityManager();
         $em->beginTransaction();
@@ -63,6 +80,12 @@ class FOrder extends EntityRepository {
         }
     }
 
+    /**
+     * Cambia lo stato di un ordine.
+     * @param int $idOrder
+     * @param string $newStatus
+     * @return void
+     */
     public function ChangeOrderStatus($idOrder, $newStatus){
         $em = getEntityManager();
         $found_order = $em->find(EOrder::class, $idOrder);
@@ -72,6 +95,11 @@ class FOrder extends EntityRepository {
         $em->flush();
     }
 
+    /**
+     * Aggiunge una richiesta di rimborso per un ordine.
+     * @param EOrder $order
+     * @return void
+     */
     public function addRefundRequest(EOrder $order): void {
         $em = $this->getEntityManager();
         $refundRequest = new ERefundRequest($order);
