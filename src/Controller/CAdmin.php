@@ -20,7 +20,7 @@ class CAdmin {
 
         if (isset($_POST['adminId']) && !empty($_POST['adminId'])) {
             $adminId = $_POST['adminId'];
-            $users = FPersistentManager::getInstance()->getFilteredUsersPaginated($adminId, $page, $itemsPerPage);
+            $users = FPersistentManager::getInstance()->getFilteredUsersPaginated($adminId);
         } else {
             $users = FPersistentManager::getInstance()->getAllUsersPaginated($page, $itemsPerPage);
         }
@@ -93,12 +93,12 @@ class CAdmin {
 
         if($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['productId'])){
             $search_term = $_POST['productId'];
-        $product = FPersistentManager::getInstance()->getProductById($search_term, $page, $pageSize = 4);
+        $product = FPersistentManager::getInstance()->getProductById($search_term);
         $categories = FPersistentManager::getInstance()->getAllCategories();
                 $brand = FPersistentManager::getInstance()->getAllBrands();
         $view->manageProducts($product, $categories, $brand, $product_added, $product_modified, $product_deleted);
         }else{   
-        $array_products = FPersistentManager::getInstance()->getAllProducts($page, $pageSize = 4);
+        $array_products = FPersistentManager::getInstance()->getAllProducts($page);
                 $categories = FPersistentManager::getInstance()->getAllCategories();
                 $brand = FPersistentManager::getInstance()->getAllBrands();
                 $view->manageProducts($array_products, $categories, $brand, $product_added, $product_modified, $product_deleted);

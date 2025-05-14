@@ -88,7 +88,6 @@ class FProduct extends EntityRepository {
     
     }
 
-    //Rivedere se è necessario questo metodo
     public function getLatestNewProducts($limit = 4) {
         $dql = "SELECT p.productId, p.nameProduct, p.priceProduct, c.nameCategory
                 FROM EProduct p
