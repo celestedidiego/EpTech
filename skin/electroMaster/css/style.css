@@ -128,6 +128,14 @@ textarea.input {
   min-height: 90px;
 }
 
+/* Fix textarea overflow cross-platform */
+textarea, textarea#description {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    resize: vertical; /* opzionale: solo resize verticale */
+}
+
 /*-- Number input --*/
 
 .input-number {
@@ -974,6 +982,51 @@ textarea.input {
   background-color: rgba(4, 55, 79, 0.8);
   border-color: rgba(4, 55, 79, 0.8);
   color: #FFF;
+}
+
+/* Limita la larghezza della preview e delle immagini */
+.image-preview {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    max-width: 100%;
+    margin-top: 10px;
+    overflow-x: auto;
+}
+
+.image-preview .image-container {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    flex: 0 0 auto;
+    border: 1px solid #e4e7ed;
+    border-radius: 6px;
+    background: #fafafa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.image-preview .image-container img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    display: block;
+}
+
+.image-preview .remove-button {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    background: #ff2301;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    font-size: 12px;
+    padding: 2px 6px;
+    cursor: pointer;
+    z-index: 2;
 }
 
 .product .product-body {
