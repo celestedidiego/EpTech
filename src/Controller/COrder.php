@@ -2,7 +2,11 @@
 
 class COrder
 {
-    // Metodo per aggiungere un ordine
+    /**
+     * Metodo per aggiungere un ordine
+     * 
+     * @return void
+     */
     public static function addOrder()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -10,7 +14,7 @@ class COrder
                 $orderData = $_POST['orderData']; // Si assume che i dati dell'ordine siano inviati tramite POST
 
                 // Invece di creare un'istanza di EOrder, passiamo direttamente i dati al gestore persistente
-                $userId = $_SESSION['user_id']; // Assuming user ID is stored in session
+                $userId = $_SESSION['user_id']; // ID utente dalla sessione
                 FPersistentManager::getInstance()->addOrderData($orderData, $userId);
 
                 $_SESSION['order_success'] = "L'ordine è stato aggiunto con successo!";
@@ -23,7 +27,12 @@ class COrder
         }
     }
 
-    // Metodo per modificare un ordine (DA VALUTARE SE TENERLO)
+     /**
+     * Modifica un ordine esistente.
+     *
+     * @param int $orderId ID dell'ordine da modificare
+     * @return void
+     */
     public static function editOrder($orderId)
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -52,7 +61,12 @@ class COrder
         }
     }
 
-    // Metodo per eliminare un ordine
+    /**
+     * Elimina un ordine esistente.
+     *
+     * @param int $orderId ID dell'ordine da eliminare
+     * @return void
+     */
     public static function deleteOrder($orderId)
     {
         try {
@@ -74,7 +88,11 @@ class COrder
         header("Location: /EpTech/order/list");
     }
 
-    // Metodo per elencare gli ordini
+     /**
+     * Elenca tutti gli ordini con paginazione.
+     *
+     * @return void
+     */
     public static function listOrders()
     {
         $page = isset($_GET['orders_page']) ? (int)$_GET['orders_page'] : 1;
@@ -86,7 +104,12 @@ class COrder
         $view->showOrders($orders, $page, $itemsPerPage);
     }
 
-    // Metodo per visualizzare un ordine
+    /**
+     * Visualizza i dettagli di un ordine.
+     *
+     * @param int $orderId ID dell'ordine da visualizzare
+     * @return void
+     */
     public static function viewOrder($orderId)
     {
         $order = FPersistentManager::getInstance()->find(EOrder::class, $orderId);
@@ -101,6 +124,12 @@ class COrder
         $view->showOrder($order);
     }
 
+    /**
+     * Invia una richiesta di reso o rimborso per un ordine consegnato.
+     *
+     * @param int $orderId ID dell'ordine per cui richiedere il rimborso
+     * @return void
+     */
     public static function requestRefund($orderId) {
         if (!isset($_SESSION['user']) || !($_SESSION['user'] instanceof ERegisteredUser)) {
             header('Location: /EpTech/user/login');
@@ -123,5 +152,3 @@ class COrder
         exit;
     }
 }
-
-

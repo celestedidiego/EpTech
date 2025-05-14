@@ -1,8 +1,18 @@
 <?php
 use Doctrine\ORM\EntityRepository;
 
+/**
+ * Class FShipping
+ * Repository per la gestione delle spedizioni.
+ */
 class FShipping extends EntityRepository {
 
+    /**
+     * Trova una spedizione tramite indirizzo e CAP.
+     * @param string $address
+     * @param string $cap
+     * @return array
+     */
     public function findShipping($address, $cap){
         $dql = "SELECT sh FROM EShipping sh WHERE sh.address = ?1 AND sh.cap = ?2";
         $query = getEntityManager()->createQuery($dql);
@@ -12,6 +22,11 @@ class FShipping extends EntityRepository {
         return $query->getResult();
     }
 
+    /**
+     * Inserisce una nuova spedizione.
+     * @param array $array_data
+     * @return void
+     */
     public function insertShipping($array_data){
         $new_shipping = new EShipping($array_data['address'], $array_data['cap'], $array_data['city'], $array_data['recipientName'], $array_data['recipientSurname']);
         $em = getEntityManager();
@@ -21,6 +36,11 @@ class FShipping extends EntityRepository {
         $em->flush();
     }
 
+    /**
+     * Restituisce tutte le spedizioni associate a un utente.
+     * @param int $idUser
+     * @return array
+     */
     public function getAllShippingUser($idUser)
     {
             return getEntityManager()->createQueryBuilder('sh')
@@ -35,6 +55,12 @@ class FShipping extends EntityRepository {
         
     }
 
+    /**
+     * Elimina una spedizione.
+     * @param EShipping $address
+     * @return void
+     * @throws \Exception
+     */
     public function deleteShipping(EShipping $address)
     {
         $em = $this->getEntityManager();
@@ -53,6 +79,10 @@ class FShipping extends EntityRepository {
         }
     }
 
+    /**
+     * Restituisce tutte le spedizioni attive (non eliminate).
+     * @return array
+     */
     public function findAllActive()
     {
         return getEntityManager()->createQueryBuilder()
@@ -62,12 +92,23 @@ class FShipping extends EntityRepository {
             ->getResult();
     }
 
+    /**
+     * Esegue una soft delete su una spedizione.
+     * @param EShipping $shipping
+     * @return void
+     */
     public function softDelete(EShipping $shipping)
     {
         $shipping->setDeleted(true);
         getEntityManager()->flush();
     }
 
+    /**
+     * Verifica se una spedizione può essere eliminata definitivamente.
+     * @param string $address
+     * @param string $cap
+     * @return bool
+     */
     public function canBeHardDeleted($address, $cap): bool
     {
         $qb = getEntityManager()->createQueryBuilder();

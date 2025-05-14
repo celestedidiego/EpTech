@@ -2,10 +2,20 @@
 
 class CReview
 {
+
+    /**
+     * Aggiunge una recensione per un prodotto.
+     * 
+     * @param int $productId ID del prodotto per il quale si desidera aggiungere una recensione.
+     * 
+     * @return void
+     */
     public static function add($productId)
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $view = new VReview();
+
+            // Verifica se l'utente ha acquistato il prodotto prima di permettere l'aggiunta della recensione
             if (!FPersistentManager::getInstance()->hasPurchasedProduct($productId)) {
                 $_SESSION['review_error'] = "Non puoi recensire un prodotto che non hai acquistato.";
                 header("Location: /EpTech/purchase/viewProduct/" . $productId);
@@ -15,12 +25,14 @@ class CReview
             $user = FPersistentManager::getInstance()->find(ERegisteredUser::class, $_SESSION['user']->getIdRegisteredUser());
             $product = FPersistentManager::getInstance()->find(EProduct::class, $productId);
 
+            // Verifica se esiste già una recensione per il prodotto da parte dell'utente
             $existingReview = FPersistentManager::getInstance()->getReviewUser($user, $product);
             if ($existingReview) {
                 $_SESSION['review_error'] = "Hai già scritto una recensione per questo prodotto. Puoi modificarla ma non aggiungerne una nuova.";
                 header("Location: /EpTech/purchase/viewProduct/" . $productId);
             } else {
                 try {
+                    // Aggiunge la recensione
                     $text = $_POST['text'];
                     $vote = $_POST['vote'];
 
@@ -42,12 +54,20 @@ class CReview
         }
     }
 
+    /**
+     * Modifica una recensione esistente per un prodotto.
+     * 
+     * @param int $productId ID del prodotto per il quale si desidera modificare la recensione.
+     * 
+     * @return void
+     */
     public static function edit($productId)
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $user = FPersistentManager::getInstance()->find(ERegisteredUser::class, $_SESSION['user']->getIdRegisteredUser());
             $product = FPersistentManager::getInstance()->find(EProduct::class, $productId);
 
+            // Verifica se l'utente ha acquistato il prodotto prima di permettere la modifica della recensione
             if (!FPersistentManager::getInstance()->hasPurchasedProduct($productId)) {
                 $_SESSION['review_error'] = "Non puoi modificare una recensione per un prodotto che non hai acquistato.";
                 header("Location: /EpTech/purchase/viewProduct/" . $productId);
@@ -57,11 +77,13 @@ class CReview
             $reviewId = $_POST['idReview'];
             $review = FPersistentManager::getInstance()->find(EReview::class, $reviewId);
 
+            // Verifica se la recensione appartiene all'utente
             if ($review->getRegisteredUser()->getIdRegisteredUser() != $user->getIdRegisteredUser()) {
                 $_SESSION['review_error'] = "Non puoi modificare una recensione che non ti appartiene.";
                 header("Location: /EpTech/purchase/viewProduct/" . $productId);
             } else {
                 try {
+                    // Modifica la recensione
                     $text = $_POST['text'];
                     $vote = $_POST['vote'];
 
@@ -80,6 +102,13 @@ class CReview
         }
     }
     
+    /**
+     * Permette all'admin di rispondere a una recensione.
+     * 
+     * @param int $reviewId ID della recensione a cui si desidera rispondere.
+     * 
+     * @return void
+     */
     public static function respondToReview($reviewId)
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -95,7 +124,7 @@ class CReview
             }
 
             // Recupera la risposta dal form
-            $response = $_POST['risposta']; // Cambiato il nome del campo per corrispondere al template
+            $response = $_POST['risposta'];
 
             // Imposta la risposta dell'admin
             $review->setResponseAdmin($response, $admin);
@@ -111,6 +140,11 @@ class CReview
         }
     }
 
+    /**
+     * Visualizza l'elenco delle recensioni per la gestione da parte dell'admin.
+     *
+     * @return void
+     */
     public static function listReviews()
     {
         $admin = FPersistentManager::getInstance()->find(EAdmin::class, $_SESSION['user']->getIdAdmin());
@@ -123,6 +157,13 @@ class CReview
         $view->showAdminReviews($reviews);
     }
 
+     /**
+     * Verifica se l'amministratore è autorizzato a rispondere alla recensione.
+     *
+     * @param EAdmin $admin L'admin che intende rispondere.
+     * @param EReview $review La recensione alla quale vuole rispondere.
+     * @return bool True se l'admin è autorizzato, false altrimenti.
+     */
     public static function canRespond($admin, $review)
     {
         return $review->getProduct()->getAdmin()->getIdAdmin() == $admin->getIdAdmin();

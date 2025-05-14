@@ -63,7 +63,7 @@
                             <td>{if $address->isDeleted()}Nascosto{else}Attivo{/if}</td>
                             <td>
                                 <div class="row d-flex align-items-center justify-content-center">
-                                    <!-- Considerazioni:
+                                <!-- Considerazioni:
                                 Gli indirizzi sono generalmente dati statici che raramente cambiano.
                                 Quando un utente si trasferisce, di solito aggiunge un nuovo indirizzo piuttosto che modificare quello esistente.
 

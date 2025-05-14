@@ -12,7 +12,6 @@
 
         body {
             background: rgba(4, 55, 79, 0.8); 
-            /* background:  #281858; */
             text-align: center;
             font-family: 'Roboto', sans-serif;
         }
@@ -475,7 +474,7 @@
     <script>
         $(document).ready(function() {
 
-            // Leggi il valore di data-error-log dal form
+            // Legge il valore di data-error-log dal form
             var errorLog = $('form').data('error-log');
 
             // Controlla se c'è un errore di login
@@ -485,14 +484,6 @@
                     $('form').removeClass('wrong-entry');
                 }, 3000);
             }
-
-            // Quando si clicca su password si alza il form
-            //$('#password').focusin(function(){
-                //$('form').addClass('up');
-            //});
-            //$('#password').focusout(function(){
-                //$('form').removeClass('up');
-            //});
 
             // Panda Eye move
             $(document).on("mousemove", function(event) {

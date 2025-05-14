@@ -2,14 +2,28 @@
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 
+/**
+ * Class FProduct
+ * Repository per la gestione dei prodotti.
+ */
 class FProduct extends EntityRepository {
 
+    /**
+     * Inserisce un nuovo prodotto.
+     * @param EProduct $product
+     * @return void
+     */
     public function insertProduct(EProduct $product){
         $em = getEntityManager();
         $em->persist($product);
         $em->flush();
     }
 
+    /**
+     * Esegue una soft delete su un prodotto.
+     * @param mixed $product
+     * @return void
+     */
     public function deleteProduct($product) {
         $em = getEntityManager();
         $found_product = $em->find(EProduct::class, $product);
@@ -19,6 +33,12 @@ class FProduct extends EntityRepository {
         $em->flush();
     }
 
+    /**
+     * Aggiorna l'immagine di un prodotto.
+     * @param EProduct $product
+     * @param EImage $image
+     * @return void
+     */
     public function updateImageProduct(EProduct $product, EImage $image){
         $em = getEntityManager();
         $found_product = $em->find(EProduct::class, $product->getProductId());
@@ -28,6 +48,14 @@ class FProduct extends EntityRepository {
         $em->flush();
     }
 
+    /**
+     * Aggiorna da admin la categoria di un prodotto.
+     * @param EProduct $product
+     * @param EAdmin $admin
+     * @param ECategory $category
+     * @return void
+     * @throws \Exception
+     */
     public function updateAdminCatProduct(EProduct $product, EAdmin $admin, ECategory $category)
     {
         $em = getEntityManager();
@@ -45,6 +73,12 @@ class FProduct extends EntityRepository {
         }
     }
 
+    /**
+     * Restituisce tutti i prodotti paginati.
+     * @param int $currentPage
+     * @param int $pageSize
+     * @return array
+     */
     public function getAllProducts($currentPage = 1, $pageSize = 4){
         $dql = "SELECT p
             FROM EProduct p
@@ -65,6 +99,13 @@ class FProduct extends EntityRepository {
         ];
     }
 
+    /**
+     * Restituisce un prodotto tramite ID, paginato.
+     * @param int $id
+     * @param int $currentPage
+     * @param int $pageSize
+     * @return array
+     */
     public function getProductById($id, $currentPage = 1, $pageSize = 4){
         $dql= "SELECT p 
         FROM EProduct p 
@@ -88,6 +129,11 @@ class FProduct extends EntityRepository {
     
     }
 
+    /**
+     * Restituisce gli ultimi quattro prodotti aggiunti.
+     * @param int $limit
+     * @return array
+     */
     public function getLatestNewProducts($limit = 4) {
         $dql = "SELECT p.productId, p.nameProduct, p.priceProduct, c.nameCategory
                 FROM EProduct p
@@ -99,6 +145,14 @@ class FProduct extends EntityRepository {
         return $query->getResult();
     }
 
+    /**
+     * Restituisce tutti i prodotti di un admin, con filtri e paginazione.
+     * @param EAdmin $admin
+     * @param int $page
+     * @param array $filter
+     * @param int $pageSize
+     * @return array
+     */
     public function getAllProductsByAdmin(EAdmin $admin, $page = 1, $filter = [], $pageSize = 4) {
         $qb = getEntityManager()->createQueryBuilder();
         $qb->select('p')
@@ -143,6 +197,12 @@ class FProduct extends EntityRepository {
         ];
     }
 
+    /**
+     * Aggiorna i dati di un prodotto.
+     * @param EProduct $product
+     * @param array $array_data
+     * @return void
+     */
     public function updateProduct(EProduct $product, $array_data){
         $em = getEntityManager();
         $found_product = $em->find(EProduct::class, $product->getProductId());
@@ -157,6 +217,13 @@ class FProduct extends EntityRepository {
         $em->flush();
     }
 
+    /**
+     * Restituisce tutti i prodotti di una categoria, paginati.
+     * @param mixed $category
+     * @param int $currentPage
+     * @param int $pageSize
+     * @return array
+     */
     public function getAllProductsByCategory($category, $currentPage = 1, $pageSize = 4){
         $dql = "SELECT p
                 FROM EProduct p
