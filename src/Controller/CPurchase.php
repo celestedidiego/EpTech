@@ -2,6 +2,11 @@
 
 class CPurchase {
 
+     /**
+     * Mostra la pagina dell'e-commerce con filtri, categorie e brand.
+     *
+     * @return void
+     */
     public static function shop() {
 
         $view = new VPurchase();
@@ -27,6 +32,12 @@ class CPurchase {
 
     }
 
+     /**
+     * Mostra la pagina di un prodotto.
+     *
+     * @param int $productId ID del prodotto da visualizzare
+     * @return void
+     */
     public static function viewProduct($productId) {
         $view = new VPurchase();
         $product = FPersistentManager::getInstance()->find(EProduct::class, $productId);
@@ -57,17 +68,23 @@ class CPurchase {
             }
         }
 
-        // Recupera i messaggi dalla sessione
+        // Recupera i messaggi di successo o errore dalla sessione
         $successMessage = isset($_SESSION['review_success']) ? $_SESSION['review_success'] : null;
         $errorMessage = isset($_SESSION['review_error']) ? $_SESSION['review_error'] : null;
 
-        // Rimuovi i messaggi dalla sessione dopo averli recuperati
+        // Rimuove i messaggi dalla sessione dopo averli visualizzati
         unset($_SESSION['review_success']);
         unset($_SESSION['review_error']);
 
         $view->viewProduct($product, $images, $reviews, $same_cat_products, $can_review, $review_user, $successMessage, $errorMessage);
     }
 
+    /**
+     * Aggiunge un prodotto al carrello (via cookie).
+     *
+     * @param int $productId ID del prodotto da aggiungere
+     * @return void
+     */
     public static function addToCart($productId)
     {
         if (!(isset($_COOKIE['cart']))) {
@@ -97,7 +114,12 @@ class CPurchase {
         header('Location: /EpTech/purchase/viewProduct/' . $productId);
     }
 
-
+    /**
+     * Rimuove un prodotto dal carrello.
+     *
+     * @param int $productId ID del prodotto da rimuovere
+     * @return void
+     */
     public static function removeFromCart($productId){
         $cart = json_decode($_COOKIE['cart'], true);
         unset($cart[$productId]);
@@ -109,6 +131,11 @@ class CPurchase {
         exit;
     }
 
+     /**
+     * Svuota il carrello.
+     *
+     * @return void
+     */
     public static function emptyCart() {
         if (isset($_COOKIE['cart'])) {
             setcookie('cart', json_encode([]), time() - 3600, "/"); 
@@ -117,6 +144,11 @@ class CPurchase {
         header('Location: /EpTech/user/home');
     }
 
+     /**
+     * Mostra la pagina del carrello.
+     *
+     * @return void
+     */
     public static function showCart(){
         if (!(isset($_COOKIE['cart']))) {
             setcookie('cart', json_encode([]), time() + (300), "/");  // 5 minuti
@@ -125,7 +157,12 @@ class CPurchase {
         $view_cart->cart(); 
     }
 
-
+     /**
+     * Aggiorna la quantità di un prodotto nel carrello.
+     *
+     * @param int $productId ID del prodotto
+     * @return void
+     */
     public static function updateQuantity($productId){
         if (!isset($_COOKIE['cart'])) {
             setcookie('cart', json_encode([]), time() + (300), "/"); // 5 minuti
@@ -158,6 +195,11 @@ class CPurchase {
         header('Location: /EpTech/purchase/showCart');
     }
     
+    /**
+     * Gestisce la visualizzazione e il completamento del checkout.
+     *
+     * @return void
+     */
     public static function checkout(){
         $view = new VPurchase();
     
@@ -185,13 +227,13 @@ class CPurchase {
             
             $view->viewCheckoutForm($shipping, $creditCards, $products_cart, $total_cart);
         } elseif ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            // Gestisci il completamento dell'ordine
+            // Gestisce il completamento dell'ordine
             $shipping_id = $_POST['shipping'];
             $creditCard_id = $_POST['creditCard'];
             $cart = isset($_COOKIE['cart']) ? json_decode($_COOKIE['cart'], true) : [];
             // Crea un nuovo ordine
             $order = FPersistentManager::getInstance()->newOrder($_SESSION['user'], $shipping_id, $creditCard_id, $cart);
-            // Aggiungi i prodotti all'ordine
+            // Aggiunge i prodotti all'ordine
             $cart = isset($_COOKIE['cart']) ? json_decode($_COOKIE['cart'], true) : [];
             foreach ($cart as $productId => $quantity) {
                 $product = FPersistentManager::getInstance()->find(EProduct::class, $productId);
@@ -208,7 +250,11 @@ class CPurchase {
         }
     }
     
-    
+    /**
+     * Completa l’ordine inviato dal form (POST).
+     *
+     * @return void
+     */
     public static function completeOrder(){
         if ($_SERVER['REQUEST_METHOD'] != 'POST') {
             header('Location: /EpTech/user/home');
@@ -222,7 +268,7 @@ class CPurchase {
             $shipping = explode('|', $_POST['shipping']);
             $cardNumber = $_POST['creditCard'];
 
-            // Recupera il carrello dalla sessione o dal cookie
+            // Recupera il carrello dal cookie
             $cart = isset($_COOKIE['cart']) ? json_decode($_COOKIE['cart'], true) : [];
 
             if (empty($cart)) {
@@ -243,8 +289,6 @@ class CPurchase {
             $view->viewConfirmOrder($order);
 
         } catch (\Exception $e) {
-            // Gestione degli errori
-            error_log("Errore durante il completamento dell'ordine: " . $e->getMessage());
             
             // Reindirizza l'utente a una pagina di errore o al carrello con un messaggio di errore
             $_SESSION['error_order'] = "Si è verificato un errore durante il completamento dell'ordine. " . $e->getMessage();
@@ -253,6 +297,12 @@ class CPurchase {
         }
     }
 
+     /**
+     * Mostra i dettagli di un ordine specifico.
+     *
+     * @param int $orderId ID dell’ordine da visualizzare
+     * @return void
+     */
     public static function detailOrder($orderId)
     {
         $view_user = new VPurchase();
@@ -266,7 +316,7 @@ class CPurchase {
                 }
                 $view_user->detailOrder($order);
             } elseif ($_SESSION['user'] instanceof EAdmin) {
-                // Admin: consenti l'accesso ai dettagli dell'ordine
+                // Admin: consente l'accesso ai dettagli dell'ordine
                 foreach ($order->getItemOrder() as $item) {
                     $item->getProduct()->getImages();
                 }

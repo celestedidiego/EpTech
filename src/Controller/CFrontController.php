@@ -53,12 +53,18 @@ class CFrontController {
                 exit;
             }
         } else {
-            // File del controller non trovato, reindirizza alla home page
+            // File del controller non trovato, reindirizza alla homepage
             header('Location: /EpTech/user/home');
             exit;
         }
     }
 
+    /** Verifica se il controller e il metodo sono pubblici.
+     * 
+     * @param string $controller Nome del controller
+     * @param string $method Nome del metodo
+     * @return bool Restituisce true se il controller e il metodo sono pubblici, false altrimenti.
+     */
     private function isPublic($controller, $method) {
         // Definisce le rotte pubbliche
         $publicRoutes = [
@@ -77,6 +83,14 @@ class CFrontController {
         return isset($publicRoutes[$controller]) && in_array($method, $publicRoutes[$controller]);
     }
 
+    /**
+     * Verifica se un determinato ruolo utente ha i permessi per accedere a un metodo specifico.
+     *
+     * @param string $roleUser Ruolo dell'utente (es. admin, registered_user, user_blocked).
+     * @param string $controller Nome del controller richiesto.
+     * @param string $method Metodo del controller richiesto.
+     * @return bool True se l'utente ha i permessi, false altrimenti.
+     */
     private function hasPermission($roleUser, $controller, $method) {
         // Definisce i permessi per ogni ruolo.
         $rolePermissions = [

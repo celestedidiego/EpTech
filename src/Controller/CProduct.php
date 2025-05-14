@@ -1,6 +1,12 @@
 <?php
 
 class CProduct {
+
+     /**
+     * Mostra la lista dei prodotti con filtri e messaggi di successo.
+     *
+     * @return void
+     */
     public static function listProducts() {
         $view = new VProduct();
         
@@ -13,12 +19,12 @@ class CProduct {
         
         $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
         
-        // Check for success messages in the session
+        // Controlla se ci sono messaggi di successo da visualizzare
         $product_added = isset($_SESSION['product_added']) && $_SESSION['product_added'];
         $product_modified = isset($_SESSION['product_modified']) && $_SESSION['product_modified'];
         $product_deleted = isset($_SESSION['product_deleted']) && $_SESSION['product_deleted'];
         
-        // Remove success messages from the session
+        // Resetta i messaggi di successo
         unset($_SESSION['product_added']);
         unset($_SESSION['product_modified']);
         unset($_SESSION['product_deleted']);
@@ -37,6 +43,11 @@ class CProduct {
         }
     }
     
+    /**
+     * Aggiunge un nuovo prodotto.
+     *
+     * @return void
+     */
     public static function addProduct()
     {
         $view = new VProduct();
@@ -110,6 +121,12 @@ class CProduct {
         }
     }
 
+    /**
+     * Modifica un prodotto esistente.
+     *
+     * @param int $productId L'ID del prodotto da modificare.
+     * @return void
+     */
     public static function modifyProduct($productId){
         
         $view = new VProduct();
@@ -135,16 +152,16 @@ class CProduct {
             FPersistentManager::getInstance()->updateProduct($product_to_modify, $array_data);
 
             if(isset($_FILES['images']) && !empty($_FILES['images']['tmp_name'][0])){
-                //Elimino tutte le immagini nel database relative al prodotto
+                //Elimina tutte le immagini nel database relative al prodotto
                 FPersistentManager::getInstance()->deleteAllImages($productId);
-                // Controllo se le immagini inserite eccedono una dimensione di 1MB
+                // Controlla se le immagini inserite eccedono una dimensione di 1MB
                 foreach($_FILES['images']['size'] as $key => $value) {
                     if($_FILES['images']['size'][$key] > 1000000){
                         $view->errorImageUpload();
                         exit;
                     }
                 }
-                // Controllo il tipo di file caricati
+                // Controlla il tipo di file caricati
                 foreach($_FILES['images']['type'] as $key => $value) {
                     if(!(in_array($_FILES['images']['type'][$key], $allowed_types))){
                         $view->errorImageUpload();
@@ -155,7 +172,7 @@ class CProduct {
                 // Trova il prodotto appena inserito
                 $found_product = FPersistentManager::getInstance()->find(EProduct::class, $productId);
                 
-                // Inserisci ogni immagine e collegala al prodotto
+                // Inserisce ogni immagine e la collega al prodotto
                 foreach($_FILES['images']['tmp_name'] as $key => $value) {
                     $fileName = $_FILES['images']['name'][$key];
                     $fileSize = $_FILES['images']['size'][$key];
@@ -179,12 +196,24 @@ class CProduct {
         }
     }
 
+     /**
+     * Elimina un prodotto dal sistema.
+     *
+     * @param int $productId ID del prodotto da eliminare.
+     * @return void
+     */
     public static function deleteProduct($productId) {
         FPersistentManager::getInstance()->deleteProduct($productId);
         $_SESSION['product_deleted'] = true;
         header('Location: /EpTech/product/listProducts?page=1');
     }
 
+    /**
+     * Mostra i dettagli di un prodotto, incluse le recensioni.
+     *
+     * @param int $productId ID del prodotto da visualizzare.
+     * @return void
+     */
     public static function viewProduct($productId) {
         $view = new VProduct();
         $product = FPersistentManager::getInstance()->find(EProduct::class, $productId);

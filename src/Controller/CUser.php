@@ -2,8 +2,12 @@
 
 class CUser {
 
-    // Questo metodo gestisce la visualizzazione della homepage. Controlla se l'utente è loggato e mostra la homepage appropriata per utenti registrati, amministratori o utenti non loggati. 
-    // Inoltre, imposta un cookie per il carrello se non esiste già.
+    /**
+     * Gestisce la visualizzazione della homepage.
+     * 
+     * Verifica se l'utente è loggato e mostra la homepage appropriata per utenti registrati, amministratori o utenti non loggati.
+     * Inoltre, imposta un cookie per il carrello se non esiste già.
+     */
 
     public static function home() {
         $view_home = new VUser();
@@ -11,7 +15,7 @@ class CUser {
         $array_category = FPersistentManager::getInstance()->getAllCategories();
         $articles = json_decode(file_get_contents('./src/Utility/articles.json'), true); // Legge l'articolo salvato
 
-        // Ottieni l'articolo più recente
+        // Ottiene l'articolo più recente
         $article = is_array($articles) && count($articles) > 0 ? end($articles) : null;
         
         if (!isset($_COOKIE['cart'])) {
@@ -29,7 +33,12 @@ class CUser {
         }
     }
     
-    // Gestisce il processo di login. Se la richiesta è GET, mostra il form di login. Se la richiesta è POST, verifica le credenziali dell'utente e, se corrette, imposta la sessione e i cookie appropriati
+    /**
+     * Gestisce il processo di login.
+     * 
+     * Se la richiesta è GET, mostra il form di login.
+     * Se la richiesta è POST, verifica le credenziali dell'utente e, se corrette, imposta la sessione e i cookie appropriati.
+     */
     public static function login() {
         $view = new VUser();
         if ($_SERVER['REQUEST_METHOD'] == "GET") {
@@ -60,14 +69,20 @@ class CUser {
 
                 // Reindirizza alla home
                 header('Location: /EpTech/user/home');
-                exit; // Assicurati di terminare lo script dopo il reindirizzamento
+                exit; 
             } else {
                 $view->loginError();
             }
         }
     }
     
-    // Controlla se l'utente è loggato verificando l'esistenza di un cookie di sessione e una variabile di sessione.
+    /**
+     * Controlla se l'utente è loggato.
+     * 
+     * Verifica l'esistenza di un cookie di sessione e una variabile di sessione per determinare se l'utente è loggato.
+     * 
+     * @return bool Restituisce true se l'utente è loggato, false altrimenti.
+     */
     public static function isLogged()
     {
         $identificato = false;
@@ -86,13 +101,23 @@ class CUser {
         return $identificato;
     }
 
-    // Gestisce il logout dell'utente, distruggendo la sessione e reindirizzando alla homepage.
+     /**
+     * Gestisce il logout dell'utente.
+     * 
+     * Distrugge la sessione e reindirizza l'utente alla homepage.
+     */
     public static function logout(){
         session_unset();
         session_destroy();
         header('Location: /EpTech/user/home');
     }
 
+     /**
+     * Gestisce la registrazione di un nuovo utente.
+     * 
+     * Se la richiesta è GET, mostra il form di registrazione.
+     * Se la richiesta è POST, valida i dati e registra un nuovo utente nel sistema, inviando un'email di conferma.
+     */
     public static function signUp(){
         $view_registeredUser = new VUser();
         if($_SERVER['REQUEST_METHOD'] == "GET"){
@@ -103,10 +128,10 @@ class CUser {
                 $array_data[$key] = $value;
             }
     
-            // Convert birthDate to DateTime object
+            // Converte birthDate in un oggetto DateTime
             $birthDate = \DateTime::createFromFormat('Y-m-d', $array_data['birthDate']);
             if (!$birthDate) {
-                $view_registeredUser->signUpError(); // Handle invalid date format
+                $view_registeredUser->signUpError(); // Mostra errore se la data di nascita non è valida
                 return;
             }
             
@@ -122,7 +147,7 @@ class CUser {
     
             // Crea un oggetto temporaneo per verificare l'esistenza dell'email
             $temp = new ERegisteredUser(
-                null, // Default date if no valid date is provided
+                null, 
                 null,
                 $new_user->getEmail(),
                 new \DateTime('1900-01-01'),
@@ -158,13 +183,20 @@ class CUser {
         }
     }
 
+     /**
+     * Conferma l'email dell'utente.
+     * 
+     * Verifica il token di conferma fornito via GET e, se valido, conferma l'email dell'utente.
+     * 
+     * @return void
+     */
     public static function confirmEmail() {
         if (isset($_GET['token'])) {
             $token = $_GET['token'];
             $user = FPersistentManager::getInstance()->findOneBy(ERegisteredUser::class, ['confirmationToken' => $token]);
     
             if ($user) {
-                $user->setConfirmationToken(null); // Rimuovi il token
+                $user->setConfirmationToken(null); // Rimuove il token
                 $user->setEmailConfirmed(true); // Imposta l'email come confermata
                 FPersistentManager::getInstance()->update($user);
     
@@ -180,7 +212,12 @@ class CUser {
         }
     }
 
-    // Mostra il form per modificare i dati dell'utente se l'utente è loggato, altrimenti reindirizza al form di login.
+    /**
+     * Mostra il form per modificare i dati dell'utente.
+     * 
+     * Se l'utente è loggato, mostra il form per modificare i dati.
+     * Se l'utente non è loggato, viene reindirizzato alla pagina di login.
+     */
     public static function userDataForm()
     {
         $view_user = new VUser();
@@ -191,7 +228,12 @@ class CUser {
         }
     }
 
-    // Mostra la sezione dei dati dell'utente se l'utente è loggato, altrimenti reindirizza al form di login.
+    /**
+     * Mostra la sezione dei dati dell'utente.
+     * 
+     * Se l'utente è loggato, mostra i dati dell'utente.
+     * Se l'utente non è loggato, viene reindirizzato alla pagina di login.
+     */
     public static function userDataSection()
     {
         $view_user = new VUser();
@@ -220,6 +262,12 @@ class CUser {
         header('Location: /EpTech/user/home');
     }
 
+     /**
+     * Modifica la password dell'utente.
+     * 
+     * Se la richiesta è GET, mostra il form per cambiare la password.
+     * Se la richiesta è POST, valida la password attuale e cambia la password con quella nuova, se le condizioni sono rispettate.
+     */
     public static function changePass() {
         $view = new VUser();
         if ($_SERVER['REQUEST_METHOD'] == "GET") {
@@ -250,6 +298,12 @@ class CUser {
         }
     }
 
+     /**
+     * Modifica i dati dell'utente.
+     * 
+     * Se la richiesta è GET, mostra il form per modificare i dati utente.
+     * Se la richiesta è POST, aggiorna i dati utente nel sistema e nella sessione.
+     */
     public static function changeUserData()
     {
         $view = new VUser();
@@ -274,6 +328,11 @@ class CUser {
         }
     }
 
+     /**
+     * Gestisce la visualizzazione e la modifica degli indirizzi di spedizione dell'utente.
+     * 
+     * Mostra gli indirizzi di spedizione dell'utente e eventuali messaggi di successo o errore.
+     */
     public static function shipping() {
         $view_user = new VUser();
         $array_shipping = FPersistentManager::getInstance()->getAllShippingUser($_SESSION['user']);
@@ -303,6 +362,12 @@ class CUser {
         $view_user->shipping($array_shipping, $messages);
     }
 
+     /**
+     * Aggiunge un nuovo indirizzo di spedizione.
+     * 
+     * Se la richiesta è GET, mostra il form per aggiungere un nuovo indirizzo.
+     * Se la richiesta è POST, valida i dati inseriti e aggiunge il nuovo indirizzo nel sistema.
+     */
     public static function addShipping() {
         $view = new VUser();
         if ($_SERVER['REQUEST_METHOD'] == "GET") {
@@ -340,6 +405,12 @@ class CUser {
         }
     }
 
+    /**
+     * Elimina un indirizzo di spedizione.
+     * 
+     * Se l'indirizzo può essere eliminato definitivamente, lo elimina.
+     * Se l'indirizzo è associato a ordini esistenti, esegue una soft delete (nasconde l'indirizzo).
+     */
     public static function deleteShipping($address, $cap) {
         $found_shipping = FPersistentManager::getInstance()->findShipping($address, $cap);
         
@@ -359,6 +430,7 @@ class CUser {
         exit();
     }
 
+    // Riattiva un indirizzo di spedizione precedentemente disattivato.
     public static function reactivateShipping($address, $cap) {
         $found_shipping = FPersistentManager::getInstance()->findShipping($address, $cap);
         
@@ -373,6 +445,12 @@ class CUser {
         exit();
     }
 
+    /**
+     * Gestisce l'aggiunta di nuove carte di credito.
+     * 
+     * Se la richiesta è GET, mostra il form per aggiungere una carta di credito.
+     * Se la richiesta è POST, valida i dati della carta e la aggiunge nel sistema.
+     */
     public static function addCards() {
         $view = new VUser();
         if ($_SERVER['REQUEST_METHOD'] == "GET") {
@@ -398,6 +476,12 @@ class CUser {
         }
     }
 
+    /**
+    * Valida i dati della carta di credito.
+     *
+    * @param array $data I dati della carta di credito da validare.
+    * @return array Un array contenente i messaggi di errore, se ce ne sono.
+    */
     private static function validateCreditCardData($data) {
         $errors = [];
 
@@ -434,6 +518,7 @@ class CUser {
         return $errors;
     }
 
+    // Mostra la lista delle carte di credito associate all'utente.
     public static function creditCards() {
         $view_user = new VUser();
         $cards = FPersistentManager::getInstance()->getAllCreditCardUser($_SESSION['user']);
@@ -463,6 +548,14 @@ class CUser {
         $view_user->creditCards($cards, $messages);
     }
 
+    /**
+    * Elimina una carta di credito.
+    *
+    * Questo metodo cerca la carta di credito con il numero fornito e, se trovata, la elimina
+    * permanentemente (se possibile) o la "nascosta" se è associata ad ordini esistenti.
+    *
+    * @param string $number Il numero della carta di credito da eliminare.
+    */
     public static function deleteCreditCard($number) {
         $found_card = FPersistentManager::getInstance()->findCreditCard($number);
         
@@ -482,6 +575,14 @@ class CUser {
         exit();
     }
 
+    /**
+    * Riattiva una carta di credito.
+    *  
+    * Questo metodo cerca la carta di credito con il numero fornito e la riattiva se è stata precedentemente
+    * disabilitata.
+    *
+    * @param string $number Il numero della carta di credito da riattivare.
+    */
     public static function reactivateCreditCard($number) {
         $found_card = FPersistentManager::getInstance()->findCreditCard($number);
         
@@ -496,6 +597,7 @@ class CUser {
         exit();
     }
 
+    // Mostra la pagina "Chi siamo".
     public static function aboutUs() {
         $view = new VUser();
         $view->showAboutUs(); // Mostra il template della pagina "Chi siamo"
