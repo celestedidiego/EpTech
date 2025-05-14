@@ -1,14 +1,27 @@
 <?php
 use Doctrine\ORM\EntityRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\ORM\Query\Parameter;
 
+/**
+ * Class FImage
+ * Repository per la gestione delle immagini dei prodotti.
+ */
 class FImage extends EntityRepository {
+    /**
+     * Inserisce una nuova immagine.
+     * @param EImage $image
+     * @return void
+     */
     public function insertImage(EImage $image){
         $em = getEntityManager();
         $em->persist($image);
         $em->flush();
     }
+
+    /**
+     * Trova un'immagine tramite ID.
+     * @param int $image
+     * @return array
+     */
     public function findImage($image){
         $dql = "SELECT im FROM EImage im WHERE im.idImage = ?1";
         $query = getEntityManager()->createQuery($dql);
@@ -16,6 +29,12 @@ class FImage extends EntityRepository {
         $query->setMaxResults(1);
         return $query->getResult();
     }
+
+    /**
+     * Restituisce tutte le immagini di un prodotto come array.
+     * @param EProduct $product
+     * @return array
+     */
     public function getAllImages(EProduct $product){
         $dql = "SELECT im
             FROM EImage im
@@ -36,6 +55,12 @@ class FImage extends EntityRepository {
         }
         return $array_images;
     }
+
+    /**
+     * Restituisce tutte le immagini di un prodotto come oggetti Doctrine.
+     * @param EProduct $product
+     * @return array
+     */
     public function getAllObjectImages(EProduct $product){
         $dql = "SELECT im
             FROM EImage im
@@ -44,6 +69,12 @@ class FImage extends EntityRepository {
         $query->setParameter(1, $product);
         return $query->getResult();
     }
+
+    /**
+     * Elimina tutte le immagini associate a un prodotto.
+     * @param int $productId
+     * @return void
+     */
     public function deleteAllImages($productId){
         $em = getEntityManager();
         $found_product = $em->find(EProduct::class, $productId);

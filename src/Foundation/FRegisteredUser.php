@@ -1,9 +1,17 @@
 <?php
 use Doctrine\ORM\EntityRepository;
 
+/**
+ * Class FRegisteredUser
+ * Repository per la gestione degli utenti registrati.
+ */
 class FRegisteredUser extends EntityRepository {
 
-    //Trova un utente registrato tramite l'email
+    /**
+     * Trova un utente registrato tramite email.
+     * @param string $email
+     * @return array
+     */
     public function findRegisteredUser($email){
         $dql = "SELECT ru FROM ERegisteredUser ru WHERE ru.email = ?1";
         $query = getEntityManager()->createQuery($dql);
@@ -12,7 +20,11 @@ class FRegisteredUser extends EntityRepository {
         return $query->getResult();
     }
 
-    //Trova un utente registrato tramite Id
+    /**
+     * Trova un utente registrato tramite ID.
+     * @param int $id
+     * @return array
+     */
     public function findRegisteredUserById($id){
         $dql = "SELECT ru FROM ERegisteredUser ru WHERE ru.registeredUserId = ?1";
         $query = getEntityManager()->createQuery($dql);
@@ -21,12 +33,22 @@ class FRegisteredUser extends EntityRepository {
         return $query->getResult();
     }
 
+    /**
+     * Inserisce un nuovo utente registrato.
+     * @param ERegisteredUser $user
+     * @return void
+     */
     public function insertNewRegisteredUser(ERegisteredUser $user){
         $em = getEntityManager();
         $em->persist($user);
         $em->flush();
     }
 
+    /**
+     * Esegue una soft delete su un utente registrato.
+     * @param ERegisteredUser $user
+     * @return void
+     */
     public function deleteRegisteredUser(ERegisteredUser $user) {
         $em = getEntityManager();
         $found_user = $em->find(ERegisteredUser::class, $user->getIdRegisteredUser());
@@ -37,6 +59,12 @@ class FRegisteredUser extends EntityRepository {
         }
     }
 
+    /**
+     * Aggiorna la password di un utente registrato.
+     * @param ERegisteredUser $user
+     * @param string $new_password
+     * @return void
+     */
     public function updatePass(ERegisteredUser $user, $new_password){
         $em = getEntityManager();
         $found_user = $em->find(ERegisteredUser::class, $user->getIdRegisteredUser());
@@ -47,6 +75,12 @@ class FRegisteredUser extends EntityRepository {
         $em->flush();
     }
 
+    /**
+     * Aggiorna i dati di un utente registrato.
+     * @param ERegisteredUser $user
+     * @param array $array_data
+     * @return void
+     */
     public function updateRegisteredUser(ERegisteredUser $user, $array_data){
         $em = getEntityManager();
         $found_user = $em->find(ERegisteredUser::class, $user->getIdRegisteredUser());

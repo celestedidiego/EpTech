@@ -2,9 +2,17 @@
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 
+/**
+ * Class FReview
+ * Repository per la gestione delle recensioni dei prodotti.
+ */
 class FReview extends EntityRepository {
 
-    //DA FARE
+    /**
+     * Trova una recensione tramite ID.
+     * @param int $idReview
+     * @return array
+     */
     public function findReviewByID($idReview)
     {
         $dql = "SELECT r FROM EReview r WHERE r.idReview = :idReview";
@@ -14,6 +22,13 @@ class FReview extends EntityRepository {
         return $query->getResult();
     }
 
+    /**
+     * Restituisce le recensioni dei prodotti gestiti da un admin, paginati.
+     * @param mixed $admin
+     * @param int $page
+     * @param int $itemsPerPage
+     * @return array
+     */
     public function getReviewAdmin($admin, $page = 1, $itemsPerPage = 4) {
         $qb = $this->createQueryBuilder('r')
             ->join('r.product', 'p')
@@ -36,6 +51,13 @@ class FReview extends EntityRepository {
         ];
     }
 
+    /**
+     * Restituisce le recensioni di un prodotto, paginati.
+     * @param mixed $product
+     * @param int $page
+     * @param int $itemsPerPage
+     * @return array
+     */
     public function getReviewsProduct($product, $page = 1, $itemsPerPage = 5) {
         $qb = $this->createQueryBuilder('r')
             ->where('r.product = :product')
@@ -57,6 +79,12 @@ class FReview extends EntityRepository {
         ];
     }
 
+    /**
+     * Restituisce la recensione di un utente registrato per un prodotto.
+     * @param mixed $registeredUser
+     * @param mixed $product
+     * @return mixed
+     */
     public function getReviewUser($registeredUser, $product) {
         $em = getEntityManager();
         return $em->getRepository('EReview')->findOneBy([
@@ -65,18 +93,33 @@ class FReview extends EntityRepository {
         ]);
     }
 
+    /**
+     * Inserisce una nuova recensione.
+     * @param mixed $review
+     * @return void
+     */
     public function addReview($review) {
         $em = getEntityManager();
         $em->persist($review);
         $em->flush();
     }
     
+    /**
+     * Elimina una recensione.
+     * @param mixed $review
+     * @return void
+     */
     public function deleteReview($review) {
         $em = getEntityManager();
         $em->remove($review);
         $em->flush();
     }
 
+    /**
+     * Verifica se l'utente ha acquistato un prodotto.
+     * @param mixed $productId
+     * @return bool
+     */
     public function hasPurchasedProduct($productId) {
         $em = getEntityManager();
         $found_user = $em->find(ERegisteredUser::class, $_SESSION['user']->getIdRegisteredUser());
@@ -96,6 +139,13 @@ class FReview extends EntityRepository {
         return $result > 0;  // Restituisce true se il cliente ha acquistato il prodotto, false altrimenti
     }
 
+    /**
+     * Restituisce le recensioni tramite nome prodotto, paginati.
+     * @param string $productName
+     * @param int $page
+     * @param int $itemsPerPage
+     * @return array
+     */
     public function getReviewsByProductName($productName, $page = 1, $itemsPerPage = 10) {
         $offset = ($page - 1) * $itemsPerPage;
     

@@ -1,8 +1,17 @@
 <?php
 use Doctrine\ORM\EntityRepository;
 
+/**
+ * Class FCreditCard
+ * Repository per la gestione delle carte di credito.
+ */
 class FCreditCard extends EntityRepository {
     
+    /**
+     * Trova una carta di credito tramite numero.
+     * @param string $cardNumber
+     * @return ECreditCard|null
+     */
     public function findCreditCard($cardNumber) {
         $dql = "SELECT car FROM ECreditCard car WHERE car.cardNumber = ?1";
         $query = $this->getEntityManager()->createQuery($dql); 
@@ -11,6 +20,11 @@ class FCreditCard extends EntityRepository {
         return $query->getOneOrNullResult(); // Restituisce un singolo oggetto o null
     }
 
+    /**
+     * Inserisce una nuova carta di credito.
+     * @param array $array_data
+     * @return void
+     */
     public function insertCreditCard($array_data){
         $new_creditCard = new ECreditCard($array_data['cardNumber'], $array_data['cardHolderName'], $array_data['endDate'], $array_data['cvv']);
         $em = getEntityManager();
@@ -20,6 +34,11 @@ class FCreditCard extends EntityRepository {
         $em->flush();
     }
 
+    /**
+     * Restituisce tutte le carte di credito associate a un utente.
+     * @param int $idUser
+     * @return array
+     */
     public function getAllCreditCardUser($idUser)
     {
         return getEntityManager()->createQueryBuilder('car')
@@ -33,6 +52,11 @@ class FCreditCard extends EntityRepository {
             ->getResult();
     }
 
+    /**
+     * Elimina definitivamente una carta di credito.
+     * @param ECreditCard $creditCard
+     * @return void
+     */
     public function deleteCreditCard(ECreditCard $creditCard) {
         $em = $this->getEntityManager(); 
         $found_creditCard = $em->find(ECreditCard::class, $creditCard->getCardNumber());
@@ -44,6 +68,10 @@ class FCreditCard extends EntityRepository {
         }
     }
 
+    /**
+     * Restituisce tutte le carte di credito attive (non eliminate).
+     * @return array
+     */
     public function findAllActive()
     {
         return getEntityManager()->createQueryBuilder()
@@ -53,12 +81,22 @@ class FCreditCard extends EntityRepository {
             ->getResult();
     }
 
+    /**
+     * Esegue una soft delete su una carta di credito.
+     * @param ECreditCard $creditCard
+     * @return void
+     */
     public function softDelete(ECreditCard $creditCard)
     {
         $creditCard->setDeleted(true);
         getEntityManager()->flush();
     }
 
+    /**
+     * Verifica se una carta di credito può essere eliminata definitivamente.
+     * @param string $cardNumber
+     * @return bool
+     */
     public function canBeHardDeleted($cardNumber): bool
     {
         $qb = getEntityManager()->createQueryBuilder();
