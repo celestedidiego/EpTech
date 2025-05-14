@@ -12,12 +12,14 @@ $connectionParams = [
     'password' => '',
     'host'     => '127.0.0.1',
     'driver'   => 'pdo_mysql',
+    'charset'  => 'utf8',
 ];
 
 // Check if the database exists
 try {
     $conn = new PDO("mysql:host=".$connectionParams['host']."; charset=utf8;", $connectionParams['user'], $connectionParams['password']);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $conn->exec("SET NAMES 'utf8'");
 
     $stmt = $conn->query("SELECT SCHEMA_NAME FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = '" . $connectionParams['dbname']."'");
     if ($stmt->rowCount() == 0) {
