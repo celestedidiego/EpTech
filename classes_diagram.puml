@@ -1,76 +1,217 @@
-@startuml EpTechUML
+@startuml
+left to right direction
+skinparam pageSize 21cm 29.7cm
+skinparam pageMargin 1cm
+class EAdmin {
+  +__construct()
+  +getIdAdmin()
+  +getName()
+  +setName()
+  +getSurname()
+  +setSurname()
+  +getEmail()
+  +setEmail()
+  +getUsername()
+  +setUsername()
+  +getPassword()
+  +setPassword()
+  +getProducts()
+  +getReviews()
+}
+class ECategory {
+  +__construct()
+  +getIdCategory()
+  +getNameCategory()
+  +setNameCategory()
+  +getProducts()
+  +setProducts()
+}
+class ECreditCard {
+  +__construct()
+  +getCardNumber()
+  +setCardNumber()
+  +getCardHolderName()
+  +setCardHolderName()
+  +getEndDate()
+  +setEndDate()
+  +getCVV()
+  +setCVV()
+  +getOrders()
+  +setOrders()
+  +getRegisteredUser()
+  +setRegisteredUser()
+  +isDeleted()
+  +setDeleted()
+}
+class EImage {
+  +__construct()
+  +getEncodedData()
+  +getIdImage()
+  +setIdImage()
+  +getName()
+  +setName()
+  +getSize()
+  +setSize()
+  +getType()
+  +setType()
+  +getImageData()
+  +setImageData()
+  +getProduct()
+  +setProduct()
+}
+class EItemOrder {
+  +__construct()
+  +getQuantity()
+  +setQuantity()
+  +getOrder()
+  +setOrder()
+  +getProduct()
+  +setProduct()
+}
+class EOrder {
+  +__construct()
+  +addQProductOrder()
+  +removeQProductOrder()
+  +getIdOrder()
+  +setIdOrder()
+  +getTotalPrice()
+  +setTotalPrice()
+  +getDateTime()
+  +setDateTime()
+  +getShipping()
+  +setShipping()
+  +getTotalQuantityProduct()
+  +setTotalQuantityProduct()
+  +getOrderStatus()
+  +setOrderStatus()
+  +isPresoInCarico()
+  +isInSpedizione()
+  +isConsegnato()
+  +isAnnullato()
+  +getItemOrder()
+  +setItemOrder()
+  +getCreditCard()
+  +setCreditCard()
+  +getRegistereduser()
+  +setRegisteredUser()
+  +getRefundRequests()
+  +hasRefundRequest()
+}
+class EProduct {
+  +__construct()
+  +getProductId()
+  +getNameCategory()
+  +setNameCategory()
+  +getNameProduct()
+  +setNameProduct()
+  +getPriceProduct()
+  +setPriceProduct()
+  +getDescription()
+  +setDescription()
+  +getBrand()
+  +setBrand()
+  +getModel()
+  +setModel()
+  +getColor()
+  +setColor()
+  +getItemOrder()
+  +getReviews()
+  +setReviews()
+  +getAvQuantity()
+  +setAvQuantity()
+  +getAdmin()
+  +setAdmin()
+  +isDeleted()
+  +setDeleted()
+  +getImages()
+  +addImage()
+  +removeImage()
+}
+class ERefundRequest {
+  +__construct()
+  +getId()
+  +getOrder()
+  +getStatus()
+  +setStatus()
+  +getRequestDate()
+}
+class ERegisteredUser {
+  +__construct()
+  +getIdRegisteredUser()
+  +getName()
+  +setName()
+  +getSurname()
+  +setSurname()
+  +getEmail()
+  +setEmail()
+  +getBirthDate()
+  +setBirthDate()
+  +getUsername()
+  +setUsername()
+  +getPassword()
+  +setPassword()
+  +getOrders()
+  +setOrders()
+  +getReviews()
+  +setReviews()
+  +getAddresses()
+  +getCreditCards()
+  +setCreditCards()
+  +isBlocked()
+  +setBlocked()
+  +isDeleted()
+  +setDeleted()
+  +getConfirmationToken()
+  +setConfirmationToken()
+  +isEmailConfirmed()
+  +setEmailConfirmed()
+}
+class EReview {
+  +__construct()
+  +getReviewId()
+  +getText()
+  +setText()
+  +getVote()
+  +setVote()
+  +getProduct()
+  +setProduct()
+  +getRegisteredUser()
+  +setRegisteredUser()
+  +setResponseAdmin()
+  +getResponseAdmin()
+  +getAdmin()
+  +setAdmin()
+}
+class EShipping {
+  +__construct()
+  +getIdShipping()
+  +isDeleted()
+  +setDeleted()
+  +getAddress()
+  +setAddress()
+  +getCAP()
+  +setCAP()
+  +getCity()
+  +setCity()
+  +getRecipientName()
+  +setRecipientName()
+  +getRecipientSurname()
+  +setRecipientSurname()
+  +getOrders()
+  +setOrders()
+  +getShippingRegisteredUser()
+  +setShippingRegisteredUser()
+}
 
-class CReview
-class COrder
-class CFrontController
-class CShipping
-class CAdmin
-class CProduct
-class CPurchase
-class CUser
-class UEMailer
-class FRegisteredUser
-class FItemOrder
-class FAdmin
-class FImage
-class FCreditCard
-class FOrder
-class FReview
-class FPersistentManager
-class FProduct
-class FCategory
-class FShipping
-class VProduct
-class VOrder
-class VReview
-class VPurchase
-class VAdmin
-class VShipping
-class VUser
-class EImage
-class EShipping
-class EOrder
-class EProduct
-class ECategory
-class EItemOrder
-class EReview
-class ERegisteredUser
-class ECreditCard
-class EUnRegisteredUser
-class ERefundRequest
-class EAdmin
-CAdmin <|-- CUser
-COrder <|-- CShipping
-COrder <|-- CProduct
-COrder <|-- CUser
-CReview <|-- CProduct
-CReview <|-- CUser
-CProduct <|-- ECategory
-CProduct <|-- EImage
-COrder <|-- EItemOrder
-COrder <|-- EShipping
-COrder <|-- ECreditCard
-CUser <|-- ERegisteredUser
-CUser <|-- EUnRegisteredUser
-CAdmin <|-- EAdmin
-CReview <|-- EReview
-CShipping <|-- EShipping
-CProduct <|-- FProduct
-COrder <|-- FOrder
-CReview <|-- FReview
-CUser <|-- FRegisteredUser
-CAdmin <|-- FAdmin
-CShipping <|-- FShipping
-CProduct <|-- FCategory
-CProduct <|-- FImage
-COrder <|-- FItemOrder
-CUser <|-- FCreditCard
-FPersistentManager <|-- FProduct
-FPersistentManager <|-- FOrder
-FPersistentManager <|-- FReview
-FPersistentManager <|-- FRegisteredUser
-FPersistentManager <|-- FAdmin
-FPersistentManager <|-- FShipping
-FPersistentManager <|-- FCreditCard
-
+EAdmin --> EProduct
+EAdmin --> EReview
+ERegisteredUser --> EOrder
+EProduct --> ECategory
+EProduct --> EReview
+EProduct --> EImage
+EProduct --> EItemOrder
+EItemOrder --> EOrder
+EOrder --> EShipping
+EOrder --> ECreditCard
+EOrder --> ERefundRequest
 @enduml
