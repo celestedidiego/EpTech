@@ -179,7 +179,6 @@ class CProduct {
         }
     }
 
-
     public static function deleteProduct($productId) {
         FPersistentManager::getInstance()->deleteProduct($productId);
         $_SESSION['product_deleted'] = true;

@@ -85,7 +85,7 @@ class CFrontController {
                 'user' => ['userDataForm', 'userDataSection', 'deleteAccount', 'changePass', 'changeUserData'],
                 'admin' => ['manageUsers','filterUsersPaginated', 'deleteUser', 'blockUser', 'unblockUser', 'manageProducts', 'deleteProduct', 'manageReviews','manageOrders', 'changeOrderStatus', 'manageSection', 'acceptRefund', 'rejectRefund', 'newArticle', 'saveArticle'],
                 'product' => ['listProducts', 'addProduct', 'modifyProduct', 'deleteProduct'],
-                'order' => ['listOrders', 'viewOrder', 'deleteOrder', 'editOrder'],
+                'order' => ['listOrders', 'viewOrder'],
                 'review' => ['listReviews', 'canRespond', 'respondToReview'],
                 'shipping' => ['listShipping', 'editShipping', 'deleteShipping'],
                 'purchase' => ['detailOrder'],

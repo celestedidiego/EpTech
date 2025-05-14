@@ -89,9 +89,6 @@ class FPersistentManager {
 
     //Utilizzato per trovare un utente nel database, sia che l'utente sia un oggetto di una classe specifica (ERegisteredUser, EUnRegisteredUser, EAdmin) o una stringa (email).
     public function findUtente($user){
-        /** Se $cliente è un oggetto richiamerà findCliente($cliente->getEmail())
-         * altrimenti se è una stringa (cioè se è una email) richiamerà findCliente($cliente)
-         */
         if($user instanceof ERegisteredUser){
             if(is_object($user)){
                 return getEntityManager()->getRepository('ERegisteredUser')->findRegisteredUser($user->getEmail());
@@ -161,6 +158,7 @@ class FPersistentManager {
         $em->persist($found_admin);
         $em->flush();
     }
+
     //Utilizzato per aggiornare i dati di un utente registrato (ERegisteredUser) o di un amministratore (EAdmin) nel database
     public function updateUser($user, array $array_data): void
     {
@@ -366,14 +364,6 @@ class FPersistentManager {
         return getEntityManager()->getRepository('EReview')->getReviewUser($registeredUser, $product);
     }
 
-    /*public function getProductForAdmin($page = 1, $itemsPerPage = 10){
-        $offset = ($page - 1) * $itemsPerPage;
-        $limit = $itemsPerPage + 1;  // Richiediamo un elemento in più per determinare se c'è una pagina successiva
-        
-        $em = getEntityManager();
-
-    }*/
-
     public function findUser($user) {
         if (is_string($user)) {
             return $this->findUserByEmail($user);
@@ -405,7 +395,7 @@ class FPersistentManager {
 
     public function findCreditCard($cardNumber) {
         $dql = "SELECT car FROM ECreditCard car WHERE car.cardNumber = ?1";
-        $query = getEntityManager()->createQuery($dql); // $this->getEntityManager()
+        $query = getEntityManager()->createQuery($dql); 
         $query->setParameter(1, $cardNumber);
         $query->setMaxResults(1);
         return $query->getOneOrNullResult(); // Restituisce un singolo oggetto o null
@@ -502,25 +492,6 @@ class FPersistentManager {
     public function getFilteredUsersPaginated($adminId){
         return getEntityManager()->getRepository('EAdmin')->getFilteredUsersPaginated($adminId);
     }
-
-    /*
-    public function getLatestProductsHome($limit = 4){
-
-        
-        $array_product = $this->getRepository(EProduct::class)->getLatestNewProducts($limit);
-    
-        for($i = 0; $i < sizeof($array_product); $i++){
-            $prod_item = FPersistentManager::getInstance()->find(EProduct::class,$array_product[$i]['productId']);
-            $array_images = FPersistentManager::getInstance()->getAllImages($prod_item);
-            if (is_array($array_images)) {
-                foreach($array_images as $image) {
-                    $array_product[$i]['images'] = $image;
-                }
-            }
-        }
-        return $array_product;
-    }
-    */
 
     public function getLatestProductsHome($limit = 4) {
         $array_product = $this->getRepository(EProduct::class)->getLatestNewProducts($limit);

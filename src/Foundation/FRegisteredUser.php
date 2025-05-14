@@ -37,9 +37,6 @@ class FRegisteredUser extends EntityRepository {
         }
     }
 
-
-
-    //Aggiornare la password dell'utente registrato
     public function updatePass(ERegisteredUser $user, $new_password){
         $em = getEntityManager();
         $found_user = $em->find(ERegisteredUser::class, $user->getIdRegisteredUser());

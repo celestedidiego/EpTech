@@ -281,16 +281,5 @@ class CPurchase {
             header('Location: /EpTech/user/userHistoryOrders');
             exit;
         }
-
-        /*if ($order && $order->getRegisteredUser()->getIdRegisteredUser() == $_SESSION['user']->getIdRegisteredUser()) {
-            // Forza il caricamento delle immagini
-            foreach ($order->getItemOrder() as $item) {
-                $item->getProduct()->getImages();
-            }
-            $view_user->detailOrder($order);
-        } else {
-            header('Location: /EpTech/user/userHistoryOrders');
-            exit;
-        }*/
     }
 }

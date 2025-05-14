@@ -496,41 +496,6 @@ class CUser {
         exit();
     }
 
-    /*public static function searchProducts() {
-        if (!isset($_SESSION['user']) || !($_SESSION['user'] instanceof EAdmin)) {
-            header('Location: /EpTech/user/login');
-            exit;
-         }
-     
-         $view_admin = new VAdmin();
-     
-         if ($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['search'])) {
-             $search_term = $_POST['search'];
-             $products = FPersistentManager::getInstance()->getProductById($search_term);
-             $view_admin->displaySearchResults($products);
-         } 
-     }*/
-
-    //DA VEDERE SE SERVE
-    public static function deleteProduct($id) {
-        if (!isset($_SESSION['user']) || !($_SESSION['user'] instanceof EAdmin)) {
-            header('Location: /EpTech/user/login');
-            exit;
-        }
-
-        if ($_SERVER['REQUEST_METHOD'] == "POST") {
-
-            $result = FPersistentManager::getInstance()->deleteProduct($id);
-            if ($result) {
-                $_SESSION['product_deleted'] = true;
-            } else {
-                $_SESSION['product_delete_error'] = true;
-            }
-            header('Location: /EpTech/user/manageProducts');
-            exit;
-        }
-    }
-
     public static function aboutUs() {
         $view = new VUser();
         $view->showAboutUs(); // Mostra il template della pagina "Chi siamo"
