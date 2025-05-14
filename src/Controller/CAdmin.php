@@ -2,7 +2,7 @@
 
 class CAdmin {
 
-    // Prende i dati degli utenti dal PersistentManager per darli a VAdmin
+    // Prende i dati degli utenti dal PersistentManager per darli a VAdmin.
     public static function manageUsers() {
         $view = new VAdmin();
         
@@ -13,6 +13,7 @@ class CAdmin {
         $view->manageUsers($users_info);
     }
 
+    // Gestisce la visualizzazione di una lista di utenti filtrata o paginata, a seconda dei parametri ricevuti.
     public static function filterUsersPaginated()
     {
         $page  = isset($_GET['page']) ? (int)$_GET['page'] : 1;
@@ -75,18 +76,18 @@ class CAdmin {
         header('Location: /EpTech/admin/manageUsers');
     }
 
-    //chiede al PersistentManager i dati di tutte i prodotti per darli a VAdmin
+    // Chiede al PersistentManager i dati di tutte i prodotti per darli a VAdmin.
     public static function manageProducts(){
         $view = new VAdmin();
         
         $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
         
-        // Verifica se ci sono messaggi di successo nella sessione
+        // Verifica se ci sono messaggi di successo nella sessione.
         $product_added = isset($_SESSION['product_added']) && $_SESSION['product_added'];
         $product_modified = isset($_SESSION['product_modified']) && $_SESSION['product_modified'];
         $product_deleted = isset($_SESSION['product_deleted']) && $_SESSION['product_deleted'];
         
-        // Rimuovi i messaggi di successo dalla sessione
+        // Rimuovi i messaggi di successo dalla sessione.
         unset($_SESSION['product_added']);
         unset($_SESSION['product_modified']);
         unset($_SESSION['product_deleted']);
@@ -105,7 +106,7 @@ class CAdmin {
         }
     }
 
-    //chiede al PersistentManager di cancellare un prodotto dato l'ID, una volta fatto manda una mail al venditore di riferimento
+    // Chiede al PersistentManager di cancellare un prodotto dato l'ID, una volta fatto manda una mail all'admin.
     public static function deleteProduct($productId) {
         if (!isset($_SESSION['user']) || !($_SESSION['user'] instanceof EAdmin)) {
             header('Location: /EpTech/user/login');
@@ -129,12 +130,14 @@ class CAdmin {
         
     }
 
+    // Recupera tutti gli ordini dal db e li passa alla vista dell'admin per mostrarli.
     public static function manageOrders() {
         $view = new VAdmin();
         $orders = FPersistentManager::getInstance()->findAll(EOrder::class);
         $view->showManageOrders($orders);
     }
 
+    // Aggiorna lo stato di un ordine specifico.
     public static function changeOrderStatus($orderId) {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $newStatus = $_POST['orderStatus'];
@@ -153,6 +156,7 @@ class CAdmin {
         exit;
     }
 
+    // Recupera e mostra all'admin le recensioni dei prodotti.
     public static function manageReviews() {
         $view = new VAdmin();
         
@@ -175,11 +179,14 @@ class CAdmin {
         $view->manageReviews($reviews);
     }
 
+    // Mostra all'admin la pagina per gestire le sezioni, utilizzando la vista VAdmin.
     public static function manageSection() {
         $view = new VAdmin();
         $view->showManageSection();
     }
 
+    // Accetta la richiesta di rimborso associata a un ordine, aggiornandone lo stato se è ancora in attesa, 
+    // e reindirizza alla pagina di gestione ordini con un messaggio di conferma o errore.
     public static function acceptRefund($orderId) {
         $order = FPersistentManager::getInstance()->find(EOrder::class, $orderId);
         if ($order && $order->hasRefundRequest()) {
@@ -198,6 +205,8 @@ class CAdmin {
         exit;
     }
 
+    // Rifiuta una richiesta di rimborso associata a un ordine specifico, aggiornandone lo stato, 
+    // e reindirizza l’admin alla pagina di gestione ordini mostrando un messaggio di successo o errore.
     public static function rejectRefund($orderId) {
         $order = FPersistentManager::getInstance()->find(EOrder::class, $orderId);
         if ($order && $order->hasRefundRequest()) {
@@ -216,12 +225,15 @@ class CAdmin {
         exit;
     }
 
+    // Mostra la pagina per aggiungere un nuovo articolo, recuperando gli articoli esistenti da un file JSON.
     public static function newArticle() {
         $view = new VAdmin();
         $articles = json_decode(file_get_contents('./src/Utility/articles.json'), true); // Legge l'articolo salvato
         $view->showNewArticle($articles);
     }
 
+    // Salva un nuovo articolo, aggiungendolo a un file JSON che funge da archivio, 
+    // e poi reindirizza l'admin alla pagina di creazione articoli con un messaggio di conferma.
     public static function saveArticle() {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $newArticle = [
