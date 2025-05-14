@@ -31,7 +31,7 @@
     <div class="container mt-5">
         <h2 class="text-center mb-4">Recensioni dei prodotti</h2>
         
-        <!-- FILTRO PER NOME -->
+        <!-- FILTER BY NAME -->
         <form method="GET" action="/EpTech/admin/manageReviews">
             <div class="form-group">
                 <label for="product_name">Filtra per Nome Prodotto:</label>
@@ -40,7 +40,7 @@
             <button type="submit" class="btn btn-primary">Cerca</button>
         </form>
         <br>
-        <!-- /FILTRO PER NOME -->
+        <!-- /FILTER BY NAME -->
 
         {if isset($success)}
             <div class="alert alert-success">

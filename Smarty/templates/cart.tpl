@@ -4,7 +4,6 @@
         <meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		 <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
 		<title>EpTech</title>
 
@@ -26,13 +25,6 @@
 
 		<!-- Custom stlylesheet -->
 		<link type="text/css" rel="stylesheet" href="/EpTech/skin/electroMaster/css/style.css"/>
-
-		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-		<!--[if lt IE 9]>
-		  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-		  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-		<![endif]-->
     </head>
     <body>
     {include file='headerSection.tpl'}
@@ -75,9 +67,9 @@
                     <div class="col-md-2">
                         <form action="/EpTech/purchase/updateQuantity/{$product['product']->getProductId()}" method="POST">
                             <select class="input-select margin-bottom-20" id="quantity" name="quantity">
-                                <!--Controllo la quantità disp quando è minore di 10,
-                                Se è minore di 10, mettere tanti option quanto è le quantità 
-                                altrimenti fisso la quantità max a 10-->
+                                <!--Controllo la quantità disponibile:
+                                se è minore di 10, mette tanti option quante sono le quantità 
+                                altrimenti fissa la quantità max a 10-->
                                 {if $product['product']->getAvQuantity() >= 10}
                                     {for $i=1 to 10}
                                     <option value="{$i}" {if $cart[$product['product']->getProductId()] == $i}selected{/if}>

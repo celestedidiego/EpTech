@@ -1,4 +1,3 @@
-
 {if $errorImageUpload == 1}
     <div class="mt-5">
         <div class="alert alert-danger" role="alert">
