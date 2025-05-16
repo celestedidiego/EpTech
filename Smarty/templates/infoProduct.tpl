@@ -141,22 +141,15 @@
 			<div id="product-tab">
 				<!-- product tab nav -->
 				<ul class="tab-nav">
-					<li class="active"><a data-toggle="tab" href="#tab1">Descrizione</a></li>
-					<li><a data-toggle="tab" href="#tab3">Recensioni ({$reviews.n_reviews})</a></li>
+					<!-- <li class="active"><a data-toggle="tab" href="#tab1">Descrizione</a></li> -->
+					<!-- <li><a data-toggle="tab" href="#tab3">Recensioni ({$reviews.n_reviews})</a></li> -->
+					<li class="active"><a data-toggle="tab" href="#tab3">Recensioni ({$reviews.n_reviews})</a></li>
 				</ul>
 				<!-- /product tab nav -->
 
 				<!-- product tab content -->
 				<div class="tab-content">
-					<!-- tab1  -->
-					<div id="tab1" class="tab-pane fade in active">
-						<div class="row">
-							<div class="col-md-12">
-								<p>{$description}</p>
-							</div>
-						</div>
-					</div>
-					<!-- /tab1  -->
+					<!-- rimosso tab1  -->
 
 					<!-- tab3  -->
 					<div class="mt-5 d-flex justify-content-center">
@@ -171,7 +164,7 @@
 							</div>
 						{/if}
 					</div>
-					<div id="tab3" class="tab-pane fade in">
+					<div id="tab3" class="tab-pane fade in active">
 					{if $reviews['n_reviews'] > 1}
 						<!-- Pagination -->
 						<ul class="reviews-pagination">

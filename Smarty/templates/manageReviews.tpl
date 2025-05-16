@@ -74,7 +74,12 @@
                                 {if $review->getResponseAdmin()}
                                     <div class="mt-3 p-3 border bg-light">
                                         <h6>La tua risposta:</h6>
-                                        <p>{$review->getResponseAdmin()}</p>
+                                        <form method="POST" action="/EpTech/review/respondToReview/{$review->getReviewId()}">
+                                            <div class="form-group">
+                                                <textarea class="form-control" name="risposta" rows="3" required>{$review->getResponseAdmin()}</textarea>
+                                            </div>
+                                            <button type="submit" class="btn btn-warning btn-sm mt-2">Modifica Risposta</button>
+                                        </form>
                                     </div>
                                 {else}
                                     <form method="POST" action="/EpTech/review/respondToReview/{$review->getReviewId()}">
