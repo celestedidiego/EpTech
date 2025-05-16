@@ -1,6 +1,6 @@
 {
-    "name": "cdidi/ep-tech-prova",
-    "description": "prova applicazione web e-commerce",
+    "name": "cdidi/ep-tech",
+    "description": "Applicazione web e-commerce",
     "type": "project",
     "autoload": {
         "classmap": [
@@ -9,7 +9,16 @@
     },
     "authors": [
         {
-            "name": "Celeste"
+            "name": "Celeste Di Diego",
+            "homepage": "https://www.github.com/celestedidiego"
+        },
+        {
+            "name": "Alessia Pulcini",
+            "homepage": "https://www.github.com/alepulc"
+        },
+        {
+            "name": "Riccardo Beniamino",
+            "homepage": "https://www.github.com/rickb3n"
         }
     ],
     "require": {
@@ -22,7 +31,6 @@
         "phpmailer/phpmailer": "^6.9"
     },
     "require-dev": {
-        "symfony/maker-bundle": "^1.50",
-        "phpunit/phpunit": "9.5"
+        "symfony/maker-bundle": "^1.50"
     }
 }
