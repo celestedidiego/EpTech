@@ -31,7 +31,8 @@
         <div class="container mt-5">
             <h2 class="text-center">Gestione Ordini</h2>
             {if $orders|@count > 0}
-                <table class="table table-bordered mt-4">
+              <div class="table-responsive">
+                <table class="table table-bordered mt-4 text-center">
                     <thead>
                         <tr>
                             <th>ID Ordine</th>
@@ -86,6 +87,7 @@
                         {/foreach}
                     </tbody>
                 </table>
+                </div>
             {else}
                 <p class="alert alert-warning text-center">Non ci sono ordini disponibili.</p>
             {/if}
