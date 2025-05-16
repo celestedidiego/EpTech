@@ -67,7 +67,7 @@
                 <div class="col-12 content-area">
                 {include file='userDataSection.tpl'} 
             {elseif $shop == 1}
-                <div class="col-lg-9 col-md-8 col-sm-7 col-xs-12 content-area">
+                <div class="col-lg-9 col-md-8 col-sm-7 col-12 content-area">
                 {include file='shop.tpl'}
             {elseif $shippings == 1}
                 <div class="col-12 content-area">
