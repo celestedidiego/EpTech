@@ -29,8 +29,5 @@
         "symfony/http-foundation": "^6.1",
         "symfony/framework-bundle": "^6.1",
         "phpmailer/phpmailer": "^6.9"
-    },
-    "require-dev": {
-        "symfony/maker-bundle": "^1.50"
     }
 }
