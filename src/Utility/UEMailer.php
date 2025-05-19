@@ -118,4 +118,22 @@ class UEMailer {
             return false;
         }
     }
+
+    public function sendOrderStatusUpdateEmail($userEmail, $order, $newStatus) {
+        try {
+            $this->mailer->clearAddresses();
+            $this->mailer->addAddress($userEmail);
+            $this->mailer->Subject = 'Aggiornamento stato ordine EpTech';
+            $orderId = $order->getIdOrder();
+            $orderDate = $order->getDateTime()->format('d/m/Y H:i');
+            $statusText = ucfirst($newStatus);
+            $this->mailer->Body = "Il tuo ordine EpTech (n. $orderId, effettuato il $orderDate) ha cambiato stato: $statusText.";
+            $this->mailer->AltBody = "Il tuo ordine EpTech (n. $orderId, effettuato il $orderDate) ha cambiato stato: $statusText.";
+
+            $this->mailer->send();
+            return true;
+        } catch (Exception $e) {
+            return false;
+        }
+    }
 }
