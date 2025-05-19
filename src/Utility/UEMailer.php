@@ -84,4 +84,19 @@ class UEMailer {
             return false;
         }
     }
+
+    public function sendWelcomeEmail($userEmail) {
+        try {
+            $this->mailer->clearAddresses();
+            $this->mailer->addAddress($userEmail);
+            $this->mailer->Subject = 'Benvenuto su EpTech!';
+            $this->mailer->Body = "Ciao e benvenuto su EpTech! Siamo felici di averti con noi.";
+            $this->mailer->AltBody = "Ciao e benvenuto su EpTech! Siamo felici di averti con noi.";
+
+            $this->mailer->send();
+            return true;
+        } catch (Exception $e) {
+            return false;
+        }
+    }
 }

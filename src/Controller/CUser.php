@@ -195,6 +195,10 @@ class CUser {
             $token = $_GET['token'];
             $user = FPersistentManager::getInstance()->findOneBy(ERegisteredUser::class, ['confirmationToken' => $token]);
     
+            // INVIO EMAIL DI BENVENUTO
+            $mailer = new UEMailer();
+            $mailer->sendWelcomeEmail($user->getEmail());
+            
             if ($user) {
                 $user->setConfirmationToken(null); // Rimuove il token
                 $user->setEmailConfirmed(true); // Imposta l'email come confermata
