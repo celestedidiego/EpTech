@@ -16,6 +16,7 @@ class CPurchase {
             'category' => isset($_GET['category']) ? $_GET['category'] : '',
             'brand' => isset($_GET['brand']) ? $_GET['brand'] : '',
             'prezzo_max' => isset($_GET['prezzo_max']) ? (int)$_GET['prezzo_max'] : 5000,
+            'order_by' => isset($_GET['order_by']) ? $_GET['order_by'] : '',
         ];
 
         $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;

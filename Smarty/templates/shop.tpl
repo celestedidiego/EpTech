@@ -43,7 +43,7 @@
     <ul class="reviews-pagination">
         {if $array_products.currentPage > 1}
             <li>
-                <a href="?page={math equation='x-1' x=$array_products.currentPage}&query={$applied_filters.query}&category={$applied_filters.category}&brand={$applied_filters.brand}&prezzo_max={$applied_filters.prezzo_max}">
+                <a href="?page={math equation='x-1' x=$array_products.currentPage}&query={$applied_filters.query}&category={$applied_filters.category}&brand={$applied_filters.brand}&prezzo_max={$applied_filters.prezzo_max}&order_by={$applied_filters.order_by}">
                     <i class="fa fa-angle-left"></i>
                 </a>
             </li>
@@ -51,7 +51,7 @@
     
         {for $page=1 to $array_products.totalPages}
             <li {if $page == $array_products.currentPage}class="active"{/if}>
-                <a href="?page={$page}&query={$applied_filters.query}&category={$applied_filters.category}&brand={$applied_filters.brand}&prezzo_max={$applied_filters.prezzo_max}">
+                <a href="?page={$page}&query={$applied_filters.query}&category={$applied_filters.category}&brand={$applied_filters.brand}&prezzo_max={$applied_filters.prezzo_max}&order_by={$applied_filters.order_by}">
                     {$page}
                 </a>
             </li>
@@ -59,7 +59,7 @@
     
         {if $array_products.currentPage < $array_products.totalPages}
             <li>
-                <a href="?page={$array_products.currentPage+1}&query={$applied_filters.query}&category={$applied_filters.category}&brand={$applied_filters.brand}&prezzo_max={$applied_filters.prezzo_max}">
+                <a href="?page={$array_products.currentPage+1}&query={$applied_filters.query}&category={$applied_filters.category}&brand={$applied_filters.brand}&prezzo_max={$applied_filters.prezzo_max}&order_by={$applied_filters.order_by}">
                     <i class="fa fa-angle-right"></i>
                 </a>
             </li>
@@ -69,23 +69,28 @@
 
     {if isset($array_products.products) && $array_products.products|@count > 0}
         {foreach from=$array_products['products'] item=product}
+            {if is_array($product)}
+                {assign var="prodotto" value=$product.0}
+            {else}
+                {assign var="prodotto" value=$product}
+            {/if}
             <!-- product -->
             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                 <div class="product">
 
                     <div class="product-img1">
-                        {if isset($product->getImages()->first()->getImageData()) && isset($product->getImages()->first()->getType())}
-                            <img src="data:{$product->getImages()->first()->getType()};base64,{$product->getImages()->first()->getEncodedData()}" alt="Image">
+                        {if isset($prodotto->getImages()->first()->getImageData()) && isset($prodotto->getImages()->first()->getType())}
+                            <img src="data:{$prodotto->getImages()->first()->getType()};base64,{$prodotto->getImages()->first()->getEncodedData()}" alt="Image">
                         {else}
                             <p>Immagine non trovata</p>
                         {/if}         
                     </div>
 
                     <div class="product-body">
-                        <p class="product-category">{$product->getNameCategory()->getNameCategory()}</p>
-                        <h3 class="product-name">{$product->getNameProduct()}</h3>
-                        <h4 class="product-price">€ {$product->getPriceProduct()}</h4>
-                        <form class="product-btns" method="GET" action="/EpTech/purchase/viewProduct/{$product->getProductId()}">											
+                        <p class="product-category">{$prodotto->getNameCategory()->getNameCategory()}</p>
+                        <h3 class="product-name">{$prodotto->getNameProduct()}</h3>
+                        <h4 class="product-price">€ {$prodotto->getPriceProduct()}</h4>
+                        <form class="product-btns" method="GET" action="/EpTech/purchase/viewProduct/{$prodotto->getProductId()}">											
                             <button type="submit" class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">vedi prodotto</span></button>
                         </form>
                     </div>

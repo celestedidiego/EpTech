@@ -465,10 +465,13 @@ class FPersistentManager {
      */
     public function getProductFiltered($filters, $page = 1, $pageSize = 4) {
         $qb = getEntityManager()->createQueryBuilder();
-        $qb->select('p')
-        ->from('EProduct', 'p')
-        ->where('p.is_deleted = false');
+        $qb->select('p, AVG(r.vote) AS avg_rating, SUM(io.quantity) AS sold_count')
+            ->from('EProduct', 'p')
+            ->leftJoin('p.reviews', 'r')
+            ->leftJoin('EItemOrder', 'io', 'WITH', 'io.product = p.productId')
+            ->where('p.is_deleted = false');
 
+        // ...altri filtri...
         // Filtro per query di ricerca
         if (!empty($filters['query'])) {
             $qb->andWhere('p.nameProduct LIKE :query OR p.description LIKE :query')
@@ -494,9 +497,27 @@ class FPersistentManager {
             ->setParameter('price_max', $filters['prezzo_max']);
         }
 
-        // Imposta i risultati per la paginazione
+        // Ordinamento
+        if (!empty($filters['order_by'])) {
+            switch ($filters['order_by']) {
+                case 'sold_desc':
+                    $qb->addOrderBy('sold_count', 'DESC');
+                    break;
+                case 'rating_desc':
+                    $qb->addOrderBy('avg_rating', 'DESC');
+                    break;
+                case 'price_asc':
+                    $qb->addOrderBy('p.priceProduct', 'ASC');
+                    break;
+                case 'price_desc':
+                    $qb->addOrderBy('p.priceProduct', 'DESC');
+                    break;
+            }
+        }
+
+        $qb->groupBy('p.productId');
         $qb->setFirstResult(($page - 1) * $pageSize)
-        ->setMaxResults($pageSize);
+            ->setMaxResults($pageSize);
 
         $query = $qb->getQuery();
         $paginator = new Paginator($query, $fetchJoinCollection = true);

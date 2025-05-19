@@ -15,6 +15,7 @@ class CProduct {
             'category' => isset($_GET['category']) ? $_GET['category'] : '',
             'brand' => isset($_GET['brand']) ? $_GET['brand'] : '',
             'max_price' => isset($_GET['max_price']) ? (int)$_GET['max_price'] : 5000,
+            'order_by' => isset($_GET['order_by']) ? $_GET['order_by'] : '',
         ];
         
         $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;

@@ -25,6 +25,16 @@
             <label for="priceRange">Prezzo massimo: <span id="priceValue">€{if isset($smarty.get.prezzo_max)}{$smarty.get.prezzo_max}{else}5000{/if}</span></label>
             <input type="range" class="form-control-range" id="priceRange" name="prezzo_max" min="0" max="5000" value="{if isset($smarty.get.prezzo_max)}{$smarty.get.prezzo_max}{else}5000{/if}" oninput="updatePriceValue(this.value)">
         </div>
+        <div class="form-group">
+            <label for="orderBy">Ordina per</label>
+            <select id="orderBy" name="order_by" class="form-control">
+                <option value="">Predefinito</option>
+                <option value="sold_desc" {if $applied_filters.order_by == 'sold_desc'}selected{/if}>Più venduti</option>
+                <option value="rating_desc" {if $applied_filters.order_by == 'rating_desc'}selected{/if}>Valutazione (dalla più alta)</option>
+                <option value="price_asc" {if $applied_filters.order_by == 'price_asc'}selected{/if}>Prezzo crescente</option>
+                <option value="price_desc" {if $applied_filters.order_by == 'price_desc'}selected{/if}>Prezzo decrescente</option>
+            </select>
+        </div>
         <button type="submit" class="btn btn-primary btn-block">Applica filtri</button>
     </form>
 </div>
