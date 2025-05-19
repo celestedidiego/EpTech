@@ -1,14 +1,35 @@
 <?php
 
+/**
+ * Class VAdmin
+ * Gestisce la visualizzazione delle pagine di amministrazione tramite Smarty.
+ */
 class VAdmin {
 
+    /**
+     * @var Smarty
+     */
     private $smarty;
 
+    /**
+     * VAdmin constructor.
+     * Inizializza la configurazione di Smarty.
+     */
     public function __construct()
     {
         $this->smarty = StartSmarty::configuration();
     }
 
+    /**
+     * Mostra la pagina di gestione prodotti per l'admin.
+     * @param array $array_products Lista dei prodotti.
+     * @param array $categories Lista delle categorie.
+     * @param array $brand Lista dei brand.
+     * @param bool $product_added Indica se un prodotto è stato aggiunto con successo.
+     * @param bool $product_modified Indica se un prodotto è stato modificato con successo.
+     * @param bool $product_deleted Indica se un prodotto è stato eliminato con successo.
+     * @return void
+     */
     public function manageProducts($array_products, $categories, $brand, $product_added, $product_modified, $product_deleted){
 
         $loginVariables=(new VUser)->checkLogin();
@@ -36,6 +57,11 @@ class VAdmin {
 
     }
 
+    /**
+     * Mostra la pagina di gestione utenti per l'admin.
+     * @param array $users_info Informazioni sugli utenti.
+     * @return void
+     */
     public function manageUsers($users_info) {
         $loginVariables=(new VUser)->checkLogin();
         foreach ($loginVariables as $key => $value){
@@ -53,7 +79,11 @@ class VAdmin {
         $this->smarty->display('manageUsers.tpl');
     }
 
-    //mostra solo i prodotti filtrti dall'admin
+    /**
+     * Mostra solo i prodotti filtrati dall'admin.
+     * @param array $products Prodotti filtrati.
+     * @return void
+     */
     public function displaySearchResults($products) {
         $loginVariables=(new VUser)->checkLogin();
         foreach ($loginVariables as $key => $value){
@@ -66,6 +96,11 @@ class VAdmin {
         $this->smarty->display('manageProducts.tpl');
     }
 
+    /**
+     * Mostra solo gli utenti filtrati dall'admin.
+     * @param array $users Utenti filtrati.
+     * @return void
+     */
     public function displayFilteredUsers($users)
     {
         $loginVariables = (new VUser)->checkLogin();
@@ -81,7 +116,11 @@ class VAdmin {
         $this->smarty->display('manageUsers.tpl');
     }
 
-    // Mostra tutte le recensioni gestite dall'admin
+    /**
+     * Mostra tutte le recensioni gestite dall'admin.
+     * @param array $reviews Lista delle recensioni.
+     * @return void
+     */
     public function manageReviews($reviews) {
         $loginVariables = (new VUser)->checkLogin();
         foreach ($loginVariables as $key => $value){
@@ -99,7 +138,11 @@ class VAdmin {
         $this->smarty->display('manageReviews.tpl');
     }
 
-    // Mostra solo le recensioni filtrate dall'admin
+    /**
+     * Mostra solo le recensioni filtrate dall'admin.
+     * @param array $reviews Recensioni filtrate.
+     * @return void
+     */
     public function displayFilteredReviews($reviews) {
         $loginVariables = (new VUser)->checkLogin();
         foreach ($loginVariables as $key => $value){
@@ -112,6 +155,11 @@ class VAdmin {
         $this->smarty->display('manageReviews.tpl');
     }
 
+    /**
+     * Mostra la pagina di gestione ordini per l'admin.
+     * @param array $orders Lista degli ordini.
+     * @return void
+     */
     public function showManageOrders($orders) {
         $loginVariables = (new VUser)->checkLogin();
         foreach ($loginVariables as $key => $value) {
@@ -121,6 +169,10 @@ class VAdmin {
         $this->smarty->display('manageOrders.tpl');
     }
 
+    /**
+     * Mostra la sezione di gestione dell'admin.
+     * @return void
+     */
     public function showManageSection() {
         $loginVariables = (new VUser)->checkLogin();
         foreach ($loginVariables as $key => $value) {
@@ -130,6 +182,11 @@ class VAdmin {
         $this->smarty->display('userinfo.tpl');
     }
 
+    /**
+     * Mostra la pagina per la creazione di un nuovo articolo.
+     * @param array $articles Lista degli articoli (opzionale).
+     * @return void
+     */
     public function showNewArticle($articles = []) {
         $loginVariables=(new VUser)->checkLogin();
         foreach ($loginVariables as $key => $value){

@@ -2,9 +2,20 @@
 
 use Doctrine\ORM\Query\Expr;
 
+/**
+ * Class VUser
+ * Gestisce la visualizzazione e le operazioni relative all'utente tramite Smarty.
+ */
 class VUser {
+    /**
+     * @var Smarty
+     */
     private $smarty;
 
+    /**
+     * VUser constructor.
+     * Inizializza la configurazione di Smarty e assegna le variabili di carrello.
+     */
     public function __construct() {
         // Configura Smarty utilizzando il metodo statico configuration della classe StartSmarty
         $this->smarty = StartSmarty::configuration();
@@ -30,7 +41,10 @@ class VUser {
 
     }
 
-    // Ha la funzione di gestire il contenuto del carrello dell'utente
+    /**
+     * Gestisce il contenuto del carrello dell'utente.
+     * @return array Array contenente i prodotti nel carrello, il subtotale e il carrello.
+     */
     public function cart_header(){
         if (!isset($_COOKIE['cart'])) {
             setcookie('cart', json_encode([]), time() + (300), "/"); // 5 minuti
@@ -66,7 +80,10 @@ class VUser {
         ];
     }
 
-    // Ha la funzione di contare il numero totale di articoli presenti nel carrello dell'utente
+    /**
+     * Conta il numero totale di articoli presenti nel carrello dell'utente.
+     * @return int Numero totale di articoli nel carrello.
+     */
     public function countItemCart()
     {
         if (!(isset($_COOKIE['cart']))) {
@@ -80,6 +97,10 @@ class VUser {
         return $cont;
     }
 
+    /**
+     * Verifica lo stato di login dell'utente e restituisce le variabili di login.
+     * @return array Variabili di login.
+     */
     public function checkLogin()
     {
         $loginVariables = [
@@ -99,23 +120,38 @@ class VUser {
         return $loginVariables;
     }
 
-    //Questo metodo visualizza il template accessDenied.tpl. Viene utilizzato per mostrare una pagina che informa l'utente che l'accesso alla risorsa richiesta è stato negato
+    /**
+     * Mostra la pagina di accesso negato.
+     * @return void
+     */
     public function accessDenied()
     {
         $this->smarty->display('accessDenied.tpl');
     }
 
-    // Questo metodo visualizza il template accessUnAuthorized.tpl. Viene utilizzato per mostrare una pagina che informa l'utente che non è autorizzato ad accedere alla risorsa richiesta
+    /**
+     * Mostra la pagina di accesso non autorizzato.
+     * @return void
+     */
     public function accessUnAuthorized(){
         $this->smarty->display('accessUnAuthorized.tpl');
     }
 
-    // Questo metodo visualizza il template login.tpl. Viene utilizzato per mostrare la pagina di login all'utente
+    /**
+     * Mostra il form di login.
+     * @return void
+     */
     public function showLoginForm(){
         $this->smarty->display('login.tpl');
     }
 
-    // Ha la funzione di gestire il successo del login di un utente e di preparare i dati necessari per visualizzare la homepage
+    /**
+     * Gestisce il successo del login di un utente e prepara i dati per la homepage.
+     * @param array $array_product Prodotti da mostrare.
+     * @param array $array_category Categorie da mostrare.
+     * @param array $article Articoli da mostrare.
+     * @return void
+     */
     public function loginSuccessUser($array_product, $array_category, $article){
         // Recupero delle variabili di login
         $loginVariables = self::checkLogin();
@@ -159,7 +195,10 @@ class VUser {
         $this->smarty->display('homepage.tpl');
     }
 
-    // Questo metodo prepara i dati necessari per visualizzare correttamente le informazioni dell'amministratore dopo che ha effettuato con successo il login
+    /**
+     * Prepara i dati per la visualizzazione dell'admin dopo il login.
+     * @return void
+     */
     public function loginSuccessAdmin(){
         $loginVariables = self::checkLogin();
         foreach ($loginVariables as $key => $value) {
@@ -174,14 +213,23 @@ class VUser {
         $this->smarty->display('userinfo.tpl');
     }
 
-    // Ha la funzione di gestire la visualizzazione di un messaggio di errore quando il login fallisce
+    /**
+     * Gestisce la visualizzazione di un messaggio di errore quando il login fallisce.
+     * @return void
+     */
     public function loginError(){
         $this->smarty->assign('error_log', 1);
         $this->smarty->display('login.tpl');
     }
 
 
-    // Ha la funzione di gestire il processo di logout dell'utente e di preparare i dati necessari per visualizzare la homepage
+    /**
+     * Gestisce il logout dell'utente e prepara i dati per la homepage.
+     * @param array $array_product Prodotti da mostrare.
+     * @param array $array_category Categorie da mostrare.
+     * @param array $article Articoli da mostrare.
+     * @return void
+     */
     public function logout($array_product, $array_category, $article){
         $loginVariables = self::checkLogin();
         foreach ($loginVariables as $key => $value) {
@@ -228,24 +276,37 @@ class VUser {
         $this->smarty->display('homepage.tpl');
     }
 
-    // Questo metodo visualizza il template di registrazione
+    /**
+     * Mostra il form di registrazione.
+     * @return void
+     */
     public function signUp(){
         $this->smarty->display('registration.tpl');
     }
 
-    // Viene utilizzato per indicare che la password deve essere controllata durante la registrazione.
+    /**
+     * Indica che la password deve essere controllata durante la registrazione.
+     * @return void
+     */
     public function checkPassSignUp(){
         $this->smarty->assign('check_pass', 1);
         $this->smarty->display('registration.tpl');
     }
 
-    // Viene utilizzato per indicare che c'è stato un errore durante la registrazione
+    /**
+     * Indica che c'è stato un errore durante la registrazione.
+     * @return void
+     */
     public function signUpError(){
         $this->smarty->assign('errore_r', 1);
         $this->smarty->display('registration.tpl');
     }
     
-    // Verifica se l'utente è loggato, assegna le variabili di login e i dati dell'utente al template, e visualizza il template dei dati utente. 
+    /**
+     * Verifica se l'utente è loggato, assegna le variabili di login 
+     * e i dati dell'utente al template, e visualizza il template dei dati utente.
+     * @return void 
+     * */ 
     public function userDataForm(){
         $loginVariables = self::checkLogin();
         foreach ($loginVariables as $key => $value) {
@@ -262,8 +323,11 @@ class VUser {
         $this->smarty->display('userinfo.tpl');
     }
     
-    // Verifica se l'utente è loggato, gestisce i messaggi di successo relativi alla modifica dei dati utente e della password, assegna i dati dell'utente al template e visualizza la sezione dei dati utente. 
-    // Questo permette di mostrare un form precompilato con le informazioni dell'utente loggato e di indicare eventuali successi nelle operazioni di modifica.
+    /**
+    * Verifica se l'utente è loggato, gestisce i messaggi di successo relativi alla modifica dei dati utente e della password, assegna i dati dell'utente al template e visualizza la sezione dei dati utente. 
+    * Questo permette di mostrare un form precompilato con le informazioni dell'utente loggato e di indicare eventuali successi nelle operazioni di modifica.
+    * @return void
+    */
     public function userDataSection(){
         $loginVariables = self::checkLogin();
         foreach ($loginVariables as $key => $value) {
@@ -295,8 +359,12 @@ class VUser {
         $this->smarty->display('userinfo.tpl');
     }
 
-    // Verifica se l'utente è loggato, assegna le variabili di login e la cronologia degli ordini al template, e visualizza la sezione della cronologia degli ordini. 
-    // Questo permette di mostrare all'utente una lista dei suoi ordini passati.
+    /** 
+    * Verifica se l'utente è loggato, assegna le variabili di login e la cronologia degli ordini al template, e visualizza la sezione della cronologia degli ordini. 
+    * Questo permette di mostrare all'utente una lista dei suoi ordini passati.
+    * @param array $orders Cronologia degli ordini dell'utente.
+    * @return void
+    */
     public function userHistoryOrders($orders){
         $loginVariables = self::checkLogin();
         foreach ($loginVariables as $key => $value) {
@@ -307,7 +375,10 @@ class VUser {
         $this->smarty->display('userinfo.tpl');
     }
 
-    // Questo metodo mostra il form per cambiare la password.
+    /**
+     * Mostra il form per cambiare la password.
+     * @return void
+     */
     public function changePass(){
         $loginVariables = self::checkLogin();
         foreach ($loginVariables as $key => $value) {
@@ -317,7 +388,11 @@ class VUser {
         $this->smarty->display('userinfo.tpl');
     }
 
-    //Questo metodo mostra il form di cambio password con un messaggio di errore se l'aggiornamento della password non è riuscito
+    /**
+     * Mostra il form di cambio password con messaggio di se l'aggiornamento della
+     * password non è riuscito.
+     * @return void
+     */
     public function errorPassUpdate(){
         $loginVariables = self::checkLogin();
         foreach ($loginVariables as $key => $value) {
@@ -328,7 +403,11 @@ class VUser {
         $this->smarty->display('userinfo.tpl');
     }
 
-    // Questo metodo mostra il form di cambio password con un messaggio di errore se la password vecchia inserita non è corretta.
+    /**
+     * Mostra il form di cambio password con errore se il cambio della vecchia password
+     * non è riuscito.
+     * @return void
+     */
     public function errorOldPass(){
         $loginVariables = self::checkLogin();
         foreach ($loginVariables as $key => $value) {
@@ -339,7 +418,11 @@ class VUser {
         $this->smarty->display('userinfo.tpl');
     }
 
-    // Questo metodo mostra il form di cambio password con un messaggio di errore se la nuova password inserita è uguale alla vecchia password.
+    /**
+     * Mostra il form di cambio password con errore se la vecchia password è uguale alla
+     * nuova password.
+     * @return void
+     */
     public function equalPasswordError() {
         $loginVariables = self::checkLogin();
         foreach ($loginVariables as $key => $value) {
@@ -350,7 +433,12 @@ class VUser {
         $this->smarty->display('userinfo.tpl');
     }
 
-    // Questo metodo mostra la sezione degli indirizzi di spedizione dell'utente.
+    /**
+     * Mostra la sezione degli indirizzi di spedizione dell'utente.
+     * @param array $array_shipping Indirizzi di spedizione.
+     * @param array $messages Messaggi opzionali.
+     * @return void
+     */
     public function shipping($array_shipping, $messages = []) {
         $loginVariables = self::checkLogin();
         foreach ($loginVariables as $key => $value) {
@@ -362,7 +450,10 @@ class VUser {
         $this->smarty->display('userinfo.tpl');
     }
 
-    // Questo metodo mostra il form per aggiungere un nuovo indirizzo di spedizione.
+    /**
+     * Mostra il form per aggiungere un nuovo indirizzo di spedizione.
+     * @return void
+     */
     public function addShipping(){
         $loginVariables = self::checkLogin();
         foreach ($loginVariables as $key => $value) {
@@ -372,7 +463,12 @@ class VUser {
         $this->smarty->display('userinfo.tpl');
     }
 
-    // Questo metodo mostra il form per aggiungere un nuovo indirizzo di spedizione con eventuali messaggi di errore.
+    /**
+     * Mostra il form per aggiungere un nuovo indirizzo di spedizione con eventuali
+     * messsaggi di errore.
+     * @param array $errors Errori da mostrare.
+     * @return void
+     */
     public function addShippingWithError($errors) {
         $loginVariables = self::checkLogin();
         foreach ($loginVariables as $key => $value) {
@@ -383,7 +479,11 @@ class VUser {
         $this->smarty->display('userinfo.tpl');
     }
 
-    // Questo metodo mostra la sezione degli indirizzi di spedizione con un messaggio di errore se la cancellazione di un indirizzo non è riuscita.
+    /**
+     * Mostra la sezione degli indirizzi di spedizione con messaggio di
+     * errore se la cancellazione non è riuscita.
+     * @return void
+     */
     public function errorDeleteShipping() {
         $loginVariables = self::checkLogin();
         foreach ($loginVariables as $key => $value) {
@@ -394,6 +494,12 @@ class VUser {
         $this->smarty->display('userinfo.tpl');
     }
 
+    /**
+     * Mostra la sezione delle carte di credito dell'utente.
+     * @param array $credit_cards Carte di credito.
+     * @param array $messages Messaggi opzionali.
+     * @return void
+     */
     public function creditCards($credit_cards, $messages = []) {
         $loginVariables = self::checkLogin();
         foreach ($loginVariables as $key => $value) {
@@ -405,6 +511,10 @@ class VUser {
         $this->smarty->display('userinfo.tpl');
     }
 
+    /**
+     * Mostra la sezione delle carte di credito con errore di cancellazione.
+     * @return void
+     */
     public function errorDeleteCard(){
         $loginVariables = self::checkLogin();
         foreach ($loginVariables as $key => $value) {
@@ -415,6 +525,10 @@ class VUser {
         $this->smarty->display('userinfo.tpl');
     }
 
+    /**
+     * Mostra il form per aggiungere una nuova carta di credito.
+     * @return void
+     */
     public function addCards(){
         $loginVariables = self::checkLogin();
         foreach ($loginVariables as $key => $value) {
@@ -423,17 +537,32 @@ class VUser {
         $this->smarty->assign('addCards', 1);
         $this->smarty->display('userinfo.tpl');
     }
+    /**
+     * Mostra il form per aggiungere una nuova carta di credito 
+     * con eventuali messaggi di errore.
+     * @param array $errors Errori da mostrare.
+     * @return void
+     */
     public function addCardsWithErrors($errors) {
         $this->smarty->assign('errors', $errors);
         $this->smarty->assign('addCards', 1);
         $this->smarty->display('userinfo.tpl');
     }
 
+    /**
+     * Mostra la pagina di successo della registrazione.
+     * @param string $message Messaggio di successo.
+     * @return void
+     */
     public function signUpSuccess($message) {
         $this->smarty->assign('success_message', $message);
         $this->smarty->display('signUpSuccess.tpl');
     }
     
+    /**
+     * Mostra la pagina "Chi siamo".
+     * @return void
+     */
     public function showAboutUs() {
         $loginVariables=(new VUser)->checkLogin();
         foreach ($loginVariables as $key => $value){

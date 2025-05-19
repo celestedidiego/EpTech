@@ -1,13 +1,35 @@
 <?php
 
+/**
+ * Class VProduct
+ * Gestisce la visualizzazione dei prodotti tramite Smarty.
+ */
 class VProduct {
 
+    /**
+     * @var Smarty
+     */
     private $smarty;
 
+    /**
+     * VProduct constructor.
+     * Inizializza la configurazione di Smarty.
+     */
     public function __construct() {
         $this->smarty = StartSmarty::configuration();
     }
 
+    /**
+     * Mostra la lista dei prodotti con filtri e messaggi di stato.
+     * @param array $products Lista dei prodotti.
+     * @param array $categories Lista delle categorie.
+     * @param array $brands Lista dei brand.
+     * @param array $filters Filtri applicati.
+     * @param bool $product_added Indica se un prodotto è stato aggiunto.
+     * @param bool $product_modified Indica se un prodotto è stato modificato.
+     * @param bool $product_deleted Indica se un prodotto è stato eliminato.
+     * @return void
+     */
     public function listProducts($products, $categories, $brands, $filters, $product_added, $product_modified, $product_deleted) {
         $loginVariables = (new VUser)->checkLogin();
         foreach ($loginVariables as $key => $value) {
@@ -23,6 +45,11 @@ class VProduct {
         $this->smarty->display('userinfo.tpl');
     }
 
+    /**
+     * Mostra il form per aggiungere un nuovo prodotto.
+     * @param array $array_category Lista delle categorie.
+     * @return void
+     */
     public function addProductForm($array_category) {
         $loginVariables = (new VUser)->checkLogin();
         foreach ($loginVariables as $key => $value) {
@@ -33,7 +60,12 @@ class VProduct {
         $this->smarty->display('userinfo.tpl');
     }
 
-    
+    /**
+     * Mostra il form per modificare un prodotto esistente.
+     * @param object $product Prodotto da modificare.
+     * @param array $images Immagini associate al prodotto.
+     * @return void
+     */
     public function modifyProductForm($product, $images) {
         $loginVariables = (new VUser)->checkLogin();
         foreach ($loginVariables as $key => $value) {
@@ -51,6 +83,11 @@ class VProduct {
         $this->smarty->display('userinfo.tpl');
     }
 
+    /**
+     * Mostra un errore di caricamento immagine durante l'aggiunta di un prodotto.
+     * @param array|null $categories Lista delle categorie (opzionale).
+     * @return void
+     */
     public function errorImageUpload($categories = null){
         $loginVariables = (new VUser)->checkLogin();
         foreach ($loginVariables as $key => $value) {
@@ -61,7 +98,13 @@ class VProduct {
         $this->smarty->assign('errorImageUpload', 1);
         $this->smarty->display('userinfo.tpl');
     }
-    
+
+    /**
+     * Mostra i dettagli di un prodotto e le sue recensioni.
+     * @param object $product Prodotto da visualizzare.
+     * @param array $reviews Recensioni associate al prodotto.
+     * @return void
+     */
     public function showProductDetails($product, $reviews) {
         $averageRating = 0;
         if ($reviews['n_reviews'] > 0) {
@@ -74,5 +117,4 @@ class VProduct {
         $this->smarty->assign('reviews', $reviews);
         $this->smarty->display('infoProduct.tpl');
     }
-
 }

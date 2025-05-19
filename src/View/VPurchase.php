@@ -1,9 +1,20 @@
 <?php
 
+/**
+ * Class VPurchase
+ * Gestisce la visualizzazione e le operazioni di acquisto tramite Smarty.
+ */
 class VPurchase {
 
+    /**
+     * @var Smarty
+     */
     private $smarty;
 
+    /**
+     * VPurchase constructor.
+     * Inizializza la configurazione di Smarty e assegna le variabili di carrello.
+     */
     public function __construct() {
         // Configura Smarty utilizzando il metodo statico configuration della classe StartSmarty
         $this->smarty = StartSmarty::configuration();
@@ -28,6 +39,14 @@ class VPurchase {
     
     }
 
+    /**
+     * Mostra la pagina dello shop con prodotti, categorie, brand e filtri applicati.
+     * @param array $products Lista dei prodotti.
+     * @param array $categories Lista delle categorie.
+     * @param array $brands Lista dei brand.
+     * @param array $applied_filters Filtri applicati.
+     * @return void
+     */
     public function shop($products, $categories, $brands, $applied_filters) {
         // Recupera le variabili di sessione relative all'utente loggato
         $loginVariables = (new VUser)->checkLogin();
@@ -59,6 +78,18 @@ class VPurchase {
         $this->smarty->display('userinfo.tpl');
     }
 
+    /**
+     * Mostra la pagina di dettaglio di un prodotto.
+     * @param object $product Prodotto da visualizzare.
+     * @param array $images Immagini del prodotto.
+     * @param array $reviews Recensioni del prodotto.
+     * @param array $same_cat_products Prodotti della stessa categoria.
+     * @param bool $can_review Indica se l'utente può recensire.
+     * @param mixed $user_review Recensione dell'utente.
+     * @param string $successMessage Messaggio di successo.
+     * @param string $errorMessage Messaggio di errore.
+     * @return void
+     */
     public function viewProduct($product, $images, $reviews, $same_cat_products, $can_review, $user_review, $successMessage, $errorMessage) {
         // Recupera le variabili di sessione relative all'utente loggato
         $loginVariables = (new VUser)->checkLogin();
@@ -109,6 +140,10 @@ class VPurchase {
         $this->smarty->display('infoProduct.tpl');
     }
 
+    /**
+     * Mostra la pagina del carrello.
+     * @return void
+     */
     public function cart(){
         $loginVariables = (new VUser)->checkLogin();
         foreach ($loginVariables as $key => $value) {
@@ -123,6 +158,14 @@ class VPurchase {
         $this->smarty->display('cart.tpl');
     }
 
+    /**
+     * Mostra il form di checkout.
+     * @param array $shipping Dati di spedizione.
+     * @param array $creditCards Carte di credito disponibili.
+     * @param array $products_cart Prodotti nel carrello.
+     * @param float $total_cart Totale del carrello.
+     * @return void
+     */
     public function viewCheckoutForm($shipping, $creditCards, $products_cart, $total_cart) {
         $loginVariables = (new VUser)->checkLogin();
         foreach ($loginVariables as $key => $value) {
@@ -137,6 +180,11 @@ class VPurchase {
         $this->smarty->display('checkout.tpl');
     }
 
+    /**
+     * Mostra la pagina di conferma ordine.
+     * @param array $order Dati dell'ordine.
+     * @return void
+     */
     public function viewConfirmOrder($order) {
         $loginVariables = (new VUser)->checkLogin();
         foreach ($loginVariables as $key => $value) {
@@ -147,6 +195,12 @@ class VPurchase {
 
         $this->smarty->display('orderCompleted.tpl');
     }
+
+    /**
+     * Mostra il dettaglio di un ordine.
+     * @param array $order Dati dell'ordine.
+     * @return void
+     */
     public function detailOrder($order){
         $loginVariables = (new VUser)->checkLogin();
         foreach ($loginVariables as $key => $value) {
@@ -156,6 +210,11 @@ class VPurchase {
         $this->smarty->assign('detailOrder', 1);
         $this->smarty->display('userinfo.tpl');
     }
+
+    /**
+     * Mostra la pagina di errore ordine.
+     * @return void
+     */
     public function errorOrder() {
         $loginVariables = (new VUser)->checkLogin();
         foreach ($loginVariables as $key => $value) {

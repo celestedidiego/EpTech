@@ -1,9 +1,20 @@
 <?php
 
+/**
+ * Class VReview
+ * Gestisce la visualizzazione delle recensioni tramite Smarty.
+ */
 class VReview {
 
+    /**
+     * @var Smarty
+     */
     private $smarty;
 
+    /**
+     * VReview constructor.
+     * Inizializza la configurazione di Smarty e assegna le variabili di carrello.
+     */
     public function __construct() {
         // Configura Smarty utilizzando il metodo statico configuration della classe StartSmarty
         $this->smarty = StartSmarty::configuration();
@@ -28,6 +39,13 @@ class VReview {
     
     }
 
+    /**
+     * Mostra le recensioni di un prodotto.
+     * @param object $product Prodotto di riferimento.
+     * @param array $reviews Lista delle recensioni.
+     * @param bool $canReview Indica se l'utente può recensire.
+     * @return void
+     */
     public function showProductReviews($product, $reviews, $canReview) {
         // Recupera le variabili di sessione relative al login
         $loginVariables = (new VUser)->checkLogin();
@@ -50,6 +68,11 @@ class VReview {
         $this->smarty->display('productReviews.tpl');
     }
 
+    /**
+     * Mostra le recensioni nella sezione amministrativa.
+     * @param array $reviews Lista delle recensioni.
+     * @return void
+     */
     public function showAdminReviews($reviews) {
         // Recupera le variabili di sessione relative al login
         $loginVariables = (new VUser)->checkLogin();
@@ -80,6 +103,11 @@ class VReview {
         $this->smarty->display('adminReviews.tpl');
     }
 
+    /**
+     * Mostra il form per inserire una recensione.
+     * @param object $product Prodotto da recensire.
+     * @return void
+     */
     public function showReviewForm($product) {
         // Recupera le variabili di sessione relative al login
         $loginVariables = (new VUser)->checkLogin();
@@ -96,6 +124,11 @@ class VReview {
         $this->smarty->display('reviewForm.tpl');
     }
 
+    /**
+     * Mostra il form per rispondere a una recensione.
+     * @param object $review Recensione a cui rispondere.
+     * @return void
+     */
     public function showReplyForm($review) {
         // Recupera le variabili di sessione relative al login
         $loginVariables = (new VUser)->checkLogin();
