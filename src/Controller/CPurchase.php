@@ -283,6 +283,12 @@ class CPurchase {
                 throw new \Exception("Errore nella creazione dell'ordine");
             }
 
+            // INVIO EMAIL DI CONFERMA ORDINE
+            if (isset($_SESSION['user']) && $_SESSION['user'] instanceof ERegisteredUser) {
+                $mailer = new UEMailer();
+                $mailer->sendOrderConfirmationEmail($_SESSION['user']->getEmail(), $order);
+            }
+
             // Svuota il carrello
             setcookie('cart', json_encode([]), time() - 3600, "/");
 

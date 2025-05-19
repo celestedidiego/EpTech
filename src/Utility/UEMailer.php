@@ -8,7 +8,8 @@ class UEMailer {
 
     public function __construct() {
         $this->mailer = new PHPMailer(true);
-
+        // Imposta la codifica a UTF-8 per supportare caratteri speciali come €
+        $this->mailer->CharSet = 'UTF-8';
         // Carica le configurazioni da un file esterno o da variabili d'ambiente
         $config = $this->loadConfig();
 
@@ -92,6 +93,24 @@ class UEMailer {
             $this->mailer->Subject = 'Benvenuto su EpTech!';
             $this->mailer->Body = "Ciao e benvenuto su EpTech! Siamo felici di averti con noi.";
             $this->mailer->AltBody = "Ciao e benvenuto su EpTech! Siamo felici di averti con noi.";
+
+            $this->mailer->send();
+            return true;
+        } catch (Exception $e) {
+            return false;
+        }
+    }
+
+    public function sendOrderConfirmationEmail($userEmail, $order) {
+        try {
+            $this->mailer->clearAddresses();
+            $this->mailer->addAddress($userEmail);
+            $this->mailer->Subject = 'Conferma ordine EpTech';
+            $orderId = $order->getIdOrder();
+            $orderTotal = $order->getTotalPrice();
+            $orderDate = $order->getDateTime()->format('d/m/Y H:i');
+            $this->mailer->Body = "Grazie per il tuo ordine su EpTech!\n Dettagli ordine: \n Numero ordine: $orderId Data: $orderDate Totale: €: $orderTotal \n Riceverai aggiornamenti sullo stato dell'ordine via email.";
+            $this->mailer->AltBody = "Grazie per il tuo ordine su EpTech! \n Numero ordine: $orderId, Data: $orderDate, Totale: €: $orderTotal";
 
             $this->mailer->send();
             return true;
