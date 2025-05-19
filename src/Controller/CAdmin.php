@@ -167,6 +167,13 @@ class CAdmin {
                 $order->setOrderStatus($newStatus);
                 FPersistentManager::getInstance()->update($order);
                 $_SESSION['success_message'] = "Stato dell'ordine aggiornato con successo.";
+
+                // Invio mail all'utente quando l'admin cambia lo stato dell'ordine
+                $user = $order->getRegisteredUser();
+                if ($user && $user->getEmail()) {
+                    $mailer = new UEMailer();
+                    $mailer->sendOrderStatusUpdateEmail($user->getEmail(), $order, $newStatus);
+                }
             } else {
                 $_SESSION['error_message'] = "Ordine non trovato.";
             }
