@@ -29,7 +29,11 @@
                                 <p class="mt-2">Stato richiesta: {$refundStatus}</p>
                             {else}
                                 {if $order->getOrderStatus() == 'Consegnato'}
-                                    <a href="#" class="btn btn-warning btn-sm" onclick="confirmRefundRequest('{$order->getIdOrder()}')">Richiesta Reso o Rimborso</a>
+                                    {if isset($order->refund_expired) && $order->refund_expired}
+                                        <span class="text-danger">Reso/Rimborso Non Più Disponibile</span>
+                                    {else}
+                                        <a href="#" class="btn btn-warning btn-sm" onclick="confirmRefundRequest('{$order->getIdOrder()}')">Richiesta Reso/Rimborso</a>
+                                    {/if}
                                 {/if}
                             {/if}
                         </td>

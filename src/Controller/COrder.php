@@ -138,7 +138,21 @@ class COrder
 
         $order = FPersistentManager::getInstance()->find(EOrder::class, $orderId);
         if ($order && $order->getOrderStatus() === 'Consegnato') {
-            if ($order->hasRefundRequest()) {
+            $deliveredAt = $order->getDeliveredAt();
+            $now = new \DateTime();
+            $expired = false;
+            if ($deliveredAt instanceof \DateTime) {
+                $interval = $now->getTimestamp() - $deliveredAt->getTimestamp();
+                if ($interval > 120) { // 2 minuti = 120 secondi
+                    $expired = true;
+                }
+            } else {
+                $expired = true;
+            }
+
+            if ($expired) {
+                $_SESSION['error_message'] = "Richiesta scaduta";
+            } else if ($order->hasRefundRequest()) {
                 $_SESSION['error_message'] = "Hai già effettuato una richiesta di reso o rimborso per questo ordine.";
             } else {
                 FPersistentManager::getInstance()->addRefundRequest($order);

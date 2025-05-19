@@ -165,6 +165,10 @@ class CAdmin {
 
             if ($order) {
                 $order->setOrderStatus($newStatus);
+                // Se lo stato è "Consegnato", salva il timestamp di consegna
+                if ($newStatus === 'Consegnato') {
+                    $order->setDeliveredAt(new \DateTime());
+                }
                 FPersistentManager::getInstance()->update($order);
                 $_SESSION['success_message'] = "Stato dell'ordine aggiornato con successo.";
             } else {
@@ -216,9 +220,9 @@ class CAdmin {
         if ($order && $order->hasRefundRequest()) {
             $refundRequest = $order->getRefundRequests()[0];
             if ($refundRequest->getStatus() === 'pending') {
-                $refundRequest->setStatus('accepted');
+                $refundRequest->setStatus('accettata');
                 FPersistentManager::getInstance()->update($refundRequest);
-                $_SESSION['success_message'] = "Richiesta di reso o rimborso accettata.";
+                $_SESSION['success_message'] = "Richiesta di reso/rimborso accettata.";
             } else {
                 $_SESSION['error_message'] = "La richiesta è già stata gestita.";
             }
@@ -239,10 +243,10 @@ class CAdmin {
         $order = FPersistentManager::getInstance()->find(EOrder::class, $orderId);
         if ($order && $order->hasRefundRequest()) {
             $refundRequest = $order->getRefundRequests()[0];
-            if ($refundRequest->getStatus() === 'pending') {
-                $refundRequest->setStatus('rejected');
+            if ($refundRequest->getStatus() === 'in attesa') {
+                $refundRequest->setStatus('rifiutata');
                 FPersistentManager::getInstance()->update($refundRequest);
-                $_SESSION['success_message'] = "Richiesta di reso o rimborso rifiutata.";
+                $_SESSION['success_message'] = "Richiesta di reso/rimborso rifiutata.";
             } else {
                 $_SESSION['error_message'] = "La richiesta è già stata gestita.";
             }

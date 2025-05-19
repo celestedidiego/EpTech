@@ -206,7 +206,38 @@ class VPurchase {
         foreach ($loginVariables as $key => $value) {
             $this->smarty->assign($key, $value);
         }
+        $expired = false;
+        // Gestione sia oggetto che array
+        if (is_object($order) && method_exists($order, 'getOrderStatus')) {
+            $orderStatus = $order->getOrderStatus();
+            $deliveredAt = $order->getDeliveredAt();
+        } elseif (is_array($order)) {
+            $orderStatus = $order['orderStatus'] ?? null;
+            $deliveredAt = $order['deliveredAt'] ?? null;
+        } else {
+            $orderStatus = null;
+            $deliveredAt = null;
+        }
+        if ($orderStatus === 'Consegnato') {
+            if ($deliveredAt instanceof \DateTime) {
+                $now = new \DateTime();
+                $interval = $now->getTimestamp() - $deliveredAt->getTimestamp();
+                if ($interval > 120) {
+                    $expired = true;
+                }
+            } elseif (is_string($deliveredAt)) {
+                $now = new \DateTime();
+                $deliveredDate = new \DateTime($deliveredAt);
+                $interval = $now->getTimestamp() - $deliveredDate->getTimestamp();
+                if ($interval > 120) {
+                    $expired = true;
+                }
+            } else {
+                $expired = true;
+            }
+        }
         $this->smarty->assign('order', $order);
+        $this->smarty->assign('refund_expired', $expired);
         $this->smarty->assign('detailOrder', 1);
         $this->smarty->display('userinfo.tpl');
     }

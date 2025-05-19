@@ -253,6 +253,23 @@ class CUser {
     {
         $view_user = new VUser();
         $orders = FPersistentManager::getInstance()->getOrderUser();
+        // Set refund_expired property for each order
+        foreach ($orders as $order) {
+            $expired = false;
+            if ($order->getOrderStatus() === 'Consegnato') {
+                $deliveredAt = $order->getDeliveredAt();
+                if ($deliveredAt instanceof \DateTime) {
+                    $now = new \DateTime();
+                    $interval = $now->getTimestamp() - $deliveredAt->getTimestamp();
+                    if ($interval > 120) {
+                        $expired = true;
+                    }
+                } else {
+                    $expired = true;
+                }
+            }
+            $order->refund_expired = $expired;
+        }
         $view_user->userHistoryOrders($orders);
     }
 

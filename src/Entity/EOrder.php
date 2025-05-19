@@ -44,6 +44,9 @@ class EOrder
     #[ORM\OneToMany(mappedBy: "order", targetEntity: ERefundRequest::class)]
     private Collection $refundRequests;
 
+    #[ORM\Column(type: "datetime", nullable: true)]
+    protected $deliveredAt;
+
     public function __construct()
     {
         $this->totalPrice = 0.0;
@@ -136,7 +139,7 @@ class EOrder
         return $this->orderStatus== 'Preso in carico';   
     }
 
-     public function isInSpedizione(){
+    public function isInSpedizione(){
         return $this->orderStatus == 'In spedizione';
     }
 
@@ -191,4 +194,17 @@ class EOrder
         return false;
     }
 
+    public function setDeliveredAt(\DateTime $dt) {
+        $this->deliveredAt = $dt;
+    }
+
+    public function getDeliveredAt() {
+        return $this->deliveredAt;
+    }
+
+    /**
+     * Indica se la richiesta di rimborso è scaduta (solo runtime, non persistente)
+     * @var bool|null
+     */
+    public ?bool $refund_expired = null;
 }
