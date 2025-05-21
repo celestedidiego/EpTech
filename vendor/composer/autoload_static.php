@@ -256,7 +256,6 @@ class ComposerStaticInit17b6cdc511631d653f0122fd305f42ea
         'ERegisteredUser' => __DIR__ . '/../..' . '/src/Entity/ERegisteredUser.php',
         'EReview' => __DIR__ . '/../..' . '/src/Entity/EReview.php',
         'EShipping' => __DIR__ . '/../..' . '/src/Entity/EShipping.php',
-        'EUnRegisteredUser' => __DIR__ . '/../..' . '/src/Entity/EUnRegisteredUser.php',
         'FAdmin' => __DIR__ . '/../..' . '/src/Foundation/FAdmin.php',
         'FCategory' => __DIR__ . '/../..' . '/src/Foundation/FCategory.php',
         'FCreditCard' => __DIR__ . '/../..' . '/src/Foundation/FCreditCard.php',

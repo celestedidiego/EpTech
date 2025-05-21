@@ -26,7 +26,6 @@ return array(
     'ERegisteredUser' => $baseDir . '/src/Entity/ERegisteredUser.php',
     'EReview' => $baseDir . '/src/Entity/EReview.php',
     'EShipping' => $baseDir . '/src/Entity/EShipping.php',
-    'EUnRegisteredUser' => $baseDir . '/src/Entity/EUnRegisteredUser.php',
     'FAdmin' => $baseDir . '/src/Foundation/FAdmin.php',
     'FCategory' => $baseDir . '/src/Foundation/FCategory.php',
     'FCreditCard' => $baseDir . '/src/Foundation/FCreditCard.php',
