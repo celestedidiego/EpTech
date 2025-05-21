@@ -70,7 +70,7 @@
                                     {if $order->hasRefundRequest()}
                                         {assign var="refundRequests" value=$order->getRefundRequests()}
                                         {assign var="refundStatus" value=$refundRequests[0]->getStatus()}
-                                        {if $refundStatus == 'pending'}
+                                        {if $refundStatus == 'in attesa'}
                                             <a href="#" class="btn btn-danger btn-sm" onclick="showRefundActions('{$order->getIdOrder()}')">Reso o Rimborso</a>
                                             <div id="refund-actions-{$order->getIdOrder()}" style="display: none; margin-top: 10px;">
                                                 <a href="/EpTech/admin/acceptRefund/{$order->getIdOrder()}" class="btn btn-success btn-sm">Accetta</a>

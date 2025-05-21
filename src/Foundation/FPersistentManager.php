@@ -146,7 +146,7 @@ class FPersistentManager {
 
      /**
      * Trova un utente (registrato o admin) tramite oggetto o email.
-     * Utilizzato per trovare un utente nel database, sia che l'utente sia un oggetto di una classe specifica (ERegisteredUser, EUnRegisteredUser, EAdmin) o una stringa (email).
+     * Utilizzato per trovare un utente nel database, sia che l'utente sia un oggetto di una classe specifica (ERegisteredUser, EAdmin) o una stringa (email).
      * @param mixed $user
      * @return mixed
      */

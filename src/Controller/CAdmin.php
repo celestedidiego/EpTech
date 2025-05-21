@@ -226,7 +226,7 @@ class CAdmin {
         $order = FPersistentManager::getInstance()->find(EOrder::class, $orderId);
         if ($order && $order->hasRefundRequest()) {
             $refundRequest = $order->getRefundRequests()[0];
-            if ($refundRequest->getStatus() === 'pending') {
+            if ($refundRequest->getStatus() === 'in attesa') {
                 $refundRequest->setStatus('accettata');
                 FPersistentManager::getInstance()->update($refundRequest);
                 $_SESSION['success_message'] = "Richiesta di reso/rimborso accettata.";

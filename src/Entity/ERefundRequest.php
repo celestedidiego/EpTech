@@ -22,7 +22,7 @@ class ERefundRequest {
 
     public function __construct(EOrder $order) {
         $this->order = $order;
-        $this->status = 'pending';
+        $this->status = 'in attesa';
         $this->requestDate = new \DateTime();
     }
 
