@@ -59,6 +59,32 @@ class UEMailer {
         }
     }
 
+    public function sendAccountBlockedEmail($userEmail) {
+        try {
+            $this->mailer->addAddress($userEmail);
+            $this->mailer->Subject = 'Il tuo account EpTech è stato bloccato';
+            $this->mailer->Body = 'Il tuo account è stato bloccato da un amministratore di EpTech. Contatta il supporto per maggiori informazioni.';
+
+            $this->mailer->send();
+            return true;
+        } catch (Exception $e) {
+            return false;
+        }
+    }
+
+    public function sendAccountUnblockedEmail($userEmail) {
+        try {
+            $this->mailer->addAddress($userEmail);
+            $this->mailer->Subject = 'Il tuo account EpTech è stato sbloccato';
+            $this->mailer->Body = 'Il tuo account è stato sbloccato da un amministratore di EpTech. Ora puoi accedere nuovamente alla piattaforma.';
+
+            $this->mailer->send();
+            return true;
+        } catch (Exception $e) {
+            return false;
+        }
+    }
+
     public function sendProductDeletionEmail($userEmail,$nameProduct) {
         try {
             $this->mailer->addAddress($userEmail);
@@ -130,6 +156,45 @@ class UEMailer {
             $this->mailer->Body = "Il tuo ordine EpTech (n. $orderId, effettuato il $orderDate) ha cambiato stato: $statusText.";
             $this->mailer->AltBody = "Il tuo ordine EpTech (n. $orderId, effettuato il $orderDate) ha cambiato stato: $statusText.";
 
+            $this->mailer->send();
+            return true;
+        } catch (Exception $e) {
+            return false;
+        }
+    }
+
+    public function sendRefundRequestEmail($userEmail, $orderId) {
+        try {
+            $this->mailer->clearAddresses();
+            $this->mailer->addAddress($userEmail);
+            $this->mailer->Subject = 'Richiesta di reso/rimborso ricevuta';
+            $this->mailer->Body = "Abbiamo ricevuto la tua richiesta di reso/rimborso per l'ordine #$orderId. Ti aggiorneremo appena possibile.";
+            $this->mailer->send();
+            return true;
+        } catch (Exception $e) {
+            return false;
+        }
+    }
+
+    public function sendRefundAcceptedEmail($userEmail, $orderId) {
+        try {
+            $this->mailer->clearAddresses();
+            $this->mailer->addAddress($userEmail);
+            $this->mailer->Subject = 'Richiesta di reso/rimborso accettata';
+            $this->mailer->Body = "La tua richiesta di reso/rimborso per l'ordine #$orderId è stata accettata. Riceverai il rimborso a breve.";
+            $this->mailer->send();
+            return true;
+        } catch (Exception $e) {
+            return false;
+        }
+    }
+
+    public function sendRefundRejectedEmail($userEmail, $orderId) {
+        try {
+            $this->mailer->clearAddresses();
+            $this->mailer->addAddress($userEmail);
+            $this->mailer->Subject = 'Richiesta di reso/rimborso rifiutata';
+            $this->mailer->Body = "La tua richiesta di reso/rimborso per l'ordine #$orderId è stata rifiutata. Per maggiori informazioni contatta il supporto.";
             $this->mailer->send();
             return true;
         } catch (Exception $e) {

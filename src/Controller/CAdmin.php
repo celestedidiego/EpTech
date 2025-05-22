@@ -56,13 +56,16 @@ class CAdmin {
      * 
      * @param int $userId ID dell'utente da bloccare.
      */
-
     public static function blockUser($userId) {
         $entityClass = 'ERegisteredUser';
         $user = FPersistentManager::getInstance()->find($entityClass, $userId);
         if ($user) {
             $user->setBlocked(true);
             FPersistentManager::getInstance()->update($user);
+
+            $mailer = new UEMailer();
+            $mailer->sendAccountBlockedEmail($user->getEmail());
+
             $_SESSION['message'] = "L'utente è stato bloccato con successo.";
         } else {
             $_SESSION['error'] = "Utente non trovato.";
@@ -81,6 +84,10 @@ class CAdmin {
         if ($user) {
             $user->setBlocked(false);
             FPersistentManager::getInstance()->update($user);
+
+            $mailer = new UEMailer();
+            $mailer->sendAccountUnblockedEmail($user->getEmail());
+
             $_SESSION['message'] = "L'utente è stato sbloccato con successo.";
         } else {
             $_SESSION['error'] = "Utente non trovato.";
@@ -229,6 +236,13 @@ class CAdmin {
             if ($refundRequest->getStatus() === 'in attesa') {
                 $refundRequest->setStatus('accettata');
                 FPersistentManager::getInstance()->update($refundRequest);
+
+                $user = $order->getRegisteredUser();
+                if ($user) {
+                    $mailer = new UEMailer();
+                    $mailer->sendRefundAcceptedEmail($user->getEmail(), $order->getIdOrder());
+                }
+
                 $_SESSION['success_message'] = "Richiesta di reso/rimborso accettata.";
             } else {
                 $_SESSION['error_message'] = "La richiesta è già stata gestita.";
@@ -253,6 +267,13 @@ class CAdmin {
             if ($refundRequest->getStatus() === 'in attesa') {
                 $refundRequest->setStatus('rifiutata');
                 FPersistentManager::getInstance()->update($refundRequest);
+
+                $user = $order->getRegisteredUser();
+                if ($user) {
+                    $mailer = new UEMailer();
+                    $mailer->sendRefundRejectedEmail($user->getEmail(), $order->getIdOrder());
+                }
+
                 $_SESSION['success_message'] = "Richiesta di reso/rimborso rifiutata.";
             } else {
                 $_SESSION['error_message'] = "La richiesta è già stata gestita.";

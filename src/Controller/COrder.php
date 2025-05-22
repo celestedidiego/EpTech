@@ -156,6 +156,10 @@ class COrder
                 $_SESSION['error_message'] = "Hai già effettuato una richiesta di reso o rimborso per questo ordine.";
             } else {
                 FPersistentManager::getInstance()->addRefundRequest($order);
+
+                $mailer = new UEMailer();
+                $mailer->sendRefundRequestEmail($_SESSION['user']->getEmail(), $order->getIdOrder());
+
                 $_SESSION['success_message'] = "Richiesta di reso o rimborso inviata con successo.";
             }
         } else {
