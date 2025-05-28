@@ -51,7 +51,18 @@ class FOrder extends EntityRepository {
             $quantityTotal = 0;
 
             foreach ($cart as $productId => $quantity) {
-                $product = $em->find(EProduct::class, $productId);
+                // Ottieni il prodotto con lock pessimista
+                $product = $em->find(
+                    EProduct::class,
+                    $productId,
+                    \Doctrine\DBAL\LockMode::PESSIMISTIC_WRITE
+                );
+
+                // Controlla la quantità disponibile
+                if ($product->getAvQuantity() < $quantity) {
+                    throw new \Exception("Quantità non disponibile per il prodotto '{$product->getNameProduct()}' (ID $productId). Disponibile: {$product->getAvQuantity()}, richiesto: $quantity");
+                }
+
                 $itemOrder = new EItemOrder();
                 $itemOrder->setOrder($order);
                 $itemOrder->setProduct($product);
@@ -74,7 +85,7 @@ class FOrder extends EntityRepository {
             $em->flush();
             $em->commit();
             return $order;
-        } catch (Exception $e) {
+        } catch (\Throwable $e) { // intercetta tutte le eccezioni, non solo Exception
             $em->rollback();
             throw $e;
         }

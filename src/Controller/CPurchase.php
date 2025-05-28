@@ -203,7 +203,7 @@ class CPurchase {
      */
     public static function checkout(){
         $view = new VPurchase();
-    
+
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             
             // Recupera gli indirizzi e le carte di credito dell'utente
@@ -228,26 +228,29 @@ class CPurchase {
             
             $view->viewCheckoutForm($shipping, $creditCards, $products_cart, $total_cart);
         } elseif ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            // Gestisce il completamento dell'ordine
-            $shipping_id = $_POST['shipping'];
-            $creditCard_id = $_POST['creditCard'];
-            $cart = isset($_COOKIE['cart']) ? json_decode($_COOKIE['cart'], true) : [];
-            // Crea un nuovo ordine
-            $order = FPersistentManager::getInstance()->newOrder($_SESSION['user'], $shipping_id, $creditCard_id, $cart);
-            // Aggiunge i prodotti all'ordine
-            $cart = isset($_COOKIE['cart']) ? json_decode($_COOKIE['cart'], true) : [];
-            foreach ($cart as $productId => $quantity) {
-                $product = FPersistentManager::getInstance()->find(EProduct::class, $productId);
-                if ($product) {
-                    FPersistentManager::getInstance()->addProductOrder($order, $product, $quantity);
+            try {
+                $shipping_id = $_POST['shipping'];
+                $creditCard_id = $_POST['creditCard'];
+                $cart = isset($_COOKIE['cart']) ? json_decode($_COOKIE['cart'], true) : [];
+                // Crea un nuovo ordine
+                $order = FPersistentManager::getInstance()->newOrder($_SESSION['user'], $shipping_id, $creditCard_id, $cart);
+                // Aggiunge i prodotti all'ordine
+                $cart = isset($_COOKIE['cart']) ? json_decode($_COOKIE['cart'], true) : [];
+                foreach ($cart as $productId => $quantity) {
+                    $product = FPersistentManager::getInstance()->find(EProduct::class, $productId);
+                    if ($product) {
+                        FPersistentManager::getInstance()->addProductOrder($order, $product, $quantity);
+                    }
                 }
+                // Svuota il carrello
+                setcookie('cart', json_encode([]), time() - 3600, "/");
+                // Mostra la pagina di conferma dell'ordine
+                $view->viewConfirmOrder($order);
+            } catch (\Exception $e) {
+                $_SESSION['error_order'] = "Si è verificato un errore durante il completamento dell'ordine. " . $e->getMessage();
+                header('Location: /EpTech/purchase/errorOrder');
+                exit;
             }
-            
-            // Svuota il carrello
-            setcookie('cart', json_encode([]), time() - 3600, "/");
-            
-            // Mostra la pagina di conferma dell'ordine
-            $view->viewConfirmOrder($order);
         }
     }
     
@@ -338,5 +341,17 @@ class CPurchase {
             header('Location: /EpTech/user/userHistoryOrders');
             exit;
         }
+    }
+
+    /**
+     * Mostra la pagina di errore ordine.
+     *
+     * @return void
+     */
+    public static function errorOrder() {
+        $view = new VOrder();
+        $errorMessage = isset($_SESSION['error_order']) ? $_SESSION['error_order'] : "Si è verificato un errore sconosciuto.";
+        unset($_SESSION['error_order']);
+        $view->showOrderError($errorMessage);
     }
 }

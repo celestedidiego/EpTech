@@ -74,7 +74,7 @@ class VOrder
         }
         $this->smarty->assign('order', $order);
         $this->smarty->assign('refund_expired', $expired);
-        $this->smarty->display('order_detail.tpl');
+        $this->smarty->display('detailOrder.tpl');
     }
 
     /**
@@ -95,5 +95,16 @@ class VOrder
     {
         $this->smarty->assign('order', $order);
         $this->smarty->display('order_edit.tpl');
+    }
+
+    /**
+     * Mostra la pagina di errore ordine.
+     * @param string $errorMessage Messaggio di errore da visualizzare.
+     * @return void
+     */
+    public function showOrderError($errorMessage)
+    {
+        $this->smarty->assign('error_order', $errorMessage);
+        $this->smarty->display('errorOrder.tpl');
     }
 }
