@@ -96,7 +96,7 @@
                             </div>
                             <div class="cart-summary">
                                 <small>{$cart_quantity} prodotti/o selezionati</small>
-                                <h5>SUBTOTAL: €{$subtotal}</h5>
+                                <h5>TOTALE: €{$subtotal}</h5>
                             </div>
                             <div class="cart-btns">
                                 <a href="/EpTech/purchase/showCart">Vai al carrello</a>
