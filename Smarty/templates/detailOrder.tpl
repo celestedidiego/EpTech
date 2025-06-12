@@ -95,6 +95,27 @@
             .text-center.mt-4 a:hover {
                 background-color: #797f8a;
             }
+
+            @media (max-width: 767px) {
+                .row.mt-4 .card {
+                    flex-direction: column;
+                    align-items: stretch;
+                }
+                .row.mt-4 .card img {
+                    width: 100%;
+                    max-width: 250px;
+                    margin: 0 auto 10px auto;
+                    display: block;
+                }
+                .row.mt-4 .card-body {
+                    padding: 10px;
+                }
+                .col-md-6 {
+                    width: 100%;
+                    max-width: 100%;
+                    flex: 0 0 100%;
+                }
+            }
         </style>
         <h2 class="text-center">Dettagli Ordine</h2>
         <div class="row">
