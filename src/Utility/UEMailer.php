@@ -38,7 +38,7 @@ class UEMailer {
             'smtp_password' => 'xxxxxxxxxxxxxx',
             'smtp_secure' => 'tls',
             'smtp_port' => 2525,
-            'from_email' => 'admin@eptech',
+            'from_email' => 'admin@eptech.com',
             'from_name' => 'EpTech Admin',
         ]; 
 
