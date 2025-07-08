@@ -32,15 +32,15 @@ class UEMailer {
          * <?php
         
 
-            return [
-                'smtp_host' => 'sandbox.smtp.mailtrap.io',
-                'smtp_username' => 'a940082c2f6a4e',
-                'smtp_password' => '5a816ceb23d405',
-                'smtp_secure' => 'tls',
-                'smtp_port' => 2525,
-                'from_email' => 'riccardo@riccardo.com',
-                'from_name' => 'EpTech Admin',
-            ]; 
+        return [
+            'smtp_host' => 'sandbox.smtp.mailtrap.io',
+            'smtp_username' => 'xxxxxxxxxxxxxx',
+            'smtp_password' => 'xxxxxxxxxxxxxx',
+            'smtp_secure' => 'tls',
+            'smtp_port' => 2525,
+            'from_email' => 'admin@eptech.com',
+            'from_name' => 'EpTech Admin',
+        ]; 
 
         */
         return include __DIR__ .'/../../config/configMailer.php';

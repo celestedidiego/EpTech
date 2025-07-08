@@ -61,7 +61,7 @@
       git clone https://github.com/celestedidiego/EpTech
    ```
 
-3. Crea un nuovo database con nome eptechprova su `localhost/phpmyadmin` e importa il db provaeptech.sql incluso nel repository.
+3. Crea un nuovo database con nome eptech su `localhost/phpmyadmin` e importa il db eptech.sql incluso nel repository.
 
 ## 📦🐧 Installazione Linux
 
@@ -104,7 +104,7 @@ L'output deve essere di questo tipo:
     drwxrwxr-x 19 nome_utente daemon    4096 apr 23 11:48 vendor
 ```
 
-4. Crea un nuovo database con nome eptechprova su `localhost/phpmyadmin` e importa il db provaeptech.sql incluso nel repository.
+4. Crea un nuovo database con nome eptech su `localhost/phpmyadmin` e importa il db provaeptech.sql incluso nel repository.
 
 ## 📦🍏 Installazione MacOS
 Essendo basato su Unix, i passaggi sono i medesimi di Linux, sostituire lampp con mampp

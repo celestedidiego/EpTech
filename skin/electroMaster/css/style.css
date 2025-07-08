@@ -2320,3 +2320,15 @@ textarea, textarea#description {
     margin-top: 10px;
   }
 }
+
+/* Tabella responsive per mobile */
+@media (max-width: 767px) {
+  .table-responsive {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .table-responsive table {
+    min-width: 600px; /* o quanto serve per non "rompere" le colonne */
+  }
+}

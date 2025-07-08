@@ -1,6 +1,7 @@
 <div class="container mt-5">
     <h2 class="text-center">Storico Ordini</h2>
     {if $orders|@count > 0}
+    <div class="table-responsive">
         <table class="table table-bordered mt-4">
             <thead>
                 <tr>
@@ -41,6 +42,7 @@
                 {/foreach}
             </tbody>
         </table>
+    </div>
     {else}
         <p class="alert alert-warning text-center">Non hai ordini registrati.</p>
     {/if}
