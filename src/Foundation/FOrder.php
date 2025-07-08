@@ -28,7 +28,7 @@ class FOrder extends EntityRepository {
      * @throws Exception
      */
     public function newOrder($address, $cap, $cardNumber, $cart){
-        $em = getEntityManager();
+        $em = $this->getEntityManager();
         $em->beginTransaction();
 
         try {
@@ -98,7 +98,7 @@ class FOrder extends EntityRepository {
      * @return void
      */
     public function ChangeOrderStatus($idOrder, $newStatus){
-        $em = getEntityManager();
+        $em = $this->getEntityManager();
         $found_order = $em->find(EOrder::class, $idOrder);
         $found_order->setOrderStatus($newStatus);
 

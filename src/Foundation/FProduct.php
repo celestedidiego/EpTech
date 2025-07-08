@@ -14,7 +14,7 @@ class FProduct extends EntityRepository {
      * @return void
      */
     public function insertProduct(EProduct $product){
-        $em = getEntityManager();
+        $em = $this->getEntityManager();
         $em->persist($product);
         $em->flush();
     }
@@ -25,7 +25,7 @@ class FProduct extends EntityRepository {
      * @return void
      */
     public function deleteProduct($product) {
-        $em = getEntityManager();
+        $em = $this->getEntityManager();
         $found_product = $em->find(EProduct::class, $product);
         if(!$found_product->isDeleted()){
             $found_product->setDeleted(true);
@@ -40,7 +40,7 @@ class FProduct extends EntityRepository {
      * @return void
      */
     public function updateImageProduct(EProduct $product, EImage $image){
-        $em = getEntityManager();
+        $em = $this->getEntityManager();
         $found_product = $em->find(EProduct::class, $product->getProductId());
         $found_image =  $em->find(EImage::class, $image->getIdImage());
         $found_product->addImage($found_image);
@@ -58,7 +58,7 @@ class FProduct extends EntityRepository {
      */
     public function updateAdminCatProduct(EProduct $product, EAdmin $admin, ECategory $category)
     {
-        $em = getEntityManager();
+        $em = $this->getEntityManager();
         $found_product = $em->find(EProduct::class, $product->getProductId());
         $found_admin = $em->find(EAdmin::class, $admin->getIdAdmin());
         $found_category = $em->find(ECategory::class, $category->getIdCategory());
@@ -84,7 +84,7 @@ class FProduct extends EntityRepository {
             FROM EProduct p
             WHERE p.is_deleted = false
             ORDER BY p.productId ASC"; // per ordinare i prodotti in ordine crescente
-        $query = getEntityManager()->createQuery($dql);
+        $query = $this->getEntityManager()->createQuery($dql);
         $query->setFirstResult(($currentPage - 1) * $pageSize)
         ->setMaxResults($pageSize);
 
@@ -111,7 +111,7 @@ class FProduct extends EntityRepository {
         FROM EProduct p 
         WHERE p.productId= ?1
         AND p.is_deleted = false";
-        $query = getEntityManager()->createQuery($dql);
+        $query = $this->getEntityManager()->createQuery($dql);
         $query->setParameter(1, $id);
         $query->setMaxResults(1);
         $query->setFirstResult(($currentPage - 1) * $pageSize)
@@ -154,7 +154,7 @@ class FProduct extends EntityRepository {
      * @return array
      */
     public function getAllProductsByAdmin(EAdmin $admin, $page = 1, $filter = [], $pageSize = 4) {
-        $qb = getEntityManager()->createQueryBuilder();
+        $qb = $this->getEntityManager()->createQueryBuilder();
         $qb->select('p')
            ->from('EProduct', 'p')
            ->where('p.admin = :admin')
@@ -204,7 +204,7 @@ class FProduct extends EntityRepository {
      * @return void
      */
     public function updateProduct(EProduct $product, $array_data){
-        $em = getEntityManager();
+        $em = $this->getEntityManager();
         $found_product = $em->find(EProduct::class, $product->getProductId());
         $found_product->setNameProduct($array_data['name']);
         $found_product->setDescription($array_data['description']);
@@ -230,7 +230,7 @@ class FProduct extends EntityRepository {
                 JOIN p.category c
                 WHERE c.categoryId = ?1
                 AND p.is_deleted = false";
-        $query = getEntityManager()->createQuery($dql)
+        $query = $this->getEntityManager()->createQuery($dql)
         ->setParameter(1, $category)
         ->setFirstResult(($currentPage - 1) * $pageSize)
         ->setMaxResults($pageSize);

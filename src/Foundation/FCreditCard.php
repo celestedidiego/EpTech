@@ -27,7 +27,7 @@ class FCreditCard extends EntityRepository {
      */
     public function insertCreditCard($array_data){
         $new_creditCard = new ECreditCard($array_data['cardNumber'], $array_data['cardHolderName'], $array_data['endDate'], $array_data['cvv']);
-        $em = getEntityManager();
+        $em = $this->getEntityManager();
         $found_user = $em->find(ERegisteredUser::class, $_SESSION['user']->getIdRegisteredUser());
         $new_creditCard->setRegisteredUser($found_user);
         $em->persist($new_creditCard);
@@ -41,7 +41,7 @@ class FCreditCard extends EntityRepository {
      */
     public function getAllCreditCardUser($idUser)
     {
-        return getEntityManager()->createQueryBuilder('car')
+        return $this->getEntityManager()->createQueryBuilder('car')
             ->select('car')
             ->from(ECreditCard::class, 'car')
             ->where('car.registeredUser = :idUser')
@@ -74,7 +74,9 @@ class FCreditCard extends EntityRepository {
      */
     public function findAllActive()
     {
-        return getEntityManager()->createQueryBuilder()
+        return $this->getEntityManager()->createQueryBuilder()
+            ->select('car')
+            ->from(ECreditCard::class, 'car')
             ->where('car.is_deleted = :isDeleted')
             ->setParameter('isDeleted', false)
             ->getQuery()
@@ -89,7 +91,7 @@ class FCreditCard extends EntityRepository {
     public function softDelete(ECreditCard $creditCard)
     {
         $creditCard->setDeleted(true);
-        getEntityManager()->flush();
+        $this->getEntityManager()->flush();
     }
 
     /**
@@ -99,7 +101,7 @@ class FCreditCard extends EntityRepository {
      */
     public function canBeHardDeleted($cardNumber): bool
     {
-        $qb = getEntityManager()->createQueryBuilder();
+        $qb = $this->getEntityManager()->createQueryBuilder();
         $count = $qb->select('COUNT(o.id_ordine)')
             ->from('EOrder', 'o')
             ->where('o.card_number = :cardNumber')
@@ -109,5 +111,5 @@ class FCreditCard extends EntityRepository {
 
         return $count === 0;
     }
-
+    
 }

@@ -14,7 +14,7 @@ class FAdmin extends EntityRepository {
      */
     public function findAdmin($email){
         $dql = "SELECT a FROM EAdmin a WHERE a.email = ?1";
-        $query = getEntityManager()->createQuery($dql);
+        $query = $this->getEntityManager()->createQuery($dql);
         $query->setParameter(1, $email);
         $query->setMaxResults(1);
         return $query->getResult();
@@ -27,7 +27,7 @@ class FAdmin extends EntityRepository {
      */
     public function findAdminById($adminId){
         $dql = "SELECT a FROM EAdmin a WHERE a.adminId = ?1";
-        $query = getEntityManager()->createQuery($dql);
+        $query = $this->getEntityManager()->createQuery($dql);
         $query->setParameter(1, $adminId);
         $query->setMaxResults(1);
         return $query->getResult();
@@ -40,7 +40,7 @@ class FAdmin extends EntityRepository {
      * @return void
      */
     public function updatePass(EAdmin $admin, $new_password){
-        $em = getEntityManager();
+        $em = $this->getEntityManager();
         $found_admin = $em->find(EAdmin::class, $admin->getIdAdmin());
         $found_admin->setPassword(password_hash($new_password, PASSWORD_DEFAULT));
          //Aggiorno la sessione
@@ -56,7 +56,7 @@ class FAdmin extends EntityRepository {
      * @return void
      */
     public function updateAdmin(EAdmin $admin, $array_data){
-        $em = getEntityManager();
+        $em = $this->getEntityManager();
         $found_admin = $em->find(EAdmin::class, $admin->getIdAdmin());
         $found_admin->setName($array_data['name']);
         $found_admin->setSurname($array_data['surname']);
@@ -74,7 +74,7 @@ class FAdmin extends EntityRepository {
      * @return void
      */
     public function deleteAdmin(EAdmin $admin) {
-        $em = getEntityManager();
+        $em = $this->getEntityManager();
         $found_admin = $em->find(EAdmin::class, $admin->getIdAdmin());
         $em->remove($found_admin);
         $em->flush();
@@ -86,7 +86,7 @@ class FAdmin extends EntityRepository {
      * @return void
      */
     public function softDeleteUser($user) {
-        $em=getEntityManager();
+        $em = $this->getEntityManager();
         $user->setDeleted(true);
         $em->persist($user);
         $em->flush();
@@ -145,7 +145,7 @@ class FAdmin extends EntityRepository {
         $offset = ($page - 1) * $itemsPerPage;
         $limit = $itemsPerPage + 1; // Richiediamo un elemento in più per determinare se c'è una pagina successiva
 
-        $em = getEntityManager();
+        $em = $this->getEntityManager();
 
         // Query per gli utenti registrati
         $qb = $this->getEntityManager()->createQueryBuilder();
@@ -203,7 +203,7 @@ class FAdmin extends EntityRepository {
     public function getAllReviewsPaginated($page = 1, $itemsPerPage = 5)
     {
         $offset = ($page - 1) * $itemsPerPage;
-        $em = getEntityManager();
+        $em = $this->getEntityManager();
 
         // Query per ottenere le recensioni paginati
         $qb = $em->createQueryBuilder();
@@ -250,7 +250,7 @@ class FAdmin extends EntityRepository {
     public function findReviewsByUserId($userId, $page = 1, $itemsPerPage = 5)
     {
         $offset = ($page - 1) * $itemsPerPage;
-        $em = getEntityManager();
+        $em = $this->getEntityManager();
 
         // Query per ottenere le recensioni paginati
         $qb = $em->createQueryBuilder();

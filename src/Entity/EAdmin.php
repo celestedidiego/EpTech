@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 class EAdmin
 {
-
+    
     #[ORM\Id]
     #[ORM\GeneratedValue()]
     #[ORM\Column(name: "adminId",type: "integer")]
@@ -51,7 +51,6 @@ class EAdmin
     {
         return $this->adminId;
     }
-
 
     public function getName() {
         return $this->name;

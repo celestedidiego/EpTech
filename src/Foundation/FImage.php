@@ -12,7 +12,7 @@ class FImage extends EntityRepository {
      * @return void
      */
     public function insertImage(EImage $image){
-        $em = getEntityManager();
+        $em = $this->getEntityManager();
         $em->persist($image);
         $em->flush();
     }
@@ -24,7 +24,7 @@ class FImage extends EntityRepository {
      */
     public function findImage($image){
         $dql = "SELECT im FROM EImage im WHERE im.idImage = ?1";
-        $query = getEntityManager()->createQuery($dql);
+        $query = $this->getEntityManager()->createQuery($dql);
         $query->setParameter(1, $image);
         $query->setMaxResults(1);
         return $query->getResult();
@@ -40,7 +40,7 @@ class FImage extends EntityRepository {
             FROM EImage im
             WHERE im.product = ?1
             ORDER BY im.name ASC"; //ordinamento dlle immagini per nome file
-        $query = getEntityManager()->createQuery($dql);
+        $query = $this->getEntityManager()->createQuery($dql);
         $query->setParameter(1, $product);
         $tmp_images = $query->getArrayResult();
 
@@ -65,7 +65,7 @@ class FImage extends EntityRepository {
         $dql = "SELECT im
             FROM EImage im
             WHERE im.product = ?1";
-        $query = getEntityManager()->createQuery($dql);
+        $query = $this->getEntityManager()->createQuery($dql);
         $query->setParameter(1, $product);
         return $query->getResult();
     }
@@ -76,9 +76,9 @@ class FImage extends EntityRepository {
      * @return void
      */
     public function deleteAllImages($productId){
-        $em = getEntityManager();
+        $em = $this->getEntityManager();
         $found_product = $em->find(EProduct::class, $productId);
-        $found_images = self::getAllObjectImages($found_product);
+        $found_images = $this->getAllObjectImages($found_product);
         if(!$found_product->isDeleted()){
             foreach($found_images as $image){
                 $em->remove($image);

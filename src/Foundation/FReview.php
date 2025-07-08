@@ -1,4 +1,5 @@
 <?php
+
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 
@@ -16,8 +17,8 @@ class FReview extends EntityRepository {
     public function findReviewByID($idReview)
     {
         $dql = "SELECT r FROM EReview r WHERE r.idReview = :idReview";
-        $query = getEntityManager()->createQuery($dql);
-        $query->setParameter(1, $idReview);
+        $query = $this->getEntityManager()->createQuery($dql);
+        $query->setParameter('idReview', $idReview);
         $query->setMaxResults(1);
         return $query->getResult();
     }
@@ -86,7 +87,7 @@ class FReview extends EntityRepository {
      * @return mixed
      */
     public function getReviewUser($registeredUser, $product) {
-        $em = getEntityManager();
+        $em = $this->getEntityManager();
         return $em->getRepository('EReview')->findOneBy([
             'registeredUser' => $registeredUser,
             'product' => $product
@@ -99,7 +100,7 @@ class FReview extends EntityRepository {
      * @return void
      */
     public function addReview($review) {
-        $em = getEntityManager();
+        $em = $this->getEntityManager();
         $em->persist($review);
         $em->flush();
     }
@@ -110,7 +111,7 @@ class FReview extends EntityRepository {
      * @return void
      */
     public function deleteReview($review) {
-        $em = getEntityManager();
+        $em = $this->getEntityManager();
         $em->remove($review);
         $em->flush();
     }
@@ -121,7 +122,7 @@ class FReview extends EntityRepository {
      * @return bool
      */
     public function hasPurchasedProduct($productId) {
-        $em = getEntityManager();
+        $em = $this->getEntityManager();
         $found_user = $em->find(ERegisteredUser::class, $_SESSION['user']->getIdRegisteredUser());
         $qb = $em->createQueryBuilder();
         $result = $qb->select('COUNT(DISTINCT o.idOrder)')
@@ -154,7 +155,7 @@ class FReview extends EntityRepository {
                 WHERE p.nameProduct LIKE :productName
                 ORDER BY r.idReview DESC";
     
-        $query = getEntityManager()->createQuery($dql)
+        $query = $this->getEntityManager()->createQuery($dql)
             ->setParameter('productName', '%' . $productName . '%')
             ->setFirstResult($offset)
             ->setMaxResults($itemsPerPage);

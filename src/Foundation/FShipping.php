@@ -1,4 +1,5 @@
 <?php
+
 use Doctrine\ORM\EntityRepository;
 
 /**
@@ -15,7 +16,7 @@ class FShipping extends EntityRepository {
      */
     public function findShipping($address, $cap){
         $dql = "SELECT sh FROM EShipping sh WHERE sh.address = ?1 AND sh.cap = ?2";
-        $query = getEntityManager()->createQuery($dql);
+        $query = $this->getEntityManager()->createQuery($dql);
         $query->setParameter(1, $address);
         $query->setParameter(2, $cap);
         $query->setMaxResults(1);
@@ -29,7 +30,7 @@ class FShipping extends EntityRepository {
      */
     public function insertShipping($array_data){
         $new_shipping = new EShipping($array_data['address'], $array_data['cap'], $array_data['city'], $array_data['recipientName'], $array_data['recipientSurname']);
-        $em = getEntityManager();
+        $em = $this->getEntityManager();
         $found_user = $em->find(ERegisteredUser::class, $_SESSION['user']->getIdRegisteredUser());
         $new_shipping->setShippingRegisteredUser($found_user);
         $em->persist($new_shipping);
@@ -43,7 +44,7 @@ class FShipping extends EntityRepository {
      */
     public function getAllShippingUser($idUser)
     {
-            return getEntityManager()->createQueryBuilder('sh')
+            return $this->getEntityManager()->createQueryBuilder('sh')
             ->select('sh')
             ->from(EShipping::class, 'sh')  // Aggiunta esplicita della clausola FROM
             ->where('sh.shippingRegisteredUser = :idUser')
@@ -85,7 +86,9 @@ class FShipping extends EntityRepository {
      */
     public function findAllActive()
     {
-        return getEntityManager()->createQueryBuilder()
+        return $this->getEntityManager()->createQueryBuilder('sh')
+            ->select('sh')
+            ->from(EShipping::class, 'sh')
             ->where('sh.is_deleted = :isDeleted')
             ->setParameter('isDeleted', false)
             ->getQuery()
@@ -100,7 +103,7 @@ class FShipping extends EntityRepository {
     public function softDelete(EShipping $shipping)
     {
         $shipping->setDeleted(true);
-        getEntityManager()->flush();
+        $this->getEntityManager()->flush();
     }
 
     /**
@@ -111,7 +114,7 @@ class FShipping extends EntityRepository {
      */
     public function canBeHardDeleted($address, $cap): bool
     {
-        $qb = getEntityManager()->createQueryBuilder();
+        $qb = $this->getEntityManager()->createQueryBuilder();
         $count = $qb->select('COUNT(o.idOrder)')
             ->from('EOrder', 'o')
             ->join('o.shipping', 'sh')

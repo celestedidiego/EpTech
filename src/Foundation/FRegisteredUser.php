@@ -1,4 +1,5 @@
 <?php
+
 use Doctrine\ORM\EntityRepository;
 
 /**
@@ -14,7 +15,7 @@ class FRegisteredUser extends EntityRepository {
      */
     public function findRegisteredUser($email){
         $dql = "SELECT ru FROM ERegisteredUser ru WHERE ru.email = ?1";
-        $query = getEntityManager()->createQuery($dql);
+        $query = $this->getEntityManager()->createQuery($dql);
         $query->setParameter(1, $email);
         $query->setMaxResults(1);
         return $query->getResult();
@@ -27,7 +28,7 @@ class FRegisteredUser extends EntityRepository {
      */
     public function findRegisteredUserById($id){
         $dql = "SELECT ru FROM ERegisteredUser ru WHERE ru.registeredUserId = ?1";
-        $query = getEntityManager()->createQuery($dql);
+        $query = $this->getEntityManager()->createQuery($dql);
         $query->setParameter(1, $id);
         $query->setMaxResults(1);
         return $query->getResult();
@@ -39,7 +40,7 @@ class FRegisteredUser extends EntityRepository {
      * @return void
      */
     public function insertNewRegisteredUser(ERegisteredUser $user){
-        $em = getEntityManager();
+        $em = $this->getEntityManager();
         $em->persist($user);
         $em->flush();
     }
@@ -50,7 +51,7 @@ class FRegisteredUser extends EntityRepository {
      * @return void
      */
     public function deleteRegisteredUser(ERegisteredUser $user) {
-        $em = getEntityManager();
+        $em = $this->getEntityManager();
         $found_user = $em->find(ERegisteredUser::class, $user->getIdRegisteredUser());
         if ($found_user) {
             $found_user->setDeleted(true);
@@ -66,7 +67,7 @@ class FRegisteredUser extends EntityRepository {
      * @return void
      */
     public function updatePass(ERegisteredUser $user, $new_password){
-        $em = getEntityManager();
+        $em = $this->getEntityManager();
         $found_user = $em->find(ERegisteredUser::class, $user->getIdRegisteredUser());
         $found_user->setPassword(password_hash($new_password, PASSWORD_DEFAULT));
          //Aggiorno la sessione
@@ -82,7 +83,7 @@ class FRegisteredUser extends EntityRepository {
      * @return void
      */
     public function updateRegisteredUser(ERegisteredUser $user, $array_data){
-        $em = getEntityManager();
+        $em = $this->getEntityManager();
         $found_user = $em->find(ERegisteredUser::class, $user->getIdRegisteredUser());
         $found_user->setName($array_data['name']);
         $found_user->setSurname($array_data['surname']);
