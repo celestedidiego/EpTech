@@ -42,8 +42,10 @@ class FAdmin extends EntityRepository {
     public function updatePass(EAdmin $admin, $new_password){
         $em = $this->getEntityManager();
         $found_admin = $em->find(EAdmin::class, $admin->getIdAdmin());
+        // Aggiornamento nel database
         $found_admin->setPassword(password_hash($new_password, PASSWORD_DEFAULT));
-         //Aggiorno la sessione
+        //Aggiornamento nella sessione
+        // NON si dovrebbe salvare la password in sessione
         $_SESSION['user']->setPassword(password_hash($new_password, PASSWORD_DEFAULT));
         $em->persist($found_admin);
         $em->flush();
@@ -60,7 +62,7 @@ class FAdmin extends EntityRepository {
         $found_admin = $em->find(EAdmin::class, $admin->getIdAdmin());
         $found_admin->setName($array_data['name']);
         $found_admin->setSurname($array_data['surname']);
-        //Aggiorno la sessione
+        //Aggiornamento nella sessione
         $_SESSION['user']->setName($array_data['name']);
         $_SESSION['user']->setSurname($array_data['surname']);
         $em->persist($found_admin);
@@ -93,14 +95,14 @@ class FAdmin extends EntityRepository {
     }
 
     /**
-     * Restituisce tutti gli utenti paginati
+     * Restituisce una lista paginata di tutti gli utenti registrati.
      * @param int $page
      * @param int $itemsPerPage
      * @return array
      */
     public function getAllUsersPaginated($page = 1, $itemsPerPage = 10)
     {
-        $offset = ($page - 1) * $itemsPerPage;
+        $offset = ($page - 1) * $itemsPerPage; // Calcola quanti record saltare prima di iniziare a mostrare i risultati per una pagina specifica
         $limit = $itemsPerPage + 1;  // Richiediamo un elemento in più per determinare se c'è una pagina successiva
         
         // Query per gli utenti registrati
@@ -116,20 +118,21 @@ class FAdmin extends EntityRepository {
         // Esecuzione della query
         $users = $qb->getQuery()->getResult();
 
-        // Tagliamo l'array al numero di elementi richiesti
+        // Controlla se l'array ha più elementi del necessario (significa che ci sono altre pagine)
         $hasMorePages = count($users) > $itemsPerPage;
+        //Taglia l'array alla dimensione corretta
         $users = array_slice($users, 0, $itemsPerPage);
 
         // Conteggio totale degli utenti (questa query verrà eseguita solo quando necessario)
         $totalItems = $this->getTotalUsersCount();
 
         return [
-            'users' => $users,
-            'totalItems' => $totalItems,
-            'itemsPerPage' => $itemsPerPage,
-            'currentPage' => $page,
-            'totalPages' => ceil($totalItems / $itemsPerPage),
-            'hasMorePages' => $hasMorePages
+            'users' => $users, // Array con i dati degli utenti della pagina corrente
+            'totalItems' => $totalItems, // Numero totale di utenti nel database
+            'itemsPerPage' => $itemsPerPage, // Quanti elementi per pagina
+            'currentPage' => $page, // Pagina attualmente visualizzata
+            'totalPages' => ceil($totalItems / $itemsPerPage), // Numero totale di pagine
+            'hasMorePages' => $hasMorePages // Esistono pagine successive?
         ];
     }
 
@@ -142,10 +145,8 @@ class FAdmin extends EntityRepository {
      */
     public function getFilteredUsersPaginated($id, $page = 1, $itemsPerPage = 10)
     {
-        $offset = ($page - 1) * $itemsPerPage;
+        $offset = ($page - 1) * $itemsPerPage; // Calcola quanti record saltare prima di iniziare a mostrare i risultati per una pagina specifica
         $limit = $itemsPerPage + 1; // Richiediamo un elemento in più per determinare se c'è una pagina successiva
-
-        $em = $this->getEntityManager();
 
         // Query per gli utenti registrati
         $qb = $this->getEntityManager()->createQueryBuilder();
@@ -162,8 +163,9 @@ class FAdmin extends EntityRepository {
         // Esecuzione della query
         $users = $qb->getQuery()->getResult();
 
-        // Tagliamo l'array al numero di elementi richiesti
+        // Controlla se l'array ha più elementi del necessario (significa che ci sono altre pagine)
         $hasMorePages = count($users) > $itemsPerPage;
+        // Taglia l'array alla dimensione corretta
         $users = array_slice($users, 0, $itemsPerPage);
 
         // Conteggio totale degli utenti (questa query verrà eseguita solo quando necessario)
@@ -195,7 +197,7 @@ class FAdmin extends EntityRepository {
     }
 
     /**
-     * Restituisce tutte le recensioni paginati.
+     * Restituisce tutte le recensioni paginate.
      * @param int $page
      * @param int $itemsPerPage
      * @return array
@@ -205,7 +207,7 @@ class FAdmin extends EntityRepository {
         $offset = ($page - 1) * $itemsPerPage;
         $em = $this->getEntityManager();
 
-        // Query per ottenere le recensioni paginati
+        // Query per ottenere le recensioni paginate
         $qb = $em->createQueryBuilder();
         $qb->select('r')
             ->from('EReview', 'r')
@@ -241,7 +243,7 @@ class FAdmin extends EntityRepository {
     }
 
     /**
-     * Trova le recensioni di un utente specifico, paginati.
+     * Trova le recensioni di un utente specifico, paginate.
      * @param int $userId
      * @param int $page
      * @param int $itemsPerPage
@@ -252,7 +254,7 @@ class FAdmin extends EntityRepository {
         $offset = ($page - 1) * $itemsPerPage;
         $em = $this->getEntityManager();
 
-        // Query per ottenere le recensioni paginati
+        // Query per ottenere le recensioni paginate
         $qb = $em->createQueryBuilder();
         $qb->select('r.idReview', 'r.text', 'r.vote' , 'ru.registeredUserId as user_id', 'ru.name as user_name', 'ru.surname as user_surname', 'p.productId as product_id', 'p.nameProduct as product_name')
         ->from('EReview', 'r')

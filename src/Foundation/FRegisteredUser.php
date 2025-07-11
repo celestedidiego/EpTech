@@ -70,8 +70,9 @@ class FRegisteredUser extends EntityRepository {
         $em = $this->getEntityManager();
         $found_user = $em->find(ERegisteredUser::class, $user->getIdRegisteredUser());
         $found_user->setPassword(password_hash($new_password, PASSWORD_DEFAULT));
-         //Aggiorno la sessione
-         $_SESSION['user']->setPassword(password_hash($new_password, PASSWORD_DEFAULT));
+        //Aggiornamento della sessione
+        //NON si dovrebbe salvare la password in sessione
+        $_SESSION['user']->setPassword(password_hash($new_password, PASSWORD_DEFAULT));
         $em->persist($found_user);
         $em->flush();
     }
@@ -88,7 +89,7 @@ class FRegisteredUser extends EntityRepository {
         $found_user->setName($array_data['name']);
         $found_user->setSurname($array_data['surname']);
         $found_user->setUsername($array_data['username']);
-        //Aggiorno la sessione
+        //Aggiornamento della sessione
         $_SESSION['user']->setName($array_data['name']);
         $_SESSION['user']->setSurname($array_data['surname']);
         $_SESSION['user']->setUsername($array_data['username']);

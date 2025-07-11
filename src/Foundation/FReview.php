@@ -24,7 +24,7 @@ class FReview extends EntityRepository {
     }
 
     /**
-     * Restituisce le recensioni dei prodotti gestiti da un admin, paginati.
+     * Restituisce le recensioni dei prodotti gestiti da un admin
      * @param mixed $admin
      * @param int $page
      * @param int $itemsPerPage
@@ -53,7 +53,7 @@ class FReview extends EntityRepository {
     }
 
     /**
-     * Restituisce le recensioni di un prodotto, paginati.
+     * Restituisce le recensioni di un prodotto
      * @param mixed $product
      * @param int $page
      * @param int $itemsPerPage
@@ -141,7 +141,7 @@ class FReview extends EntityRepository {
     }
 
     /**
-     * Restituisce le recensioni tramite nome prodotto, paginati.
+     * Restituisce le recensioni tramite nome prodotto
      * @param string $productName
      * @param int $page
      * @param int $itemsPerPage

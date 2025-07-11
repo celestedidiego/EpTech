@@ -96,6 +96,9 @@ class FCreditCard extends EntityRepository {
 
     /**
      * Verifica se una carta di credito può essere eliminata definitivamente.
+     * PUÒ essere eliminata definitivamente SE:
+     * Nessun ordine ha mai utilizzato questa carta
+     * Non ci sono riferimenti in altre tabelle
      * @param string $cardNumber
      * @return bool
      */

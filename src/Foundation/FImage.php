@@ -46,10 +46,6 @@ class FImage extends EntityRepository {
 
         $array_images = [];
         foreach($tmp_images as $image){
-            //Poiché $array_immagini[0]['imageData'] contiene l'id della Risorsa, uso
-            //la funzione stream_get_contents($array_immagini[0]['imageData']) per 
-            //riottenere la stringa base64 memorizzata nel database per poi
-            //assegnarla di nuovo all'array 
             $image['imageData'] = stream_get_contents($image['imageData']);
             $array_images[] = $image;
         }
@@ -78,7 +74,9 @@ class FImage extends EntityRepository {
     public function deleteAllImages($productId){
         $em = $this->getEntityManager();
         $found_product = $em->find(EProduct::class, $productId);
+        // Ottieni tutte le immagini del prodotto (come oggetti Doctrine)
         $found_images = $this->getAllObjectImages($found_product);
+        // Controllo di sicurezza: solo se il prodotto non è eliminato
         if(!$found_product->isDeleted()){
             foreach($found_images as $image){
                 $em->remove($image);

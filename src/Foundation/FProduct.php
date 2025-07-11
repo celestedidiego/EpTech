@@ -27,6 +27,8 @@ class FProduct extends EntityRepository {
     public function deleteProduct($product) {
         $em = $this->getEntityManager();
         $found_product = $em->find(EProduct::class, $product);
+
+        // Se un prodotto non è stato eliminato, esegui soft delete
         if(!$found_product->isDeleted()){
             $found_product->setDeleted(true);
         }
@@ -63,6 +65,8 @@ class FProduct extends EntityRepository {
         $found_admin = $em->find(EAdmin::class, $admin->getIdAdmin());
         $found_category = $em->find(ECategory::class, $category->getIdCategory());
 
+        // Verifica che tutti e tre gli oggetti siano stati trovati
+        // e non siano nulli
         if ($found_product && $found_admin && $found_category) {
             $found_product->setAdmin($found_admin);
             $found_product->setNameCategory($found_category);
@@ -85,8 +89,8 @@ class FProduct extends EntityRepository {
             WHERE p.is_deleted = false
             ORDER BY p.productId ASC"; // per ordinare i prodotti in ordine crescente
         $query = $this->getEntityManager()->createQuery($dql);
-        $query->setFirstResult(($currentPage - 1) * $pageSize)
-        ->setMaxResults($pageSize);
+        $query->setFirstResult(($currentPage - 1) * $pageSize) // Offset: da quale record iniziare
+        ->setMaxResults($pageSize); // Limit: quanti record prendere
 
         $paginator = new Paginator($query, fetchJoinCollection: true);
 
@@ -100,7 +104,7 @@ class FProduct extends EntityRepository {
     }
 
     /**
-     * Restituisce un prodotto tramite ID, paginato.
+     * Restituisce un prodotto tramite ID
      * @param int $id
      * @param int $currentPage
      * @param int $pageSize
@@ -159,7 +163,8 @@ class FProduct extends EntityRepository {
            ->from('EProduct', 'p')
            ->where('p.admin = :admin')
            ->setParameter('admin', $admin);
-    
+
+        // filtri dinamici
         if (!empty($filter['query'])) {
             $qb->andWhere('p.nameProduct LIKE :query OR p.description LIKE :query')
                ->setParameter('query', '%' . $filter['query'] . '%');
@@ -218,7 +223,7 @@ class FProduct extends EntityRepository {
     }
 
     /**
-     * Restituisce tutti i prodotti di una categoria, paginati.
+     * Restituisce tutti i prodotti di una categoria
      * @param mixed $category
      * @param int $currentPage
      * @param int $pageSize

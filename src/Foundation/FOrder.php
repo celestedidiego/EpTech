@@ -29,14 +29,16 @@ class FOrder extends EntityRepository {
      */
     public function newOrder($address, $cap, $cardNumber, $cart){
         $em = $this->getEntityManager();
-        $em->beginTransaction();
+        $em->beginTransaction(); // Inizia transazione database
 
         try {
             $user = $em->find(ERegisteredUser::class, $_SESSION['user']->getIdRegisteredUser());
+            // Verifica se l'inidirizzo di spedizione esiste
             $addressObj = FPersistentManager::getInstance()->findShipping($address, $cap);
             if (!$addressObj) {
                 throw new \Exception("Indirizzo non trovato");
             }
+            // Verifica se la carta di credito esiste
             $cardObj = FPersistentManager::getInstance()->findCreditCard($cardNumber);
             if (!$cardObj) {
                 throw new \Exception("Carta di credito non trovata");
@@ -52,6 +54,7 @@ class FOrder extends EntityRepository {
 
             foreach ($cart as $productId => $quantity) {
                 // Ottieni il prodotto con lock pessimista
+                // LOCK: Solo 1 utente alla volta può accedere
                 $product = $em->find(
                     EProduct::class,
                     $productId,
@@ -63,10 +66,11 @@ class FOrder extends EntityRepository {
                     throw new \Exception("Quantità non disponibile per il prodotto '{$product->getNameProduct()}' (ID $productId). Disponibile: {$product->getAvQuantity()}, richiesto: $quantity");
                 }
 
+                // Crea un singolo "item" dell'ordine
                 $itemOrder = new EItemOrder();
-                $itemOrder->setOrder($order);
-                $itemOrder->setProduct($product);
-                $itemOrder->setQuantity($quantity);
+                $itemOrder->setOrder($order); // Collega all'ordine
+                $itemOrder->setProduct($product); // Collega al prodotto
+                $itemOrder->setQuantity($quantity); // Imposta quantità ordinata
                 $em->persist($itemOrder);
 
                 $order->addQProductOrder($itemOrder);
@@ -74,6 +78,8 @@ class FOrder extends EntityRepository {
                 $total += $product->getPriceProduct() * $quantity;
                 $quantityTotal += $quantity;
 
+                // Aggiorna la quantità disponibile del prodotto
+                // Sottrae la quantità ordinata dalle scorte disponibili
                 $product->setAvQuantity($product->getAvQuantity() - $quantity);
                 $em->persist($product);
             }
@@ -83,7 +89,8 @@ class FOrder extends EntityRepository {
 
             $em->persist($order);
             $em->flush();
-            $em->commit();
+            // Lock viene rilasciato al commit()
+            $em->commit(); // Conferma definitivamente la transazione
             return $order;
         } catch (\Throwable $e) { // intercetta tutte le eccezioni, non solo Exception
             $em->rollback();
