@@ -45,8 +45,6 @@ class FAdmin extends EntityRepository {
         // Aggiornamento nel database
         $found_admin->setPassword(password_hash($new_password, PASSWORD_DEFAULT));
         //Aggiornamento nella sessione
-        // NON si dovrebbe salvare la password in sessione
-        $_SESSION['user']->setPassword(password_hash($new_password, PASSWORD_DEFAULT));
         $em->persist($found_admin);
         $em->flush();
     }

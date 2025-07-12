@@ -71,8 +71,6 @@ class FRegisteredUser extends EntityRepository {
         $found_user = $em->find(ERegisteredUser::class, $user->getIdRegisteredUser());
         $found_user->setPassword(password_hash($new_password, PASSWORD_DEFAULT));
         //Aggiornamento della sessione
-        //NON si dovrebbe salvare la password in sessione
-        $_SESSION['user']->setPassword(password_hash($new_password, PASSWORD_DEFAULT));
         $em->persist($found_user);
         $em->flush();
     }

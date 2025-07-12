@@ -1,14 +1,9 @@
 <?php
+<?php
 
 class CPurchase {
 
-     /**
-     * Mostra la pagina dell'e-commerce con filtri, categorie e brand.
-     *
-     * @return void
-     */
     public static function shop() {
-
         $view = new VPurchase();
 
         $filters = [
@@ -30,15 +25,8 @@ class CPurchase {
         $brands= FPersistentManager::getInstance()->getAllBrands();
         
         $view->shop($product, $categories, $brands, $filters);
-
     }
 
-     /**
-     * Mostra la pagina di un prodotto.
-     *
-     * @param int $productId ID del prodotto da visualizzare
-     * @return void
-     */
     public static function viewProduct($productId) {
         $view = new VPurchase();
         $product = FPersistentManager::getInstance()->find(EProduct::class, $productId);
@@ -69,35 +57,28 @@ class CPurchase {
             }
         }
 
-        // Recupera i messaggi di successo o errore dalla sessione
         $successMessage = isset($_SESSION['review_success']) ? $_SESSION['review_success'] : null;
         $errorMessage = isset($_SESSION['review_error']) ? $_SESSION['review_error'] : null;
 
-        // Rimuove i messaggi dalla sessione dopo averli visualizzati
         unset($_SESSION['review_success']);
         unset($_SESSION['review_error']);
 
         $view->viewProduct($product, $images, $reviews, $same_cat_products, $can_review, $review_user, $successMessage, $errorMessage);
     }
 
-    /**
-     * Aggiunge un prodotto al carrello (via cookie).
-     *
-     * @param int $productId ID del prodotto da aggiungere
-     * @return void
-     */
+    // Aggiunge un prodotto al carrello
     public static function addToCart($productId)
     {
-        if (!(isset($_COOKIE['cart']))) {
-            setcookie('cart', 0, time() + (86400 * 30), "/"); // 30 giorni
+        if (!isset($_SESSION['cart'])) {
+            $_SESSION['cart'] = [];
         }
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $quantity = 1;
         } else {
             $quantity = $_POST['quantity'];
         }
-        $cart = json_decode($_COOKIE['cart'], true);
-        if (!(empty($cart)) || array_key_exists($productId, $cart)) {
+        $cart = $_SESSION['cart'];
+        if (isset($cart[$productId])) {
             $cart[$productId] += $quantity;
         } else {
             $cart[$productId] = $quantity;
@@ -108,72 +89,51 @@ class CPurchase {
             $cart[$productId] = $max_quantity;
             $_SESSION['max_quantity_reached'] = true;
         }
-        json_encode($cart);
-        setcookie('cart', json_encode($cart), time() + (86400 * 30), "/");
+        $_SESSION['cart'] = $cart;
 
         $_SESSION['added_to_cart'] = isset($_SESSION['max_quantity_reached']) && $_SESSION['max_quantity_reached'] ? false : true;
         header('Location: /EpTech/purchase/viewProduct/' . $productId);
     }
 
-    /**
-     * Rimuove un prodotto dal carrello.
-     *
-     * @param int $productId ID del prodotto da rimuovere
-     * @return void
-     */
+    // Rimuove un prodotto dal carrello
     public static function removeFromCart($productId){
-        $cart = json_decode($_COOKIE['cart'], true);
-        unset($cart[$productId]);
-        json_encode($cart);
-        setcookie('cart', json_encode($cart), time() + (300), "/");
+        if (!isset($_SESSION['cart'])) {
+            $_SESSION['cart'] = [];
+        }
+        $cart = $_SESSION['cart'];
+        unset($cart[$productId]);  //rimuove il prodotto dal carrello
+        $_SESSION['cart'] = $cart;
         $_SESSION['removed_from_cart'] = true;
 
         header('Location: /EpTech/purchase/showCart');
         exit;
     }
 
-     /**
-     * Svuota il carrello.
-     *
-     * @return void
-     */
+    // Svuota il carrello
     public static function emptyCart() {
-        if (isset($_COOKIE['cart'])) {
-            setcookie('cart', json_encode([]), time() - 3600, "/"); 
-            $_SESSION['cart_emptied'] = true;
-        }
+        $_SESSION['cart'] = [];
+        $_SESSION['cart_emptied'] = true;
         header('Location: /EpTech/user/home');
     }
 
-     /**
-     * Mostra la pagina del carrello.
-     *
-     * @return void
-     */
+    // Mostra la pagina del carrello
     public static function showCart(){
-        if (!(isset($_COOKIE['cart']))) {
-            setcookie('cart', json_encode([]), time() + (300), "/");  // 5 minuti
+        if (!isset($_SESSION['cart'])) {
+            $_SESSION['cart'] = [];
         }
         $view_cart = new VPurchase();
         $view_cart->cart(); 
     }
 
-     /**
-     * Aggiorna la quantità di un prodotto nel carrello.
-     *
-     * @param int $productId ID del prodotto
-     * @return void
-     */
+    // Aggiorna la quantità di un prodotto nel carrello
     public static function updateQuantity($productId){
-        if (!isset($_COOKIE['cart'])) {
-            setcookie('cart', json_encode([]), time() + (300), "/"); // 5 minuti
+        if (!isset($_SESSION['cart'])) {
+            $_SESSION['cart'] = [];
         }
-        $cart = json_decode($_COOKIE['cart'], true);
+        $cart = $_SESSION['cart'];
         $newQuantity = $_POST['quantity'];
-        // Aggiorna la quantità nel carrello
         $cart[$productId] = (int)$newQuantity;
 
-        // Verifica che la nuova quantità non superi la quantità disponibile
         $found_product = FPersistentManager::getInstance()->find(EProduct::class, $productId);
         $max_quantity = $found_product->getAvQuantity();
 
@@ -184,37 +144,25 @@ class CPurchase {
             $_SESSION['max_quantity_reached'] = false;
         }
 
-        // Se la nuova quantità è 0, rimuovi il prodotto dal carrello
         if ($cart[$productId] == 0) {
             unset($cart[$productId]);
         }
 
-        // Aggiorna il cookie del carrello
-        $new_cart = json_encode($cart);
-        setcookie('cart', $new_cart, time() + (86400 * 30), "/");
+        $_SESSION['cart'] = $cart;
         $_SESSION['qty_updated'] = true;
         header('Location: /EpTech/purchase/showCart');
     }
     
-    /**
-     * Gestisce la visualizzazione e il completamento del checkout.
-     *
-     * @return void
-     */
+    // Gestisce la visualizzazione e il completamento del checkout
     public static function checkout(){
         $view = new VPurchase();
 
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-            
-            // Recupera gli indirizzi e le carte di credito dell'utente
             $shipping = FPersistentManager::getInstance()->getAllShippingUser($_SESSION['user']);
             $creditCards = FPersistentManager::getInstance()->getAllCreditCardUser($_SESSION['user']);
-            
-            // Recupera i prodotti nel carrello
-            $cart = isset($_COOKIE['cart']) ? json_decode($_COOKIE['cart'], true) : [];
+            $cart = isset($_SESSION['cart']) ? $_SESSION['cart'] : [];
             $products_cart = [];
             $total_cart = 0;
-            
             foreach ($cart as $productId => $quantity) {
                 $product = FPersistentManager::getInstance()->find(EProduct::class, $productId);
                 if ($product) {
@@ -225,26 +173,21 @@ class CPurchase {
                     $total_cart += $product->getPriceProduct() * $quantity;
                 }
             }
-            
             $view->viewCheckoutForm($shipping, $creditCards, $products_cart, $total_cart);
         } elseif ($_SERVER['REQUEST_METHOD'] == 'POST') {
             try {
                 $shipping_id = $_POST['shipping'];
                 $creditCard_id = $_POST['creditCard'];
-                $cart = isset($_COOKIE['cart']) ? json_decode($_COOKIE['cart'], true) : [];
-                // Crea un nuovo ordine
+                $cart = isset($_SESSION['cart']) ? $_SESSION['cart'] : [];
                 $order = FPersistentManager::getInstance()->newOrder($_SESSION['user'], $shipping_id, $creditCard_id, $cart);
-                // Aggiunge i prodotti all'ordine
-                $cart = isset($_COOKIE['cart']) ? json_decode($_COOKIE['cart'], true) : [];
+                $cart = isset($_SESSION['cart']) ? $_SESSION['cart'] : [];
                 foreach ($cart as $productId => $quantity) {
                     $product = FPersistentManager::getInstance()->find(EProduct::class, $productId);
                     if ($product) {
                         FPersistentManager::getInstance()->addProductOrder($order, $product, $quantity);
                     }
                 }
-                // Svuota il carrello
-                setcookie('cart', json_encode([]), time() - 3600, "/");
-                // Mostra la pagina di conferma dell'ordine
+                $_SESSION['cart'] = [];
                 $view->viewConfirmOrder($order);
             } catch (\Exception $e) {
                 $_SESSION['error_order'] = "Si è verificato un errore durante il completamento dell'ordine. " . $e->getMessage();
@@ -254,11 +197,7 @@ class CPurchase {
         }
     }
     
-    /**
-     * Completa l’ordine inviato dal form (POST).
-     *
-     * @return void
-     */
+    // Completa l’ordine inviato dal form (POST)
     public static function completeOrder(){
         if ($_SERVER['REQUEST_METHOD'] != 'POST') {
             header('Location: /EpTech/user/home');
@@ -268,51 +207,36 @@ class CPurchase {
         $view = new VPurchase();
 
         try {
-            // Recupera i dati dal form
             $shipping = explode('|', $_POST['shipping']);
             $cardNumber = $_POST['creditCard'];
-
-            // Recupera il carrello dal cookie
-            $cart = isset($_COOKIE['cart']) ? json_decode($_COOKIE['cart'], true) : [];
+            $cart = isset($_SESSION['cart']) ? $_SESSION['cart'] : [];
 
             if (empty($cart)) {
                 throw new \Exception("Il carrello è vuoto");
             }
 
-            // Crea l'ordine
             $order = FPersistentManager::getInstance()->newOrder($shipping[0], $shipping[1], $cardNumber, $cart);
 
             if (!$order) {
                 throw new \Exception("Errore nella creazione dell'ordine");
             }
 
-            // INVIO EMAIL DI CONFERMA ORDINE
             if (isset($_SESSION['user']) && $_SESSION['user'] instanceof ERegisteredUser) {
                 $mailer = new UEMailer();
                 $mailer->sendOrderConfirmationEmail($_SESSION['user']->getEmail(), $order);
             }
 
-            // Svuota il carrello
-            setcookie('cart', json_encode([]), time() - 3600, "/");
+            $_SESSION['cart'] = [];
 
-            // Mostra la pagina di conferma dell'ordine
             $view->viewConfirmOrder($order);
 
         } catch (\Exception $e) {
-            
-            // Reindirizza l'utente a una pagina di errore o al carrello con un messaggio di errore
             $_SESSION['error_order'] = "Si è verificato un errore durante il completamento dell'ordine. " . $e->getMessage();
             header('Location: /EpTech/purchase/errorOrder');
             exit;
         }
     }
 
-     /**
-     * Mostra i dettagli di un ordine specifico.
-     *
-     * @param int $orderId ID dell’ordine da visualizzare
-     * @return void
-     */
     public static function detailOrder($orderId)
     {
         $view_user = new VPurchase();
@@ -320,34 +244,22 @@ class CPurchase {
 
         if ($order && isset($_SESSION['user'])) {
             if ($_SESSION['user'] instanceof ERegisteredUser && $order->getRegisteredUser()->getIdRegisteredUser() == $_SESSION['user']->getIdRegisteredUser()) {
-                // Utente registrato: carica i dettagli dell'ordine
                 foreach ($order->getItemOrder() as $item) {
                     $item->getProduct()->getImages();
                 }
                 $view_user->detailOrder($order);
             } elseif ($_SESSION['user'] instanceof EAdmin) {
-                // Admin: consente l'accesso ai dettagli dell'ordine
                 foreach ($order->getItemOrder() as $item) {
                     $item->getProduct()->getImages();
                 }
                 $view_user->detailOrder($order);
-            } else {
-                // Utente non autorizzato
-                header('Location: /EpTech/user/userHistoryOrders');
-                exit;
-            }
+            } 
         } else {
-            // Ordine non trovato o utente non loggato
-            header('Location: /EpTech/user/userHistoryOrders');
+            header('Location: /EpTech/user/userHistoryOrder');
             exit;
         }
     }
 
-    /**
-     * Mostra la pagina di errore ordine.
-     *
-     * @return void
-     */
     public static function errorOrder() {
         $view = new VOrder();
         $errorMessage = isset($_SESSION['error_order']) ? $_SESSION['error_order'] : "Si è verificato un errore sconosciuto.";

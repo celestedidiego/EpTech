@@ -35,7 +35,7 @@ class VPurchase {
         $this->smarty->assign('cart', $data['cart']);
         
         // Assegna una variabile Smarty 'is_cart_empty' che indica se il carrello è vuoto
-        $this->smarty->assign('is_cart_empty', !isset($_COOKIE['cart']) || empty($data['cart']) ? 1 : 0);
+        $this->smarty->assign('is_cart_empty', !isset($_SESSION['cart']) || empty($_SESSION['cart']) ? 1 : 0);
     
     }
 

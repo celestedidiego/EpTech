@@ -36,7 +36,7 @@ class VUser {
         $this->smarty->assign('cart', $data['cart']);
         
         // Assegna una variabile Smarty 'is_cart_empty' che indica se il carrello è vuoto
-        $this->smarty->assign('is_cart_empty', !isset($_COOKIE['cart']) || empty($data['cart']) ? 1 : 0);
+        $this->smarty->assign('is_cart_empty', !isset($_SESSION['cart']) || empty($_SESSION['cart']) ? 1 : 0);
     
 
     }
@@ -45,34 +45,30 @@ class VUser {
      * Gestisce il contenuto del carrello dell'utente.
      * @return array Array contenente i prodotti nel carrello, il subtotale e il carrello.
      */
+    
     public function cart_header(){
-        if (!isset($_COOKIE['cart'])) {
-            setcookie('cart', json_encode([]), time() + (300), "/"); // 5 minuti
-        } // Controllo e creazione del cookie cart
-        // Viene inizializzato un array $array_carrello vuoto e viene decodificato il contenuto del cookie cart in un array associativo $carrello
+        if (!isset($_SESSION['cart'])) {
+            $_SESSION['cart'] = [];
+        }
         $array_cart = [];
-        $cart = isset($_COOKIE['cart']) ? json_decode($_COOKIE['cart'], true) : [];
+        $cart = $_SESSION['cart'];
 
-        // Recupero dei dettagli dei prodotti nel carrello
-        
         if($cart){
             foreach($cart as $id => $qty){
-                $product = FPersistentManager::getInstance()->find(EProduct::class, $id);
-                $array_cart[] = [
-                    'product' => $product,
-                    'quantity' => $qty
-                ];
+             $product = FPersistentManager::getInstance()->find(EProduct::class, $id);
+             $array_cart[] = [
+                'product' => $product,
+                'quantity' => $qty
+            ];
             } 
         }
 
-        // Calcolo del subtotale del carrello
         $subtotal = 0;
         if(!empty($array_cart)){
             foreach($array_cart as $item){
-                $subtotal += $item['product']->getPriceProduct() * $item['quantity'];
+               $subtotal += $item['product']->getPriceProduct() * $item['quantity'];
             }
         }
-        // Restituzione dell'array del carrello, del subtotale e del carrello
         return [
             'array_cart' => $array_cart ? $array_cart : [],
             'subtotal' => $subtotal,
@@ -80,16 +76,17 @@ class VUser {
         ];
     }
 
+
     /**
      * Conta il numero totale di articoli presenti nel carrello dell'utente.
      * @return int Numero totale di articoli nel carrello.
      */
     public function countItemCart()
     {
-        if (!(isset($_COOKIE['cart']))) {
+        if (!(isset($_SESSION['cart']))) {
             return 0;
         }
-        $cart = json_decode($_COOKIE['cart']);
+        $cart = $_SESSION['cart'];
         $cont = 0;
         foreach ($cart as $id => $quantity) {
             $cont += $quantity;

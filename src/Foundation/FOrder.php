@@ -33,7 +33,7 @@ class FOrder extends EntityRepository {
 
         try {
             $user = $em->find(ERegisteredUser::class, $_SESSION['user']->getIdRegisteredUser());
-            // Verifica se l'inidirizzo di spedizione esiste
+            // Verifica se l'indirizzo di spedizione esiste
             $addressObj = FPersistentManager::getInstance()->findShipping($address, $cap);
             if (!$addressObj) {
                 throw new \Exception("Indirizzo non trovato");
