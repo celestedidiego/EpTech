@@ -6,7 +6,7 @@ class CUser {
      * Gestisce la visualizzazione della homepage.
      * 
      * Verifica se l'utente è loggato e mostra la homepage appropriata per utenti registrati, amministratori o utenti non loggati.
-     * Inoltre, imposta un cookie per il carrello se non esiste già.
+     * Inoltre, imposta una sessione per il carrello se non esiste già.
      */
 
     public static function home() {
@@ -18,8 +18,8 @@ class CUser {
         // Ottiene l'articolo più recente
         $article = is_array($articles) && count($articles) > 0 ? end($articles) : null;
         
-        if (!isset($_COOKIE['cart'])) {
-            setcookie('cart', json_encode([]), time() + (300), "/"); // 5 minuti
+        if (!isset($_SESSION['cart'])) {
+            $_SESSION['cart'] = [];
         }
 
         if (static::isLogged()) {
@@ -60,11 +60,6 @@ class CUser {
                     $_SESSION['role'] = 'registered_user'; // Imposta il ruolo per gli utenti registrati
                 } elseif ($_SESSION['user'] instanceof EAdmin) {
                     $_SESSION['role'] = 'admin'; // Imposta il ruolo per gli amministratori
-                }
-
-                // Imposta un cookie di autenticazione
-                if (!isset($_COOKIE['auth'])) {
-                    setcookie('auth', base64_encode($user[0]->getEmail()), time() + (300), "/"); // 5 minuti
                 }
 
                 // Reindirizza alla home
