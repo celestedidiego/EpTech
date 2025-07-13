@@ -43,7 +43,7 @@ $entityManager = new EntityManager(
     $config
 );
 
-function GetEntityManager (): EntityManager 
+function getEntityManager (): EntityManager 
 {
     global $entityManager;
     return $entityManager;

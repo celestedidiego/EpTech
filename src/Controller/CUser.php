@@ -587,10 +587,10 @@ class CUser {
         
         if ($found_card) {
             if (FPersistentManager::getInstance()->canCreditCardBeHardDeleted($number)) {
-                FPersistentManager::getInstance()->deleteCreditCard($found_card);
+                FPersistentManager::getInstance()->deleteCreditCard($found_card[0]);
                 $_SESSION['card_deleted'] = true;
             } else {
-                FPersistentManager::getInstance()->softDeleteCreditCard($found_card);
+                FPersistentManager::getInstance()->softDeleteCreditCard($found_card[0]);
                 $_SESSION['card_soft_deleted'] = true;
             }
         } else {

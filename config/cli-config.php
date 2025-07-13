@@ -7,7 +7,7 @@ use Doctrine\ORM\Tools\Console\EntityManagerProvider\SingleManagerProvider;
 require_once 'bootstrap.php';
 
 // replace with mechanism to retrieve EntityManager in your app
-$entityManager = GetEntityManager();
+$entityManager = getEntityManager();
 
 return ConsoleRunner::run (
     new SingleManagerProvider($entityManager)

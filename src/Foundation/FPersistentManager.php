@@ -667,7 +667,7 @@ class FPersistentManager {
         $query = getEntityManager()->createQuery($dql); 
         $query->setParameter(1, $cardNumber);
         $query->setMaxResults(1);
-        return $query->getOneOrNullResult(); // Restituisce un singolo oggetto o null
+        return $query->getResult(); 
     }
 
      /**
