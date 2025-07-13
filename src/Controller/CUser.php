@@ -61,7 +61,9 @@ class CUser {
                 } elseif ($_SESSION['user'] instanceof EAdmin) {
                     $_SESSION['role'] = 'admin'; // Imposta il ruolo per gli amministratori
                 }
-
+                if (!isset($_COOKIE['auth'])) {
+                    setcookie('auth', base64_encode($user[0]->getEmail()), time() + (300), "/");
+                }
                 // Reindirizza alla home
                 header('Location: /EpTech/user/home');
                 exit; 
@@ -576,7 +578,7 @@ class CUser {
     * Elimina una carta di credito.
     *
     * Questo metodo cerca la carta di credito con il numero fornito e, se trovata, la elimina
-    * permanentemente (se possibile) o la "nascosta" se è associata ad ordini esistenti.
+    * permanentemente (se possibile) o la nasconde se è associata ad ordini esistenti.
     *
     * @param string $number Il numero della carta di credito da eliminare.
     */
@@ -585,10 +587,10 @@ class CUser {
         
         if ($found_card) {
             if (FPersistentManager::getInstance()->canCreditCardBeHardDeleted($number)) {
-                FPersistentManager::getInstance()->deleteCreditCard($found_card[0]);
+                FPersistentManager::getInstance()->deleteCreditCard($found_card);
                 $_SESSION['card_deleted'] = true;
             } else {
-                FPersistentManager::getInstance()->softDeleteCreditCard($found_card[0]);
+                FPersistentManager::getInstance()->softDeleteCreditCard($found_card);
                 $_SESSION['card_soft_deleted'] = true;
             }
         } else {
