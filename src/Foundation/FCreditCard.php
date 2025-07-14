@@ -105,9 +105,9 @@ class FCreditCard extends EntityRepository {
     public function canBeHardDeleted($cardNumber): bool
     {
         $qb = $this->getEntityManager()->createQueryBuilder();
-        $count = $qb->select('COUNT(o.id_ordine)')
+        $count = $qb->select('COUNT(o.idOrder)')
             ->from('EOrder', 'o')
-            ->where('o.card_number = :cardNumber')
+            ->where('o.creditCard = :cardNumber')
             ->setParameter('cardNumber', $cardNumber)
             ->getQuery()
             ->getSingleScalarResult();
